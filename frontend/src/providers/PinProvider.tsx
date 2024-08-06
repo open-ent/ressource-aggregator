@@ -37,6 +37,7 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
     if (idSelectedStructure) {
       refetchPins();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idSelectedStructure]);
 
   useEffect(() => {

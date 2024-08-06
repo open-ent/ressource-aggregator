@@ -46,7 +46,7 @@ export const ResourcePage: React.FC = () => {
       refetchSearch();
       setInitialLoadDone(true);
     }
-    if (user?.type.length === 1 && user.type.includes("Relative")) {
+    if (user?.type.length === 1 && user?.type.includes("Relative")) {
       if (globals) {
         setExternalResourcesData(globals);
       }

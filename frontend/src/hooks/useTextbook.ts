@@ -20,6 +20,7 @@ export const useTextbook = (idStructure: string) => {
 
   useEffect(() => {
     refetchTextbooks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idStructure]);
 
   useEffect(() => {

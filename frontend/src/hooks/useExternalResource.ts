@@ -27,6 +27,7 @@ export const useExternalResource = (idStructure: string) => {
 
   useEffect(() => {
     refetchSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idStructure]);
 
   const [externalResources, setExternalResources] = useState<

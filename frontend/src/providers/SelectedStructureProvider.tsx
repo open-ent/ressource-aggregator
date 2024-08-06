@@ -47,6 +47,7 @@ export const SelectedStructureProvider: React.FC<
         setNameSelectedStructure(user?.structureNames[0]);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [PREF_STRUCTURE]);
 
   useEffect(() => {
@@ -56,7 +57,8 @@ export const SelectedStructureProvider: React.FC<
       setIdSelectedStructure(id);
       savePreference(id);
     }
-  }, [nameSelectedStructure]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nameSelectedStructure, user]);
 
   const value = useMemo<SelectedStructureProviderContextType>(
     () => ({
@@ -64,7 +66,7 @@ export const SelectedStructureProvider: React.FC<
       setNameSelectedStructure,
       idSelectedStructure,
     }),
-    [idSelectedStructure, setIdSelectedStructure],
+    [idSelectedStructure, nameSelectedStructure],
   );
 
   return (

@@ -12,6 +12,7 @@ const filterBySources = (
     RESOURCES: string;
     SIGNETS: string;
     MOODLES: string;
+    GLOBAL_RESOURCES: string;
   },
 ) => {
   if (!sources.length) {
@@ -20,6 +21,7 @@ const filterBySources = (
       ...sortByAlphabet(resources.externalResources),
       ...sortByAlphabet(resources.signets),
       ...sortByAlphabet(resources.moodle),
+      ...sortByAlphabet(resources.global),
     ];
   }
   let filteredResources: Resource[] = [];
@@ -45,6 +47,12 @@ const filterBySources = (
     filteredResources = [
       ...filteredResources,
       ...sortByAlphabet(resources.moodle),
+    ];
+  }
+  if (sources.some((source) => source === SOURCES.GLOBAL_RESOURCES)) {
+    filteredResources = [
+      ...filteredResources,
+      ...sortByAlphabet(resources.global),
     ];
   }
   return filteredResources;

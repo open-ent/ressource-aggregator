@@ -20,6 +20,7 @@ export const useSearch = (query: any, idStructure: string) => {
 
   useEffect(() => {
     refetchSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idStructure]);
 
   useEffect(() => {
