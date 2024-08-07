@@ -108,7 +108,7 @@ export const TextbookPage: React.FC = () => {
           <div className="med-search-page-content-body">
             {textbooksData && !textbooksData.length ? (
               <EmptyState
-                imgSource="empty-state-textbooks.png"
+                image="empty-state-textbooks.png"
                 title="mediacentre.empty.state.textbooks"
               />
             ) : (

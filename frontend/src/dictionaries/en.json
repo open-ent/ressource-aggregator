@@ -235,6 +235,10 @@
   "mediacentre.modal.signet.input.orientation": "Orientation / Découverte des métiers",
   "mediacentre.modal.signet.button.create": "Créer",
   "mediacentre.signet.create.success": "Votre signet a bien été créé !",
+  "mediacentre.empty.state.archived": "La corbeille est vide",
+  "mediacentre.empty.state.published": "Aucun signet n'a été publié",
+  "mediacentre.empty.state.shared": "Aucun signet n'a été partagé avec vous",
+  "mediacentre.empty.state.mine": "Acuun signet n'a été créé",
 
   "mediacentre.empty.state.filter": "Aucune ressource ne correspond à vos critères de recherche. Modifiez les critères et tentez à nouveau !",
   "mediacentre.empty.state.search": "Aucune ressource ne correspond à votre recherche. Modifiez les critères et tentez à nouveau !",

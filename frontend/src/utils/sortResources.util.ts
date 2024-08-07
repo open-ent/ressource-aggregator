@@ -1,7 +1,8 @@
 import { Resource } from "~/model/Resource.model";
+import { Signet } from "~/model/Signet.model";
 
 // return a new list of resources sorted by alphabet
-export const sortByAlphabet = (resources: Resource[]) => {
+export const sortByAlphabet = (resources: Resource[] | Signet[]) => {
   if (!resources || !resources.length) {
     return [];
   }

@@ -34,27 +34,32 @@ export const useSignet = () => {
     refetch: refetchMySignet,
   } = useGetMySignetsQuery(null);
   const [homeSignets, setHomeSignets] = useState<Signet[] | null>(null);
+  const [allSignets, setAllSignets] = useState<Signet[] | null>(null);
   const { favorites } = useFavorite();
 
   const getHomeSignets = useCallback(() => {
+    if (!allSignets) {
+      return null;
+    }
+    return allSignets.filter(
+      (signet: Signet) => signet.owner_id != user?.userId,
+    );
+  }, [allSignets, user?.userId]);
+
+  const getAllSignets = useCallback(() => {
     if (!publicSignets || !mySignets) {
       return null;
     }
     const publicSignetsData: Signet[] =
       publicSignets?.data?.signets?.resources ?? [];
-    const mySignetsData: Signet[] = mySignets
-      ? mySignets.filter((signet: Signet) => signet.owner_id != user?.userId)
-      : [];
-    const updatedMySignetsData: Signet[] = mySignetsData.map(
-      (signet: Signet) => ({
-        ...signet,
-        source: SIGNET,
-        shared: false,
-        disciplines: convertDisciplines(signet.disciplines),
-        levels: convertLevels(signet.levels),
-        plain_text: convertKeyWords(signet.plain_text),
-      }),
-    );
+    const updatedMySignetsData: Signet[] = mySignets.map((signet: Signet) => ({
+      ...signet,
+      source: SIGNET,
+      shared: false,
+      disciplines: convertDisciplines(signet.disciplines),
+      levels: convertLevels(signet.levels),
+      plain_text: convertKeyWords(signet.plain_text),
+    }));
     const updatedPublicSignetsData: Signet[] = publicSignetsData.map(
       (signet: Signet) => ({
         ...signet,
@@ -62,6 +67,7 @@ export const useSignet = () => {
           type.toLowerCase().includes("orientation"),
         ),
         shared: true,
+        source: SIGNET,
       }),
     );
     let signetsData: Signet[] = [
@@ -89,7 +95,7 @@ export const useSignet = () => {
       }));
     }
     return signetsData;
-  }, [favorites, mySignets, publicSignets, user?.userId, pins]);
+  }, [favorites, mySignets, publicSignets, pins]);
 
   const refetchSignet = async () => {
     await refetchPublicSignet();
@@ -104,6 +110,37 @@ export const useSignet = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicSignets, mySignets, user?.userId, favorites, pins]);
 
+  useEffect(() => {
+    if (favorites && pins) {
+      const signetsData = getAllSignets();
+      setAllSignets(signetsData);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [publicSignets, mySignets, user?.userId, favorites, pins]);
+
+  const mine = (signets: Signet[]) => {
+    return signets.filter(
+      (signet: Signet) => !signet.archived && signet.owner_id === user?.userId,
+    );
+  };
+
+  const shared = (signets: Signet[]) => {
+    return signets.filter(
+      (signet: Signet) =>
+        !signet.archived && signet.collab && signet.owner_id !== user?.userId,
+    );
+  };
+
+  const published = (signets: Signet[]) => {
+    return signets.filter(
+      (signet: Signet) => !signet.archived && signet.shared,
+    );
+  };
+
+  const archived = (signets: Signet[]) => {
+    return signets.filter((signet: Signet) => signet.archived);
+  };
+
   return {
     homeSignets,
     setHomeSignets,
@@ -113,5 +150,11 @@ export const useSignet = () => {
     mySignetError,
     mySignetIsLoading,
     refetchSignet,
+    allSignets,
+    setAllSignets,
+    mine,
+    shared,
+    published,
+    archived,
   };
 };

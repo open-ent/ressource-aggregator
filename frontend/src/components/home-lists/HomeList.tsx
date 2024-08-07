@@ -1,4 +1,4 @@
-import { isActionAvailable, LoadingScreen } from "@edifice-ui/react";
+import { LoadingScreen } from "@edifice-ui/react";
 import { useTranslation } from "react-i18next";
 
 import { ListCard } from "../list-card/ListCard";
@@ -10,7 +10,6 @@ import { GlobalResource } from "~/model/GlobalResource.model";
 import { Signet } from "~/model/Signet.model";
 import { Textbook } from "~/model/Textbook.model";
 import "./HomeList.scss";
-import { useActions } from "~/services/queries";
 
 interface HomeListProps {
   resources:
@@ -37,9 +36,6 @@ export const HomeList: React.FC<HomeListProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const { data: actions } = useActions();
-  const canAccessSignet = isActionAvailable("signets", actions);
-
   const redirectLink = () => {
     if (type === CardTypeEnum.manuals) {
       return "/mediacentre#/textbook";
@@ -51,9 +47,7 @@ export const HomeList: React.FC<HomeListProps> = ({
       return "/mediacentre#/favorites";
     }
     if (type === CardTypeEnum.book_mark) {
-      return canAccessSignet
-        ? "/mediacentre?view=angular#/signet"
-        : "/mediacentre#/signets";
+      return "/mediacentre#/signets";
     }
     return "/mediacentre";
   };

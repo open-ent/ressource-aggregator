@@ -110,7 +110,7 @@ export const Search: React.FC = () => {
           <div className="med-search-page-content-body">
             {searchResourcesData && !searchResourcesData.length ? (
               <EmptyState
-                imgSource="empty-state-search.png"
+                image="empty-state-search.png"
                 title="mediacentre.empty.state.search"
               />
             ) : (
