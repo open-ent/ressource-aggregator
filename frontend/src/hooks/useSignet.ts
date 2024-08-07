@@ -21,18 +21,10 @@ import {
 export const useSignet = () => {
   const { user } = useUser();
   const { pins } = usePinProvider();
-  const {
-    data: publicSignets,
-    error: publicSignetError,
-    isLoading: publicSignetIsLoading,
-    refetch: refetchPublicSignet,
-  } = useGetPublishedSignetsQuery(null);
-  const {
-    data: mySignets,
-    error: mySignetError,
-    isLoading: mySignetIsLoading,
-    refetch: refetchMySignet,
-  } = useGetMySignetsQuery(null);
+  const { data: publicSignets, refetch: refetchPublicSignet } =
+    useGetPublishedSignetsQuery(null);
+  const { data: mySignets, refetch: refetchMySignet } =
+    useGetMySignetsQuery(null);
   const [homeSignets, setHomeSignets] = useState<Signet[] | null>(null);
   const [allSignets, setAllSignets] = useState<Signet[] | null>(null);
   const { favorites } = useFavorite();
@@ -41,6 +33,7 @@ export const useSignet = () => {
     if (!allSignets) {
       return null;
     }
+
     return allSignets.filter(
       (signet: Signet) => signet.owner_id != user?.userId,
     );
@@ -68,6 +61,7 @@ export const useSignet = () => {
         ),
         shared: true,
         source: SIGNET,
+        published: true,
       }),
     );
     let signetsData: Signet[] = [
@@ -108,7 +102,15 @@ export const useSignet = () => {
       setHomeSignets(signetsData);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [publicSignets, mySignets, user?.userId, favorites, pins]);
+  }, [allSignets, favorites, pins]);
+
+  useEffect(() => {
+    if (favorites && pins) {
+      const signetsData = getAllSignets();
+      setAllSignets(signetsData);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [publicSignets, mySignets, favorites, pins]);
 
   useEffect(() => {
     if (favorites && pins) {
@@ -145,10 +147,6 @@ export const useSignet = () => {
     homeSignets,
     setHomeSignets,
     getHomeSignets,
-    publicSignetError,
-    publicSignetIsLoading,
-    mySignetError,
-    mySignetIsLoading,
     refetchSignet,
     allSignets,
     setAllSignets,

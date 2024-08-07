@@ -15,6 +15,33 @@ export const signetsApi = emptySplitApi.injectEndpoints({
         body: payload,
       }),
     }),
+    updateSignet: builder.mutation({
+      query: ({ idSignet, payload }) => ({
+        url: `signets/${idSignet}`,
+        method: "PUT",
+        body: payload,
+      }),
+    }),
+    deleteSignet: builder.mutation({
+      query: ({ idSignet }) => ({
+        url: `signets/${idSignet}`,
+        method: "DELETE",
+      }),
+    }),
+    publishSignet: builder.mutation({
+      query: ({ idSignet, payload }) => ({
+        url: `signet/publish/${idSignet}`,
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    updateShareResource: builder.mutation({
+      query: ({ idSignet, payload }) => ({
+        url: `share/resource/${idSignet}`,
+        method: "PUT",
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -22,4 +49,8 @@ export const {
   useGetPublishedSignetsQuery,
   useGetMySignetsQuery,
   useCreateSignetMutation,
+  useUpdateSignetMutation,
+  usePublishSignetMutation,
+  useUpdateShareResourceMutation,
+  useDeleteSignetMutation,
 } = signetsApi;

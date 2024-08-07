@@ -1,4 +1,4 @@
-export interface SignetPayload {
+export interface SignetCreatePayload {
   id: string;
   title: string;
   levels: { id: string; label: string }[];

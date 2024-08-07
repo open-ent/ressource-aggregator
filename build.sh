@@ -46,7 +46,6 @@ mkdir -p ./src/main/resources/view
 mkdir -p ./src/main/resources/public/template
 mkdir -p ./src/main/resources/public/img
 mkdir -p ./src/main/resources/public/js
-mkdir -p ./src/main/resources/i18n
 mv ./src/main/resources/*.html ./src/main/resources/view
 
 # Copy all built files from AngularJS into Backend
@@ -55,7 +54,6 @@ cp -R ../angularJS/src/css/* ./src/main/resources/public
 cp -R ../angularJS/src/dist/* ./src/main/resources/public/js
 cp -R ../angularJS/src/template/* ./src/main/resources/public/template
 cp -R ../angularJS/src/img/* ./src/main/resources/public/img
-cp -R ../angularJS/src/i18n/* ./src/main/resources/i18n
 
 # Copy all public files from frontend into Backend
 cp -R ../frontend/public/* ./src/main/resources/public

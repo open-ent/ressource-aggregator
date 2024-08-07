@@ -24,7 +24,7 @@ interface EditPinsProps {
 }
 
 export const EditPins: React.FC<EditPinsProps> = ({ refetch }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
   const { modalResource, openModal, closeAllModals, openSpecificModal } =
     useModalProvider();

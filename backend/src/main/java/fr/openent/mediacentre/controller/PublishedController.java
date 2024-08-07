@@ -20,18 +20,21 @@ import io.vertx.core.json.JsonObject;
 import org.entcore.common.controller.ControllerHelper;
 import org.entcore.common.http.filter.ResourceFilter;
 
+import java.util.Map;
+
 import static fr.wseduc.webutils.http.response.DefaultResponseHandler.arrayResponseHandler;
 
 public class PublishedController extends ControllerHelper {
 
     private final fr.openent.mediacentre.service.moduleSQLRequestService moduleSQLRequestService;
     private final fr.openent.mediacentre.service.mediacentreEventBus mediacentreEventBus;
-    private final DefaultSignetService signetService = new DefaultSignetService();
+    private final DefaultSignetService signetService;
 
-    public PublishedController(EventBus eb) {
+    public PublishedController(EventBus eb, Map<String, fr.wseduc.webutils.security.SecuredAction> securedActions) {
         super();
         this.moduleSQLRequestService = new DefaultModuleSQLRequestService(Mediacentre.mediacentreSchema, "signet");
         this.mediacentreEventBus = new DefaultMediacentreEventBus(eb);
+        this.signetService = new DefaultSignetService(securedActions);
     }
 
     @Get("/levels")

@@ -1,12 +1,14 @@
 package fr.openent.mediacentre.service.impl;
 
 import fr.openent.mediacentre.Mediacentre;
+import fr.openent.mediacentre.core.constants.Field;
 import fr.openent.mediacentre.helper.ElasticSearchHelper;
 import fr.openent.mediacentre.helper.IModelHelper;
 import fr.openent.mediacentre.model.SignetResource;
 import fr.openent.mediacentre.service.SignetService;
 import fr.openent.mediacentre.source.Signet;
 import fr.wseduc.webutils.Either;
+import fr.wseduc.webutils.security.SecuredAction;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
@@ -14,17 +16,55 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import org.entcore.common.share.ShareNormalizer;
 import org.entcore.common.sql.Sql;
 import org.entcore.common.sql.SqlResult;
 import org.entcore.common.user.UserInfos;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DefaultSignetService implements SignetService {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultSignetService.class);
+    private final ShareNormalizer shareNormalizer;
+
+    public DefaultSignetService(Map<String, SecuredAction> securedActions) {
+        this.shareNormalizer = new ShareNormalizer(securedActions);
+    }
+
+    public DefaultSignetService() {
+        shareNormalizer = null;
+    }
+
+    public Optional<UserInfos> getCreatorForModel(final JsonObject json) {
+        if(!json.containsKey(Field.OWNER_ID)) {
+            return Optional.empty();
+        }
+        final UserInfos user = new UserInfos();
+        user.setUserId(json.getString(Field.OWNER_ID));
+        user.setUsername(json.getString(Field.OWNER_NAME));
+        return Optional.of(user);
+    }
+
+    private JsonObject addNormalizedShares(final JsonObject signet) {
+        try {
+            if (signet != null) {
+                assert this.shareNormalizer != null;
+                this.shareNormalizer.addNormalizedRights(signet, e -> getCreatorForModel(e).map(UserInfos::getUserId));
+            }
+            return signet;
+        }
+        catch (Exception e) {
+            log.error(String.format("[Mediacentre@%s::addNormalizedShares] Failed to apply normalized shares : %s", this.getClass().getSimpleName(), e.getMessage()));
+            return signet;
+        }
+    }
 
     @Override
-    public void list(List<String> groupsAndUserIds, UserInfos user, Handler<Either<String, JsonArray>> handler) {
+    public Future<JsonArray> list(List<String> groupsAndUserIds, UserInfos user) {
+        Promise<JsonArray> promise = Promise.promise();
         JsonArray params = new JsonArray().add(user.getUserId()).add(user.getUserId()).add(user.getUserId());
         String query = "SELECT DISTINCT s.id, s.resource_id, discipline_label as disciplines, level_label as levels, key_words as plain_text, " +
                 "title, imageurl as image, s.owner_name, s.owner_id, url, date_creation, date_modification, collab, archived, orientation, " +
@@ -40,7 +80,18 @@ public class DefaultSignetService implements SignetService {
         query += " AND (ss.action = ? OR ss.action = ?)) ORDER BY s.id desc;";
         params.add(user.getUserId()).add(Mediacentre.MANAGER_RESOURCE_BEHAVIOUR).add(Mediacentre.VIEW_RESOURCE_BEHAVIOUR);
 
-        Sql.getInstance().prepared(query, params, SqlResult.validResultHandler(handler));
+        Sql.getInstance().prepared(query, params, SqlResult.validResultHandler(result -> {
+            if(result.isLeft()) {
+                promise.fail(result.left().getValue());
+                return;
+            }
+            JsonArray signets = new JsonArray(result.right().getValue()
+                    .stream()
+                    .map(signet -> addNormalizedShares((JsonObject) signet))
+                    .collect(Collectors.toList()));
+            promise.complete(signets);
+        }));
+        return promise.future();
     }
 
     @Override

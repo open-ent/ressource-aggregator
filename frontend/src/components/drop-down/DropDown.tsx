@@ -14,7 +14,7 @@ export const DropDown: React.FC<DropDownProps> = ({
   setSelectedCheckboxes,
   label,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
 
   const handleMultiCheckbox = (
     selectedCheckboxes: string[],

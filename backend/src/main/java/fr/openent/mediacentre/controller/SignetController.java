@@ -31,6 +31,7 @@ import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import org.entcore.common.controller.ControllerHelper;
 import org.entcore.common.http.filter.ResourceFilter;
+import org.entcore.common.share.ShareRoles;
 import org.entcore.common.user.UserInfos;
 import org.entcore.common.user.UserUtils;
 
@@ -49,15 +50,24 @@ public class SignetController extends ControllerHelper {
     private final NeoService neoService;
     private final FavoriteService favoriteService;
     private final SignetHelper signetHelper;
+    private final JsonObject rights;
 
-    public SignetController(EventBus eb) {
+    public SignetController(EventBus eb, Map<String, fr.wseduc.webutils.security.SecuredAction> securedActions) {
         super();
         this.eb = eb;
-        this.signetService = new DefaultSignetService();
+        this.signetService = new DefaultSignetService(securedActions);
         this.signetShareService = new DefaultSignetSharesService();
         this.neoService = new DefaultNeoService();
         this.favoriteService = new DefaultFavoriteService();
         this.signetHelper = new SignetHelper();
+        this.rights = ShareRoles.getSecuredActionNameByNormalizedRole(securedActions);
+    }
+
+    @Get("/signets/rights/sharing")
+    @ApiDoc("Get rights")
+    @SecuredAction(value="", type = ActionType.AUTHENTICATED)
+    public void getRightsByBoard(final HttpServerRequest request) {
+        renderJson(request, rights);
     }
 
     @Get("/signets")
@@ -82,7 +92,13 @@ public class SignetController extends ControllerHelper {
                 if (user.getGroupsIds() != null) {
                     groupsAndUserIds.addAll(user.getGroupsIds());
                 }
-                signetService.list(groupsAndUserIds, user, arrayResponseHandler(request));
+                signetService.list(groupsAndUserIds, user)
+                    .onSuccess(signets -> Renders.renderJson(request, signets))
+                    .onFailure(err -> {
+                        log.error("[Mediacentre@SignetController::list] Failed to list signets : " + err.getMessage());
+                        JsonObject error = (new JsonObject()).put("error", err.getMessage());
+                        Renders.renderJson(request, error, 400);
+                    });
             } else {
                 log.error("User not found in session.");
                 Renders.unauthorized(request);
@@ -516,5 +532,12 @@ public class SignetController extends ControllerHelper {
                 log.error("[Mediacentre@SignetController::getFavorites] Failed to get signet favorites : " + err.getMessage());
                 renderError(request);
             });
+    }
+
+    @Get("/signets/rights/sharing")
+    @ApiDoc("Get rights")
+    @SecuredAction(value = "", type = ActionType.AUTHENTICATED)
+    public void getRightsBySignets(HttpServerRequest request) {
+        renderJson(request, rights);
     }
 }

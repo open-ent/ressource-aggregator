@@ -10,6 +10,7 @@ import {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 
+import { ModalEnum } from "~/core/enum/modal.enum";
 import { ExternalResource } from "~/model/ExternalResource.model";
 import { Moodle } from "~/model/Moodle.model";
 import { Pin } from "~/model/Pin.model";
@@ -35,7 +36,7 @@ export type ModalProviderContextType = {
     >
   >;
   openModal: string | null;
-  openSpecificModal: (modal: string) => void;
+  openSpecificModal: (modal: ModalEnum) => void;
   closeAllModals: () => void;
 };
 
@@ -48,6 +49,7 @@ export type AlertProviderContextType = {
   setAlertText: Dispatch<SetStateAction<string>>;
   alertType: AlertTypes;
   setAlertType: Dispatch<SetStateAction<AlertTypes>>;
+  notify: (text: string, type: AlertTypes) => void;
 };
 
 export interface PinProviderProviderProps {
@@ -83,3 +85,17 @@ export type SelectedStructureProviderContextType = {
   setNameSelectedStructure: Dispatch<SetStateAction<string>>;
   idSelectedStructure: string;
 };
+
+export interface ToasterProviderProps {
+  children: ReactNode;
+}
+
+export interface ToasterProviderContextType {
+  toasterResources: SearchResource[] | null;
+  setToasterResources: Dispatch<SetStateAction<SearchResource[] | null>>;
+  isSelectable: (resource: SearchResource) => boolean;
+  toggleResource: (resource: SearchResource) => void;
+  isToasterOpen: boolean;
+  setIsToasterOpen: Dispatch<SetStateAction<boolean>>;
+  resetResources: () => void;
+}

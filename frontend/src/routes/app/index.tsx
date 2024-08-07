@@ -61,7 +61,7 @@ export const App = () => {
     (ExternalResource | GlobalResource)[] | null
   >(null);
   const [textbooksData, setTextbooksData] = useState<Textbook[] | null>(null);
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const { openModal } = useModalProvider();
 
   useEffect(() => {
@@ -137,7 +137,10 @@ export const App = () => {
   }, [externalResources, fetchFavoriteExternalResource]);
 
   const handleAddFavorite = (resource: any) => {
-    setFavorites((prevFavorites: Favorite[]) => [...prevFavorites, resource]);
+    setFavorites((prevFavorites: Favorite[] | null) => [
+      ...(prevFavorites || []),
+      resource,
+    ]);
     refetchAll();
     resource.favorite = true;
   };

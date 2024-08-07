@@ -22,7 +22,7 @@ import { sortByAlphabet } from "~/utils/sortResources.util";
 
 export const ResourcePage: React.FC = () => {
   const { user } = useUser();
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
   const { refetchPins } = usePinProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
@@ -93,7 +93,10 @@ export const ResourcePage: React.FC = () => {
           </div>
           <div className="med-search-page-content-body">
             {externalResourcesData && !externalResourcesData.length ? (
-              <EmptyState title="mediacentre.empty.state.resources" />
+              <EmptyState
+                image="empty-state.png"
+                title="mediacentre.empty.state.resources"
+              />
             ) : (
               <>
                 <FilterLayout

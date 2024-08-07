@@ -14,7 +14,7 @@ import "./ModalExplorer.scss";
 interface ModalExplorerProps {}
 
 export const ModalExplorer: React.FC<ModalExplorerProps> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const [swiperInstance, setSwiperInstance] = useState<any>();
   const [swiperProgress, setSwiperprogress] = useState<number>(0);
   const { isOpen, isOnboarding, setIsOpen, handleSavePreference } =

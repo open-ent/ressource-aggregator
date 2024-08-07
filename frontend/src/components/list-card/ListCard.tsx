@@ -39,7 +39,7 @@ export const ListCard: React.FC<ListCardProps> = ({
   homeDouble = false,
   isPinsEmpty = true,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {

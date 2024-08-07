@@ -22,7 +22,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

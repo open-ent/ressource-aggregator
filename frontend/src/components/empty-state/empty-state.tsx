@@ -11,7 +11,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   title,
   description,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   return (
     <div className="empty-state">
       <img

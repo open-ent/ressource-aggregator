@@ -16,6 +16,7 @@ import { AlertProvider } from "./providers/AlertProvider";
 import { ModalProvider } from "./providers/ModalsProvider";
 import { PinProvider } from "./providers/PinProvider";
 import { SelectedStructureProvider } from "./providers/SelectedStructureProvider";
+import { ToasterProvider } from "./providers/ToasterProvider";
 import { router } from "./routes";
 import { setupStore } from "./store";
 
@@ -50,16 +51,18 @@ root.render(
     <Provider store={store}>
       <OdeClientProvider
         params={{
-          app: "Mediacentre",
+          app: "mediacentre",
         }}
       >
         <ThemeProvider>
           <SelectedStructureProvider>
             <AlertProvider>
               <PinProvider>
-                <ModalProvider>
-                  <RouterProvider router={router} />
-                </ModalProvider>
+                <ToasterProvider>
+                  <ModalProvider>
+                    <RouterProvider router={router} />
+                  </ModalProvider>
+                </ToasterProvider>
               </PinProvider>
             </AlertProvider>
           </SelectedStructureProvider>

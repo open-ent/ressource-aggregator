@@ -15,7 +15,7 @@ export const SearchCardDetail: React.FC<SearchCardDetailProps> = ({
   list,
   separator,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const IconComponent = IconMapping[type];
   const name = list && list.length > 1 ? type + "s" : type;
   return (

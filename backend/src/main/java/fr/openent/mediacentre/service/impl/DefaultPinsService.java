@@ -13,6 +13,7 @@ import fr.openent.mediacentre.service.SignetService;
 import fr.openent.mediacentre.source.Source;
 import fr.wseduc.mongodb.MongoDb;
 import fr.wseduc.webutils.Either;
+import fr.wseduc.webutils.security.SecuredAction;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
@@ -24,10 +25,7 @@ import io.vertx.core.logging.LoggerFactory;
 import org.entcore.common.mongodb.MongoDbResult;
 import org.entcore.common.user.UserInfos;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.entcore.common.http.response.DefaultResponseHandler.arrayResponseHandler;
@@ -42,9 +40,9 @@ public class DefaultPinsService implements PinsService {
     private final SearchHelper searchHelper = new SearchHelper();
     private final SignetHelper signetHelper = new SignetHelper();
 
-    public DefaultPinsService(String collection) {
+    public DefaultPinsService(String collection, Map<String, SecuredAction> securedActions) {
         this.collection = collection;
-        this.signetService = new DefaultSignetService();
+        this.signetService = new DefaultSignetService(securedActions);
         this.mongo = MongoDb.getInstance();
     }
 
@@ -213,15 +211,9 @@ public class DefaultPinsService implements PinsService {
         if (user.getGroupsIds() != null) {
             groupsAndUserIds.addAll(user.getGroupsIds());
         }
-        Handler<Either<String, JsonArray>> handler = event -> {
-            if (event.isLeft()) {
-                log.error("[Mediacentre@DefaultPinsService::retrieveMySignets] Failed to retrieve signet resources : ", event.left().getValue());
-                promiseResponse.fail(event.left().getValue());
-            } else {
-                promiseResponse.complete(event.right().getValue());
-            }
-        };
-        signetService.list(groupsAndUserIds, user, handler);
+        signetService.list(groupsAndUserIds, user)
+            .onSuccess(promiseResponse::complete)
+            .onFailure(error -> promiseResponse.fail(error.getMessage()));
         return promiseResponse.future();
     }
 

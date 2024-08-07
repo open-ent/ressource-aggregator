@@ -10,7 +10,7 @@ interface SearchCardTypeProps {
 }
 
 export const SearchCardType: React.FC<SearchCardTypeProps> = ({ type }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const IconComponent = IconMapping[type];
 
   return (

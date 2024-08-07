@@ -20,7 +20,7 @@ import { usePinProvider } from "~/providers/PinProvider";
 import { sortByAlphabet } from "~/utils/sortResources.util";
 
 export const FavoritePage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const { refetchPins } = usePinProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openModal } = useModalProvider();
@@ -85,7 +85,7 @@ export const FavoritePage: React.FC = () => {
           <div className="med-search-page-content-body">
             {favoriteResourcesData && !favoriteResourcesData.length ? (
               <EmptyState
-                imgSource="empty-state-favorites.png"
+                image="empty-state-favorites.png"
                 title="mediacentre.empty.state.favorites"
               />
             ) : (

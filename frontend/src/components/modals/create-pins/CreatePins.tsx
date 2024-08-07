@@ -23,7 +23,7 @@ interface CreatePinsProps {
 }
 
 export const CreatePins: React.FC<CreatePinsProps> = ({ refetch }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
   const { modalResource, openModal, closeAllModals } = useModalProvider();
   const { setAlertText, setAlertType } = useAlertProvider();
@@ -62,6 +62,7 @@ export const CreatePins: React.FC<CreatePinsProps> = ({ refetch }) => {
 
       if (response?.error) {
         notify(t("mediacentre.error.pin"), "danger");
+        return;
       }
 
       refetch();

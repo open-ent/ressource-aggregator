@@ -34,8 +34,7 @@ export const HomeList: React.FC<HomeListProps> = ({
   isDouble,
   isPinsEmpty,
 }) => {
-  const { t } = useTranslation();
-
+  const { t } = useTranslation("mediacentre");
   const redirectLink = () => {
     if (type === CardTypeEnum.manuals) {
       return "/mediacentre#/textbook";

@@ -39,7 +39,7 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
     isActionAvailable("pins", actions) &&
     idSelectedStructure === pin.structure_owner;
 
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
 
   const notify = (message: string, type: AlertTypes) => {
     setAlertText(message);

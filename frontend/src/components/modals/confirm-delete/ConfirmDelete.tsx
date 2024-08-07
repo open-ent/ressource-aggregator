@@ -16,7 +16,7 @@ interface ConfirmDeleteProps {
 }
 
 export const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ refetch }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
   const { modalResource, openModal, closeAllModals } = useModalProvider();
   const { setAlertText, setAlertType } = useAlertProvider();

@@ -19,7 +19,7 @@ interface SearchCardDetailsProps {
 export const SearchCardDetails: React.FC<SearchCardDetailsProps> = ({
   searchResource,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   return (
     <div className="med-search-resource-details">
       <span className="med-search-resource-details-title">

@@ -28,7 +28,7 @@ export const FilterLayout: React.FC<FilterLayoutProps> = ({
   );
 
   const page = useLocation().pathname;
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
 
   const [sources, setSources] = useState<string[]>([]);
   const themes = [

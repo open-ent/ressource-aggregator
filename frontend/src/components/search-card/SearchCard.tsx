@@ -1,12 +1,7 @@
 import "./SearchCard.scss";
 import React, { useEffect, useState } from "react";
 
-import {
-  AlertTypes,
-  Card,
-  isActionAvailable,
-  Tooltip,
-} from "@edifice-ui/react";
+import { Card, isActionAvailable, Tooltip } from "@edifice-ui/react";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -28,6 +23,7 @@ import { Resource } from "~/model/Resource.model";
 import { SearchResource } from "~/model/SearchResource.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
+import { useToasterProvider } from "~/providers/ToasterProvider";
 import {
   useAddFavoriteMutation,
   useRemoveFavoriteMutation,
@@ -48,17 +44,19 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
   allResourcesDisplayed,
 }) => {
   const [newLink, setNewLink] = useState<string>("");
+  const { t } = useTranslation("mediacentre");
   const [isExpanded, setIsExpanded] = useState(false);
   const cardRef = React.useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
   const [addFavorite] = useAddFavoriteMutation();
   const [removeFavorite] = useRemoveFavoriteMutation();
   const { setModalResource, openSpecificModal } = useModalProvider();
-  const { setAlertText, setAlertType } = useAlertProvider();
+  const { notify } = useAlertProvider();
+  const { isSelectable, toggleResource } = useToasterProvider();
 
   // used to check if the user has the right to pin a resource
   const { data: actions } = useActions();
   const hasPinRight = isActionAvailable("pins", actions);
+  const canAccessSignet = isActionAvailable("signets", actions);
 
   const type = (): SearchCardTypeEnum => {
     if (searchResource?.source) {
@@ -80,11 +78,6 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
     } else {
       return SearchCardTypeEnum.manuals;
     }
-  };
-
-  const notify = (message: string, type: AlertTypes) => {
-    setAlertText(message);
-    setAlertType(type);
   };
 
   const copy = () => {
@@ -205,11 +198,13 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
 
   return (
     <Card
-      isSelectable={false}
+      isSelectable={canAccessSignet}
+      isSelected={isSelectable(searchResource)}
       isClickable={false}
       className={`med-search-resource-card ${
         isExpanded ? "expanded" : "not-expanded"
       }`}
+      onSelect={() => toggleResource(searchResource)}
       ref={cardRef}
     >
       <div className="med-search-resource-top-container">

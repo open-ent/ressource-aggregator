@@ -68,7 +68,7 @@ export const Resource: React.FC<ResourceProps> = ({
   const [newLink, setNewLink] = useState<string>("");
   const [addFavorite] = useAddFavoriteMutation();
   const [removeFavorite] = useRemoveFavoriteMutation();
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const { setAlertText, setAlertType } = useAlertProvider();
   const { setModalResource, openSpecificModal } = useModalProvider();
 

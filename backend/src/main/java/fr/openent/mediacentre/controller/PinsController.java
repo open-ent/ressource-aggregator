@@ -22,6 +22,7 @@ import org.entcore.common.http.filter.ResourceFilter;
 import org.entcore.common.user.UserUtils;
 
 import java.util.List;
+import java.util.Map;
 
 public class PinsController extends ControllerHelper {
 
@@ -30,10 +31,10 @@ public class PinsController extends ControllerHelper {
     private final UserService userService;
     private final List<Source> sources;
 
-    public PinsController(EventBus eb, List<Source> sources) {
+    public PinsController(EventBus eb, List<Source> sources, Map<String, fr.wseduc.webutils.security.SecuredAction> securedActions) {
         super();
         this.eb = eb;
-        this.pinsService = new DefaultPinsService(Field.PINS_COLLECTION);
+        this.pinsService = new DefaultPinsService(Field.PINS_COLLECTION, securedActions);
         this.userService = new DefaultUserService(eb);
         this.sources = sources;
     }

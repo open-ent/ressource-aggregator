@@ -1,6 +1,7 @@
 import { FC, createContext, useContext, useMemo, useState } from "react";
 
 import { ModalProviderContextType, ModalProviderProviderProps } from "./types";
+import { ModalEnum } from "~/core/enum/modal.enum";
 import { ExternalResource } from "~/model/ExternalResource.model";
 import { Moodle } from "~/model/Moodle.model";
 import { Pin } from "~/model/Pin.model";
@@ -28,7 +29,7 @@ export const ModalProvider: FC<ModalProviderProviderProps> = ({ children }) => {
   >(null);
   const [openModal, setOpenModal] = useState<string | null>(null);
 
-  const openSpecificModal = (modalType: string) => {
+  const openSpecificModal = (modalType: ModalEnum) => {
     setOpenModal(modalType);
   };
 

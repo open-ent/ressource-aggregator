@@ -19,25 +19,27 @@ import { breakpoints } from "~/core/const/breakpoints";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import useImageHandler from "~/hooks/useImageHandler";
 import useWindowDimensions from "~/hooks/useWindowDimensions";
-import { SignetPayload } from "~/model/payloads/SignetPayload";
+import { SignetCreatePayload } from "~/model/payloads/SignetCreatePayload";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
-import { useGetDisciplinesQuery } from "~/services/api/disciplines.service";
-import { useGetLevelsQuery } from "~/services/api/levels.service";
 import { useCreateSignetMutation } from "~/services/api/signet.service";
 import "../Modal.scss";
 import "./CreateSignet.scss";
 
 interface CreateSignetProps {
   refetch: () => void;
+  disciplines: { id: string; label: string }[];
+  levels: { id: string; label: string }[];
 }
 
-export const CreateSignet: React.FC<CreateSignetProps> = ({ refetch }) => {
-  const { t } = useTranslation();
+export const CreateSignet: React.FC<CreateSignetProps> = ({
+  refetch,
+  disciplines,
+  levels,
+}) => {
+  const { t } = useTranslation("mediacentre");
   const { openModal, closeAllModals } = useModalProvider();
   const { setAlertText, setAlertType } = useAlertProvider();
-  const { data: disciplines } = useGetDisciplinesQuery(null);
-  const { data: levels } = useGetLevelsQuery(null);
   const [createSignet] = useCreateSignetMutation();
   const [allLevels, setAllLevels] = useState<string[] | null>(null);
   const [allDisciplines, setAllDisciplines] = useState<string[] | null>(null);
@@ -99,7 +101,7 @@ export const CreateSignet: React.FC<CreateSignetProps> = ({ refetch }) => {
         notify(t("mediacentre.modal.signet.ask.image"), "danger");
         return;
       }
-      const payload: SignetPayload = {
+      const payload: SignetCreatePayload = {
         id: uuidv(),
         title: title,
         levels: levels
@@ -128,9 +130,9 @@ export const CreateSignet: React.FC<CreateSignetProps> = ({ refetch }) => {
         notify(t("mediacentre.error.signet.create"), "danger");
         return;
       }
+      refetch();
       handleCloseModal();
       resetFields();
-      refetch();
       notify(t("mediacentre.signet.create.success"), "success");
     } catch (error) {
       notify(t("mediacentre.error.signet.create"), "danger");

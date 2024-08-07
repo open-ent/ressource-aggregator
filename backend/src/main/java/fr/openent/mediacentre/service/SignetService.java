@@ -14,9 +14,8 @@ public interface SignetService {
      * List all signets created by me or shared with me
      * @param groupsAndUserIds list of neo ids including the connected user
      * @param user user connected
-     * @param handler function handler returning JsonArray data
      */
-    void list(List<String> groupsAndUserIds, UserInfos user, Handler<Either<String, JsonArray>> handler);
+    Future<JsonArray> list(List<String> groupsAndUserIds, UserInfos user);
 
     /**
      * List all the signets sent to me

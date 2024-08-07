@@ -80,17 +80,17 @@ public class Mediacentre extends BaseServer {
         publishedConf.setTable("signet");
         publishedConf.setShareTable("signet_shares");
 
-        SignetController signetController = new SignetController(eb);
+        SignetController signetController = new SignetController(eb, securedActions);
         signetController.setShareService(new SqlShareService(mediacentreSchema, "signet_shares", eb, securedActions, null));
         signetController.setCrudService(new SqlCrudService(mediacentreSchema, "signet", "signet_shares"));
 
         addController(new MediacentreController(sources, config));
         addController(new FavoriteController(eb));
-        addController(new PublishedController(eb));
+        addController(new PublishedController(eb, securedActions));
         addController(new SearchController(eb, sources));
         addController(new TextBooksController(eb, sources));
         addController(new GlobalResourceController(eb));
-        addController(new PinsController(eb, sources));
+        addController(new PinsController(eb, sources, securedActions));
         addController(signetController);
 
         if (this.config.getBoolean("elasticsearch", false)) {

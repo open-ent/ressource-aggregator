@@ -22,12 +22,18 @@ export const AlertProvider: FC<AlertProviderProviderProps> = ({ children }) => {
   const [alertText, setAlertText] = useState<string>("");
   const [alertType, setAlertType] = useState<AlertTypes>("success");
 
+  const notify = (text: string, type: AlertTypes) => {
+    setAlertText(text);
+    setAlertType(type);
+  };
+
   const value = useMemo<AlertProviderContextType>(
     () => ({
       alertText,
       setAlertText,
       alertType,
       setAlertType,
+      notify,
     }),
     [alertText, alertType],
   );

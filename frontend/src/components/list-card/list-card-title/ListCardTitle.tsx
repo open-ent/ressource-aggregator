@@ -9,7 +9,7 @@ interface ListCardTitleProps {
   type: CardTypeEnum;
 }
 export const ListCardTitle: React.FC<ListCardTitleProps> = ({ type }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const IconComponent = IconMapping[type];
 
   return (

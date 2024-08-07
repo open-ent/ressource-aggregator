@@ -15,7 +15,7 @@ import { usePinProvider } from "~/providers/PinProvider";
 interface PinsCarouselProps {}
 
 export const PinsCarousel: React.FC<PinsCarouselProps> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const { pins } = usePinProvider();
 
   if (!pins) {

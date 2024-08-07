@@ -38,7 +38,7 @@ export const SelectedStructureProvider: React.FC<
         setIdSelectedStructure(idPrefStructure);
         const index = user?.structures.indexOf(idPrefStructure);
         if (index !== undefined && index !== -1) {
-          setNameSelectedStructure(user?.structureNames[index]);
+          setNameSelectedStructure(user?.structureNames[index] ?? "");
         }
         return;
       }
@@ -48,7 +48,7 @@ export const SelectedStructureProvider: React.FC<
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [PREF_STRUCTURE]);
+  }, [PREF_STRUCTURE, user]);
 
   useEffect(() => {
     if (nameSelectedStructure && user) {

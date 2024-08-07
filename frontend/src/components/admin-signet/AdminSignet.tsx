@@ -1,3 +1,5 @@
+import React from "react";
+
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined";
 import FolderIcon from "@mui/icons-material/FolderOutlined";
 import FolderSharedIcon from "@mui/icons-material/FolderSharedOutlined";
@@ -8,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useSignet } from "~/hooks/useSignet";
 import { Resource } from "~/model/Resource.model";
 import { Signet } from "~/model/Signet.model";
+import { useToasterProvider } from "~/providers/ToasterProvider";
 import { sortByAlphabet } from "~/utils/sortResources.util";
 
 interface AdminSignetProps {
@@ -18,6 +21,7 @@ interface AdminSignetProps {
   setAllResourcesDisplayed: React.Dispatch<
     React.SetStateAction<Resource[] | null>
   >;
+  chooseEmptyState: (text: string, image: string) => void;
 }
 
 export const AdminSignet: React.FC<AdminSignetProps> = ({
@@ -26,11 +30,15 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
   signets,
   setSignetsData,
   setAllResourcesDisplayed,
+  chooseEmptyState = () => {},
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
+  const { resetResources } = useToasterProvider();
   const { mine, shared, published, archived } = useSignet();
 
   const selectMine = () => {
+    chooseEmptyState("mediacentre.empty.state.mine", "empty-state-mine.png");
+    resetResources();
     setAllResourcesDisplayed(null);
     setSelectedTab("mediacentre.signets.mine");
     if (signets) {
@@ -39,6 +47,11 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
   };
 
   const selectShared = () => {
+    chooseEmptyState(
+      "mediacentre.empty.state.shared",
+      "empty-state-shared.png",
+    );
+    resetResources();
     setAllResourcesDisplayed(null);
     setSelectedTab("mediacentre.signets.shared");
     if (signets) {
@@ -47,6 +60,11 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
   };
 
   const selectPublished = () => {
+    chooseEmptyState(
+      "mediacentre.empty.state.published",
+      "empty-state-published.png",
+    );
+    resetResources();
     setAllResourcesDisplayed(null);
     setSelectedTab("mediacentre.signets.published");
     if (signets) {
@@ -55,6 +73,11 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
   };
 
   const selectArchived = () => {
+    chooseEmptyState(
+      "mediacentre.empty.state.archived",
+      "empty-state-archived.png",
+    );
+    resetResources();
     setAllResourcesDisplayed(null);
     setSelectedTab("mediacentre.signets.archived");
     if (signets) {

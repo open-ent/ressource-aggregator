@@ -19,4 +19,9 @@ export interface SearchResource {
   structure_name?: string;
   structure_uai?: string;
   is_textbook?: boolean;
+  is_pinned?: boolean;
+  published?: boolean;
+  rights?: [];
+  owner_id?: string;
+  owner_name?: string;
 }

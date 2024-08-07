@@ -23,7 +23,7 @@ import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvi
 import { sortByAlphabet } from "~/utils/sortResources.util";
 
 export const TextbookPage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
   const { refetchPins } = usePinProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openModal } = useModalProvider();
