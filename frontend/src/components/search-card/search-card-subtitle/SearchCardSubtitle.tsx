@@ -13,7 +13,7 @@ export const SearchCardSubtitle: React.FC<SearchCardSubtitleProps> = ({
   type,
   searchResource,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("mediacentre");
 
   const getSubtitle = () => {
     switch (type) {

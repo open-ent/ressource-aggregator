@@ -70,7 +70,7 @@ export const App = () => {
 
   useEffect(() => {
     let newExternalResourcesData: ExternalResource[] = [];
-    if (user?.type.length === 1 && user.type.includes("Relative")) {
+    if (user?.type === "PERSRELELEVE") {
       if (globals) {
         newExternalResourcesData = globals;
       } else {

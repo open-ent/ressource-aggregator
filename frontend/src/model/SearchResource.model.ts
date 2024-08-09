@@ -24,4 +24,5 @@ export interface SearchResource {
   rights?: [];
   owner_id?: string;
   owner_name?: string;
+  orientation?: boolean;
 }
