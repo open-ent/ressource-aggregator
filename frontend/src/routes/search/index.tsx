@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 import { FilterLayout } from "../../components/filter-layout/FilterLayout";
-import { EmptyState } from "~/components/empty-state/empty-state";
+import { EmptyState } from "~/components/empty-state/EmptyState";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
 import { MainLayout } from "~/components/main-layout/MainLayout";
 import { CreatePins } from "~/components/modals/create-pins/CreatePins";

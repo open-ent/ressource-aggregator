@@ -4,7 +4,7 @@ import { Alert } from "@edifice-ui/react";
 import SchoolIcon from "@mui/icons-material/School";
 import { useTranslation } from "react-i18next";
 
-import { EmptyState } from "~/components/empty-state/empty-state";
+import { EmptyState } from "~/components/empty-state/EmptyState";
 import { FilterLayout } from "~/components/filter-layout/FilterLayout";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
 import { MainLayout } from "~/components/main-layout/MainLayout";
@@ -110,6 +110,7 @@ export const TextbookPage: React.FC = () => {
               <EmptyState
                 image="empty-state-textbooks.png"
                 title="mediacentre.empty.state.textbooks"
+                size="big"
               />
             ) : (
               <>

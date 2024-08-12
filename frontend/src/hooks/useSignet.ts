@@ -110,14 +110,6 @@ export const useSignet = () => {
       setAllSignets(signetsData);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [publicSignets, mySignets, favorites, pins]);
-
-  useEffect(() => {
-    if (favorites && pins) {
-      const signetsData = getAllSignets();
-      setAllSignets(signetsData);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicSignets, mySignets, user?.userId, favorites, pins]);
 
   const mine = (signets: Signet[]) => {

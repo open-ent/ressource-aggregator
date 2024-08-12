@@ -91,30 +91,5 @@
     .med-signets-page-parameters {
       margin-right: 30px;
     }
-
-    .empty-state {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-top: 50px;
-      gap: 20px;
-      width: 100%;
-      height: 400px;
-
-      .empty-state-text {
-        text-align: center;
-        width: 70%;
-      }
-
-      .empty-state-img {
-        height: 300px;
-        width: auto;
-
-        @media (max-width: $sm) {
-          height: 250px;
-        }
-      }
-    }
   }
 }

@@ -5,7 +5,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { useTranslation } from "react-i18next";
 
 import { FilterLayout } from "../../components/filter-layout/FilterLayout";
-import { EmptyState } from "~/components/empty-state/empty-state";
+import { EmptyState } from "~/components/empty-state/EmptyState";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
 import { MainLayout } from "~/components/main-layout/MainLayout";
 import "~/styles/page/search.scss";
@@ -87,6 +87,7 @@ export const FavoritePage: React.FC = () => {
               <EmptyState
                 image="empty-state-favorites.png"
                 title="mediacentre.empty.state.favorites"
+                size="big"
               />
             ) : (
               <>

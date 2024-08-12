@@ -5,7 +5,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useTranslation } from "react-i18next";
 
 import { AdminSignet } from "~/components/admin-signet/AdminSignet";
-import { EmptyState } from "~/components/empty-state/empty-state";
+import { EmptyState } from "~/components/empty-state/EmptyState";
 import { FilterLayout } from "~/components/filter-layout/FilterLayout";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
 import { MainLayout } from "~/components/main-layout/MainLayout";
@@ -164,7 +164,7 @@ export const SignetPage: React.FC = () => {
             </div>
             <div className={`med-${canAccess()}-page-content-body`}>
               {signetsData && !signetsData.length ? (
-                <EmptyState image={emptyImage} title={emptyText} />
+                <EmptyState image={emptyImage} title={emptyText} size="big" />
               ) : (
                 <>
                   <FilterLayout

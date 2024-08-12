@@ -4,3 +4,17 @@
   width: 15px;
   display: inline-block;
 }
+
+.card-title {
+  text-overflow: ellipsis;
+  white-space: nowrap !important;
+  width: 100%;
+
+  strong {
+    max-width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

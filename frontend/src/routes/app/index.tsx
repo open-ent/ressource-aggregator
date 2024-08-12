@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 import { PinsCarousel } from "../../components/pins-carousel/PinsCarousel";
-import { EmptyState } from "~/components/empty-state/empty-state";
+import { EmptyState } from "~/components/empty-state/EmptyState";
 import { HomeList } from "~/components/home-lists/HomeList";
 import { MainLayout } from "~/components/main-layout/MainLayout";
 import { ModalExplorer } from "~/components/modal-explorer/ModalExplorer";
@@ -61,7 +61,7 @@ export const App = () => {
     (ExternalResource | GlobalResource)[] | null
   >(null);
   const [textbooksData, setTextbooksData] = useState<Textbook[] | null>(null);
-  const { t } = useTranslation("mediacentre");
+  const { t } = useTranslation();
   const { openModal } = useModalProvider();
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export const App = () => {
 
   useEffect(() => {
     let newExternalResourcesData: ExternalResource[] = [];
-    if (user?.type === "PERSRELELEVE") {
+    if (user?.type.length === 1 && user.type.includes("Relative")) {
       if (globals) {
         newExternalResourcesData = globals;
       } else {
@@ -137,10 +137,7 @@ export const App = () => {
   }, [externalResources, fetchFavoriteExternalResource]);
 
   const handleAddFavorite = (resource: any) => {
-    setFavorites((prevFavorites: Favorite[] | null) => [
-      ...(prevFavorites || []),
-      resource,
-    ]);
+    setFavorites((prevFavorites: Favorite[]) => [...prevFavorites, resource]);
     refetchAll();
     resource.favorite = true;
   };
@@ -221,7 +218,7 @@ export const App = () => {
     examples:
     - [] -> case of all lists are empty
     - [{CardTypeEnum.manuals, textbooksData}] -> case of just one list is not empty
-    - [{CardTypeEnum.manuals, textbooksData}, {CardTypeEnum.book_mark, signets}] -> case of at least two lists are not empty
+    - [{CardTypeEnum.manuals, textbooksData}, {CardTypeEnum.book_mark, homeSignets}] -> case of at least two lists are not empty
   */
   const resourcesList = () => {
     const listToReturn = [];
@@ -241,7 +238,7 @@ export const App = () => {
       });
       return listToReturn;
     }
-    // global case follow the logic of priority of lists (1:textbooks, 2:externalResources, 3:signets)
+    // global case follow the logic of priority of lists (1:textbooks, 2:externalResources, 3:homeSignets)
     // one list is empty
     if (!isTextbooksEmpty()) {
       listToReturn.push({
@@ -309,10 +306,7 @@ export const App = () => {
           id={pinsEmpty ? "resourcesId" : "resourcesWithPinsId"}
         >
           {resourcesList().length === 0 ? (
-            <EmptyState
-              title={t("mediacentre.ressources.empty")}
-              image="empty-state.png"
-            />
+            <EmptyState title={t("mediacentre.ressources.empty")} />
           ) : (
             resourcesList().map((resource) => (
               <HomeList
