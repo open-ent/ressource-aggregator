@@ -104,7 +104,7 @@ export const HomeList: React.FC<HomeListProps> = ({
               favorite={resource.favorite}
               link={resource?.link ?? resource?.url ?? "/"}
               {...(type === CardTypeEnum.book_mark && {
-                shared: (resource as Signet).shared ?? false,
+                shared: (resource as Signet).published ?? false,
                 footerImage: (resource as Signet).owner_id
                   ? `/userbook/avatar/${
                       (resource as Signet).owner_id

@@ -12,6 +12,7 @@ import { useToasterProvider } from "~/providers/ToasterProvider";
 import "../Modal.scss";
 import {
   useDeleteSignetMutation,
+  useDeleteSignetPublicMutation,
   useUpdateShareResourceMutation,
 } from "~/services/api/signet.service";
 
@@ -25,6 +26,7 @@ export const SignetDelete: React.FC<SignetDeleteProps> = ({ refetch }) => {
   const { toasterResources, resetResources } = useToasterProvider();
   const [updateShareResource] = useUpdateShareResourceMutation();
   const [deleteSignet] = useDeleteSignetMutation();
+  const [deletePublicSignet] = useDeleteSignetPublicMutation();
   const { notify } = useAlertProvider();
 
   const handleCloseModal = () => {
@@ -41,35 +43,54 @@ export const SignetDelete: React.FC<SignetDeleteProps> = ({ refetch }) => {
         notify(t("mediacentre.error.anyResource"), "danger");
         return;
       }
+
       const promises = toasterResources.map(
         async (resource: SearchResource) => {
           const idSignet = resource?.id?.toString();
-          const sharePayload: PutSharePayload = {
-            bookmarks: {},
-            groups: {},
-            users: {},
-          };
-          await updateShareResource({
-            idSignet,
-            payload: sharePayload,
-          });
-          const deleteResponse = await deleteSignet({ idSignet });
-          if (deleteResponse?.error) {
-            notify(t("mediacentre.error.delete"), "danger");
-            return;
+          try {
+            if (resource.published) {
+              const deleteResponse = await deletePublicSignet({ idSignet });
+              if (deleteResponse?.error) {
+                throw new Error(t("mediacentre.error.delete"));
+              }
+            } else {
+              const sharePayload: PutSharePayload = {
+                bookmarks: {},
+                groups: {},
+                users: {},
+              };
+              await updateShareResource({ idSignet, payload: sharePayload });
+              const deleteResponse = await deleteSignet({ idSignet });
+              if (deleteResponse?.error) {
+                throw new Error(t("mediacentre.error.delete"));
+              }
+            }
+            return { status: "fulfilled" };
+          } catch (error) {
+            return { status: "rejected", reason: error };
           }
         },
       );
-      await Promise.all(promises);
-      refetch();
-      resetResources();
-      handleCloseModal();
-      notify(
-        toasterResources.length > 1
-          ? t("mediacentre.signet.delete.many.success")
-          : t("mediacentre.signet.delete.success"),
-        "success",
+
+      const results = await Promise.allSettled(promises);
+
+      const rejectedResults = results.filter(
+        (result) => (result as any)?.value?.status === "rejected",
       );
+
+      if (rejectedResults.length > 0) {
+        notify(t("mediacentre.error.delete"), "danger");
+      } else {
+        refetch();
+        resetResources();
+        handleCloseModal();
+        notify(
+          toasterResources.length > 1
+            ? t("mediacentre.signet.delete.many.success")
+            : t("mediacentre.signet.delete.success"),
+          "success",
+        );
+      }
     } catch (e) {
       console.error(e);
       notify(t("mediacentre.error.delete"), "danger");

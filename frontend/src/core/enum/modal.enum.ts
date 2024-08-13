@@ -9,4 +9,5 @@ export enum ModalEnum {
   DELETE_SIGNET = "delete-signet",
   RESTORE_SIGNET = "restore-signet",
   SHARE_MODAL = "share-modal",
+  PROPERTY_VIEW_SIGNET = "property-view-signet",
 }

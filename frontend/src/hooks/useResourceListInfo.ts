@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { GAR, MOODLE, SIGNET, GLOBAL } from "~/core/const/sources.const";
 import { ExternalResource } from "~/model/ExternalResource.model";
@@ -50,9 +50,7 @@ export const useResourceListInfo = (resources: Resource[] | null) => {
     ResourceInfosMapInitialStates,
   );
 
-  useEffect(() => {
-    if (!resources) return;
-
+  const getResourcesMap = useCallback((resources: Resource[]) => {
     const result = resources.reduce(
       (acc, resource) => {
         // Case textbook
@@ -120,7 +118,13 @@ export const useResourceListInfo = (resources: Resource[] | null) => {
         types: [] as string[],
       },
     );
+    return result;
+  }, []);
 
+  useEffect(() => {
+    if (!resources) return;
+
+    const result = getResourcesMap(resources);
     setResourcesMap({
       textbooks: result.textbooks as Textbook[],
       externalResources: result.externalResources as ExternalResource[],
@@ -128,7 +132,6 @@ export const useResourceListInfo = (resources: Resource[] | null) => {
       signets: result.signets as Signet[],
       global: result.global as GlobalResource[],
     });
-
     setResourcesInfosMap({
       // sort disciplines, levels and types by custom string sort
       disciplines: result.disciplines
@@ -141,10 +144,12 @@ export const useResourceListInfo = (resources: Resource[] | null) => {
         .filter((type) => type.trim() !== "")
         .sort(customStringSort),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resources]);
 
   return {
     resourcesMap,
     resourcesInfosMap,
+    getResourcesMap,
   };
 };

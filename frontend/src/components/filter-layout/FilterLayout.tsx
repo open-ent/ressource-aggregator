@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { Checkbox } from "@edifice-ui/react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
@@ -8,8 +9,14 @@ import { DropDown } from "../drop-down/DropDown";
 import { useResourceListInfo } from "~/hooks/useResourceListInfo";
 import { Resource } from "~/model/Resource.model";
 import "./FilterLayout.scss";
+import { ResourcesMap } from "~/model/ResourcesMap";
+import { Signet } from "~/model/Signet.model";
+import { useToasterProvider } from "~/providers/ToasterProvider";
 
 interface FilterLayoutProps {
+  publishedIsChecked?: boolean;
+  setPublishedIsChecked?: React.Dispatch<React.SetStateAction<boolean>>;
+  myPublishedSignets?: Signet[] | null;
   resources: Resource[] | null;
   allResourcesDisplayed: Resource[] | null;
   setAllResourcesDisplayed: React.Dispatch<
@@ -18,14 +25,19 @@ interface FilterLayoutProps {
 }
 
 export const FilterLayout: React.FC<FilterLayoutProps> = ({
+  publishedIsChecked = null,
+  setPublishedIsChecked = () => {},
+  myPublishedSignets = null,
   resources,
   allResourcesDisplayed,
   setAllResourcesDisplayed,
 }) => {
-  const { resourcesMap, resourcesInfosMap } = useResourceListInfo(resources);
+  const { resourcesMap, resourcesInfosMap, getResourcesMap } =
+    useResourceListInfo(resources);
   const { resourcesInfosMap: displayedResourcesInfosMap } = useResourceListInfo(
     allResourcesDisplayed,
   );
+  const { selectedTab } = useToasterProvider();
 
   const page = useLocation().pathname;
   const { t } = useTranslation("mediacentre");
@@ -71,24 +83,8 @@ export const FilterLayout: React.FC<FilterLayoutProps> = ({
   // we show sources only if we are on favorites or search page
   const isShowingSources = page === "/favorites" || page === "/search";
 
-  useEffect(() => {
-    if (!resources) {
-      return;
-    }
-    const filteredResources = filterByAllDropdowns(
-      resourcesMap,
-      selectedCheckboxes,
-      SOURCES,
-      THEMES,
-    );
-    if (
-      JSON.stringify(filteredResources) !==
-      JSON.stringify(allResourcesDisplayed)
-    ) {
-      setAllResourcesDisplayed(filteredResources);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCheckboxes, resourcesMap, resources]);
+  const isShowingPublished =
+    page === "/signets" && selectedTab === "mediacentre.signets.published";
 
   useEffect(() => {
     let sourcesTemp: string[] = [];
@@ -116,8 +112,53 @@ export const FilterLayout: React.FC<FilterLayoutProps> = ({
       types: [],
       disciplines: [],
     });
+    setPublishedIsChecked(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resourcesMap]);
+
+  useEffect(() => {
+    if (publishedIsChecked && myPublishedSignets) {
+      const myPublishedSignetsResult = getResourcesMap(myPublishedSignets);
+      const myPublishedSignetsResourceMap: ResourcesMap = {
+        textbooks: [],
+        externalResources: [],
+        moodle: [],
+        signets: (myPublishedSignetsResult?.signets as Signet[]) ?? [],
+        global: [],
+      };
+      const filteredResources = filterByAllDropdowns(
+        myPublishedSignetsResourceMap,
+        selectedCheckboxes,
+        SOURCES,
+        THEMES,
+      );
+      if (
+        JSON.stringify(filteredResources) !==
+        JSON.stringify(allResourcesDisplayed)
+      ) {
+        setAllResourcesDisplayed(filteredResources);
+      }
+    } else {
+      const filteredResources = filterByAllDropdowns(
+        resourcesMap,
+        selectedCheckboxes,
+        SOURCES,
+        THEMES,
+      );
+      if (
+        JSON.stringify(filteredResources) !==
+        JSON.stringify(allResourcesDisplayed)
+      ) {
+        setAllResourcesDisplayed(filteredResources);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    selectedCheckboxes,
+    resourcesMap,
+    publishedIsChecked,
+    myPublishedSignets,
+  ]);
 
   return (
     <>
@@ -174,6 +215,15 @@ export const FilterLayout: React.FC<FilterLayoutProps> = ({
             }`,
           )}
         />
+        {isShowingPublished && (
+          <div className="med-published-checkbox">
+            <Checkbox
+              label={t("mediacentre.filter.signets.published")}
+              checked={publishedIsChecked ?? false}
+              onChange={() => setPublishedIsChecked((isChecked) => !isChecked)}
+            />
+          </div>
+        )}
       </div>
     </>
   );

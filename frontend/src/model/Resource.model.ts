@@ -1,4 +1,5 @@
 export interface Resource {
+  published?: boolean;
   authors: string[];
   disciplines: string[] | [number, string][];
   document_types: string[];

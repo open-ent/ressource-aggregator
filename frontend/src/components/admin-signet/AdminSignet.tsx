@@ -14,8 +14,6 @@ import { useToasterProvider } from "~/providers/ToasterProvider";
 import { sortByAlphabet } from "~/utils/sortResources.util";
 
 interface AdminSignetProps {
-  selectedTab: string;
-  setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
   signets: Signet[] | null;
   setSignetsData: React.Dispatch<React.SetStateAction<Signet[] | null>>;
   setAllResourcesDisplayed: React.Dispatch<
@@ -25,15 +23,13 @@ interface AdminSignetProps {
 }
 
 export const AdminSignet: React.FC<AdminSignetProps> = ({
-  selectedTab,
-  setSelectedTab,
   signets,
   setSignetsData,
   setAllResourcesDisplayed,
   chooseEmptyState = () => {},
 }) => {
   const { t } = useTranslation("mediacentre");
-  const { resetResources } = useToasterProvider();
+  const { resetResources, selectedTab, setSelectedTab } = useToasterProvider();
   const { mine, shared, published, archived } = useSignet();
 
   const selectMine = () => {

@@ -9,11 +9,13 @@ import { CardTypeEnum } from "~/core/enum/card-type.enum";
 import { Resource } from "~/model/Resource.model";
 
 interface InfiniteScrollListProps {
+  publishedIsChecked?: boolean;
   redirectLink: string;
   allResourcesDisplayed: Resource[] | null;
 }
 
 export const InfiniteScrollList: React.FC<InfiniteScrollListProps> = ({
+  publishedIsChecked = false,
   redirectLink,
   allResourcesDisplayed,
 }) => {
@@ -108,6 +110,7 @@ export const InfiniteScrollList: React.FC<InfiniteScrollListProps> = ({
             type={CardTypeEnum.search}
             components={visibleResources?.map((searchResource: any) => (
               <SearchCard
+                publishedIsChecked={publishedIsChecked}
                 searchResource={searchResource}
                 link={searchResource.link ?? searchResource.url ?? "/"}
                 setIsRemoveResource={setIsRemoveResource}

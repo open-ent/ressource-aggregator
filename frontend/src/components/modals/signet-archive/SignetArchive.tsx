@@ -44,47 +44,56 @@ export const SignetArchive: React.FC<SignetArchiveProps> = ({
         notify(t("mediacentre.error.anyResource"), "danger");
         return;
       }
+
       const promises = toasterResources.map(
         async (resource: SearchResource) => {
-          const payload = {
-            ...resource,
-            archived: true,
-            levels: convertLevels(resource.levels).reduce((acc, level) => {
-              if (levels.includes(level.label)) {
-                acc.push({ id: level.id, label: level.label });
-              }
-              return acc;
-            }),
-            disciplines: convertDisciplines(resource.disciplines).reduce(
-              (acc, discipline) => {
-                if (disciplines.includes(discipline.label)) {
-                  acc.push({ id: discipline.id, label: discipline.label });
-                }
-                return acc;
-              },
-            ),
-            plain_text: convertKeyWords(resource.plain_text).map((keyword) => ({
-              label: keyword,
-            })),
-          };
-          const idSignet = resource?.id?.toString();
-          const response = await updateSignet({ idSignet, payload });
-          if (response?.error) {
-            notify(t("mediacentre.error.archived"), "danger");
-            throw new Error(t("mediacentre.error.archived"));
+          try {
+            const idSignet = resource?.id?.toString();
+            const payload = {
+              ...resource,
+              archived: true,
+              levels: levels.filter((level) =>
+                convertLevels(resource.levels).includes(level.label),
+              ),
+              disciplines: disciplines.filter((level) =>
+                convertDisciplines(resource.disciplines).includes(level.label),
+              ),
+              plain_text: convertKeyWords(resource.plain_text).map(
+                (keyword) => ({
+                  label: keyword,
+                }),
+              ),
+            };
+            const response = await updateSignet({ idSignet, payload });
+            if (response?.error) {
+              throw new Error(t("mediacentre.error.archived"));
+            }
+            return { status: "fulfilled" };
+          } catch (error) {
+            return { status: "rejected", reason: error };
           }
         },
       );
-      await Promise.all(promises);
-      refetch();
-      resetResources();
-      handleCloseModal();
-      notify(
-        toasterResources.length > 1
-          ? t("mediacentre.signet.archive.many.success")
-          : t("mediacentre.signet.archive.success"),
-        "success",
+
+      const results = await Promise.allSettled(promises);
+
+      const rejectedResults = results.filter(
+        (result) => (result as any)?.value?.status === "rejected",
       );
+
+      if (rejectedResults.length > 0) {
+        notify(t("mediacentre.error.archived"), "danger");
+      } else {
+        refetch();
+        resetResources();
+        handleCloseModal();
+        notify(
+          toasterResources.length > 1
+            ? t("mediacentre.signet.delete.many.success")
+            : t("mediacentre.signet.delete.success"),
+          "success",
+        );
+      }
     } catch (e) {
       console.error(e);
       notify(t("mediacentre.error.archived"), "danger");

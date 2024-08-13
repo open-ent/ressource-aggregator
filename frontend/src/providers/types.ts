@@ -93,6 +93,8 @@ export interface ToasterProviderProps {
 export interface ToasterProviderContextType {
   toasterResources: SearchResource[] | null;
   setToasterResources: Dispatch<SetStateAction<SearchResource[] | null>>;
+  selectedTab: string;
+  setSelectedTab: Dispatch<SetStateAction<string>>;
   isSelectable: (resource: SearchResource) => boolean;
   toggleResource: (resource: SearchResource) => void;
   isToasterOpen: boolean;

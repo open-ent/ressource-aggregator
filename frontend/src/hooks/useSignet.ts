@@ -6,6 +6,7 @@ import { Signet } from "./../model/Signet.model";
 import {
   useGetPublishedSignetsQuery,
   useGetMySignetsQuery,
+  useGetMyPublishedSignetsQuery,
 } from "./../services/api/signet.service";
 import { useFavorite } from "./useFavorite";
 import { SIGNET } from "~/core/const/sources.const";
@@ -25,8 +26,13 @@ export const useSignet = () => {
     useGetPublishedSignetsQuery(null);
   const { data: mySignets, refetch: refetchMySignet } =
     useGetMySignetsQuery(null);
+  const { data: myPublishedSignetsData, refetch: refetchMyPublishedSignet } =
+    useGetMyPublishedSignetsQuery(null);
   const [homeSignets, setHomeSignets] = useState<Signet[] | null>(null);
   const [allSignets, setAllSignets] = useState<Signet[] | null>(null);
+  const [myPublishedSignets, setMyPublishedSignets] = useState<Signet[] | null>(
+    null,
+  );
   const { favorites } = useFavorite();
 
   const getHomeSignets = useCallback(() => {
@@ -39,6 +45,48 @@ export const useSignet = () => {
     );
   }, [allSignets, user?.userId]);
 
+  const getMyPublishedSignets = useCallback(() => {
+    if (!myPublishedSignetsData) {
+      return null;
+    }
+    const signetsData = myPublishedSignetsData?.resources ?? [];
+    let updatedMyPublishedSignetsData: Signet[] = signetsData.map(
+      (signet: Signet) => ({
+        ...signet,
+        source: SIGNET,
+        disciplines: convertDisciplines(signet.disciplines),
+        levels: convertLevels(signet.levels),
+        plain_text: convertKeyWords(signet.plain_text),
+        published: true,
+      }),
+    );
+    if (favorites) {
+      updatedMyPublishedSignetsData = updatedMyPublishedSignetsData.map(
+        (signet: Signet) => ({
+          ...signet,
+          favorite: favorites.some((fav: Favorite) =>
+            signet?.id
+              ? fav?.id?.toString() === signet?.id
+              : fav?.id?.toString() === signet?._id,
+          ),
+        }),
+      );
+    }
+    if (pins) {
+      updatedMyPublishedSignetsData = updatedMyPublishedSignetsData.map(
+        (signet: Signet) => ({
+          ...signet,
+          is_pinned: pins.some(
+            (pin: Pin) =>
+              pin?.id == signet?.id &&
+              pin.source === "fr.openent.mediacentre.source.Signet",
+          ),
+        }),
+      );
+    }
+    return updatedMyPublishedSignetsData;
+  }, [myPublishedSignetsData, favorites, pins]);
+
   const getAllSignets = useCallback(() => {
     if (!publicSignets || !mySignets) {
       return null;
@@ -48,10 +96,10 @@ export const useSignet = () => {
     const updatedMySignetsData: Signet[] = mySignets.map((signet: Signet) => ({
       ...signet,
       source: SIGNET,
-      shared: false,
       disciplines: convertDisciplines(signet.disciplines),
       levels: convertLevels(signet.levels),
       plain_text: convertKeyWords(signet.plain_text),
+      published: false,
     }));
     const updatedPublicSignetsData: Signet[] = publicSignetsData.map(
       (signet: Signet) => ({
@@ -59,7 +107,6 @@ export const useSignet = () => {
         orientation: signet?.document_types?.some((type) =>
           type.toLowerCase().includes("orientation"),
         ),
-        shared: true,
         source: SIGNET,
         published: true,
       }),
@@ -94,6 +141,7 @@ export const useSignet = () => {
   const refetchSignet = async () => {
     await refetchPublicSignet();
     await refetchMySignet();
+    await refetchMyPublishedSignet();
   };
 
   useEffect(() => {
@@ -112,6 +160,14 @@ export const useSignet = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicSignets, mySignets, user?.userId, favorites, pins]);
 
+  useEffect(() => {
+    if (favorites && pins && myPublishedSignetsData) {
+      const signetsData = getMyPublishedSignets();
+      setMyPublishedSignets(signetsData);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myPublishedSignetsData, favorites, pins]);
+
   const mine = (signets: Signet[]) => {
     return signets.filter(
       (signet: Signet) => !signet.archived && signet.owner_id === user?.userId,
@@ -127,7 +183,7 @@ export const useSignet = () => {
 
   const published = (signets: Signet[]) => {
     return signets.filter(
-      (signet: Signet) => !signet.archived && signet.shared,
+      (signet: Signet) => !signet.archived && signet.published,
     );
   };
 
@@ -146,5 +202,6 @@ export const useSignet = () => {
     shared,
     published,
     archived,
+    myPublishedSignets,
   };
 };

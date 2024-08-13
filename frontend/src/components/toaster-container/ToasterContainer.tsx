@@ -51,6 +51,16 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
     }
   };
 
+  const openPropertyView = () => {
+    if (toasterResources && toasterResources.length === 1) {
+      setModalResource(toasterResources[0]);
+      openSpecificModal(ModalEnum.PROPERTY_VIEW_SIGNET);
+      setIsToasterOpen(false);
+    } else {
+      notify(t("mediacentre.toaster.selectOneResource.error"), "danger");
+    }
+  };
+
   const openPublish = () => {
     if (toasterResources) {
       openSpecificModal(ModalEnum.PUBLISH_SIGNET);
@@ -200,7 +210,7 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
               type="button"
               color="primary"
               variant="filled"
-              onClick={openPublish}
+              onClick={openPropertyView}
             >
               {t("mediacentre.toaster.properties")}
             </Button>

@@ -31,6 +31,7 @@ import {
 import { useActions } from "~/services/queries";
 
 interface SearchResourceProps {
+  publishedIsChecked?: boolean;
   searchResource: SearchResource;
   link: string;
   setIsRemoveResource: (value: boolean) => void;
@@ -38,6 +39,7 @@ interface SearchResourceProps {
 }
 
 export const SearchCard: React.FC<SearchResourceProps> = ({
+  publishedIsChecked = false,
   searchResource,
   link,
   setIsRemoveResource,
@@ -51,7 +53,7 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
   const [removeFavorite] = useRemoveFavoriteMutation();
   const { setModalResource, openSpecificModal } = useModalProvider();
   const { notify } = useAlertProvider();
-  const { isSelectable, toggleResource } = useToasterProvider();
+  const { isSelectable, toggleResource, selectedTab } = useToasterProvider();
 
   // used to check if the user has the right to pin a resource
   const { data: actions } = useActions();
@@ -198,7 +200,10 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
 
   return (
     <Card
-      isSelectable={canAccessSignet}
+      isSelectable={
+        canAccessSignet &&
+        (selectedTab !== "mediacentre.signets.published" || publishedIsChecked)
+      }
       isSelected={isSelectable(searchResource)}
       isClickable={false}
       className={`med-search-resource-card ${

@@ -18,6 +18,7 @@ import { Signet } from "~/model/Signet.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
 import { usePinProvider } from "~/providers/PinProvider";
+import { useToasterProvider } from "~/providers/ToasterProvider";
 import { useGetDisciplinesQuery } from "~/services/api/disciplines.service";
 import { useGetLevelsQuery } from "~/services/api/levels.service";
 import { useActions } from "~/services/queries";
@@ -30,25 +31,31 @@ export const SignetPage: React.FC = () => {
   const { refetchPins } = usePinProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openSpecificModal } = useModalProvider();
+  const { selectedTab } = useToasterProvider();
 
   // RIGHTS
   const { data: actions } = useActions();
   const hasSignetRight = isActionAvailable("signets", actions);
 
-  const { allSignets, mine, shared, archived, published, refetchSignet } =
-    useSignet();
+  const {
+    allSignets,
+    myPublishedSignets,
+    mine,
+    shared,
+    archived,
+    published,
+    refetchSignet,
+  } = useSignet();
   const { data: disciplines } = useGetDisciplinesQuery(null);
   const { data: levels } = useGetLevelsQuery(null);
   const [allResourcesDisplayed, setAllResourcesDisplayed] = useState<
     Resource[] | null
   >(null); // all resources after the filters
   const [signetsData, setSignetsData] = useState<Signet[] | null>(null);
-  const [selectedTab, setSelectedTab] = useState<string>(
-    "mediacentre.signets.mine",
-  );
   const [initialLoadDone, setInitialLoadDone] = useState<boolean>(false);
   const [emptyText, setEmptyText] = useState("mediacentre.empty.state.mine");
   const [emptyImage, setEmptyImage] = useState("empty-state-mine.png");
+  const [publishedIsChecked, setPublishedIsChecked] = useState<boolean>(false);
 
   const canAccess = () => (hasSignetRight ? "signets" : "search");
 
@@ -79,7 +86,6 @@ export const SignetPage: React.FC = () => {
   }, [allSignets, hasSignetRight]);
 
   useEffect(() => {
-    console.log(signetsData);
     if (signetsData && !initialLoadDone) {
       setInitialLoadDone(true);
       setAllResourcesDisplayed(sortByAlphabet(signetsData));
@@ -128,8 +134,6 @@ export const SignetPage: React.FC = () => {
           {hasSignetRight && (
             <div className="med-signets-admin-container">
               <AdminSignet
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
                 signets={allSignets}
                 setSignetsData={setSignetsData}
                 setAllResourcesDisplayed={setAllResourcesDisplayed}
@@ -168,14 +172,18 @@ export const SignetPage: React.FC = () => {
               ) : (
                 <>
                   <FilterLayout
+                    publishedIsChecked={publishedIsChecked}
+                    setPublishedIsChecked={setPublishedIsChecked}
                     resources={signetsData}
                     allResourcesDisplayed={allResourcesDisplayed}
                     setAllResourcesDisplayed={setAllResourcesDisplayed}
+                    myPublishedSignets={myPublishedSignets}
                   />
                   {allResourcesDisplayed && !allResourcesDisplayed.length ? (
                     <EmptyState title="mediacentre.empty.state.filter" />
                   ) : (
                     <InfiniteScrollList
+                      publishedIsChecked={publishedIsChecked}
                       redirectLink="/signets"
                       allResourcesDisplayed={allResourcesDisplayed}
                     />
