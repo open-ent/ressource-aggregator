@@ -23,7 +23,7 @@ export const useExternalResource = (idStructure: string) => {
     error,
     isLoading,
     refetch: refetchSearch,
-  } = useSearchQuery({ jsondata: query, idStructure });
+  } = useSearchQuery({ jsondata: query });
 
   useEffect(() => {
     refetchSearch();
