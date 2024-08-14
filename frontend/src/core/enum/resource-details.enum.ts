@@ -4,4 +4,5 @@ export const enum ResourceDetailsEnum {
   disciplines = "discipline",
   levels = "level",
   keywords = "keyword",
+  ark = "ark",
 }

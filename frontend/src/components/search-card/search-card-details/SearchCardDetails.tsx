@@ -4,6 +4,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { SearchCardDetail } from "../search-card-detail/SearchCardDetail";
+import { GAR } from "~/core/const/sources.const";
 import { ResourceDetailsEnum } from "~/core/enum/resource-details.enum";
 import { SearchResource } from "~/model/SearchResource.model";
 
@@ -48,6 +49,13 @@ export const SearchCardDetails: React.FC<SearchCardDetailsProps> = ({
         }
         separator={" / "}
       />
+      {searchResource.source == GAR && (
+        <SearchCardDetail
+          type={ResourceDetailsEnum.ark}
+          list={[searchResource.id as string]}
+          separator={" / "}
+        />
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import BookIcon from "@mui/icons-material/Book";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ComputerIcon from "@mui/icons-material/Computer";
+import ConstructionIcon from "@mui/icons-material/Construction";
 import FlagIcon from "@mui/icons-material/Flag";
 import PersonIcon from "@mui/icons-material/Person";
 import SchoolIcon from "@mui/icons-material/School";
@@ -23,4 +24,5 @@ export const IconMapping: { [key in string]: any } = {
   [ResourceDetailsEnum.disciplines]: SchoolIcon,
   [ResourceDetailsEnum.levels]: StarsIcon,
   [ResourceDetailsEnum.keywords]: BookIcon,
+  [ResourceDetailsEnum.ark]: ConstructionIcon,
 };

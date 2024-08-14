@@ -66,6 +66,7 @@
   "mediacentre.description.name.levels": "Niveaux",
   "mediacentre.description.name.keyword": "Mot-clé",
   "mediacentre.description.name.keywords": "Mots-clés",
+  "mediacentre.description.name.ark": "Identifiant support",
   "mediacentre.description.undefined": "L'auteur n'a pas fourni de description pour cette ressource.",
   "mediacentre.duplicate.toaster": "Votre cours a bien été dupliqué dans le module Moodle",
   "fr.openent.mediacentre.source.Moodle.action.duplicate": "Dupliquer",
