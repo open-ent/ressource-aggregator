@@ -7,6 +7,11 @@ import { SearchCardDetail } from "../search-card-detail/SearchCardDetail";
 import { GAR } from "~/core/const/sources.const";
 import { ResourceDetailsEnum } from "~/core/enum/resource-details.enum";
 import { SearchResource } from "~/model/SearchResource.model";
+import {
+  convertDisciplines,
+  convertKeyWords,
+  convertLevels,
+} from "~/utils/property.utils";
 
 interface SearchCardDetailsProps {
   searchResource: SearchResource;
@@ -32,21 +37,17 @@ export const SearchCardDetails: React.FC<SearchCardDetailsProps> = ({
       />
       <SearchCardDetail
         type={ResourceDetailsEnum.disciplines}
-        list={searchResource.disciplines}
+        list={convertDisciplines(searchResource.disciplines)}
         separator={" / "}
       />
       <SearchCardDetail
         type={ResourceDetailsEnum.levels}
-        list={searchResource.levels}
+        list={convertLevels(searchResource.levels)}
         separator={" / "}
       />
       <SearchCardDetail
         type={ResourceDetailsEnum.keywords}
-        list={
-          typeof searchResource.plain_text === "string"
-            ? [searchResource.plain_text]
-            : searchResource.plain_text
-        }
+        list={convertKeyWords(searchResource.plain_text)}
         separator={" / "}
       />
       {searchResource.source == GAR && (

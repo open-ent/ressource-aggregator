@@ -27,7 +27,7 @@ export const SearchCardDetail: React.FC<SearchCardDetailProps> = ({
         {t(`mediacentre.description.name.${name}`)}
       </span>
       <span className="med-search-resource-details-value">
-        {list &&
+        {list && Array.isArray(list) ? (
           list.map((item, index) => {
             return (
               <span>
@@ -35,7 +35,10 @@ export const SearchCardDetail: React.FC<SearchCardDetailProps> = ({
                 {index < list.length - 1 && separator}
               </span>
             );
-          })}
+          })
+        ) : (
+          <strong>{list}</strong>
+        )}
       </span>
     </div>
   );
