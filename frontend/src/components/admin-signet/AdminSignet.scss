@@ -17,7 +17,8 @@
       width: fit-content;
     }
 
-    &:hover {
+    &:hover,
+    &.active {
       background-color: $med-secondary-light-blue;
 
       .med-signets-admin-box-text {
@@ -27,10 +28,6 @@
 
     &:not(:last-child) {
       margin-bottom: 10px;
-    }
-
-    &.active {
-      background-color: $med-secondary-light-blue;
     }
 
     .med-signets-admin-box-text {
