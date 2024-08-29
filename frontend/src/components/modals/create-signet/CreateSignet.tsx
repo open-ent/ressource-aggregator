@@ -280,6 +280,7 @@ export const CreateSignet: React.FC<CreateSignetProps> = ({
                       allLevels.length > 1 ? "levels" : "level"
                     }`,
                   )}
+                  selectAll={true}
                 />
                 <ChipController
                   array={selectedCheckboxes?.levels}
@@ -300,6 +301,7 @@ export const CreateSignet: React.FC<CreateSignetProps> = ({
                       allDisciplines.length > 1 ? "disciplines" : "discipline"
                     }`,
                   )}
+                  selectAll={true}
                 />
                 <ChipController
                   array={selectedCheckboxes?.disciplines}

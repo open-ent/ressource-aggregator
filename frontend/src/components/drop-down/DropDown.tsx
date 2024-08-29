@@ -7,12 +7,14 @@ interface DropDownProps {
   selectedCheckboxes: string[];
   setSelectedCheckboxes: (value: string[]) => void;
   label: string;
+  selectAll?: boolean;
 }
 export const DropDown: React.FC<DropDownProps> = ({
   checkboxOptions,
   selectedCheckboxes,
   setSelectedCheckboxes,
   label,
+  selectAll = false,
 }) => {
   const { t } = useTranslation("mediacentre");
 
@@ -36,6 +38,14 @@ export const DropDown: React.FC<DropDownProps> = ({
     setSelectedCheckboxes(checked);
   };
 
+  const toggleSelectAll = () => {
+    if (!selectedCheckboxes || !selectedCheckboxes.length) {
+      setSelectedCheckboxes(checkboxOptions);
+    } else {
+      setSelectedCheckboxes([]);
+    }
+  };
+
   return (
     <Dropdown>
       <Dropdown.Trigger
@@ -44,14 +54,30 @@ export const DropDown: React.FC<DropDownProps> = ({
       />
       <Dropdown.Menu>
         <div
-          className={!selectedCheckboxes.length ? "dropdown-item-disabled" : ""}
+          className={
+            !selectedCheckboxes.length && !selectAll
+              ? "dropdown-item-disabled"
+              : ""
+          }
         >
-          <Dropdown.Item
-            key={`reset-filter-${label}`}
-            onClick={() => setSelectedCheckboxes([])}
-          >
-            {t("mediacentre.filter.reset")}
-          </Dropdown.Item>
+          {selectAll ? (
+            <Dropdown.Item
+              key={`select-all-${label}`}
+              onClick={() => toggleSelectAll()}
+            >
+              {selectedCheckboxes === undefined ||
+              selectedCheckboxes.length === 0
+                ? t("mediacentre.combo.selectAll")
+                : t("mediacentre.combo.deselectAll")}
+            </Dropdown.Item>
+          ) : (
+            <Dropdown.Item
+              key={`reset-filter-${label}`}
+              onClick={() => setSelectedCheckboxes([])}
+            >
+              {t("mediacentre.filter.reset")}
+            </Dropdown.Item>
+          )}
         </div>
         <Dropdown.Separator />
         {checkboxOptions.map((option, index) => (
