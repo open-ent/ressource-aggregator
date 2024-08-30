@@ -139,8 +139,8 @@ export const useSignet = () => {
   }, [favorites, mySignets, publicSignets, pins]);
 
   const refetchSignet = async () => {
-    await refetchPublicSignet();
     await refetchMySignet();
+    await refetchPublicSignet();
     await refetchMyPublishedSignet();
   };
 

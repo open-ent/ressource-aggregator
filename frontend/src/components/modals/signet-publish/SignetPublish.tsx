@@ -63,7 +63,7 @@ export const SignetPublish: React.FC<SignetPublishProps> = ({
         notify(t("mediacentre.error.publish"), "danger");
         return;
       }
-      refetch();
+      await refetch();
       resetResources();
       handleCloseModal();
       notify(t("mediacentre.signet.publish.success"), "success");

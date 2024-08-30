@@ -30,12 +30,11 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
 }) => {
   const { t } = useTranslation("mediacentre");
   const { resetResources, selectedTab, setSelectedTab } = useToasterProvider();
-  const { mine, shared, published, archived } = useSignet();
+  const { mine, shared, published, archived, refetchSignet } = useSignet();
 
   const selectMine = () => {
     chooseEmptyState("mediacentre.empty.state.mine", "empty-state-mine.png");
-    resetResources();
-    setAllResourcesDisplayed(null);
+    resetPage();
     setSelectedTab("mediacentre.signets.mine");
     if (signets) {
       setSignetsData(sortByAlphabet(mine(signets)) as Signet[]);
@@ -47,8 +46,7 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
       "mediacentre.empty.state.shared",
       "empty-state-shared.png",
     );
-    resetResources();
-    setAllResourcesDisplayed(null);
+    resetPage();
     setSelectedTab("mediacentre.signets.shared");
     if (signets) {
       setSignetsData(sortByAlphabet(shared(signets)) as Signet[]);
@@ -60,8 +58,7 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
       "mediacentre.empty.state.published",
       "empty-state-published.png",
     );
-    resetResources();
-    setAllResourcesDisplayed(null);
+    resetPage();
     setSelectedTab("mediacentre.signets.published");
     if (signets) {
       setSignetsData(sortByAlphabet(published(signets)) as Signet[]);
@@ -73,12 +70,17 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
       "mediacentre.empty.state.archived",
       "empty-state-archived.png",
     );
-    resetResources();
-    setAllResourcesDisplayed(null);
+    resetPage();
     setSelectedTab("mediacentre.signets.archived");
     if (signets) {
       setSignetsData(sortByAlphabet(archived(signets)) as Signet[]);
     }
+  };
+
+  const resetPage = () => {
+    refetchSignet();
+    resetResources();
+    setAllResourcesDisplayed(null);
   };
 
   return (
