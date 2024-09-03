@@ -33,7 +33,7 @@ export const useSignet = () => {
   const [myPublishedSignets, setMyPublishedSignets] = useState<Signet[] | null>(
     null,
   );
-  const { favorites } = useFavorite();
+  const { favorites, refetchFavorite } = useFavorite();
 
   const getHomeSignets = useCallback(() => {
     if (!allSignets) {
@@ -120,8 +120,8 @@ export const useSignet = () => {
         ...signet,
         favorite: favorites.some((fav: Favorite) =>
           signet?.id
-            ? fav?.id?.toString() === signet?.id
-            : fav?.id?.toString() === signet?._id,
+            ? fav?.id?.toString() === signet?.id.toString()
+            : fav?.id?.toString() === signet?._id?.toString(),
         ),
       }));
     }
@@ -139,6 +139,7 @@ export const useSignet = () => {
   }, [favorites, mySignets, publicSignets, pins]);
 
   const refetchSignet = async () => {
+    await refetchFavorite();
     await refetchMySignet();
     await refetchPublicSignet();
     await refetchMyPublishedSignet();
