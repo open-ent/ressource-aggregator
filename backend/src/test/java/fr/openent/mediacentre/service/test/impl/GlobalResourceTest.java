@@ -2,7 +2,7 @@ package fr.openent.mediacentre.service.test.impl;
 
 import fr.openent.mediacentre.enums.Profile;
 import fr.openent.mediacentre.service.GlobalResourceService;
-import fr.openent.mediacentre.service.impl.GlobalResourceServiceMongoImpl;
+import fr.openent.mediacentre.service.impl.DefaultGlobalResourceService;
 import fr.wseduc.mongodb.MongoDb;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
@@ -37,12 +37,12 @@ public class GlobalResourceTest {
     @Before
     public void setUp() {
         vertx = Vertx.vertx();
-        globalResourceService = new GlobalResourceServiceMongoImpl(GLOBAL_COLLECTION);
+        globalResourceService = new DefaultGlobalResourceService(GLOBAL_COLLECTION);
         MongoDb.getInstance().init(vertx.eventBus(), "fr.openent.mediacentre");
         PowerMockito.spy(MongoDb.class);
         PowerMockito.when(MongoDb.getInstance()).thenReturn(mongo);
         mongo = Mockito.spy(MongoDb.getInstance());
-        this.globalResourceService = Mockito.spy(new GlobalResourceServiceMongoImpl(GLOBAL_COLLECTION));
+        this.globalResourceService = Mockito.spy(new DefaultGlobalResourceService(GLOBAL_COLLECTION));
     }
 
     @Test

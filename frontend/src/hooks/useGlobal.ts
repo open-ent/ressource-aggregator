@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useGetGlobalQuery } from "./../services/api/global.service";
 import { useFavorite } from "./useFavorite";
+import { GLOBAL } from "~/core/const/sources.const";
 import { Favorite } from "~/model/Favorite.model";
 import { GlobalResource } from "~/model/GlobalResource.model";
 import { Pin } from "~/model/Pin.model";
@@ -18,7 +19,11 @@ export const useGlobal = () => {
     if (favorites && global) {
       globalData = globalData.map((global: GlobalResource) => ({
         ...global,
-        favorite: favorites.some((fav: Favorite) => fav._id === global._id),
+        favorite: favorites.some(
+          (fav: Favorite) =>
+            fav.source === GLOBAL &&
+            fav?.id?.toString() === global?.id.toString(),
+        ),
       }));
     }
     if (pins) {

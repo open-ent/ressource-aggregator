@@ -119,7 +119,7 @@ export const useSignet = () => {
       signetsData = signetsData.map((signet: Signet) => ({
         ...signet,
         favorite: favorites.some((fav: Favorite) =>
-          signet?.id
+          fav.source === SIGNET && signet?.id
             ? fav?.id?.toString() === signet?.id.toString()
             : fav?.id?.toString() === signet?._id?.toString(),
         ),

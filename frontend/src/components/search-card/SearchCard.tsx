@@ -17,6 +17,7 @@ import { SearchCardDescription } from "./search-card-description/SearchCardDescr
 import { SearchCardDetails } from "./search-card-details/SearchCardDetails";
 import { SearchCardSubtitle } from "./search-card-subtitle/SearchCardSubtitle";
 import { SearchCardType } from "./search-card-type/SearchCardType";
+import { GLOBAL, SIGNET } from "~/core/const/sources.const";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { SearchCardTypeEnum } from "~/core/enum/search-card-type.enum";
 import { Resource } from "~/model/Resource.model";
@@ -95,10 +96,7 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
 
   const fav = async () => {
     try {
-      if (
-        searchResource.source === "fr.openent.mediacentre.source.Signet" ||
-        searchResource.source === "fr.openent.mediacentre.source.GlobalResource"
-      ) {
+      if (searchResource.source === SIGNET) {
         const newId = searchResource.id
           ? parseInt(searchResource.id.toString())
           : searchResource.id;
@@ -111,9 +109,13 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
           resource: newSearchResource,
         });
       } else {
+        const newSearchResource = {
+          ...searchResource,
+          _id: undefined,
+        };
         await addFavorite({
           id: searchResource._id,
-          resource: searchResource,
+          resource: newSearchResource,
         });
       }
       notify(t("mediacentre.notification.addFavorite"), "success");
@@ -126,8 +128,8 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
   const unfav = async () => {
     try {
       if (
-        searchResource.source === "fr.openent.mediacentre.source.Signet" ||
-        searchResource.source === "fr.openent.mediacentre.source.GlobalResource"
+        searchResource.source === SIGNET ||
+        searchResource.source === GLOBAL
       ) {
         const newId = searchResource.id
           ? parseInt(searchResource.id.toString())
@@ -273,27 +275,21 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
               <Tooltip message={t("mediacentre.card.copy")} placement="top">
                 <ContentCopyIcon className="med-link" onClick={() => copy()} />
               </Tooltip>
-              {searchResource.source !=
-              "fr.openent.mediacentre.source.GlobalResource" ? (
-                searchResource.favorite ? (
-                  <Tooltip
-                    message={t("mediacentre.card.unfavorite")}
-                    placement="top"
-                  >
-                    <StarIcon className="med-star" onClick={() => unfav()} />
-                  </Tooltip>
-                ) : (
-                  <Tooltip
-                    message={t("mediacentre.card.favorite")}
-                    placement="top"
-                  >
-                    <StarBorderIcon
-                      className="med-star"
-                      onClick={() => fav()}
-                    />
-                  </Tooltip>
-                )
-              ) : null}
+              {searchResource.favorite ? (
+                <Tooltip
+                  message={t("mediacentre.card.unfavorite")}
+                  placement="top"
+                >
+                  <StarIcon className="med-star" onClick={() => unfav()} />
+                </Tooltip>
+              ) : (
+                <Tooltip
+                  message={t("mediacentre.card.favorite")}
+                  placement="top"
+                >
+                  <StarBorderIcon className="med-star" onClick={() => fav()} />
+                </Tooltip>
+              )}
             </div>
           </Card.Footer>
         </div>

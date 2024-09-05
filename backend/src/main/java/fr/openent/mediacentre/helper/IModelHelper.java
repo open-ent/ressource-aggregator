@@ -86,9 +86,9 @@ public class IModelHelper {
             field.setAccessible(true);
             try {
                 Object object = field.get(iModel);
-                String fieldName = field.getName();
-                if (object == null && !ignoreNull) {
-                    statisticsData.putNull(fieldName);
+                String fieldName = snakeCase ? StringHelper.camelToSnake(field.getName()) : field.getName();
+                if (object == null) {
+                    if (!ignoreNull) statisticsData.putNull(fieldName);
                 }
                 else if (object instanceof IModel) {
                     statisticsData.put(fieldName, ((IModel<?>)object).toJson());

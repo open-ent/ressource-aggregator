@@ -247,21 +247,15 @@ export const Resource: React.FC<ResourceProps> = ({
           <Tooltip message={t("mediacentre.card.copy")} placement="top">
             <ContentCopyIcon className="med-link" onClick={() => copy()} />
           </Tooltip>
-          {resource.source !==
-          "fr.openent.mediacentre.source.GlobalResource" ? (
-            favorite ? (
-              <Tooltip
-                message={t("mediacentre.card.unfavorite")}
-                placement="top"
-              >
-                <StarIcon className="med-star" onClick={() => unfav()} />
-              </Tooltip>
-            ) : (
-              <Tooltip message={t("mediacentre.card.favorite")} placement="top">
-                <StarBorderIcon className="med-star" onClick={() => fav()} />
-              </Tooltip>
-            )
-          ) : null}
+          {favorite ? (
+            <Tooltip message={t("mediacentre.card.unfavorite")} placement="top">
+              <StarIcon className="med-star" onClick={() => unfav()} />
+            </Tooltip>
+          ) : (
+            <Tooltip message={t("mediacentre.card.favorite")} placement="top">
+              <StarBorderIcon className="med-star" onClick={() => fav()} />
+            </Tooltip>
+          )}
         </div>
       </Card.Footer>
     </Card>

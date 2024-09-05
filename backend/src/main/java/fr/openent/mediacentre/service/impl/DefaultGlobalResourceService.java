@@ -27,13 +27,13 @@ import java.util.Optional;
 
 import static fr.openent.mediacentre.core.constants.Field.*;
 
-public class GlobalResourceServiceMongoImpl extends MongoDbCrudService implements GlobalResourceService {
+public class DefaultGlobalResourceService extends MongoDbCrudService implements GlobalResourceService {
 
     private final String collection;
     private final MongoDb mongo;
-    private static final Logger log = LoggerFactory.getLogger(GlobalResourceServiceMongoImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultGlobalResourceService.class);
 
-    public GlobalResourceServiceMongoImpl(final String collection) {
+    public DefaultGlobalResourceService(final String collection) {
         super(collection);
         this.collection = collection;
         this.mongo = MongoDb.getInstance();
@@ -45,7 +45,6 @@ public class GlobalResourceServiceMongoImpl extends MongoDbCrudService implement
 
         JsonObject now = MongoDb.now();
         resource.put(Field.DATE, now);
-        resource.put(Field.AUTHORS, Collections.singletonList(user.getUsername()));
         GlobalResource globalResource = new GlobalResource(resource);
 
         if (globalResource.getProfiles().isEmpty()) {
@@ -84,7 +83,6 @@ public class GlobalResourceServiceMongoImpl extends MongoDbCrudService implement
                 return;
             }
             promise.complete(IModelHelper.toList(result.right().getValue(), GlobalResource.class));
-
         }));
         return promise.future();
     }

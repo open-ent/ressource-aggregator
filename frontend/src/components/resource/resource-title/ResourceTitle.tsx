@@ -40,6 +40,7 @@ export const ResourceTitle: React.FC<ResourceTitleProps> = ({
     if (resource.source === "fr.openent.mediacentre.source.Signet") {
       return IconMapping[SearchCardTypeEnum.book_mark];
     }
+    return IconMapping[SearchCardTypeEnum.external_resources];
   };
 
   const IconComponent = getIconComponent();
