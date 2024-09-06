@@ -236,7 +236,11 @@ public class DefaultPinsService implements PinsService {
                             .filter(dataItem -> Objects.equals(dataItem.getValue(Field.ID), enrichedResource.getValue(Field.ID)) && Objects.equals(dataItem.getValue(Field.SOURCE), enrichedResource.getValue(Field.SOURCE)))
                             .findFirst()
                             .map(dataItem -> {
-                                dataItem.fieldNames().forEach(fieldName -> enrichedResource.put(fieldName, dataItem.getValue(fieldName)));
+                                dataItem.fieldNames().forEach(fieldName -> {
+                                    if (!enrichedResource.containsKey(Field._ID)) {
+                                        enrichedResource.put(fieldName, dataItem.getValue(fieldName));
+                                    }
+                                });
                                 return enrichedResource;
                             })
                             .orElse(null);
