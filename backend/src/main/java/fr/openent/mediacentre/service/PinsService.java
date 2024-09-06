@@ -6,7 +6,6 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.User;
 import org.entcore.common.user.UserInfos;
 
 import java.util.List;

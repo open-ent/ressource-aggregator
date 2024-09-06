@@ -1,6 +1,6 @@
 package fr.openent.mediacentre.service.impl;
 
-import com.mongodb.QueryBuilder;
+import com.mongodb.client.model.Filters;
 import fr.openent.mediacentre.core.constants.Field;
 import fr.openent.mediacentre.core.constants.MongoConstant;
 import fr.openent.mediacentre.core.constants.SourceConstant;
@@ -17,6 +17,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import org.bson.conversions.Bson;
 import org.entcore.common.mongodb.MongoDbResult;
 import org.entcore.common.service.impl.MongoDbCrudService;
 import org.entcore.common.user.UserInfos;
@@ -75,15 +76,18 @@ public class DefaultGlobalResourceService extends MongoDbCrudService implements 
     @Override
     public Future<List<GlobalResource>> list(Profile profile) {
         Promise<List<GlobalResource>> promise = Promise.promise();
-        QueryBuilder query = QueryBuilder.start(Field.PROFILES).is(profile.getName());
-        mongo.find(collection, MongoQueryBuilder.build(query), MongoDbResult.validResultsHandler(result -> {
+
+        Bson filter = Filters.eq(Field.PROFILES, profile.getName());
+
+        mongo.find(collection, MongoQueryBuilder.build(filter), MongoDbResult.validResultsHandler(result -> {
             if (result.isLeft()) {
-                log.error("[Mediacentre@GlobalResourceServiceMongoImpl::list] Can't find global resources : ", result.left().getValue());
+                log.error("[Mediacentre@GlobalResourceServiceMongoImpl::list] Can't find global resources: ", result.left().getValue());
                 promise.fail(result.left().getValue());
                 return;
             }
             promise.complete(IModelHelper.toList(result.right().getValue(), GlobalResource.class));
         }));
+
         return promise.future();
     }
 

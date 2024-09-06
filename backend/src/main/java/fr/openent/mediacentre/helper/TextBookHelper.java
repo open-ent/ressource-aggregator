@@ -7,7 +7,6 @@ import fr.openent.mediacentre.service.impl.DefaultFavoriteService;
 import fr.openent.mediacentre.service.impl.DefaultTextBookService;
 import fr.openent.mediacentre.source.GAR;
 import fr.openent.mediacentre.source.Source;
-import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
@@ -31,7 +30,7 @@ public class TextBookHelper {
         Future<JsonArray> getTextBookFuture = getTextBooks(user.getUserId());
         Future<JsonArray> getFavoritesResourcesFuture = getFavorite(GAR.class.getName(), user.getUserId());
 
-        CompositeFuture.all(getTextBookFuture, getFavoritesResourcesFuture).setHandler(event -> {
+        Future.all(getTextBookFuture, getFavoritesResourcesFuture).onComplete(event -> {
             if (event.failed()) {
                 log.error("[textBook@get] Failed to retrieve user textbooks" + event.cause().toString());
                 answer.answerFailure(new JsonObject().put("error", "Field to retrieve textbooks").put("status", "ko").encode());

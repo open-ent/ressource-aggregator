@@ -42,24 +42,24 @@ public class GAR implements Source {
      */
     private void getData(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
         
-        Future<JsonArray> getResourcesFuture = Future.future();
-        Future<JsonArray> getFavoritesResourcesFuture = Future.future();
+        Promise<JsonArray> getRessourcesPromise = Promise.promise();
+        Promise<JsonArray> getFavoritesResourcesPromise = Promise.promise();
 
-        CompositeFuture.all(getResourcesFuture, getFavoritesResourcesFuture).setHandler(event -> {
+        Future.all(getRessourcesPromise.future(), getFavoritesResourcesPromise.future()).onComplete(event -> {
             if (event.failed()) {
                 handler.handle(new Either.Left<>(event.cause().getMessage()));
             } else {
                 JsonArray formattedResources = new JsonArray();
-                for (int i = 0; i < getResourcesFuture.result().size(); i++) {
-                    formattedResources.add(format(getResourcesFuture.result().getJsonObject(i)));
+                for (int i = 0; i < getRessourcesPromise.future().result().size(); i++) {
+                    formattedResources.add(format(getFavoritesResourcesPromise.future().result().getJsonObject(i)));
                 }
 
                 handler.handle(new Either.Right<>(formattedResources));
             }
         });
 
-        getResources(user, structureId, FutureHelper.handlerJsonArray(getResourcesFuture));
-        favoriteService.get(GAR.class.getName(), user.getUserId(), FutureHelper.handlerJsonArray(getFavoritesResourcesFuture));
+        getResources(user, structureId, FutureHelper.handlerJsonArray(getRessourcesPromise));
+        favoriteService.get(GAR.class.getName(), user.getUserId(), FutureHelper.handlerJsonArray(getFavoritesResourcesPromise));
     }
 
     /**
@@ -78,7 +78,7 @@ public class GAR implements Source {
                     .put("hostname", config.getString("host").split("//")[1]);
                     
             String GAR_ADDRESS = "openent.mediacentre";
-            eb.send(GAR_ADDRESS, action, handlerToAsyncHandler(event -> {
+            eb.request(GAR_ADDRESS, action, handlerToAsyncHandler(event -> {
                 if (!"ok".equals(event.body().getString("status"))) {
                     log.error("[Gar@search] Failed to retrieve gar resources", event.body().getString("message"));
                     handler.handle(new Either.Left<>(event.body().getString("message")));
@@ -100,19 +100,19 @@ public class GAR implements Source {
     public Future<JsonArray> getAllUserResources(UserInfos user) {
         Promise<JsonArray> promise = Promise.promise();
 
-        List<Future> futures = new ArrayList<>();
+        List<Future<JsonArray>> futures = new ArrayList<>();
         List<String> structures = user.getStructures();
         for (String structure : structures) {
-            Future<JsonArray> future = Future.future();
-            futures.add(future);
-            getResources(user, structure, FutureHelper.handlerJsonArray(future));
+            Promise<JsonArray> resourcesPromise = Promise.promise();
+            futures.add(resourcesPromise.future());
+            getResources(user, structure, FutureHelper.handlerJsonArray(resourcesPromise));
         }
 
-        CompositeFuture.join(futures).onComplete(event -> {
+        Future.join(futures).onComplete(event -> {
             JsonArray resources = new JsonArray();
-            for (Future future : futures) {
+            for (Future<JsonArray> future : futures) {
                 if (future.succeeded()) {
-                    resources.addAll((JsonArray) future.result());
+                    resources.addAll(future.result());
                 }
             }
 
@@ -129,16 +129,16 @@ public class GAR implements Source {
      * @param futures Future list
      * @param handler Function handler returning data
      */
-    private void getStructuresData(UserInfos user, List<String> idStructures, List<Future> futures, Handler<AsyncResult<CompositeFuture>> handler) {
+    private void getStructuresData(UserInfos user, List<String> idStructures, List<Future<JsonArray>> futures, Handler<AsyncResult<CompositeFuture>> handler) {
         List<String> structures = idStructures == null || idStructures.isEmpty() ? user.getStructures() : idStructures;
 
         for (String structure : structures) {
-            Future<JsonArray> future = Future.future();
-            futures.add(future);
-            getData(user, structure, FutureHelper.handlerJsonArray(future));
+            Promise<JsonArray> promise = Promise.promise();
+            futures.add(promise.future());
+            getData(user, structure, FutureHelper.handlerJsonArray(promise));
         }
 
-        CompositeFuture.join(futures).onComplete(handler);
+        Future.join(futures).onComplete(handler);
     }
 
     @Override
@@ -148,12 +148,12 @@ public class GAR implements Source {
 
     @Override
     public void plainTextSearch(String query, UserInfos user, List<String> idStructures, Handler<Either<JsonObject, JsonObject>> handler) {
-        List<Future> futures = new ArrayList<>();
+        List<Future<JsonArray>> futures = new ArrayList<>();
         getStructuresData(user, idStructures, futures, event -> {
             JsonArray resources = new JsonArray();
-            for (Future future : futures) {
+            for (Future<JsonArray> future : futures) {
                 if (future.succeeded()) {
-                    resources.addAll((JsonArray) future.result());
+                    resources.addAll(future.result());
                 }
             }
 
@@ -263,12 +263,12 @@ public class GAR implements Source {
     @Override
     public void advancedSearch(JsonObject query, UserInfos user, Handler<Either<JsonObject, JsonObject>> handler) {
         List<String> fields = Arrays.asList("title", "authors", "editors", "disciplines", "levels");
-        List<Future> futures = new ArrayList<>();
+        List<Future<JsonArray>> futures = new ArrayList<>();
         getStructuresData(user, null, futures, event -> {
             JsonArray resources = new JsonArray();
-            for (Future future : futures) {
+            for (Future<JsonArray> future : futures) {
                 if (future.succeeded()) {
-                    resources.addAll((JsonArray) future.result());
+                    resources.addAll( future.result());
                 }
             }
 
@@ -455,25 +455,24 @@ public class GAR implements Source {
     }
 
     public void initTextBooks(UserInfos user, List<String> idStructures, Handler<Either<String, JsonObject>> handler) {
-        List<Future> futures = new ArrayList<>();
+        List<Future<JsonArray>> futures = new ArrayList<>();
         List<String> structures = idStructures == null || idStructures.isEmpty() ? user.getStructures() : idStructures;
         for (String structure : structures) {
-            Future<JsonArray> future = Future.future();
-            futures.add(future);
-            getResources(user, structure, FutureHelper.handlerJsonArray(future));
+            Promise<JsonArray> promise = Promise.promise();
+            futures.add(promise.future());
+            getResources(user, structure, FutureHelper.handlerJsonArray(promise));
         }
 
         String pattern = queryPattern(config.getJsonArray("textbook_typology", new JsonArray()));
         Pattern regexp = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
 
-        CompositeFuture.join(futures).onComplete(event -> {
+        Future.join(futures).onComplete(event -> {
             JsonArray textBooks = new JsonArray();
-            JsonArray externalResources = new JsonArray();
             JsonArray resources = new JsonArray();
             List<String> list = new ArrayList<>();
-            for (Future future : futures) {
+            for (Future<JsonArray> future : futures) {
                 if (future.succeeded()) {
-                    resources.addAll((JsonArray) future.result());
+                    resources.addAll(future.result());
                 }
             }
 
@@ -484,11 +483,9 @@ public class GAR implements Source {
                 if (matcher.find() && !list.contains(resource.getString("idRessource"))) {
                     list.add(resource.getString("idRessource"));
                     textBooks.add(format(resource));
-                } else {
-                    externalResources.add(format(resource));
                 }
             }
-            handler.handle(new Either.Right<>(new JsonObject().put(Field.TEXTBOOKS, textBooks).put(Field.EXTERNAL_RESOURCES, externalResources)));
+            handler.handle(new Either.Right<>(new JsonObject().put(Field.TEXTBOOKS, textBooks)));
         });
     }
 }

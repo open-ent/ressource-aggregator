@@ -35,6 +35,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Run build maven
+        working-directory: ./backend
         run: mvn -Duser.home=/var/maven clean install
       - name: Run maven test
+        working-directory: ./backend
         run: mvn -Duser.home=/var/maven test

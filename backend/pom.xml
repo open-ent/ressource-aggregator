@@ -9,7 +9,7 @@
     </parent>
     <groupId>fr.openent</groupId>
     <artifactId>mediacentre</artifactId>
-    <version>5.0-b2school</version>
+    <version>5.0-b2school-SNAPSHOT</version>
     <scm>
         <connection>scm:git:https://github.com/OPEN-ENT-NG/ressource-aggregator.git</connection>
         <developerConnection>scm:git:https://github.com/OPEN-ENT-NG/ressource-aggregator.git</developerConnection>
@@ -33,8 +33,7 @@
     </repositories>
 
     <properties>
-        <vertxVersion>3.9.5</vertxVersion>
-        <entCoreVersion>5.2.0</entCoreVersion>
+        <entCoreVersion>5.0-b2school-SNAPSHOT</entCoreVersion>
         <vertxCronTimer>2.0.0</vertxCronTimer>
         <junitVersion>5.1.0</junitVersion>
         <reflectionsVersion>0.10.2</reflectionsVersion>
@@ -59,7 +58,7 @@
             <groupId>fr.wseduc</groupId>
             <artifactId>vertx-cron-timer</artifactId>
             <version>${vertxCronTimer}</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.entcore</groupId>

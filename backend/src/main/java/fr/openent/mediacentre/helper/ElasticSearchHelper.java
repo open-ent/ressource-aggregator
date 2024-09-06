@@ -10,10 +10,7 @@ import fr.openent.mediacentre.service.impl.DefaultFavoriteService;
 import fr.openent.mediacentre.source.Signet;
 import fr.openent.mediacentre.source.Source;
 import fr.wseduc.webutils.Either;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.CompositeFuture;
-import io.vertx.core.Future;
-import io.vertx.core.Handler;
+import io.vertx.core.*;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
@@ -40,19 +37,19 @@ public class ElasticSearchHelper {
     }
 
     private static void search(Class<?> source, String userId, JsonObject query, Handler<AsyncResult<JsonArray>> handler) {
-        Future<JsonArray> esFuture = Future.future();
-        Future<List<JsonObject>> favoriteFuture = Future.future();
+        Promise<JsonArray> esPromise = Promise.promise();
+        Promise<List<JsonObject>> favoritePromise = Promise.promise();
 
-        executeEsSearch(source, query, esFuture);
-        retrieveFavorites(source, userId, favoriteFuture);
+        executeEsSearch(source, query, FutureHelper.handlerAsyncJsonArray(esPromise));
+        retrieveFavorites(source, userId, FutureHelper.handlerAsyncJsonArray(favoritePromise));
 
-        CompositeFuture.all(esFuture, favoriteFuture)
+        Future.all(esPromise.future(), favoritePromise.future())
                 .onSuccess(ar -> {
-                    List<JsonObject> resources = esFuture.result().stream()
+                    List<JsonObject> resources = esPromise.future().result().stream()
                             .filter(JsonObject.class::isInstance)
                             .map(JsonObject.class::cast)
                             .collect(Collectors.toList());
-                    List<JsonObject> favorites = favoriteFuture.result();
+                    List<JsonObject> favorites = favoritePromise.future().result();
                     List<String> favoriteMatcher = getFavoriteMatcher(source.getName());
                     resources = resourcesWithFavoritesData(resources, favorites, favoriteMatcher);
                     handler.handle(Future.succeededFuture(new JsonArray(resources)));

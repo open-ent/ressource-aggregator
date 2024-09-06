@@ -5,6 +5,7 @@ import fr.openent.mediacentre.helper.elasticsearch.ElasticSearch;
 import fr.openent.mediacentre.source.Source;
 import fr.openent.mediacentre.tasks.AmassTask;
 import fr.wseduc.cron.CronTrigger;
+import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
 import org.entcore.common.http.BaseServer;
@@ -47,8 +48,8 @@ public class Mediacentre extends BaseServer {
     public static final String MANAGER_RESOURCE_BEHAVIOUR = "fr-openent-mediacentre-controller-MediacentreController|initManagerResourceRight";
 
     @Override
-    public void start() throws Exception {
-        super.start();
+    public void start(Promise<Void> startPromise) throws Exception {
+        super.start(startPromise);
 
         EventBus eb = getEventBus(vertx);
         wsPort = config.getInteger("wsPort", 3000);
@@ -109,6 +110,9 @@ public class Mediacentre extends BaseServer {
             log.fatal("Unable to parse amass cron expression");
             throw e;
         }
+
+        startPromise.tryComplete();
+        startPromise.tryFail("[Mediacentre@Mediacentre::start] Failed to start module Mediacentre.");
     }
 
 }

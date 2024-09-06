@@ -57,7 +57,7 @@ public class DefaultMediacentreEventBus extends ControllerHelper implements medi
                 resource.put("key_words", resourceKeyword);
 
                 String action = signet.getBoolean("published", false) ? Mediacentre.MEDIACENTRE_UPDATE : Mediacentre.MEDIACENTRE_CREATE;
-                eb.send(action, resource, handlerToAsyncHandler(event -> {
+                eb.request(action, resource, handlerToAsyncHandler(event -> {
                     if ("ok".equals(event.body().getString("status"))) {
                         log.info("export succeeded");
                         handler.handle(new Either.Right<>(event.body().getJsonObject("result")));

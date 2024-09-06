@@ -19,10 +19,7 @@ import fr.wseduc.security.ActionType;
 import fr.wseduc.security.SecuredAction;
 import fr.wseduc.webutils.http.Renders;
 import fr.wseduc.webutils.request.RequestUtils;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.CompositeFuture;
-import io.vertx.core.Future;
-import io.vertx.core.Handler;
+import io.vertx.core.*;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonArray;
@@ -498,19 +495,19 @@ public class SignetController extends ControllerHelper {
             if (filteringEvent.isRight()) {
                 JsonArray deactivated = filteringEvent.right().getValue();
                 if (!deactivated.isEmpty()) {
-                    List<Future> futures = new ArrayList<>();
+                    List<Future<JsonObject>> futures = new ArrayList<>();
                     for(int i = 0; i < deactivated.size(); i++) {
-                        Future<JsonObject> removeFavoriteFuture = Future.future();
-                        Future<JsonObject> removeFavoriteSQLFuture = Future.future();
-                        futures.add(removeFavoriteFuture);
-                        futures.add(removeFavoriteSQLFuture);
+                        Promise<JsonObject> removeFavoritePromise = Promise.promise();
+                        Promise<JsonObject> removeFavoriteSQLPromise = Promise.promise();
+                        futures.add(removeFavoritePromise.future());
+                        futures.add(removeFavoriteSQLPromise.future());
                         favoriteService.delete(signetId,"fr.openent.mediacentre.source.Signet" ,
                                 deactivated.getJsonObject(i).getString("user_id"),
-                                handlerJsonObject(removeFavoriteFuture));
+                                handlerJsonObject(removeFavoritePromise));
                         favoriteService.updateSQL(Integer.parseInt(signetId), deactivated.getJsonObject(i).getString("user_id"),
-                                false, false, handlerJsonObject(removeFavoriteSQLFuture));
+                                false, false, handlerJsonObject(removeFavoriteSQLPromise));
                     }
-                    CompositeFuture.all(futures).setHandler(event -> {
+                    Future.all(futures).onComplete(event -> {
                                 if (event.succeeded()) {
                                     log.info("ok");
                                 }
