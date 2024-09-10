@@ -85,7 +85,7 @@ public class Mediacentre extends BaseServer {
         signetController.setCrudService(new SqlCrudService(mediacentreSchema, "signet", "signet_shares"));
 
         addController(new MediacentreController(sources, config));
-        addController(new FavoriteController(eb));
+        addController(new FavoriteController(eb, sources, securedActions));
         addController(new PublishedController(eb, securedActions));
         addController(new SearchController(eb, sources));
         addController(new TextBooksController(eb, sources));

@@ -12,6 +12,7 @@ import { MainLayout } from "~/components/main-layout/MainLayout";
 import { ModalContainer } from "~/components/modal-container/ModalContainer";
 import { ToasterContainer } from "~/components/toaster-container/ToasterContainer";
 import { ModalEnum } from "~/core/enum/modal.enum";
+import { useFavorite } from "~/hooks/useFavorite";
 import { useSignet } from "~/hooks/useSignet";
 import { Resource } from "~/model/Resource.model";
 import { Signet } from "~/model/Signet.model";
@@ -56,8 +57,14 @@ export const SignetPage: React.FC = () => {
   const [emptyText, setEmptyText] = useState("mediacentre.empty.state.mine");
   const [emptyImage, setEmptyImage] = useState("empty-state-mine.png");
   const [publishedIsChecked, setPublishedIsChecked] = useState<boolean>(false);
+  const { refetchFavorite } = useFavorite();
 
   const canAccess = () => (hasSignetRight ? "signets" : "search");
+
+  useEffect(() => {
+    refetchFavorite();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (allSignets) {

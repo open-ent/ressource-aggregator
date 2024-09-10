@@ -6,6 +6,7 @@ import fr.openent.mediacentre.helper.FavoriteHelper;
 import fr.openent.mediacentre.security.ViewRight;
 import fr.openent.mediacentre.service.FavoriteService;
 import fr.openent.mediacentre.service.impl.DefaultFavoriteService;
+import fr.openent.mediacentre.source.Source;
 import fr.wseduc.rs.ApiDoc;
 import fr.wseduc.rs.Delete;
 import fr.wseduc.rs.Get;
@@ -21,6 +22,9 @@ import org.entcore.common.controller.ControllerHelper;
 import org.entcore.common.http.filter.ResourceFilter;
 import org.entcore.common.user.UserUtils;
 
+import java.util.List;
+import java.util.Map;
+
 import static fr.openent.mediacentre.core.constants.Field.*;
 
 public class FavoriteController extends ControllerHelper {
@@ -29,11 +33,14 @@ public class FavoriteController extends ControllerHelper {
     private final FavoriteService favoriteService;
     private final FavoriteHelper favoriteHelper;
 
-    public FavoriteController(EventBus eb) {
+    private final List<Source> sources;
+
+    public FavoriteController(EventBus eb, List<Source> sources, Map<String, fr.wseduc.webutils.security.SecuredAction> securedActions) {
         super();
         this.eb = eb;
         this.favoriteService = new DefaultFavoriteService();
-        this.favoriteHelper = new FavoriteHelper();
+        this.favoriteHelper = new FavoriteHelper(securedActions);
+        this.sources = sources;
     }
 
     @Get("/favorites")
@@ -42,7 +49,7 @@ public class FavoriteController extends ControllerHelper {
     @SecuredAction(value = "", type = ActionType.RESOURCE)
     public void getFavorites(HttpServerRequest request) {
         UserUtils.getUserInfos(eb, request, user -> {
-            favoriteHelper.favoritesRetrieve(user, favoriteService, new APIHelper(request));
+            favoriteHelper.favoritesRetrieve(user, favoriteService, sources, new APIHelper(request));
         });
     }
 

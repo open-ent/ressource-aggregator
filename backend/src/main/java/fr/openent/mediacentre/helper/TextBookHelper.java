@@ -57,7 +57,9 @@ public class TextBookHelper {
 
     public Future<JsonArray> getTextBooks(String userId) {
         Promise<JsonArray> promise = Promise.promise();
-        textBookService.get(userId, FutureHelper.handlerJsonArray(promise));
+        textBookService.get(userId)
+            .onSuccess(promise::complete)
+            .onFailure(promise::fail);
         return promise.future();
     }
 
