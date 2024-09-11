@@ -21,6 +21,9 @@ public class Field {
     public static final String ID_RESSOURCE = "idRessource";
     public static final String USER = "user";
     public static final String USER_ID = "user_id";
+    public static final String USERID = "userId";
+    public static final String GROUP_ID = "group_id";
+    public static final String GROUPID = "groupId";
     public static final String SOURCE = "source";
     public static final String SOURCES = "sources";
     public static final String QUERY = "query";
@@ -93,5 +96,6 @@ public class Field {
     public static final String PIPELINE = "pipeline";
     public static final String CAMEL_MAX_VALUE = "maxValue";
     public static final String CAMEL_FIRST_BATCH = "firstBatch";
+    public static final String SHARED = "shared";
 }
 
