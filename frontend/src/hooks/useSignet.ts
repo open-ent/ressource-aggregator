@@ -138,6 +138,49 @@ export const useSignet = () => {
     return signetsData;
   }, [favorites, mySignets, publicSignets, pins]);
 
+  const getPublicSignets = useCallback(() => {
+    if (!publicSignets) {
+      return null;
+    }
+    const publicSignetsData: Signet[] =
+      publicSignets?.data?.signets?.resources ?? [];
+    let updatedPublicSignetsData: Signet[] = publicSignetsData.map(
+      (signet: Signet) => ({
+        ...signet,
+        orientation: signet?.document_types?.some((type) =>
+          type.toLowerCase().includes("orientation"),
+        ),
+        source: SIGNET,
+        published: true,
+      }),
+    );
+    if (favorites) {
+      updatedPublicSignetsData = updatedPublicSignetsData.map(
+        (signet: Signet) => ({
+          ...signet,
+          favorite: favorites.some((fav: Favorite) =>
+            fav.source === SIGNET && signet?.id
+              ? fav?.id?.toString() === signet?.id.toString()
+              : fav?.id?.toString() === signet?._id?.toString(),
+          ),
+        }),
+      );
+    }
+    if (pins) {
+      updatedPublicSignetsData = updatedPublicSignetsData.map(
+        (signet: Signet) => ({
+          ...signet,
+          is_pinned: pins.some(
+            (pin: Pin) =>
+              pin?.id == signet?.id &&
+              pin.source === "fr.openent.mediacentre.source.Signet",
+          ),
+        }),
+      );
+    }
+    return updatedPublicSignetsData;
+  }, [publicSignets, favorites, pins]);
+
   const refetchSignet = async () => {
     await refetchFavorite();
     await refetchMySignet();
@@ -204,5 +247,6 @@ export const useSignet = () => {
     published,
     archived,
     myPublishedSignets,
+    getPublicSignets,
   };
 };

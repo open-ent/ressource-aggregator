@@ -8,7 +8,11 @@ import {
   useState,
 } from "react";
 
-import { ToasterProviderContextType, ToasterProviderProps } from "./types";
+import {
+  ToasterProviderContextType,
+  ToasterProviderProps,
+  toasterRightsState,
+} from "./types";
 import { SearchResource } from "~/model/SearchResource.model";
 
 const ToasterProviderContext = createContext<ToasterProviderContextType | null>(
@@ -28,6 +32,9 @@ export const ToasterProvider: FC<ToasterProviderProps> = ({ children }) => {
     SearchResource[] | null
   >(null);
   const [isToasterOpen, setIsToasterOpen] = useState<boolean>(false);
+  const [toasterRights, setToasterRights] = useState<toasterRightsState | null>(
+    null,
+  );
   const [selectedTab, setSelectedTab] = useState<string>(
     "mediacentre.signets.mine",
   );
@@ -71,12 +78,15 @@ export const ToasterProvider: FC<ToasterProviderProps> = ({ children }) => {
     if (toasterResources && !!toasterResources.length && !isToasterOpen) {
       setIsToasterOpen(true);
     }
-  }, [toasterResources, isToasterOpen]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toasterResources]);
 
   const value = useMemo<ToasterProviderContextType>(
     () => ({
       toasterResources,
       setToasterResources,
+      toasterRights,
+      setToasterRights,
       selectedTab,
       setSelectedTab,
       isSelectable,
@@ -89,6 +99,7 @@ export const ToasterProvider: FC<ToasterProviderProps> = ({ children }) => {
       toasterResources,
       isToasterOpen,
       selectedTab,
+      toasterRights,
       isSelectable,
       toggleResource,
     ],

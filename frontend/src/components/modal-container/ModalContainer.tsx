@@ -4,6 +4,7 @@ import { CreatePins } from "~/components/modals/create-pins/CreatePins";
 import { CreateSignet } from "~/components/modals/create-signet/CreateSignet";
 import { SignetArchive } from "~/components/modals/signet-archive/SignetArchive";
 import { SignetDelete } from "~/components/modals/signet-delete/SignetDelete";
+import { SignetDeletePublish } from "~/components/modals/signet-delete-publish/SignetDeletePublish";
 import { SignetProperty } from "~/components/modals/signet-property/SignetProperty";
 import { SignetPropertyView } from "~/components/modals/signet-property-view/SignetPropertyView";
 import { SignetPublish } from "~/components/modals/signet-publish/SignetPublish";
@@ -61,6 +62,9 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
         />
       )}
       {openModal === ModalEnum.PROPERTY_VIEW_SIGNET && <SignetPropertyView />}
+      {openModal === ModalEnum.DELETE_SIGNET_PUBLISHED && (
+        <SignetDeletePublish refetch={refetchSignet} />
+      )}
     </div>
   );
 };

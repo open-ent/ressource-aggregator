@@ -89,8 +89,8 @@ export const SignetArchive: React.FC<SignetArchiveProps> = ({
         handleCloseModal();
         notify(
           toasterResources.length > 1
-            ? t("mediacentre.signet.delete.many.success")
-            : t("mediacentre.signet.delete.success"),
+            ? t("mediacentre.signet.archive.many.success")
+            : t("mediacentre.signet.archive.success"),
           "success",
         );
       }
@@ -107,7 +107,9 @@ export const SignetArchive: React.FC<SignetArchiveProps> = ({
   return (
     <Modal onModalClose={handleCloseModal} isOpen={true} id="archive-signet">
       <Modal.Header onModalClose={handleCloseModal}>
-        {t("mediacentre.modal.signet.archive.title")}
+        {toasterResources.length > 1
+          ? t("mediacentre.modal.signet.archive.title.many")
+          : t("mediacentre.modal.signet.archive.title")}
       </Modal.Header>
       <Modal.Body>
         {toasterResources.length > 1

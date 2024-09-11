@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { ActionBar, Button, checkUserRight } from "@edifice-ui/react";
 import "./ToasterContainer.scss";
@@ -7,7 +7,9 @@ import { useTranslation } from "react-i18next";
 
 import { ShareModalMediacentre } from "../modals/share-modal/ShareModalMediacentre";
 import { ModalEnum } from "~/core/enum/modal.enum";
+import { useSignet } from "~/hooks/useSignet";
 import { SearchResource } from "~/model/SearchResource.model";
+import { Signet } from "~/model/Signet.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
 import { useToasterProvider } from "~/providers/ToasterProvider";
@@ -35,9 +37,16 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
   const { t } = useTranslation("mediacentre");
   const { notify } = useAlertProvider();
   const { openModal, openSpecificModal, setModalResource } = useModalProvider();
-  const { isToasterOpen, setIsToasterOpen, toasterResources, resetResources } =
-    useToasterProvider();
+  const {
+    isToasterOpen,
+    setIsToasterOpen,
+    toasterResources,
+    resetResources,
+    toasterRights,
+    setToasterRights,
+  } = useToasterProvider();
   const [updateSignet] = useUpdateSignetMutation();
+  const { getPublicSignets } = useSignet();
   const { setUserRights } = useUserRightsStore.getState();
   const [shareOptions, setShareOptions] = useState<ShareOptions | null>(null);
 
@@ -82,6 +91,15 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
   const openDelete = () => {
     if (toasterResources) {
       openSpecificModal(ModalEnum.DELETE_SIGNET);
+      setIsToasterOpen(false);
+    } else {
+      notify(t("mediacentre.toaster.selectOneResource.error"), "danger");
+    }
+  };
+
+  const openDeletePublished = () => {
+    if (toasterResources) {
+      openSpecificModal(ModalEnum.DELETE_SIGNET_PUBLISHED);
       setIsToasterOpen(false);
     } else {
       notify(t("mediacentre.toaster.selectOneResource.error"), "danger");
@@ -134,13 +152,32 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
     }
   };
 
+  const openSharedProperty = async () => {
+    try {
+      if (!toasterResources || toasterResources.length > 1) {
+        return null;
+      }
+      const userRights = await checkUserRight(toasterResources[0].rights);
+      if (userRights.manager) {
+        openProperty();
+      } else {
+        openPropertyView();
+      }
+    } catch (error) {
+      console.error("Error checking user rights:", error);
+    }
+  };
+
   const openShareModal = async () => {
     try {
       if (!toasterResources || toasterResources.length > 1) {
         return null;
       }
 
+      console.log(toasterResources[0].rights);
+
       const userRights = await checkUserRight(toasterResources[0].rights);
+      console.log(userRights);
       setUserRights(userRights);
 
       setShareOptions({
@@ -148,6 +185,8 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
         resourceId: toasterResources[0]?.id?.toString() ?? "",
         resourceRights: (toasterResources[0].rights as string[]) ?? [],
       });
+      setIsToasterOpen(false);
+      resetResources();
       openSpecificModal(ModalEnum.SHARE_MODAL);
     } catch (error) {
       console.error("Error checking user rights:", error);
@@ -155,11 +194,43 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
   };
 
   const isSelectedUnpublished = () =>
-    !toasterResources?.find((resource: SearchResource) => resource?.published);
+    !toasterResources?.find(
+      (resource: SearchResource) =>
+        resource?.published ||
+        getPublicSignets()?.find(
+          (signet: Signet) => signet.id.toString() === resource?.id?.toString(),
+        ),
+    );
+
+  const isManager = useCallback(() => toasterRights?.manager, [toasterRights]);
+
+  useEffect(() => {
+    const fetchUserRights = async () => {
+      if (toasterResources && toasterResources.length === 1) {
+        setToasterRights(await checkUserRight(toasterResources[0].rights));
+      }
+    };
+    fetchUserRights();
+  }, [toasterResources]);
 
   if (!toasterResources || toasterResources.length === 0 || !isToasterOpen) {
-    return null;
+    return (
+      <>
+        {openModal === ModalEnum.SHARE_MODAL && shareOptions && (
+          <ShareModalMediacentre
+            shareOptions={shareOptions}
+            onClose={() => setShareOptions(null)}
+          />
+        )}
+      </>
+    );
   }
+
+  const sharedArray = [
+    { action: openShareModal, label: "mediacentre.toaster.shared" },
+    { action: openPublish, label: "mediacentre.toaster.published" },
+    { action: openArchive, label: "mediacentre.toaster.archived" },
+  ];
 
   return (
     <div className="med-toaster-container">
@@ -210,10 +281,21 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
               type="button"
               color="primary"
               variant="filled"
-              onClick={openPropertyView}
+              onClick={openSharedProperty}
             >
               {t("mediacentre.toaster.properties")}
             </Button>
+            {isManager() &&
+              sharedArray.map((item) => (
+                <Button
+                  type="button"
+                  color="primary"
+                  variant="filled"
+                  onClick={item.action}
+                >
+                  {t(item.label)}
+                </Button>
+              ))}
           </>
         )}
         {selectedTab === "mediacentre.signets.published" && (
@@ -222,7 +304,7 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
               type="button"
               color="primary"
               variant="filled"
-              onClick={openDelete}
+              onClick={openDeletePublished}
             >
               {t("mediacentre.toaster.delete")}
             </Button>

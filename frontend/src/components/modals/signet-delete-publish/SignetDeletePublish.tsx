@@ -4,10 +4,8 @@ import { Button, Modal } from "@edifice-ui/react";
 import { useTranslation } from "react-i18next";
 
 import { ModalEnum } from "~/core/enum/modal.enum";
-import { useSignet } from "~/hooks/useSignet";
 import { PutSharePayload } from "~/model/payloads/PutSharePayload";
 import { SearchResource } from "~/model/SearchResource.model";
-import { Signet } from "~/model/Signet.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
 import { useToasterProvider } from "~/providers/ToasterProvider";
@@ -18,18 +16,19 @@ import {
   useUpdateShareResourceMutation,
 } from "~/services/api/signet.service";
 
-interface SignetDeleteProps {
+interface SignetDeletePublishProps {
   refetch: () => void;
 }
 
-export const SignetDelete: React.FC<SignetDeleteProps> = ({ refetch }) => {
+export const SignetDeletePublish: React.FC<SignetDeletePublishProps> = ({
+  refetch,
+}) => {
   const { t } = useTranslation("mediacentre");
   const { openModal, closeAllModals } = useModalProvider();
   const { toasterResources, resetResources } = useToasterProvider();
   const [updateShareResource] = useUpdateShareResourceMutation();
   const [deleteSignet] = useDeleteSignetMutation();
   const [deletePublicSignet] = useDeleteSignetPublicMutation();
-  const { getPublicSignets } = useSignet();
   const { notify } = useAlertProvider();
 
   const handleCloseModal = () => {
@@ -39,7 +38,10 @@ export const SignetDelete: React.FC<SignetDeleteProps> = ({ refetch }) => {
 
   const onSubmit = async () => {
     try {
-      if (!toasterResources) {
+      if (
+        !toasterResources ||
+        !toasterResources.find((resource) => resource.published)
+      ) {
         notify(t("mediacentre.error.anyResource"), "danger");
         return;
       }
@@ -48,13 +50,7 @@ export const SignetDelete: React.FC<SignetDeleteProps> = ({ refetch }) => {
         async (resource: SearchResource) => {
           const idSignet = resource?.id?.toString();
           try {
-            if (
-              resource.published ||
-              getPublicSignets()?.find(
-                (signet: Signet) =>
-                  signet.id.toString() === idSignet?.toString(),
-              )
-            ) {
+            if (resource.published) {
               const deleteResponse = await deletePublicSignet({ idSignet });
               if (deleteResponse?.error) {
                 throw new Error(t("mediacentre.error.delete"));
@@ -103,19 +99,21 @@ export const SignetDelete: React.FC<SignetDeleteProps> = ({ refetch }) => {
     }
   };
 
-  if (!toasterResources || openModal !== ModalEnum.DELETE_SIGNET) {
+  if (!toasterResources || openModal !== ModalEnum.DELETE_SIGNET_PUBLISHED) {
     return null;
   }
 
   return (
     <Modal onModalClose={handleCloseModal} isOpen={true} id="delete-signet">
       <Modal.Header onModalClose={handleCloseModal}>
-        {t("mediacentre.modal.signet.delete.title")}
+        {toasterResources.length > 1
+          ? t("mediacentre.modal.signet.delete.published.title.many")
+          : t("mediacentre.modal.signet.delete.published.title")}
       </Modal.Header>
       <Modal.Body>
         {toasterResources.length > 1
-          ? t("mediacentre.modal.signet.delete.subtitle.many")
-          : t("mediacentre.modal.signet.delete.subtitle")}
+          ? t("mediacentre.modal.signet.delete.published.subtitle.many")
+          : t("mediacentre.modal.signet.delete.published.subtitle")}
       </Modal.Body>
       <Modal.Footer>
         <Button color="tertiary" onClick={handleCloseModal}>

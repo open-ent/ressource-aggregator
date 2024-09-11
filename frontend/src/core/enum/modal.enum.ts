@@ -10,4 +10,5 @@ export enum ModalEnum {
   RESTORE_SIGNET = "restore-signet",
   SHARE_MODAL = "share-modal",
   PROPERTY_VIEW_SIGNET = "property-view-signet",
+  DELETE_SIGNET_PUBLISHED = "delete-signet-published",
 }

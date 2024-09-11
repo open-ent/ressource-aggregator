@@ -22,6 +22,7 @@ import useWindowDimensions from "~/hooks/useWindowDimensions";
 import { SignetCreatePayload } from "~/model/payloads/SignetCreatePayload";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
+import { useToasterProvider } from "~/providers/ToasterProvider";
 import { useCreateSignetMutation } from "~/services/api/signet.service";
 import "../Modal.scss";
 import "./CreateSignet.scss";
@@ -40,6 +41,7 @@ export const CreateSignet: React.FC<CreateSignetProps> = ({
   const { t } = useTranslation("mediacentre");
   const { openModal, closeAllModals } = useModalProvider();
   const { setAlertText, setAlertType } = useAlertProvider();
+  const { setIsToasterOpen, resetResources } = useToasterProvider();
   const [createSignet] = useCreateSignetMutation();
   const [allLevels, setAllLevels] = useState<string[] | null>(null);
   const [allDisciplines, setAllDisciplines] = useState<string[] | null>(null);
@@ -60,6 +62,12 @@ export const CreateSignet: React.FC<CreateSignetProps> = ({
     return (value: string[]) =>
       setSelectedCheckboxes({ ...selectedCheckboxes, [key]: value });
   };
+
+  useEffect(() => {
+    setIsToasterOpen(false);
+    resetResources();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const {
     cover: thumbnail,
