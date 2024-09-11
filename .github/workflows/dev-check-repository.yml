@@ -24,15 +24,6 @@ jobs:
       - name: Run tests
         working-directory: ./frontend
         run: pnpm test
-      - name: Run npm install
-        working-directory: ./angularJS
-        run: yarn install
-      - name: Run build node with Gulp
-        working-directory: ./angularJS
-        run: node_modules/gulp/bin/gulp.js build
-      - name: Run test
-        working-directory: ./angularJS
-        run: yarn test
 
   build-gradle-test:
     runs-on: ubuntu-latest

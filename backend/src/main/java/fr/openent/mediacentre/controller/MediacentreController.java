@@ -66,12 +66,7 @@ public class MediacentreController extends ControllerHelper {
                 .put("mode", config.getString("mode"))
                 .put("sources", sourceList)
                 .put(Field.MEDIACENTREUPDATEFREQUENCY, config.getInteger(Field.MEDIACENTREUPDATEFREQUENCY, 60000));
-        final String view = request.params().get("view");
-        if ("angular".equals(view)) {
-            renderView(request, params, "mediacentre.html", null);
-        } else {
-            renderView(request, params, "index.html", null);
-        }
+        renderView(request, params);
         eventStore.createAndStoreEvent(MediacentreEvent.ACCESS.name(), request);
     }
 
