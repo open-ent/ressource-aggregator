@@ -6,11 +6,12 @@ import {
   isActionAvailable,
   Tooltip,
 } from "@edifice-ui/react";
-// import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import { useTranslation } from "react-i18next";
 
+import { fields } from "~/core/const/fields";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { Pin } from "~/model/Pin.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
@@ -38,8 +39,8 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
   const hasPinRight =
     isActionAvailable("pins", actions) &&
     idSelectedStructure === pin.structure_owner;
-
   const { t } = useTranslation("mediacentre");
+  const [highlights, setHighlights] = useState<boolean | undefined>(false);
 
   const notify = (message: string, type: AlertTypes) => {
     setAlertText(message);
@@ -71,6 +72,12 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
       setNewLink(link);
     }
   }, [link]);
+
+  useEffect(() => {
+    if (typeof window !== fields.UNDEFINED && window?.config) {
+      setHighlights(window?.config?.highlightsPins || false);
+    }
+  }, []);
 
   return (
     <Card isClickable={false} isSelectable={false} className="med-pin-card">
@@ -106,10 +113,14 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
       </a>
       <Card.Footer>
         <div className="med-left-footer">
-          {/* <AutoAwesomeIcon />
-          <span className="med-text-footer">
-            {t("mediacentre.card.offered.by.the.region")}
-          </span> */}
+          {(highlights ?? false) && pin.is_parent && (
+            <>
+              <AutoAwesomeIcon />
+              <span className="med-text-footer">
+                {t("mediacentre.card.offered.by.the.region")}
+              </span>
+            </>
+          )}
         </div>
         <div className="med-footer-svg">
           {hasPinRight && (

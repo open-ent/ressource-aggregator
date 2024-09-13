@@ -97,5 +97,7 @@ public class Field {
     public static final String CAMEL_MAX_VALUE = "maxValue";
     public static final String CAMEL_FIRST_BATCH = "firstBatch";
     public static final String SHARED = "shared";
+    public static final String HIGHLIGHTSPINS = "highlightsPins";
+    public static final String IS_PARENT = "is_parent";
 }
 

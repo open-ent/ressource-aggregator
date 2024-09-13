@@ -7,15 +7,27 @@
     <link rel="icon" id="favicon" href="" />
     <link rel="stylesheet" href="/assets/themes/edifice-bootstrap/index.css" />
     <script>
-      wsPort = "";
-      mode = "prod";
-      sources = [
-        "fr.openent.mediacentre.source.GAR",
-        "fr.openent.mediacentre.source.Moodle",
-        "fr.openent.mediacentre.source.Signet",
-      ];
-      mediacentreUpdateFrequency = 60000;
-    </script>
+      wsPort = "{{wsPort}}";
+			mode = "{{mode}}";
+			sources = [
+				{{#sources}}
+					"{{.}}",
+				{{/sources}}
+			];
+			mediacentreUpdateFrequency = {{mediacentreUpdateFrequency}};
+      highlightsPins = {{highlightsPins}};
+      window.config = {
+        wsPort: "{{wsPort}}",
+        mode: "{{mode}}",
+        sources: [
+          {{#sources}}
+            "{{.}}",
+          {{/sources}}
+        ],
+        mediacentreUpdateFrequency: {{mediacentreUpdateFrequency}},
+        highlightsPins: {{highlightsPins}}
+      };
+  </script>
   </head>
   <body>
     <div id="root"></div>

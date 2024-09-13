@@ -65,7 +65,8 @@ public class MediacentreController extends ControllerHelper {
                 .put("wsPort", "dev".equals(config.getString("mode")) ? Mediacentre.wsPort : "")
                 .put("mode", config.getString("mode"))
                 .put("sources", sourceList)
-                .put(Field.MEDIACENTREUPDATEFREQUENCY, config.getInteger(Field.MEDIACENTREUPDATEFREQUENCY, 60000));
+                .put(Field.MEDIACENTREUPDATEFREQUENCY, config.getInteger(Field.MEDIACENTREUPDATEFREQUENCY, 60000))
+                .put(Field.HIGHLIGHTSPINS, config.getBoolean(Field.HIGHLIGHTSPINS, false));
         renderView(request, params);
         eventStore.createAndStoreEvent(MediacentreEvent.ACCESS.name(), request);
     }

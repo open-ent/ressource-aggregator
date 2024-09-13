@@ -11,4 +11,5 @@ export interface Pin {
   image?: string;
   is_textbook?: boolean;
   is_pinned?: boolean;
+  is_parent?: boolean;
 }

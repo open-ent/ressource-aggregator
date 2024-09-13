@@ -46,6 +46,7 @@ public class PinsController extends ControllerHelper {
     public void getResources(HttpServerRequest request) {
         UserUtils.getUserInfos(eb, request, user -> pinsService.list(request.getParam(Field.IDSTRUCTURE))
             .compose(resources -> pinsService.getData(resources, user, sources))
+            .compose(resources -> pinsService.getStructureIsParent(resources, user))
             .onSuccess(resources -> renderJson(request, resources))
             .onFailure(error -> {
                 String message = String.format("[PinnedController@%s::getResources] Failed to get resources : %s",

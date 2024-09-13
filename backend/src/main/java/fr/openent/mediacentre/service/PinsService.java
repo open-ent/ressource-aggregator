@@ -70,4 +70,11 @@ public interface PinsService {
      * @param sources list of sources
      */
     public Future<JsonArray> getData(List<PinResource> resources, UserInfos user, List<Source> sources);
+
+    /**
+     * get parent structure informations
+     * @param resources list of pins resources
+     * @param user   user connected
+     */
+    public Future<JsonArray> getStructureIsParent(JsonArray resources, UserInfos user);
 }

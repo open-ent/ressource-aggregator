@@ -23,6 +23,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import org.entcore.common.mongodb.MongoDbResult;
+import org.entcore.common.neo4j.Neo4j;
+import org.entcore.common.neo4j.Neo4jResult;
 import org.entcore.common.user.UserInfos;
 
 import java.util.*;
@@ -39,6 +41,7 @@ public class DefaultPinsService implements PinsService {
     private final TextBookHelper textBookHelper = new TextBookHelper();
     private final SearchHelper searchHelper = new SearchHelper();
     private final SignetHelper signetHelper = new SignetHelper();
+    private final Neo4j neo = Neo4j.getInstance();
 
     public DefaultPinsService(String collection, Map<String, SecuredAction> securedActions) {
         this.collection = collection;
@@ -241,6 +244,42 @@ public class DefaultPinsService implements PinsService {
                 .collect(Collectors.toList());
 
         promise.complete(new JsonArray(enrichedResources));
+        return promise.future();
+    }
+
+    // Get all structures that are not parents
+    // and add the label "is_parent" to the resources whose structure owner has no parent
+    @Override
+    public Future<JsonArray> getStructureIsParent(JsonArray resources, UserInfos userInfos) {
+        Promise<JsonArray> promise = Promise.promise();
+
+        String query =
+                "MATCH (s:Structure) " +
+                "OPTIONAL MATCH (s)-[r:HAS_ATTACHMENT]->(ps:Structure) " +
+                "WITH s, ps " +
+                "WHERE ps IS NULL " +
+                "RETURN s.id as idStructure, s.name as structureName";
+
+        neo.execute(query, new JsonObject(), Neo4jResult.validResultHandler(event -> {
+            if (event.isLeft()) {
+                log.error("[Mediacentre@DefaultPinsService::getStructureParentInfos] Failed to get structures parents : " + event.left().getValue());
+                promise.fail(event.left().getValue());
+                return;
+            }
+            JsonArray formattedResources = resources.stream()
+                    .map(JsonObject.class::cast)
+                    .map(resource -> {
+                        event.right().getValue().stream()
+                            .map(JsonObject.class::cast)
+                            .filter(structure -> Objects.equals(structure.getString(Field.IDSTRUCTURE), resource.getString(Field.STRUCTURE_OWNER)))
+                            .findFirst()
+                            .ifPresent(structure -> resource.put(Field.IS_PARENT, true));
+                        return resource;
+                    })
+                    .collect(Collectors.collectingAndThen(Collectors.toList(), JsonArray::new));
+
+            promise.complete(formattedResources);
+        }));
         return promise.future();
     }
 }
