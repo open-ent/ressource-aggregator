@@ -31,17 +31,22 @@ interface CreateSignetProps {
   refetch: () => void;
   disciplines: { id: string; label: string }[];
   levels: { id: string; label: string }[];
+  chooseEmptyState: (text: string, image: string) => void;
+  setAllResourcesDisplayed: (resources: any) => void;
 }
 
 export const CreateSignet: React.FC<CreateSignetProps> = ({
   refetch,
   disciplines,
   levels,
+  chooseEmptyState = () => {},
+  setAllResourcesDisplayed = () => {},
 }) => {
   const { t } = useTranslation("mediacentre");
   const { openModal, closeAllModals } = useModalProvider();
   const { setAlertText, setAlertType } = useAlertProvider();
-  const { setIsToasterOpen, resetResources } = useToasterProvider();
+  const { setIsToasterOpen, resetResources, setSelectedTab } =
+    useToasterProvider();
   const [createSignet] = useCreateSignetMutation();
   const [allLevels, setAllLevels] = useState<string[] | null>(null);
   const [allDisciplines, setAllDisciplines] = useState<string[] | null>(null);
@@ -138,7 +143,10 @@ export const CreateSignet: React.FC<CreateSignetProps> = ({
         notify(t("mediacentre.error.signet.create"), "danger");
         return;
       }
+      setSelectedTab("mediacentre.signets.mine");
       refetch();
+      chooseEmptyState("mediacentre.empty.state.mine", "empty-state-mine.png");
+      setAllResourcesDisplayed(null);
       handleCloseModal();
       resetFields();
       notify(t("mediacentre.signet.create.success"), "success");

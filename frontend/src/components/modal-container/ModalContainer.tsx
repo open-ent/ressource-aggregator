@@ -16,6 +16,8 @@ interface ModalContainerProps {
   refetchPins: () => void;
   levels: { id: string; label: string }[];
   disciplines: { id: string; label: string }[];
+  chooseEmptyState: (text: string, image: string) => void;
+  setAllResourceDisplayed: (resources: any) => void;
 }
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
@@ -23,6 +25,8 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
   refetchPins = () => {},
   levels,
   disciplines,
+  chooseEmptyState = () => {},
+  setAllResourceDisplayed = () => {},
 }) => {
   const { openModal } = useModalProvider();
   return (
@@ -59,6 +63,8 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
           refetch={refetchSignet}
           levels={levels}
           disciplines={disciplines}
+          chooseEmptyState={chooseEmptyState}
+          setAllResourcesDisplayed={setAllResourceDisplayed}
         />
       )}
       {openModal === ModalEnum.PROPERTY_VIEW_SIGNET && <SignetPropertyView />}

@@ -135,6 +135,8 @@ export const SignetPage: React.FC = () => {
         levels={levels}
         disciplines={disciplines}
         refetchPins={refetchPins}
+        chooseEmptyState={chooseEmptyState}
+        setAllResourceDisplayed={setAllResourcesDisplayed}
       />
       <div className="med-root-container">
         <div className={`med-${canAccess()}-container`}>
