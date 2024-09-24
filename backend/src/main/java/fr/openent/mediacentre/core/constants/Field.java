@@ -37,6 +37,7 @@ public class Field {
     public static final String EVENT = "event";
     public static final String IS_TEXTBOOK = "is_textbook";
     public static final String TEXTBOOKS = "textbooks";
+    public static final String EXTERNAL_RESOURCES = "external_resources";
     public static final String TEXTBOOKS_RESULT = "textbooks_Result";
     public static final String STRUCTURE_UAI = "structure_uai";
     public static final String STRUCTURE_NAME = "structure_name";
@@ -97,7 +98,17 @@ public class Field {
     public static final String CAMEL_MAX_VALUE = "maxValue";
     public static final String CAMEL_FIRST_BATCH = "firstBatch";
     public static final String SHARED = "shared";
+    public static final String USERNAME = "username";
+    public static final String PARAM_RESOURCE_URI = "resourceUri";
+    public static final String PARAM_PUSH_NOTIF = "pushNotif";
+    public static final String PARAM_USER_URI = "userUri";
+    public static final String PARAM_URI = "uri";
+    public static final String BODY = "body";
     public static final String HIGHLIGHTSPINS = "highlightsPins";
     public static final String IS_PARENT = "is_parent";
+    public static final String MEMBER_ID = "member_id";
+    public static final String STRUCTURE_ID = "structureId";
+    public static final String IS_TARGET_STRUCTURE = "isTargetStructure";
+    public static final String STRUCTURE = "structure";
 }
 

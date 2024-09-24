@@ -454,7 +454,7 @@ public class GAR implements Source {
         this.config = config;
     }
 
-    public void initTextBooks(UserInfos user, List<String> idStructures, Handler<Either<String, JsonArray>> handler) {
+    public void initTextBooks(UserInfos user, List<String> idStructures, Handler<Either<String, JsonObject>> handler) {
         List<Future> futures = new ArrayList<>();
         List<String> structures = idStructures == null || idStructures.isEmpty() ? user.getStructures() : idStructures;
         for (String structure : structures) {
@@ -468,6 +468,7 @@ public class GAR implements Source {
 
         CompositeFuture.join(futures).onComplete(event -> {
             JsonArray textBooks = new JsonArray();
+            JsonArray externalResources = new JsonArray();
             JsonArray resources = new JsonArray();
             List<String> list = new ArrayList<>();
             for (Future future : futures) {
@@ -483,9 +484,11 @@ public class GAR implements Source {
                 if (matcher.find() && !list.contains(resource.getString("idRessource"))) {
                     list.add(resource.getString("idRessource"));
                     textBooks.add(format(resource));
+                } else {
+                    externalResources.add(format(resource));
                 }
             }
-            handler.handle(new Either.Right<>(textBooks));
+            handler.handle(new Either.Right<>(new JsonObject().put(Field.TEXTBOOKS, textBooks).put(Field.EXTERNAL_RESOURCES, externalResources)));
         });
     }
 }

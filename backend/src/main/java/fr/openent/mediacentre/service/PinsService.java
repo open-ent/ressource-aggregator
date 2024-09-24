@@ -72,9 +72,24 @@ public interface PinsService {
     public Future<JsonArray> getData(List<PinResource> resources, UserInfos user, List<Source> sources);
 
     /**
-     * get parent structure informations
+     * notify users about a pinned resource
+     * @param request  request
+     * @param resource resource
+     * @param structures   list of structures to notify
+     * @param structureId structure id
+     */
+    public Future<Void> sendNotification(HttpServerRequest request, JsonObject resource , List<String> structures, String structureId);
+
+    /**
+     * add parent structure informations
      * @param resources list of pins resources
      * @param user   user connected
      */
     public Future<JsonArray> getStructureIsParent(JsonArray resources, UserInfos user);
+
+    /**
+     * get parent structure informations
+     * @param structureId id of the actual structure
+     */
+    public Future<Boolean> structureIsParent(String structureId);
 }

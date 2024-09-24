@@ -7,6 +7,9 @@ import React, {
   useState,
 } from "react";
 
+import { useTranslation } from "react-i18next";
+
+import { useAlertProvider } from "./AlertProvider";
 import { useSelectedStructureProvider } from "./SelectedStructureProvider";
 import { PinProviderContextType, PinProviderProviderProps } from "./types";
 import { useGetPinsQuery } from "../services/api/pin.service";
@@ -24,6 +27,9 @@ export const usePinProvider = () => {
 
 export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
   const [pins, setPins] = useState<Pin[] | null>(null);
+  const [isRefetchPins, setIsRefetchPins] = useState<boolean>(false);
+  const { notify } = useAlertProvider();
+  const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
 
   const { currentData: fetchedPins, refetch: refetchPins } = useGetPinsQuery(
@@ -41,6 +47,10 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (fetchedPins) {
+      if (isRefetchPins) {
+        notify(t("mediacentre.pin.success"), "success");
+        setIsRefetchPins(false);
+      }
       const updatedPins = fetchedPins.map((pin: Pin) => ({
         ...pin,
         is_pinned: true,
@@ -54,6 +64,8 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
       pins,
       setPins,
       refetchPins,
+      isRefetchPins,
+      setIsRefetchPins,
     }),
     [pins, refetchPins],
   );

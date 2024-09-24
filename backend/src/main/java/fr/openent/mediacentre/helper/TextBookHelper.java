@@ -33,7 +33,7 @@ public class TextBookHelper {
 
         CompositeFuture.all(getTextBookFuture, getFavoritesResourcesFuture).setHandler(event -> {
             if (event.failed()) {
-                log.error("[textBook@get] Failed to retrieve user textbooks", event.cause().toString());
+                log.error("[textBook@get] Failed to retrieve user textbooks" + event.cause().toString());
                 answer.answerFailure(new JsonObject().put("error", "Field to retrieve textbooks").put("status", "ko").encode());
                 return;
             }
@@ -86,11 +86,17 @@ public class TextBookHelper {
     private void retrieveUserTextbooks(String state, UserInfos user, Source source, List<String> idStructures, ResponseHandlerHelper answer) {
         ((GAR) source).initTextBooks(user, idStructures, event -> {
             if (event.isLeft()) {
-                log.error("[TextBookHelper] Failed to retrieve GAR textbooks", event.left().getValue());
-                answer.answerSuccess(new JsonObject().put("error", "Failed to retrieve GAR textbooks").put("status", "ko").encode());
+                log.error("[TextBookHelper] Failed to retrieve GAR resources" + event.left().getValue());
+                answer.answerSuccess(new JsonObject().put("error", "Failed to retrieve GAR resources").put("status", "ko").encode());
                 return;
             }
-            JsonArray textbooks = event.right().getValue();
+            JsonObject resources = event.right().getValue();
+            JsonArray textbooks = resources.getJsonArray(Field.TEXTBOOKS);
+            JsonArray externalResources = resources.getJsonArray(Field.EXTERNAL_RESOURCES);
+            if (!externalResources.isEmpty()) {
+                textBookService.insertExternalResources(user.getUserId(), externalResources)
+                    .onFailure(err -> log.error("[Mediacentre@TextbookHelper:retrieveUserTextbooks] Failed to insert external resources" + err.getMessage()));
+            }
             if (textbooks.isEmpty()) {
                 answer.answerSuccess(HelperUtils.frameLoad(Field.TEXTBOOKS_RESULT,
                         state,
@@ -100,7 +106,7 @@ public class TextBookHelper {
             }
             textBookService.insert(user.getUserId(), textbooks, either -> {
                 if (either.isLeft()) {
-                    log.error("[TextBookHelper] Failed to insert user textbooks", either.left().getValue());
+                    log.error("[TextBookHelper] Failed to insert user textbooks" + either.left().getValue());
                     answer.answerFailure(new JsonObject()
                             .put(Field.ERROR, "Failed to insert GAR textbooks")
                             .put(Field.STATUS, Field.KO)
@@ -121,15 +127,22 @@ public class TextBookHelper {
     }
 
     public void refreshTextBooks(String state,List<Source> sources, UserInfos user, List<String> idStructures, ResponseHandlerHelper answer) {
-        textBookService.delete(user.getUserId(), event -> {
-            if (event.isLeft()) {
-                log.error("[TextBookHelper@refreshTextBooks] Failed to delete user textbooks");
-                answer.answerFailure(new JsonObject()
+        textBookService.deleteExternalResources(user.getUserId())
+            .onSuccess(voidResult -> textBookService.delete(user.getUserId(), event -> {
+                if (event.isLeft()) {
+                    log.error("[TextBookHelper@refreshTextBooks] Failed to delete user textbooks");
+                    answer.answerFailure(new JsonObject()
                         .put(Field.ERROR, "Failed to delete user textbooks")
                         .put(Field.STATUS, Field.KO).encode());
-                return;
-            }
-            retrieveTextBooks(state, user, sources, idStructures, answer);
-        });
+                    return;
+                }
+                retrieveTextBooks(state, user, sources, idStructures, answer);
+            }))
+            .onFailure(err -> {
+                log.error("[TextBookHelper@refreshTextBooks] Failed to delete user external resources" + err.getMessage());
+                answer.answerFailure(new JsonObject()
+                    .put(Field.ERROR, "Failed to delete user external resources")
+                    .put(Field.STATUS, Field.KO).encode());
+            });
     }
 }

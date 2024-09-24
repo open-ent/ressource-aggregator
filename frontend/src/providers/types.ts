@@ -74,6 +74,8 @@ export type PinProviderContextType = {
       "api"
     >
   >;
+  isRefetchPins: boolean;
+  setIsRefetchPins: Dispatch<SetStateAction<boolean>>;
 };
 
 export interface SelectedStructureProviderProviderProps {

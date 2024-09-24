@@ -39,6 +39,17 @@ public class FutureHelper {
         };
     }
 
+    public static Handler<Either<String, JsonArray>> handlerJsonArray(Promise<JsonArray> promise, String errorMessage) {
+        return event -> {
+            if (event.isRight()) {
+                promise.complete(event.right().getValue());
+            } else {
+                LOGGER.error(errorMessage + event.left().getValue());
+                promise.fail(event.left().getValue());
+            }
+        };
+    }
+
     public static Handler<Either<String, JsonObject>> handlerJsonObject(Future<JsonObject> future) {
         return event -> {
             if (event.isRight()) {
@@ -66,6 +77,17 @@ public class FutureHelper {
     }
 
     public static Handler<Either<String, Void>> handlerVoid(Promise<Void> promise, String errorMessage) {
+        return event -> {
+            if (event.isRight()) {
+                promise.complete();
+            } else {
+                LOGGER.error((errorMessage != null ? errorMessage : "") + event.left().getValue());
+                promise.fail(event.left().getValue());
+            }
+        };
+    }
+
+    public static Handler<Either<String, JsonObject>> handlerJsonObjectVoid(Promise<Void> promise, String errorMessage) {
         return event -> {
             if (event.isRight()) {
                 promise.complete();

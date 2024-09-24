@@ -31,6 +31,7 @@ L'application **ressource-aggregator (Mediacentre v2)** devrait permettre l'acc√
     "textbook_typology": [
         "MAN"
     ],
+    "highlightsPins": false,
     "wsPort": 3000,
     "elasticsearch": true,
     "elasticsearchConfig" : {
@@ -47,6 +48,7 @@ L'application **ressource-aggregator (Mediacentre v2)** devrait permettre l'acc√
 Dans votre springboard, vous devez inclure des variables d'environnement :
 
 <pre>
+highlightsPins = ${Boolean}
 whitelist-sources = ${Array}
 elasticServerURI = ${String}
 elasticIndexName = ${String}
@@ -55,6 +57,7 @@ elasticSearchUsername = ${String}
 elasticSearchPassword = ${String}
 </pre>
 
+**highlightsPins** : Pinned resources at top structures are tagged "Offert par la r√©gion"
 **whitelist-sources** : List of domains of resources who need a redirection for mobile use
 **elasticServerURI** : URI of Elastic Search server
 **elasticIndexName** : End of the URI to point towards the right index (ex : '/mediacentre')

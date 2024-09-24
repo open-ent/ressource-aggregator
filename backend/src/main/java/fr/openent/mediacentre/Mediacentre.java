@@ -8,6 +8,7 @@ import fr.wseduc.cron.CronTrigger;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
 import org.entcore.common.http.BaseServer;
+import org.entcore.common.notification.TimelineHelper;
 import org.entcore.common.service.impl.SqlCrudService;
 import org.entcore.common.share.impl.SqlShareService;
 import org.entcore.common.sql.SqlConf;
@@ -84,13 +85,15 @@ public class Mediacentre extends BaseServer {
         signetController.setShareService(new SqlShareService(mediacentreSchema, "signet_shares", eb, securedActions, null));
         signetController.setCrudService(new SqlCrudService(mediacentreSchema, "signet", "signet_shares"));
 
+        TimelineHelper timelineHelper = new TimelineHelper(vertx, eb, config);
+
         addController(new MediacentreController(sources, config));
         addController(new FavoriteController(eb, sources, securedActions));
         addController(new PublishedController(eb, securedActions));
         addController(new SearchController(eb, sources));
         addController(new TextBooksController(eb, sources));
         addController(new GlobalResourceController(eb));
-        addController(new PinsController(eb, sources, securedActions));
+        addController(new PinsController(eb, sources, securedActions, timelineHelper));
         addController(signetController);
 
         if (this.config.getBoolean("elasticsearch", false)) {

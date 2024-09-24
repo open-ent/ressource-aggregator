@@ -167,7 +167,7 @@
   "mediacentre.card.edit.pin": "Modifier",
   "mediacentre.card.already.pinned": "Déjà épinglée",
   "mediacentre.card.copy": "Copier le lien",
-  "mediacentre.card.offered.by.the.region": "Offert par la région",
+  "mediacentre.card.offered.by.the.region": "Offert par la Région",
   "mediacentre.sidebar.home": "Accueil",
   "mediacentre.sidebar.favorite": "Favoris",
   "mediacentre.sidebar.textbooks": "Manuels",
@@ -212,14 +212,14 @@
   "mediacentre.pins.modal.optional": "Optionnel",
   "mediacentre.pins.modal.remove.pin": "Supprimer l'épingle",
   "mediacentre.pin.success": "La ressource a bien été épinglée.",
-  "mediacentre.pin.delete.success": "La ressource a bien été supprimée.",
-  "mediacentre.pin.edit.success": "La ressource a bien été mise à jour.",
+  "mediacentre.pin.delete.success": "L'épingle a bien été supprimée.",
+  "mediacentre.pin.edit.success": "L'épingle a bien été mise à jour.",
   "mediacentre.signets.platform": "Signet de la plateforme",
   "mediacentre.pins.carousel.title": "Découvrez ces ressources !",
   "mediacentre.pins.modal.delete.title": "Suppression de l'épingle",
   "mediacentre.pins.modal.delete.subtitle": "Attention, l'épingle sera supprimée définitivement, êtes-vous sûr(e) ?",
 
-  "mediacentre.signets.themes.orientation": "Orientation et décourvertes des métiers",
+  "mediacentre.signets.themes.orientation": "Orientation et découvertes des métiers",
   "mediacentre.signets.without.theme": "Sans thématique",
 
   "mediacentre.filter.source": "Source",
@@ -289,5 +289,7 @@
   "mediacentre.modal.signet.property.view.url": "URL du signet",
   "mediacentre.modal.property.view.any.keyword": "Aucun mot clé n'a été renseigné.",
   "mediacentre.modal.property.view.any.levels": "Aucun niveau n'a été renseigné.",
-  "mediacentre.modal.property.view.any.disciplines": "Aucune discipline n'a été renseignée."
+  "mediacentre.modal.property.view.any.disciplines": "Aucune discipline n'a été renseignée.",
+  "mediacentre.new_pinned_resource_notification": "Nouvelle notification médiacentre",
+  "mediacentre.notification.pin.wait": "L'épingle est en cours de création..."
 }

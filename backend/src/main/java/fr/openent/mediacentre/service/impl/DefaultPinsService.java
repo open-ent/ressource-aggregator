@@ -1,22 +1,22 @@
 package fr.openent.mediacentre.service.impl;
 
+import fr.openent.mediacentre.Mediacentre;
 import fr.openent.mediacentre.core.constants.Field;
 import fr.openent.mediacentre.core.constants.MongoConstant;
 import fr.openent.mediacentre.core.constants.SourceConstant;
 import fr.openent.mediacentre.helper.*;
-import fr.openent.mediacentre.model.GarResource;
-import fr.openent.mediacentre.model.IModel;
 import fr.openent.mediacentre.model.PinResource;
-import fr.openent.mediacentre.model.SignetResource;
+import fr.openent.mediacentre.service.NotifyService;
 import fr.openent.mediacentre.service.PinsService;
 import fr.openent.mediacentre.service.SignetService;
+import fr.openent.mediacentre.service.TextBookService;
 import fr.openent.mediacentre.source.Source;
 import fr.wseduc.mongodb.MongoDb;
-import fr.wseduc.webutils.Either;
 import fr.wseduc.webutils.security.SecuredAction;
+import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
-import io.vertx.core.Handler;
 import io.vertx.core.Promise;
+import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -25,28 +25,38 @@ import io.vertx.core.logging.LoggerFactory;
 import org.entcore.common.mongodb.MongoDbResult;
 import org.entcore.common.neo4j.Neo4j;
 import org.entcore.common.neo4j.Neo4jResult;
+import org.entcore.common.notification.TimelineHelper;
+import org.entcore.common.sql.Sql;
+import org.entcore.common.sql.SqlResult;
 import org.entcore.common.user.UserInfos;
+import org.entcore.common.user.UserUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.entcore.common.http.response.DefaultResponseHandler.arrayResponseHandler;
-
 public class DefaultPinsService implements PinsService {
     private final String collection;
     private final MongoDb mongo;
+    private final EventBus eb;
+
     private static final Logger log = LoggerFactory.getLogger(DefaultPinsService.class);
     private final SignetService signetService;
 
     private final TextBookHelper textBookHelper = new TextBookHelper();
     private final SearchHelper searchHelper = new SearchHelper();
     private final SignetHelper signetHelper = new SignetHelper();
+    private final NotifyService notifyService;
+
+    private final TextBookService textbookService = new DefaultTextBookService();
     private final Neo4j neo = Neo4j.getInstance();
 
-    public DefaultPinsService(String collection, Map<String, SecuredAction> securedActions) {
+
+    public DefaultPinsService(String collection, Map<String, SecuredAction> securedActions, EventBus eb, TimelineHelper timelineHelper) {
         this.collection = collection;
         this.signetService = new DefaultSignetService(securedActions);
+        this.notifyService = new DefaultNotifyService(timelineHelper, eb);
         this.mongo = MongoDb.getInstance();
+        this.eb = eb;
     }
 
     public Future<JsonObject> create(JsonObject resource, String idStructure, List<String> structures) {
@@ -207,6 +217,125 @@ public class DefaultPinsService implements PinsService {
         return promise.future();
     }
 
+    @Override
+    public Future<Void> sendNotification(HttpServerRequest request, JsonObject resource, List<String> structures, String structureId) {
+        Promise<Void> promise = Promise.promise();
+        structures.add(structureId);
+        List<Future> futures = new ArrayList<>();
+        for (String structure : structures) {
+            futures.add(getAllUsersIdsInStructure(structure)); // get all users in a structures
+        }
+        CompositeFuture.all(futures)
+            .onSuccess(composite -> {
+                // get all users ids of all structures
+                List<String> allUsers = composite.list().stream()
+                        .flatMap(ids -> ((JsonArray) ids).stream())
+                        .map(Object::toString)
+                        .collect(Collectors.toList());
+
+                UserUtils.getUserInfos(eb, request, user -> {
+                    switch (resource.getString(Field.SOURCE)) {
+                        case SourceConstant.MOODLE:
+                            structureIsParent(structureId)
+                                .onSuccess(isParent -> {
+                                    notifyService.notifyNewPinnedResource(request, new JsonArray(allUsers), isParent);
+                                    promise.complete();
+                                })
+                                .onFailure(error -> {
+                                    log.error("[Mediacentre@DefaultPinsService:sendNotification] Error while checking if structure is parent: " + error.getMessage());
+                                    promise.fail(error.getMessage());
+                                });
+                            break;
+                        case SourceConstant.GAR:
+                            structureIsParent(structureId)
+                                .onSuccess(isParent -> {
+                                    if (resource.getValue(Field.IS_TEXTBOOK) != null && resource.getBoolean(Field.IS_TEXTBOOK)) {
+                                        textbookService.getUsersHaveTextbook(resource.getString(Field.ID))
+                                            .onSuccess(users -> {
+                                                JsonArray usersIds = users.stream()
+                                                        .map(JsonObject.class::cast)
+                                                        .map(json -> json.getString(Field.USER))
+                                                        .filter(allUsers::contains)
+                                                        .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
+                                                notifyService.notifyNewPinnedResource(request, usersIds, isParent);
+                                                promise.complete();
+                                            })
+                                            .onFailure(error -> {
+                                                log.error("[Mediacentre@DefaultPinsService:sendNotification] Error while retrieving textbook: " + error.getMessage());
+                                                promise.fail(error.getMessage());
+                                            });
+                                    } else {
+                                        textbookService.getUsersHaveExternalResource(resource.getString(Field.ID))
+                                            .onSuccess(users -> {
+                                                JsonArray usersIds = users.stream()
+                                                        .map(JsonObject.class::cast)
+                                                        .map(json -> json.getString(Field.USER))
+                                                        .filter(allUsers::contains)
+                                                        .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
+                                                notifyService.notifyNewPinnedResource(request, usersIds, isParent);
+                                                promise.complete();
+                                            })
+                                            .onFailure(error -> {
+                                                log.error("[Mediacentre@DefaultPinsService:sendNotification] Error while retrieving external resource: " + error.getMessage());
+                                                promise.fail(error.getMessage());
+                                            });
+                                    }
+                                })
+                                .onFailure(error -> {
+                                    log.error("[Mediacentre@DefaultPinsService:sendNotification] Error while checking if structure is parent: " + error.getMessage());
+                                    promise.fail(error.getMessage());
+                                });
+                            break;
+                        default:
+                            signetHelper.signetRetrieve(user)
+                                .onSuccess(signets -> {
+                                    Optional<JsonObject> optionalSignet = signets.stream()
+                                        .map(JsonObject.class::cast)
+                                        .filter(signet -> String.valueOf(signet.getValue(Field.ID)).equals(String.valueOf(resource.getString(Field.ID))))
+                                        .findFirst();
+
+                                    if (optionalSignet.isPresent()) {
+                                        structureIsParent(structureId)
+                                            .onSuccess(isParent -> {
+                                                notifyService.notifyNewPinnedResource(request, new JsonArray(allUsers), isParent);
+                                                promise.complete();
+                                            })
+                                            .onFailure(error -> {
+                                                log.error("[Mediacentre@DefaultPinsService:sendNotification] Error while checking if structure is parent: " + error.getMessage());
+                                                promise.fail(error.getMessage());
+                                            });
+                                    } else {
+                                        retrieveUsersHasShared(String.valueOf(resource.getValue(Field.ID)))
+                                            .onSuccess(result -> structureIsParent(structureId)
+                                                .onSuccess(isParent -> {
+                                                    notifyService.notifyNewPinnedResource(request, result, isParent);
+                                                    promise.complete();
+                                                })
+                                                .onFailure(error -> {
+                                                    log.error("[Mediacentre@DefaultPinsService:sendNotification] Error while checking if structure is parent: " + error.getMessage());
+                                                    promise.fail(error.getMessage());
+                                                }))
+                                            .onFailure(error -> {
+                                                log.error("[Mediacentre@DefaultPinsService:sendNotification] Error while retrieving users who have shared the resource: " + error.getMessage());
+                                                promise.fail(error.getMessage());
+                                            });
+                                    }
+                                })
+                                .onFailure(error -> {
+                                    log.error("[Mediacentre@DefaultPinsService:sendNotification] Error while retrieving public signet resources: " + error.getMessage());
+                                    promise.fail(error.getMessage());
+                                });
+                            break;
+                    }
+                });
+            })
+            .onFailure(error -> {
+                log.error("[Mediacentre@DefaultPinsService:sendNotification] Error while retrieving users in structures: " + error.getMessage());
+                promise.fail(error.getMessage());
+            });
+        return promise.future();
+    }
+
     private Future<JsonArray> retrieveMySignets(UserInfos user) {
         Promise<JsonArray> promiseResponse = Promise.promise();
         final List<String> groupsAndUserIds = new ArrayList<>();
@@ -228,7 +357,11 @@ public class DefaultPinsService implements PinsService {
 
                     return data.stream()
                             .map(JsonObject.class::cast)
-                            .filter(dataItem -> Objects.equals(dataItem.getValue(Field.ID), enrichedResource.getValue(Field.ID)) && Objects.equals(dataItem.getValue(Field.SOURCE), enrichedResource.getValue(Field.SOURCE)))
+                            .filter(dataItem ->
+                                Objects.equals(String.valueOf(dataItem.getValue(Field.ID)), String.valueOf(enrichedResource.getValue(Field.ID))) &&
+                                (dataItem.getValue(Field.SOURCE) == null || enrichedResource.getValue(Field.SOURCE) == null ||
+                                Objects.equals(dataItem.getValue(Field.SOURCE), enrichedResource.getValue(Field.SOURCE)))
+                            )
                             .findFirst()
                             .map(dataItem -> {
                                 dataItem.fieldNames().forEach(fieldName -> {
@@ -279,6 +412,74 @@ public class DefaultPinsService implements PinsService {
                     .collect(Collectors.collectingAndThen(Collectors.toList(), JsonArray::new));
 
             promise.complete(formattedResources);
+        }));
+        return promise.future();
+    }
+
+    // Check if the structure is a parent structure (structure who have no parent)
+    @Override
+    public Future<Boolean> structureIsParent(String structureId) {
+        Promise<Boolean> promise = Promise.promise();
+        String query = "MATCH (s:Structure) " +
+        "OPTIONAL MATCH (s)-[r:HAS_ATTACHMENT]->(ps:Structure) " +
+        "WITH s " +
+        "WHERE ps IS NULL AND s.id = {structureId} " +
+        "RETURN COUNT(s) > 0 AS isTargetStructure";
+        JsonObject params = new JsonObject().put(Field.STRUCTURE_ID, structureId);
+        neo.execute(query, params, Neo4jResult.validUniqueResultHandler(event -> {
+            if (event.isLeft()) {
+                log.error("[Mediacentre@DefaultPinsService::structureIsParent] Failed to get structure parent : " + event.left().getValue());
+                promise.fail(event.left().getValue());
+                return;
+            }
+            promise.complete(event.right().getValue().getBoolean(Field.IS_TARGET_STRUCTURE));
+        }));
+        return promise.future();
+    }
+
+    private Future<JsonArray> getAllUsersIdsInStructure(String structure) {
+        Promise<JsonArray> promise = Promise.promise();
+        String query =
+            "MATCH (u:User)-[:IN]->(pg:ProfileGroup)-[:DEPENDS]->(s:Structure) " +
+            "WHERE s.id = {structure} " +
+            "RETURN DISTINCT " +
+            "u.id as id";
+        JsonObject params = new JsonObject().put(Field.STRUCTURE, structure);
+        neo.execute(query, params, Neo4jResult.validResultHandler(event -> {
+            if (event.isLeft()) {
+                log.error("[Mediacentre@DefaultPinsService::getAllUsersIdsInStructure] Failed to get users in structure : " + event.left().getValue());
+                promise.fail(event.left().getValue());
+                return;
+            }
+            JsonArray users = new JsonArray(event.right().getValue().stream()
+                    .map(JsonObject.class::cast)
+                    .map(json -> json.getString(Field.ID))
+                    .collect(Collectors.toList()));
+            log.debug("[Mediacentre@DefaultPinsService::getAllUsersIdsInStructure] Users in structure " + structure + " : " + users);
+            promise.complete(users);
+        }));
+        return promise.future();
+    }
+
+    // get all users who received the resource
+    private Future<JsonArray> retrieveUsersHasShared(String idResource) {
+        Promise<JsonArray> promise = Promise.promise();
+        String query = "SELECT DISTINCT member_id" +
+            " FROM " + Mediacentre.SIGNET_SHARES_TABLE +
+            " WHERE resource_id = ?" +
+            " GROUP BY member_id;";
+        JsonArray params = new JsonArray().add(idResource);
+        Sql.getInstance().prepared(query, params, SqlResult.validResultHandler(event -> {
+            if (event.isLeft()) {
+                log.error("[Mediacentre@DefaultPinsService::retrieveUsersHasShared] Failed to get users who have shared the resource : " + event.left().getValue());
+                promise.fail(event.left().getValue());
+                return;
+            }
+            JsonArray users = new JsonArray(event.right().getValue().stream()
+                    .map(JsonObject.class::cast)
+                    .map(json -> json.getString(Field.MEMBER_ID))
+                    .collect(Collectors.toList()));
+            promise.complete(users);
         }));
         return promise.future();
     }

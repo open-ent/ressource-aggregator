@@ -56,7 +56,6 @@ coverage/
 # Ignore the entire "resources" folder except jsonchema
 /backend/src/main/resources/public
 /backend/src/main/resources/view
-/backend/src/main/resources/i18n
 /backend/src/main/resources/img
 
 # ANGULARJS

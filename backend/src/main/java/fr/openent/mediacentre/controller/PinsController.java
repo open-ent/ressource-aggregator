@@ -15,10 +15,13 @@ import fr.wseduc.security.ActionType;
 import fr.wseduc.security.SecuredAction;
 import fr.wseduc.webutils.http.Renders;
 import fr.wseduc.webutils.request.RequestUtils;
+import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.http.HttpServerRequest;
+import io.vertx.core.json.JsonArray;
 import org.entcore.common.controller.ControllerHelper;
 import org.entcore.common.http.filter.ResourceFilter;
+import org.entcore.common.notification.TimelineHelper;
 import org.entcore.common.user.UserUtils;
 
 import java.util.List;
@@ -31,10 +34,10 @@ public class PinsController extends ControllerHelper {
     private final UserService userService;
     private final List<Source> sources;
 
-    public PinsController(EventBus eb, List<Source> sources, Map<String, fr.wseduc.webutils.security.SecuredAction> securedActions) {
+    public PinsController(EventBus eb, List<Source> sources, Map<String, fr.wseduc.webutils.security.SecuredAction> securedActions, TimelineHelper timelineHelper) {
         super();
         this.eb = eb;
-        this.pinsService = new DefaultPinsService(Field.PINS_COLLECTION, securedActions);
+        this.pinsService = new DefaultPinsService(Field.PINS_COLLECTION, securedActions, eb, timelineHelper);
         this.userService = new DefaultUserService(eb);
         this.sources = sources;
     }
@@ -68,13 +71,17 @@ public class PinsController extends ControllerHelper {
             .compose(v -> userService.getSubstructureIds(idStructure))
             .compose(structures -> pinsService.checkChildPin(structures, pinned)
                 .compose(v -> pinsService.create(pinned, idStructure, structures))
-                    .onSuccess(result -> Renders.created(request))
-                    .onFailure(error -> {
-                        String message = String.format("[PinnedController@%s::createResource] Failed to create resource : %s",
-                                this.getClass().getSimpleName(), error.getMessage());
-                        log.error(message);
-                        Renders.badRequest(request, error.getMessage());
-                    })
+                .compose(result -> {
+                    Renders.created(request);
+                    return Future.succeededFuture((Void) null);
+                })
+                .onSuccess(result -> pinsService.sendNotification(request, pinned, structures, idStructure))
+                .onFailure(error -> {
+                    String message = String.format("[PinnedController@%s::createResource] Failed to create resource : %s",
+                            this.getClass().getSimpleName(), error.getMessage());
+                    log.error(message);
+                    Renders.badRequest(request, error.getMessage());
+                })
             )
             .onFailure(error -> {
                 String message = String.format("[PinnedController@%s::createResource] Failed to create resource : %s",
