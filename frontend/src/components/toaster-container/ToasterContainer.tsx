@@ -174,10 +174,8 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
         return null;
       }
 
-      console.log(toasterResources[0].rights);
-
       const userRights = await checkUserRight(toasterResources[0].rights);
-      console.log(userRights);
+
       setUserRights(userRights);
 
       setShareOptions({

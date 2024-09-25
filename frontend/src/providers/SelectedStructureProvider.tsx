@@ -35,10 +35,13 @@ export const SelectedStructureProvider: React.FC<
     (async () => {
       const idPrefStructure = await getPreference();
       if (idPrefStructure) {
-        setIdSelectedStructure(idPrefStructure);
         const index = user?.structures.indexOf(idPrefStructure);
         if (index !== undefined && index !== -1) {
+          setIdSelectedStructure(idPrefStructure);
           setNameSelectedStructure(user?.structureNames[index] ?? "");
+        } else if (user?.structures.length) {
+          setIdSelectedStructure(user?.structures[0]);
+          setNameSelectedStructure(user?.structureNames[0]);
         }
         return;
       }

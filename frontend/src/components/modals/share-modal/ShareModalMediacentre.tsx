@@ -25,7 +25,6 @@ export const ShareModalMediacentre: FunctionComponent<
     closeAllModals();
   };
 
-  console.log(shareOptions);
   const handleShareSuccess = (): void => {
     onClose();
     closeAllModals();

@@ -46,7 +46,8 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (favorite) {
-      let favoriteData: Favorite[] = favorite?.data ?? [];
+      let favoriteData: Favorite[] =
+        favorite?.data?.length > 0 ? favorite.data : [] ?? [];
       favoriteData = favoriteData.map((favorite: Favorite) => ({
         ...favorite,
         favorite: true,
