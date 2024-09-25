@@ -78,8 +78,8 @@ export const useSignet = () => {
           ...signet,
           is_pinned: pins.some(
             (pin: Pin) =>
-              pin?.id == signet?.id &&
-              pin.source === "fr.openent.mediacentre.source.Signet",
+              pin?.id?.toString() == signet?.id?.toString() &&
+              pin.source === SIGNET,
           ),
         }),
       );
@@ -130,8 +130,8 @@ export const useSignet = () => {
         ...signet,
         is_pinned: pins.some(
           (pin: Pin) =>
-            pin?.id == signet?.id &&
-            pin.source === "fr.openent.mediacentre.source.Signet",
+            pin?.id?.toString() == signet?.id?.toString() &&
+            pin.source === SIGNET,
         ),
       }));
     }
@@ -172,8 +172,8 @@ export const useSignet = () => {
           ...signet,
           is_pinned: pins.some(
             (pin: Pin) =>
-              pin?.id == signet?.id &&
-              pin.source === "fr.openent.mediacentre.source.Signet",
+              pin?.id?.toString() == signet?.id?.toString() &&
+              pin.source === SIGNET,
           ),
         }),
       );

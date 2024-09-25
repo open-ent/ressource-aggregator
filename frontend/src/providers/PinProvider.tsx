@@ -13,7 +13,9 @@ import { useAlertProvider } from "./AlertProvider";
 import { useSelectedStructureProvider } from "./SelectedStructureProvider";
 import { PinProviderContextType, PinProviderProviderProps } from "./types";
 import { useGetPinsQuery } from "../services/api/pin.service";
+import { Favorite } from "~/model/Favorite.model";
 import { Pin } from "~/model/Pin.model";
+import { useGetFavoriteQuery } from "~/services/api/favorite.service";
 
 const PinProviderContext = createContext<PinProviderContextType | null>(null);
 
@@ -31,6 +33,9 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
   const { notify } = useAlertProvider();
   const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
+  const [favorites, setFavorites] = useState<Favorite[] | null>(null);
+
+  const { data: favorite } = useGetFavoriteQuery(null);
 
   const { currentData: fetchedPins, refetch: refetchPins } = useGetPinsQuery(
     idSelectedStructure!,
@@ -38,6 +43,17 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
       skip: !idSelectedStructure, // Skip the query if idSelectedStructure is null
     },
   );
+
+  useEffect(() => {
+    if (favorite) {
+      let favoriteData: Favorite[] = favorite?.data ?? [];
+      favoriteData = favoriteData.map((favorite: Favorite) => ({
+        ...favorite,
+        favorite: true,
+      }));
+      setFavorites(favoriteData);
+    }
+  }, [favorite]);
 
   useEffect(() => {
     if (idSelectedStructure) {
@@ -51,13 +67,28 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
         notify(t("mediacentre.pin.success"), "success");
         setIsRefetchPins(false);
       }
-      const updatedPins = fetchedPins.map((pin: Pin) => ({
+      let updatedPins = fetchedPins.map((pin: Pin) => ({
         ...pin,
         is_pinned: true,
       }));
+      if (favorites) {
+        updatedPins = updatedPins.map((pin: Pin) => ({
+          ...pin,
+          favorite: favorites.some(
+            (favorite: Favorite) =>
+              favorite?.id?.toString() === pin?.id?.toString() &&
+              favorite?.source === pin?.source,
+          ),
+          favoriteId: favorites.find(
+            (favorite: Favorite) =>
+              favorite?.id?.toString() === pin?.id?.toString() &&
+              favorite?.source === pin?.source,
+          )?._id,
+        }));
+      }
       setPins(updatedPins);
     }
-  }, [fetchedPins]);
+  }, [fetchedPins, favorites]);
 
   const value = useMemo<PinProviderContextType>(
     () => ({
