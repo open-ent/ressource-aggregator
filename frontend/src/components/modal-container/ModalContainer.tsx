@@ -12,7 +12,7 @@ import { ModalEnum } from "~/core/enum/modal.enum";
 import { useModalProvider } from "~/providers/ModalsProvider";
 
 interface ModalContainerProps {
-  refetchSignet: () => void;
+  refetchSignet: () => Promise<void>;
   refetchPins: () => void;
   levels: { id: string; label: string }[];
   disciplines: { id: string; label: string }[];
@@ -21,7 +21,7 @@ interface ModalContainerProps {
 }
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
-  refetchSignet = () => {},
+  refetchSignet,
   refetchPins = () => {},
   levels,
   disciplines,

@@ -17,7 +17,7 @@ import {
 } from "~/services/api/signet.service";
 
 interface SignetDeletePublishProps {
-  refetch: () => void;
+  refetch: () => Promise<void>;
 }
 
 export const SignetDeletePublish: React.FC<SignetDeletePublishProps> = ({
@@ -83,15 +83,17 @@ export const SignetDeletePublish: React.FC<SignetDeletePublishProps> = ({
       if (rejectedResults.length > 0) {
         notify(t("mediacentre.error.delete"), "danger");
       } else {
-        refetch();
-        resetResources();
-        handleCloseModal();
-        notify(
-          toasterResources.length > 1
-            ? t("mediacentre.signet.delete.many.success")
-            : t("mediacentre.signet.delete.success"),
-          "success",
-        );
+        setTimeout(async () => {
+          await refetch();
+          resetResources();
+          handleCloseModal();
+          notify(
+            toasterResources.length > 1
+              ? t("mediacentre.signet.delete.many.success")
+              : t("mediacentre.signet.delete.success"),
+            "success",
+          );
+        }, 500);
       }
     } catch (e) {
       console.error(e);
