@@ -65,6 +65,7 @@
   &.favorites {
     .card-title {
       margin: 6px;
+      width: calc(100% - 12px);
     }
     .card-body {
       margin: 0px 5px;
@@ -75,6 +76,7 @@
   &.manuals {
     .card-title {
       margin: 6px 10px 0px 10px;
+      width: calc(100% - 20px);
     }
     .card-text {
       margin: 0px 10px;
