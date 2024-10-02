@@ -19,7 +19,6 @@ import { breakpoints } from "~/core/const/breakpoints";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import useImageHandler from "~/hooks/useImageHandler";
 import useWindowDimensions from "~/hooks/useWindowDimensions";
-import { SignetUpdatePayload } from "~/model/payloads/SignetUpdatePayload";
 import { SearchResource } from "~/model/SearchResource.model";
 import { Signet } from "~/model/Signet.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
@@ -118,7 +117,8 @@ export const SignetProperty: React.FC<SignetPropertyProps> = ({
         notify(t("mediacentre.modal.signet.ask.image"), "danger");
         return;
       }
-      const payload: SignetUpdatePayload = {
+      const payload: any = {
+        ...modalResource,
         levels:
           levels
             ?.filter((level: { label: string }) =>
@@ -143,9 +143,6 @@ export const SignetProperty: React.FC<SignetPropertyProps> = ({
         url: url,
         image: imageUrl ?? "",
         orientation: isOrientationChecked,
-        date_creation: (modalResource as Signet).date_creation ?? null,
-        collab: (modalResource as Signet).collab ?? false,
-        archived: (modalResource as Signet).archived ?? false,
       };
       const idSignet = modalResource?.id?.toString();
       const response = await updateSignet({ idSignet, payload });
@@ -165,7 +162,7 @@ export const SignetProperty: React.FC<SignetPropertyProps> = ({
   };
 
   const handleChangePlainText = (value: string) => {
-    if (value !== " ") {
+    if (value.trim() !== "") {
       setPlainText(value);
     }
   };
@@ -303,6 +300,7 @@ export const SignetProperty: React.FC<SignetPropertyProps> = ({
                       allLevels.length > 1 ? "levels" : "level"
                     }`,
                   )}
+                  selectAll={true}
                 />
                 <ChipController
                   array={selectedCheckboxes?.levels}
@@ -323,6 +321,7 @@ export const SignetProperty: React.FC<SignetPropertyProps> = ({
                       allDisciplines.length > 1 ? "disciplines" : "discipline"
                     }`,
                   )}
+                  selectAll={true}
                 />
                 <ChipController
                   array={selectedCheckboxes?.disciplines}

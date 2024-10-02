@@ -117,11 +117,17 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
           const payload = {
             ...resource,
             archived: false,
-            levels: convertLevels(resource.levels)
-              .filter((level) => levels.includes(level.label))
+            levels: levels
+              .filter((level) =>
+                convertLevels(resource.levels).includes(level.label),
+              )
               .map((level) => ({ id: level.id, label: level.label })),
-            disciplines: convertDisciplines(resource.disciplines)
-              .filter((discipline) => disciplines.includes(discipline.label))
+            disciplines: disciplines
+              .filter((discipline) =>
+                convertDisciplines(resource.disciplines).includes(
+                  discipline.label,
+                ),
+              )
               .map((discipline) => ({
                 id: discipline.id,
                 label: discipline.label,

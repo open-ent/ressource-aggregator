@@ -38,7 +38,7 @@ export const PinsCarousel: React.FC<PinsCarouselProps> = () => {
           gap: "20px",
           // breakpoints are used for the responsive design of the carousel
           breakpoints: {
-            1435: {
+            1500: {
               perPage: 3,
               arrows: pins.length > 3,
             },

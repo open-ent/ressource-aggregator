@@ -30,7 +30,7 @@ export const SearchCardDetail: React.FC<SearchCardDetailProps> = ({
         {list && Array.isArray(list) ? (
           list.map((item, index) => {
             return (
-              <span>
+              <span key={index}>
                 {<strong>{item}</strong>}
                 {index < list.length - 1 && separator}
               </span>

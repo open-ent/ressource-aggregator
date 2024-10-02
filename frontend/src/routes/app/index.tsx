@@ -308,8 +308,9 @@ export const App = () => {
           {resourcesList().length === 0 ? (
             <EmptyState title={t("mediacentre.ressources.empty")} />
           ) : (
-            resourcesList().map((resource) => (
+            resourcesList().map((resource, index) => (
               <HomeList
+                key={Date.now() + index}
                 resources={resource.resource}
                 type={resource.type}
                 handleAddFavorite={handleAddFavorite}

@@ -12,7 +12,7 @@ export interface Signet extends Resource {
   owner_name?: string;
   link?: string;
   url?: string;
-  shared?: boolean;
+  shared?: [];
   archived?: boolean;
   orientation?: boolean;
   published?: boolean;

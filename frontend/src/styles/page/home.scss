@@ -27,6 +27,7 @@ main {
   @media (min-width: $xl) {
     grid-template-columns: 70% 30%;
     grid-template-rows: 300px 600px;
+    height: 100%;
     #pinId {
       grid-row: 1;
       grid-column: 1;
@@ -52,6 +53,9 @@ main {
     width: 100%;
     display: flex;
     justify-content: center;
+    @media screen and (min-width: $xl) {
+      margin-top: 25px;
+    }
     @media (max-width: $lg) {
       flex-direction: column;
     }

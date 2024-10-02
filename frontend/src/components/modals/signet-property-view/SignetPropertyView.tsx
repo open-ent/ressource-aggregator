@@ -128,7 +128,7 @@ export const SignetPropertyView: React.FC<SignetPropertyViewProps> = () => {
                       ),
                     )
                   ) : (
-                    <p>{t("mediacentre.modal.property.view.any.plaintext")}</p>
+                    <p>{t("mediacentre.modal.property.view.any.keyword")}</p>
                   )}
                 </div>
               </div>

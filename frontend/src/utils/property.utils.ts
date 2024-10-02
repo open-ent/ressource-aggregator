@@ -1,10 +1,10 @@
 export const convertKeyWords = (keywords: any) =>
   typeof keywords === "string"
-    ? keywords.split(" ")
+    ? keywords.split(" ").filter((word) => word.trim() != "")
     : Array.isArray(keywords) && typeof keywords[0] === "string"
-    ? keywords
+    ? keywords.filter((word) => word.trim() != "")
     : Array.isArray(keywords) && Array.isArray(keywords[0])
-    ? keywords.map(([, text]) => text)
+    ? keywords.map(([, text]) => text).filter((word) => word.trim() != "")
     : [];
 
 export const convertLevels = (levels: any) =>

@@ -100,6 +100,7 @@ export const useSignet = () => {
       levels: convertLevels(signet.levels),
       plain_text: convertKeyWords(signet.plain_text),
       published: false,
+      collab: !!signet?.shared?.length,
     }));
     const updatedPublicSignetsData: Signet[] = publicSignetsData.map(
       (signet: Signet) => ({

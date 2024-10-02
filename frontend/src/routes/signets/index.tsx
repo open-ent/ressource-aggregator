@@ -32,7 +32,7 @@ export const SignetPage: React.FC = () => {
   const { refetchPins } = usePinProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openSpecificModal } = useModalProvider();
-  const { selectedTab } = useToasterProvider();
+  const { selectedTab, setSelectedTab } = useToasterProvider();
 
   // RIGHTS
   const { data: actions } = useActions();
@@ -63,7 +63,9 @@ export const SignetPage: React.FC = () => {
 
   useEffect(() => {
     refetchFavorite();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setSelectedTab("mediacentre.signets.mine");
+    setEmptyText("mediacentre.empty.state.mine");
+    setEmptyImage("empty-state-mine.png");
   }, []);
 
   useEffect(() => {
@@ -89,7 +91,6 @@ export const SignetPage: React.FC = () => {
         setSignetsData(allSignets);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allSignets, hasSignetRight]);
 
   useEffect(() => {
@@ -97,7 +98,6 @@ export const SignetPage: React.FC = () => {
       setInitialLoadDone(true);
       setAllResourcesDisplayed(sortByAlphabet(signetsData));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [signetsData]);
 
   const chooseEmptyState = (text: string, image: string) => {

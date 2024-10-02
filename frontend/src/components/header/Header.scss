@@ -6,7 +6,7 @@
   align-items: center;
   width: calc(100% - 100px);
   margin-left: 100px;
-  padding: 1.5rem 0;
+  padding-top: 1.5rem;
   background-color: #edeff2;
 
   .med-header-container {
@@ -19,6 +19,10 @@
       max-width: 500px;
       width: 40%;
       margin-left: 1rem;
+
+      @media screen and (max-width: 768px) {
+        margin-left: 0;
+      }
     }
 
     &.med-menu {
@@ -55,6 +59,7 @@
 
 @media screen and (max-width: 768px) {
   .med-header {
+    flex-direction: column;
     align-items: flex-start;
     width: 100%;
     margin-left: 25px;
@@ -63,6 +68,7 @@
     .med-header-container:last-child {
       margin-right: 50px;
       width: 80%;
+      margin-top: 5px;
     }
   }
 }

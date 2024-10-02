@@ -12,6 +12,7 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import anime from "animejs";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import { SearchCardDescription } from "./search-card-description/SearchCardDescription";
 import { SearchCardDetails } from "./search-card-details/SearchCardDetails";
@@ -55,6 +56,7 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
   const { setModalResource, openSpecificModal } = useModalProvider();
   const { notify } = useAlertProvider();
   const { isSelectable, toggleResource, selectedTab } = useToasterProvider();
+  const page = useLocation().pathname;
 
   // used to check if the user has the right to pin a resource
   const { data: actions } = useActions();
@@ -204,7 +206,9 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
     <Card
       isSelectable={
         canAccessSignet &&
-        (selectedTab !== "mediacentre.signets.published" || publishedIsChecked)
+        (selectedTab !== "mediacentre.signets.published" ||
+          publishedIsChecked) &&
+        page === "/signets"
       }
       isSelected={isSelectable(searchResource)}
       isClickable={false}

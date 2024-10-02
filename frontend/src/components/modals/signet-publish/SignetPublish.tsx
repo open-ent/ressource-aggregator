@@ -4,6 +4,7 @@ import { Button, Modal } from "@edifice-ui/react";
 import { useTranslation } from "react-i18next";
 
 import { ModalEnum } from "~/core/enum/modal.enum";
+import { useSignet } from "~/hooks/useSignet";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
 import { useToasterProvider } from "~/providers/ToasterProvider";
@@ -31,6 +32,7 @@ export const SignetPublish: React.FC<SignetPublishProps> = ({
   const { toasterResources, resetResources } = useToasterProvider();
   const [publishSignet] = usePublishSignetMutation();
   const { notify } = useAlertProvider();
+  const { getPublicSignets } = useSignet();
 
   const handleCloseModal = () => {
     resetResources();
@@ -43,6 +45,7 @@ export const SignetPublish: React.FC<SignetPublishProps> = ({
         notify(t("mediacentre.error.anyResource"), "success");
         return;
       }
+      const publicSignets = await getPublicSignets();
       const payload = {
         ...toasterResources[0],
         levels: levels.filter((level) =>
@@ -55,6 +58,10 @@ export const SignetPublish: React.FC<SignetPublishProps> = ({
         ),
         plain_text: convertKeyWords(toasterResources[0].plain_text).map(
           (keyword) => ({ label: keyword }),
+        ),
+        published: publicSignets?.some(
+          (signet) =>
+            signet?.id?.toString() === toasterResources[0].id?.toString(),
         ),
       };
       const idSignet = toasterResources[0]?.id?.toString();

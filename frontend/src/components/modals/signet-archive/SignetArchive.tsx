@@ -44,7 +44,6 @@ export const SignetArchive: React.FC<SignetArchiveProps> = ({
         notify(t("mediacentre.error.anyResource"), "danger");
         return;
       }
-
       const promises = toasterResources.map(
         async (resource: SearchResource) => {
           try {

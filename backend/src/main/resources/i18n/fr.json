@@ -135,6 +135,7 @@
   "mediacentre.error.archived": "Une erreur est survenue lors de l'archivage du signet",
   "mediacentre.error.delete": "Une erreur est survenue lors de la suppression du signet",
   "mediacentre.error.restore": "Une erreur est survenue lors de la restauration du signet",
+  "mediacentre.error.publish": "Une erreur est survenue lors de la publication du signet",
 
   "mediacentre.success.signet.create": "Votre signet a bien été créé !",
   "mediacentre.success.signet.save": "Votre signet a bien été sauvegardé !",
@@ -253,9 +254,9 @@
   "mediacentre.modal.signet.publish.title": "Publier le signet",
   "mediacentre.modal.signet.publish.subtitle": "Êtes-vous sûr(e) de vouloir publier ce signet ? Une fois publié, il sera visible pour tous les utilisateurs de la plateforme.",
   "mediacentre.modal.signet.archive.title": "Archiver le signet",
-  "mediacentre.modal.signet.archive.subtitle": "Êtes-vous sûr(e) de vouloir mettre le signet selectionné à la corbeille ?",
+  "mediacentre.modal.signet.archive.subtitle": "Êtes-vous sûr(e) de vouloir mettre le signet sélectionné à la corbeille ?",
   "mediacentre.modal.signet.archive.title.many": "Archiver les signets",
-  "mediacentre.modal.signet.archive.subtitle.many": "Êtes-vous sûr(e) de vouloir mettre les signets selectionnés à la corbeille ?",
+  "mediacentre.modal.signet.archive.subtitle.many": "Êtes-vous sûr(e) de vouloir mettre les signets sélectionnés à la corbeille ?",
   "mediacentre.modal.signet.delete.title": "Supprimer définitivement",
   "mediacentre.modal.signet.delete.subtitle": "Attention, le signet sera supprimé définitivement, êtes-vous sûr(e) ?",
   "mediacentre.modal.signet.delete.subtitle.many": "Attention, les signets seront supprimés définitivement, êtes-vous sûr(e) ?",
@@ -290,6 +291,6 @@
   "mediacentre.modal.property.view.any.keyword": "Aucun mot clé n'a été renseigné.",
   "mediacentre.modal.property.view.any.levels": "Aucun niveau n'a été renseigné.",
   "mediacentre.modal.property.view.any.disciplines": "Aucune discipline n'a été renseignée.",
-  "mediacentre.new_pinned_resource_notification": "Nouvelle notification médiacentre",
+  "mediacentre.new_pinned_resource_notification": "Ajout d'une ressource épinglée",
   "mediacentre.notification.pin.wait": "L'épingle est en cours de création..."
 }
