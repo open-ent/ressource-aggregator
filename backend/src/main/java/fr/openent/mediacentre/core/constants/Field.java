@@ -8,6 +8,7 @@ public class Field {
     // Config fields
     public static final String NOTIFY_CRON = "notify_cron";
     public static final String MEDIACENTRE_ADDRESS = "fr.openent.mediacentre";
+    public static final String MEDIACENTRE_FEATURED_ADDRESS = "fr.openent.mediacentre.featured.resources";
 
     // URLs
     public static final String MEDIACENTRE_URL = "/mediacentre";
@@ -19,6 +20,9 @@ public class Field {
     public static final String _ID = "_id";
     public static final String ID = "id";
     public static final String ID_RESSOURCE = "idRessource";
+    public static final String NOM_RESSOURCE = "nomRessource";
+    public static final String URL_VIGNETTE = "urlVignette";
+    public static final String URL_ACCES_RESSOURCE = "urlAccesRessource";
     public static final String USER = "user";
     public static final String USER_ID = "user_id";
     public static final String USERID = "userId";
@@ -26,6 +30,8 @@ public class Field {
     public static final String GROUPID = "groupId";
     public static final String SOURCE = "source";
     public static final String SOURCES = "sources";
+    public static final String MODULE = "module";
+    public static final String GAR = "GAR";
     public static final String QUERY = "query";
     public static final String JSONDATA = "jsondata";
     public static final String DATA = "data";
@@ -49,6 +55,7 @@ public class Field {
     public static final String MESSAGE = "message";
     public static final String GLOBAL_COLLECTION = "mediacentre.global";
     public static final String PINS_COLLECTION = "mediacentre.pins";
+    public static final String FEATURED_COLLECTION = "mediacentre.featured-resources";
     public static final String IDSTRUCTURE = "idStructure";
     public static final String IDPIN = "idPin";
     public static final String TITLE = "title";

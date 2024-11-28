@@ -90,6 +90,7 @@ public class Mediacentre extends BaseServer {
         TimelineHelper timelineHelper = new TimelineHelper(vertx, eb, config);
 
         addController(new MediacentreController(sources, config));
+        addController(new FeaturedResourcesController(eb, sources));
         addController(new FavoriteController(eb, sources, securedActions));
         addController(new PublishedController(eb, securedActions));
         addController(new SearchController(eb, sources));
