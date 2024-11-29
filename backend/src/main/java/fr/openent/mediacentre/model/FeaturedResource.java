@@ -16,7 +16,7 @@ public class FeaturedResource extends Resource implements IModel<FeaturedResourc
     }
 
     public FeaturedResource(JsonObject resource) {
-        this.resourceId = resource.getString(RESOURCE_ID, null);
+        this.resourceId = resource.getString(RESOURCEID, null);
         this.description = resource.getString(DESCRIPTION, null);
         this.source = resource.getString(SOURCE, null);
         this.module = resource.getString(MODULE, null);
@@ -57,5 +57,10 @@ public class FeaturedResource extends Resource implements IModel<FeaturedResourc
     public FeaturedResource setModule(String module) {
         this.module = module;
         return this;
+    }
+
+    @Override
+    public JsonObject toJson() {
+        return IModelHelper.toJson(this, true, false);
     }
 }

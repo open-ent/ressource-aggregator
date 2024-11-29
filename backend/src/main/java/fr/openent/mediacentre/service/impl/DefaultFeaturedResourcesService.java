@@ -30,6 +30,34 @@ public class DefaultFeaturedResourcesService implements FeaturedResourcesService
         this.sources = sources;
     }
 
+    public Future<List<FeaturedResource>> addFeaturedResource(List<FeaturedResource> resources){
+        Promise<List<FeaturedResource>> promise = Promise.promise();
+        String error = "[Mediacentre@DefaultFeaturedResourcesService::addFeaturedResource] Failed to add featured resources to Mongo";
+        if (resources == null || resources.isEmpty()) {
+            promise.fail("[Mediacentre@DefaultFeaturedResourcesService::addFeaturedResource] Resources list is empty or null");
+            return promise.future();
+        }
+
+        JsonArray resourcesJsonArray = IModelHelper.toJsonArray(resources);
+
+        MongoDb.getInstance().insert(FEATURED_COLLECTION, resourcesJsonArray, MongoDbResult.validResultsHandler(IModelHelper.resultToIModel(promise, FeaturedResource.class, error)));
+        return promise.future();
+    }
+
+    public Future<JsonObject> deleteFeaturedResource(String resourceId) {
+        Promise<JsonObject> promise = Promise.promise();
+        JsonObject matcher = new JsonObject()
+                .put(RESOURCEID, resourceId);
+        MongoDb.getInstance().delete(FEATURED_COLLECTION, matcher, MongoDbResult.validResultHandler(event -> {
+            if (event.isLeft()) {
+                log.error("[Mediacentre@DefaultFeaturedResourcesService::deleteFeaturedResource] Can't delete featured-resources in Mongo : " + event.left().getValue());
+                promise.fail(event.left().getValue());
+            }
+            promise.complete(event.right().getValue());
+        }));
+        return promise.future();
+    }
+
     private Future<JsonArray> getResourcesFromGar(UserInfos user) {
         Promise<JsonArray> promise = Promise.promise();
 
@@ -52,11 +80,13 @@ public class DefaultFeaturedResourcesService implements FeaturedResourcesService
         return promise.future();
     }
 
-    private Future<List<FeaturedResource>> getFeaturedResourcesFromMongo(String moduleName) {
+    public Future<List<FeaturedResource>> getFeaturedResourcesFromMongo(String moduleName) {
         Promise<List<FeaturedResource>> promise = Promise.promise();
         String error = "[Mediacentre@DefaultFeaturedResourcesService::getFeaturedResourcesFromMongo] Failed to get featured resources from Mongo";
-        JsonObject matcher = new JsonObject()
-                .put(MODULE, moduleName);
+        JsonObject matcher = new JsonObject();
+        if (moduleName != null && !moduleName.isEmpty()) {
+            matcher.put(MODULE, moduleName);
+        }
 
         MongoDb.getInstance().find(FEATURED_COLLECTION, matcher, MongoDbResult.validResultsHandler(IModelHelper.resultToIModel(promise, FeaturedResource.class, error)));
         return promise.future();
