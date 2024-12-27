@@ -9,7 +9,7 @@
     </parent>
     <groupId>fr.openent</groupId>
     <artifactId>mediacentre</artifactId>
-    <version>5.0.1</version>
+    <version>5.0-SNAPSHOT</version>
     <scm>
         <connection>scm:git:https://github.com/OPEN-ENT-NG/ressource-aggregator.git</connection>
         <developerConnection>scm:git:https://github.com/OPEN-ENT-NG/ressource-aggregator.git</developerConnection>
@@ -33,8 +33,8 @@
     </repositories>
 
     <properties>
-        <entCoreVersion>6.0.0</entCoreVersion>
-        <vertxCronTimerVersion>3.0.0</vertxCronTimerVersion>
+        <entCoreVersion>6.0-SNAPSHOT</entCoreVersion>
+        <vertxCronTimerVersion>3.0-SNAPSHOT</vertxCronTimerVersion>
         <junitVersion>5.1.0</junitVersion>
         <reflectionsVersion>0.10.2</reflectionsVersion>
         <mockitoVersion>[2.0,3.0)</mockitoVersion>
