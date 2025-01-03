@@ -385,8 +385,6 @@ public class GAR implements Source {
     public JsonObject format(JsonObject resource) {
         String pattern = queryPattern(config.getJsonArray("textbook_typology", new JsonArray()));
         Pattern regexp = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
-        JsonObject type = resource.getJsonObject("typePresentation");
-        Matcher matcher = regexp.matcher(type.getString("code"));
 
         JsonObject formattedResource = new JsonObject()
             .put("title", resource.getString("nomRessource"))
@@ -405,7 +403,9 @@ public class GAR implements Source {
             .put("structure_name", resource.getString("structure_name"))
             .put("structure_uai", resource.getString("structure_uai"));
 
-        if (matcher.find()) {
+
+        JsonObject type = resource.getJsonObject("typePresentation", new JsonObject());
+        if (type.containsKey("code") && regexp.matcher(type.getString("code")).find()) {
             formattedResource.put("is_textbook", true);
         }
 
