@@ -15,6 +15,7 @@ import org.entcore.common.user.UserInfos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -117,22 +118,34 @@ public class DefaultFeaturedResourcesService implements FeaturedResourcesService
                 .collect(Collectors.toMap(FeaturedResource::getResourceId, FeaturedResource::getDescription));
 
         JsonArray filteredResources = new JsonArray();
-        sourceResources.stream()
+
+        // Avoid multiple copy of same resources
+        List<JsonObject> distinctResources = new ArrayList<>(sourceResources.stream()
                 .filter(JsonObject.class::isInstance)
                 .map(JsonObject.class::cast)
-                .filter(resource -> {
-                    String resourceId = resource.getString(ID_RESSOURCE, null);
-                    return resourceId != null && mongoDescriptions.containsKey(resourceId);
-                })
-                .forEach(resource -> {
-                    JsonObject combinedResource = new JsonObject()
-                            .put(ID_RESSOURCE, resource.getString(ID_RESSOURCE, null))
-                            .put(NOM_RESSOURCE, resource.getString(NOM_RESSOURCE, null))
-                            .put(URL_ACCES_RESSOURCE, resource.getString(URL_ACCES_RESSOURCE, null))
-                            .put(URL_VIGNETTE, resource.getString(URL_VIGNETTE, null))
-                            .put(DESCRIPTION, mongoDescriptions.get(resource.getString(ID_RESSOURCE, null)));
-                    filteredResources.add(combinedResource);
-                });
+                .collect(Collectors.toMap(
+                        json -> json.getString(ID_RESSOURCE), // We use idResource field as key
+                        json -> json,           // And we keep the whole json as value
+                        (existing, replacement) -> existing // if key already exist in map, we keep the existing value
+                ))
+                .values());
+
+        // Filter from distinctResources the ones with id existing in mongoResources
+        distinctResources.stream()
+            .filter(resource -> {
+                String resourceId = resource.getString(ID_RESSOURCE, null);
+                return resourceId != null && mongoDescriptions.containsKey(resourceId);
+            })
+            .forEach(resource -> {
+                JsonObject combinedResource = new JsonObject()
+                        .put(ID_RESSOURCE, resource.getString(ID_RESSOURCE, null))
+                        .put(NOM_RESSOURCE, resource.getString(NOM_RESSOURCE, null))
+                        .put(URL_ACCES_RESSOURCE, resource.getString(URL_ACCES_RESSOURCE, null))
+                        .put(URL_VIGNETTE, resource.getString(URL_VIGNETTE, null))
+                        .put(DESCRIPTION, mongoDescriptions.get(resource.getString(ID_RESSOURCE, null)));
+                filteredResources.add(combinedResource);
+            });
+
         return filteredResources;
     }
 
