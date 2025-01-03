@@ -48,11 +48,13 @@ public class GAR implements Source {
         Future.all(getRessourcesPromise.future(), getFavoritesResourcesPromise.future()).onComplete(event -> {
             if (event.failed()) {
                 handler.handle(new Either.Left<>(event.cause().getMessage()));
-            } else {
-                JsonArray formattedResources = new JsonArray();
-                for (int i = 0; i < getRessourcesPromise.future().result().size(); i++) {
-                    formattedResources.add(format(getFavoritesResourcesPromise.future().result().getJsonObject(i)));
-                }
+            }
+            else {                
+                JsonArray formattedResources = getRessourcesPromise.future().result().stream()
+                        .filter(JsonObject.class::isInstance)
+                        .map(JsonObject.class::cast)
+                        .map(this::format)
+                        .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
 
                 handler.handle(new Either.Right<>(formattedResources));
             }
