@@ -7,6 +7,7 @@ import fr.openent.mediacentre.tasks.AmassTask;
 import fr.wseduc.cron.CronTrigger;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.entcore.common.http.BaseServer;
 import org.entcore.common.notification.TimelineHelper;
@@ -62,7 +63,7 @@ public class Mediacentre extends BaseServer {
 
         /* Add All sources based on module configuration */
         List<Source> sources = new ArrayList<>();
-        JsonObject configSources = config.getJsonObject("sources");
+        JsonObject configSources = config.getJsonObject("sources", new JsonObject());
         List<String> sourceNames = new ArrayList<>(configSources.fieldNames());
         for (String sourceName : sourceNames) {
             if (configSources.getBoolean(sourceName)) {

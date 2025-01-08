@@ -310,7 +310,7 @@ public class ElasticSearchHelper {
         }
 
         for (String field : query.fieldNames()) {
-            JsonObject searchQuery = query.getJsonObject(field);
+            JsonObject searchQuery = query.getJsonObject(field, new JsonObject());
             Comparator comparator = Comparator.get(searchQuery.getString("comparator"));
             Map<String, String> searchField = new HashMap<>();
             searchField.put("field", field);

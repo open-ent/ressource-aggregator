@@ -55,7 +55,7 @@ public class SearchController extends ControllerHelper {
                 return;
             }
 
-            JsonObject jsondata = new JsonObject(request.getParam(Field.JSONDATA));
+            JsonObject jsondata = new JsonObject(request.getParam(Field.JSONDATA, ""));
 
             if (       !jsondata.containsKey(Field.DATA)
                     || !jsondata.containsKey(Field.STATE)
@@ -70,7 +70,7 @@ public class SearchController extends ControllerHelper {
             }
 
             String state = jsondata.getString(Field.STATE);
-            JsonArray expectedSources = new JsonArray(jsondata.getJsonArray(Field.SOURCES).toString());
+            JsonArray expectedSources = new JsonArray(jsondata.getJsonArray(Field.SOURCES, new JsonArray()).toString());
             // filter expectedSources with initialised sources
             expectedSources = new JsonArray(expectedSources.stream()
                     .filter(String.class::isInstance)

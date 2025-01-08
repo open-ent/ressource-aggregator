@@ -480,9 +480,8 @@ public class GAR implements Source {
 
             for (int i = 0; i < resources.size(); i++) {
                 JsonObject resource = resources.getJsonObject(i);
-                JsonObject type = resource.getJsonObject("typePresentation");
-                Matcher matcher = regexp.matcher(type.getString("code"));
-                if (matcher.find() && !list.contains(resource.getString("idRessource"))) {
+                JsonObject type = resource.getJsonObject("typePresentation", new JsonObject());
+                if (type.containsKey("code") && regexp.matcher(type.getString("code")).find() && !list.contains(resource.getString("idRessource"))) {
                     list.add(resource.getString("idRessource"));
                     textBooks.add(format(resource));
                 }

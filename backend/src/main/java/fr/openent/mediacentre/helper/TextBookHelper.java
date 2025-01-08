@@ -90,13 +90,13 @@ public class TextBookHelper {
                 return;
             }
             JsonObject resources = event.right().getValue();
-            JsonArray textbooks = resources.getJsonArray(Field.TEXTBOOKS);
-            JsonArray externalResources = resources.getJsonArray(Field.EXTERNAL_RESOURCES);
-            if (!externalResources.isEmpty()) {
+            JsonArray textbooks = resources.getJsonArray(Field.TEXTBOOKS, new JsonArray());
+            JsonArray externalResources = resources.getJsonArray(Field.EXTERNAL_RESOURCES, new JsonArray());
+            if (externalResources != null && !externalResources.isEmpty()) {
                 textBookService.insertExternalResources(user.getUserId(), externalResources)
                     .onFailure(err -> log.error("[Mediacentre@TextbookHelper:retrieveUserTextbooks] Failed to insert external resources" + err.getMessage()));
             }
-            if (textbooks.isEmpty()) {
+            if (textbooks == null || textbooks.isEmpty()) {
                 answer.answerSuccess(HelperUtils.frameLoad(Field.TEXTBOOKS_RESULT,
                         state,
                         Field.OK,

@@ -53,7 +53,7 @@ public class SignetHelper {
                         );
                         promise.fail(event.left().getValue().toString());
                     } else {
-                        promise.complete(event.right().getValue().getJsonArray(Field.RESOURCES));
+                        promise.complete(event.right().getValue().getJsonArray(Field.RESOURCES, new JsonArray()));
                     }
                 }
         );
