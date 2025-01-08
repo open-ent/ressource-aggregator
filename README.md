@@ -1,9 +1,9 @@
 # ressource-aggregator (Mediacentre v2)
 
 # À propos de l'application ressource-aggregator (Mediacentre v2)
-* Licence : [AGPL v3](http://www.gnu.org/licenses/agpl.txt) - Copyright CGI
-* Développeur : CGI
-* Financeurs : CGI
+* Licence : [AGPL v3](http://www.gnu.org/licenses/agpl.txt) - Copyright Régions Ile De France et Nouvelle Aquitaine, Département de Seine et Marne et ville de Paris
+* Développeur : CGI / Edifice
+* Financeurs : Régions Ile De France et Nouvelle Aquitaine, Département de Seine et Marne et ville de Paris
 * Description : Module permettant d'accéder à la liste et de rechercher des ressources GAR, PMB et Moodle accessibles à l'utilisateur
 
 # Présentation du module
