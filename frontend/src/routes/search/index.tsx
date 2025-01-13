@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Alert } from "@edifice-ui/react";
+import { Alert } from "@edifice.io/react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
 import { useLocation, useSearchParams } from "react-router-dom";

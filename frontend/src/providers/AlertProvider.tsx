@@ -1,6 +1,6 @@
 import { FC, createContext, useContext, useMemo, useState } from "react";
 
-import { AlertTypes } from "@edifice-ui/react";
+import { AlertTypes } from "@edifice.io/react";
 
 import { AlertProviderContextType, AlertProviderProviderProps } from "./types";
 

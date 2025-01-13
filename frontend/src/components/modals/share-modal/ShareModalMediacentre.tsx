@@ -1,7 +1,10 @@
 import { FunctionComponent } from "react";
 
-import { OdeClientProvider, ShareModal } from "@edifice-ui/react";
-import { useOdeClient } from "@edifice-ui/react";
+import {
+  useEdificeClient,
+  ShareModal,
+  EdificeClientProvider,
+} from "@edifice.io/react";
 
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { useModalProvider } from "~/providers/ModalsProvider";
@@ -18,7 +21,7 @@ type ShareResourceModalProps = {
 export const ShareModalMediacentre: FunctionComponent<
   ShareResourceModalProps
 > = ({ shareOptions, onClose }: ShareResourceModalProps) => {
-  const { appCode } = useOdeClient();
+  const { appCode } = useEdificeClient();
   const { openModal, closeAllModals } = useModalProvider();
   const handleShareClose = (): void => {
     onClose();
@@ -37,7 +40,7 @@ export const ShareModalMediacentre: FunctionComponent<
   const formatAppPath = `${appCode}`;
   return (
     <>
-      <OdeClientProvider
+      <EdificeClientProvider
         params={{
           app: formatAppPath,
         }}
@@ -48,7 +51,7 @@ export const ShareModalMediacentre: FunctionComponent<
           onCancel={handleShareClose}
           onSuccess={handleShareSuccess}
         />
-      </OdeClientProvider>
+      </EdificeClientProvider>
     </>
   );
 };

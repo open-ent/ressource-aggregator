@@ -1,7 +1,6 @@
 import React, { useRef, useCallback, useEffect } from "react";
 
 import { ImagePicker, ImagePickerProps } from "@edifice-ui/react";
-
 interface UniqueImagePickerProps extends ImagePickerProps {
   onImageChange: (file: File | null) => void;
 }

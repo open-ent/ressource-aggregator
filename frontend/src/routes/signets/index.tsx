@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { Alert, Button, isActionAvailable } from "@edifice-ui/react";
+import { isActionAvailable } from "@edifice.io/client";
+import { Alert, Button } from "@edifice.io/react";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useTranslation } from "react-i18next";
 
@@ -24,6 +25,7 @@ import { useGetDisciplinesQuery } from "~/services/api/disciplines.service";
 import { useGetLevelsQuery } from "~/services/api/levels.service";
 import { useActions } from "~/services/queries";
 import { sortByAlphabet } from "~/utils/sortResources.util";
+
 import "~/styles/page/signet.scss";
 import "~/styles/page/search.scss";
 

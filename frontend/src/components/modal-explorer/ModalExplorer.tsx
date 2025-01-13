@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Button, Image, Modal } from "@edifice-ui/react";
+import { Button, Image, Modal } from "@edifice.io/react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { Pagination } from "swiper/modules";

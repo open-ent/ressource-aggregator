@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Breadcrumb, Dropdown, SearchBar, useUser } from "@edifice-ui/react";
+import { Breadcrumb, Dropdown, SearchBar, useUser } from "@edifice.io/react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 

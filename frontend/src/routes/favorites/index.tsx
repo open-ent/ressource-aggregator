@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Alert } from "@edifice-ui/react";
+import { Alert } from "@edifice.io/react";
 import StarIcon from "@mui/icons-material/Star";
 import { useTranslation } from "react-i18next";
 

@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
-import { AlertTypes } from "@edifice-ui/react";
+import { AlertTypes } from "@edifice.io/react";
 import {
   FetchArgs,
   QueryActionCreatorResult,

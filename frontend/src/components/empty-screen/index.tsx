@@ -1,14 +1,18 @@
-import { useOdeClient, useOdeTheme, EmptyScreen } from "@edifice-ui/react";
+import {
+  useEdificeClient,
+  useEdificeTheme,
+  EmptyScreen,
+} from "@edifice.io/react";
 import { useTranslation } from "react-i18next";
 
 export default function EmptyScreenApp(): JSX.Element {
-  const { appCode } = useOdeClient();
-  const { theme } = useOdeTheme();
+  const { appCode } = useEdificeClient();
+  const { theme } = useEdificeTheme();
   const { t } = useTranslation("mediacentre");
 
   return (
     <EmptyScreen
-      imageSrc={`${theme?.bootstrapPath}/images/emptyscreen/illu-${appCode}.svg`}
+      imageSrc={`${theme?.basePath}/images/emptyscreen/illu-${appCode}.svg`}
       imageAlt={t("explorer.emptyScreen.app.alt")}
       title={t("explorer.emptyScreen.blog.title.create")}
       text={"Oops"}

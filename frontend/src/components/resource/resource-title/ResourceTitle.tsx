@@ -1,4 +1,4 @@
-import { Card } from "@edifice-ui/react";
+import { Card } from "@edifice.io/react";
 
 import { IconMapping } from "~/core/const/icon-mapping.const";
 import { CardTypeEnum } from "~/core/enum/card-type.enum";

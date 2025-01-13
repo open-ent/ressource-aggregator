@@ -45,7 +45,7 @@ function generateDeps(content) {
   return {
     ...content.dependencies,
     "@edifice-ui/icons": BRANCH,
-    "@edifice-ui/react": BRANCH,
+    "@edifice.io/react": BRANCH,
   };
 }
 

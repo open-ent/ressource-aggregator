@@ -1,4 +1,4 @@
-import { Dropdown } from "@edifice-ui/react";
+import { Dropdown } from "@edifice.io/react";
 import "./DropDown.scss";
 import { useTranslation } from "react-i18next";
 

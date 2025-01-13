@@ -1,7 +1,7 @@
 import React from "react";
 
 import "~/i18n";
-import { OdeClientProvider, ThemeProvider } from "@edifice-ui/react";
+import { EdificeClientProvider, EdificeThemeProvider } from "@edifice.io/react";
 import {
   QueryCache,
   QueryClient,
@@ -49,12 +49,12 @@ const queryClient = new QueryClient({
 root.render(
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
-      <OdeClientProvider
+      <EdificeClientProvider
         params={{
           app: "mediacentre",
         }}
       >
-        <ThemeProvider>
+        <EdificeThemeProvider>
           <SelectedStructureProvider>
             <AlertProvider>
               <PinProvider>
@@ -66,8 +66,8 @@ root.render(
               </PinProvider>
             </AlertProvider>
           </SelectedStructureProvider>
-        </ThemeProvider>
-      </OdeClientProvider>
+        </EdificeThemeProvider>
+      </EdificeClientProvider>
     </Provider>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>,

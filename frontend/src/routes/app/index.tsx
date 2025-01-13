@@ -1,7 +1,7 @@
 import { useState, useEffect, useReducer, useCallback } from "react";
 
-import { Alert, useUser } from "@edifice-ui/react";
-import { ID } from "edifice-ts-client";
+import { ID } from "@edifice.io/client";
+import { Alert, useUser } from "@edifice.io/react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 

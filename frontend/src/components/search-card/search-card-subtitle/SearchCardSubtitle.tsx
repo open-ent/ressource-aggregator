@@ -1,4 +1,4 @@
-import { Card } from "@edifice-ui/react";
+import { Card } from "@edifice.io/react";
 import { useTranslation } from "react-i18next";
 
 import { SearchCardTypeEnum } from "~/core/enum/search-card-type.enum";

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { Card, isActionAvailable, Tooltip } from "@edifice-ui/react";
+import { isActionAvailable } from "@edifice.io/client";
+import { Card, Tooltip } from "@edifice.io/react";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import PushPinIcon from "@mui/icons-material/PushPin";
@@ -22,6 +23,8 @@ import {
   useRemoveFavoriteMutation,
 } from "~/services/api/favorite.service";
 import { useActions } from "~/services/queries";
+
+
 
 interface PinsCarouselCardProps {
   pin: Pin;

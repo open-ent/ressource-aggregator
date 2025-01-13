@@ -7,7 +7,7 @@ import {
   Input,
   Label,
   Modal,
-} from "@edifice-ui/react";
+} from "@edifice.io/react";
 import { useTranslation } from "react-i18next";
 
 import "../Modal.scss";

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import "./Resource.scss";
-import { AlertTypes, Card, isActionAvailable } from "@edifice-ui/react";
-import { Tooltip } from "@edifice-ui/react";
+import { isActionAvailable } from "@edifice.io/client";
+import { AlertTypes, Card } from "@edifice.io/react";
+import { Tooltip } from "@edifice.io/react";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import PinIcon from "@mui/icons-material/PushPin";
 import UnPinIcon from "@mui/icons-material/PushPinOutlined";

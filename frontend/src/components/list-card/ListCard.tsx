@@ -6,7 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 
-import { Grid } from "@edifice-ui/react";
+import { Grid } from "@edifice.io/react";
 import Brightness1Icon from "@mui/icons-material/Brightness1";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
