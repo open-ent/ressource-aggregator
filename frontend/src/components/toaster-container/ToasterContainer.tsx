@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import {
-  ActionBar,
-  Button,
-  checkUserRight,
-} from "@edifice.io/react";
+import { ActionBar, Button, checkUserRight } from "@edifice.io/react";
 import "./ToasterContainer.scss";
 import { ShareOptions } from "node_modules/@edifice.io/react/dist/modules/modals/ShareModal/ShareModal";
 import { useTranslation } from "react-i18next";

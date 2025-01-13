@@ -24,8 +24,6 @@ import {
 } from "~/services/api/favorite.service";
 import { useActions } from "~/services/queries";
 
-
-
 interface PinsCarouselCardProps {
   pin: Pin;
   link: string;
