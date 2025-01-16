@@ -235,13 +235,10 @@ export const CreateSignet: React.FC<CreateSignetProps> = ({
             }}
           >
             <UniqueImagePicker
-              addButtonLabel="Add image"
-              deleteButtonLabel="Delete image"
-              label="Upload an image"
               onUploadImage={handleUploadImageThumbnail}
               onDeleteImage={handleDeleteImageThumbnail}
-              src={thumbnailSrc}
-              onImageChange={(file: any) => {
+              src={thumbnail as string}
+              onImageChange={(file) => {
                 if (file) {
                   handleUploadImageThumbnail(file);
                 } else {
