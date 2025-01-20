@@ -1,8 +1,11 @@
-{
+  {
   "mediacentre.pinned_resource_notification": "Ajout d'une ressource épinglée",
 
   "timeline.pinned.body1": "Vous avez une nouvelle ressource épinglée.",
   "timeline.pinned.consult": "Consulter ",
   "timeline.pinned.link": "votre Médiacentre",
-  "timeline.pinned.body2": " pour la découvrir."
+  "timeline.pinned.body2": " pour la découvrir.",
+
+  "push.notif.mediacentre.title": "Médiacentre",
+  "push.notif.mediacentre.newResource": "Vous avez une nouvelle ressource épinglée."
 }

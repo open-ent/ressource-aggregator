@@ -4,6 +4,8 @@
 
 ## Issue ticket number and link
 
+[MED-](https://jira.support-ent.fr/browse/MED-)
+
 ## Checklist before requesting a review (magic string, indentation, comment/documentation...)
 
 - [ ] I have detailed the tests to do in my feature/fix in order to prevent consequents regressions (must specify in **Checklist tests**)
