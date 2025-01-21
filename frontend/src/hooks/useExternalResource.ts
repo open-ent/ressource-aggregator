@@ -7,7 +7,7 @@ import { Resource } from "~/model/Resource.model";
 import { SearchResultCategory } from "~/model/SearchResultCategory";
 import { usePinProvider } from "~/providers/PinProvider";
 
-export const useExternalResource = (idStructure: string) => {
+export const useExternalResource = () => {
   const { pins } = usePinProvider();
   const query = {
     state: "PLAIN_TEXT",
@@ -18,17 +18,7 @@ export const useExternalResource = (idStructure: string) => {
     sources: ["fr.openent.mediacentre.source.GAR"],
   };
 
-  const {
-    data,
-    error,
-    isLoading,
-    refetch: refetchSearch,
-  } = useSearchQuery({ jsondata: query });
-
-  useEffect(() => {
-    refetchSearch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idStructure]);
+  const { data, error, isLoading } = useSearchQuery({ jsondata: query });
 
   const [externalResources, setExternalResources] = useState<
     ExternalResource[] | null
@@ -63,7 +53,6 @@ export const useExternalResource = (idStructure: string) => {
   return {
     externalResources,
     setExternalResources,
-    refetchSearch,
     error,
     isLoading,
   };

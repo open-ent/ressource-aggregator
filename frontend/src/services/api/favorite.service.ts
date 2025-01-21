@@ -4,6 +4,7 @@ export const favoriteApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getFavorite: builder.query({
       query: () => "favorites",
+      providesTags: ["FavoritesChanged"],
     }),
     addFavorite: builder.mutation({
       query: ({
@@ -17,6 +18,7 @@ export const favoriteApi = emptySplitApi.injectEndpoints({
         method: "POST",
         body: { ...resource },
       }),
+      invalidatesTags: ["FavoritesChanged", "PinsChanged"],
     }),
     removeFavorite: builder.mutation({
       query: ({
@@ -29,6 +31,7 @@ export const favoriteApi = emptySplitApi.injectEndpoints({
         url: `favorites?id=${id}&source=${source}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["FavoritesChanged", "PinsChanged"],
     }),
   }),
 });

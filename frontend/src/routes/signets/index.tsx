@@ -13,25 +13,22 @@ import { MainLayout } from "~/components/main-layout/MainLayout";
 import { ModalContainer } from "~/components/modal-container/ModalContainer";
 import { ToasterContainer } from "~/components/toaster-container/ToasterContainer";
 import { ModalEnum } from "~/core/enum/modal.enum";
-import { useFavorite } from "~/hooks/useFavorite";
 import { useSignet } from "~/hooks/useSignet";
 import { Resource } from "~/model/Resource.model";
 import { Signet } from "~/model/Signet.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
-import { usePinProvider } from "~/providers/PinProvider";
 import { useToasterProvider } from "~/providers/ToasterProvider";
 import { useGetDisciplinesQuery } from "~/services/api/disciplines.service";
 import { useGetLevelsQuery } from "~/services/api/levels.service";
 import { useActions } from "~/services/queries";
 import { sortByAlphabet } from "~/utils/sortResources.util";
 
-import "~/styles/page/signet.scss";
 import "~/styles/page/search.scss";
+import "~/styles/page/signet.scss";
 
 export const SignetPage: React.FC = () => {
   const { t } = useTranslation("mediacentre");
-  const { refetchPins } = usePinProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openSpecificModal } = useModalProvider();
   const { selectedTab, setSelectedTab } = useToasterProvider();
@@ -40,15 +37,8 @@ export const SignetPage: React.FC = () => {
   const { data: actions } = useActions();
   const hasSignetRight = isActionAvailable("signets", actions);
 
-  const {
-    allSignets,
-    myPublishedSignets,
-    mine,
-    shared,
-    archived,
-    published,
-    refetchSignet,
-  } = useSignet();
+  const { allSignets, myPublishedSignets, mine, shared, archived, published } =
+    useSignet();
   const { data: disciplines } = useGetDisciplinesQuery(null);
   const { data: levels } = useGetLevelsQuery(null);
   const [allResourcesDisplayed, setAllResourcesDisplayed] = useState<
@@ -59,12 +49,10 @@ export const SignetPage: React.FC = () => {
   const [emptyText, setEmptyText] = useState("mediacentre.empty.state.mine");
   const [emptyImage, setEmptyImage] = useState("empty-state-mine.png");
   const [publishedIsChecked, setPublishedIsChecked] = useState<boolean>(false);
-  const { refetchFavorite } = useFavorite();
 
   const canAccess = () => (hasSignetRight ? "signets" : "search");
 
   useEffect(() => {
-    refetchFavorite();
     setSelectedTab("mediacentre.signets.mine");
     setEmptyText("mediacentre.empty.state.mine");
     setEmptyImage("empty-state-mine.png");
@@ -129,14 +117,11 @@ export const SignetPage: React.FC = () => {
           selectedTab={selectedTab}
           levels={levels}
           disciplines={disciplines}
-          refetch={refetchSignet}
         />
       )}
       <ModalContainer
-        refetchSignet={refetchSignet}
         levels={levels}
         disciplines={disciplines}
-        refetchPins={refetchPins}
         chooseEmptyState={chooseEmptyState}
         setAllResourceDisplayed={setAllResourcesDisplayed}
       />

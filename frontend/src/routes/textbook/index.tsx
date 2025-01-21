@@ -18,24 +18,21 @@ import { Resource } from "~/model/Resource.model";
 import { Textbook } from "~/model/Textbook.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
-import { usePinProvider } from "~/providers/PinProvider";
 import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvider";
 import { sortByAlphabet } from "~/utils/sortResources.util";
 
 export const TextbookPage: React.FC = () => {
   const { t } = useTranslation("mediacentre");
-  const { refetchPins } = usePinProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openModal } = useModalProvider();
   const { idSelectedStructure } = useSelectedStructureProvider();
 
-  const { textbooks, refetchTextbooks } = useTextbook(idSelectedStructure);
+  const { textbooks } = useTextbook(idSelectedStructure);
   const [textbooksData, setTextbooksData] = useState<Resource[] | null>(null);
-  const { favorites, refetchFavorite } = useFavorite();
+  const { favorites } = useFavorite();
   const [allResourcesDisplayed, setAllResourcesDisplayed] = useState<
     Resource[] | null
   >(null); // all resources after the filters
-  const [initialLoadDone, setInitialLoadDone] = useState(false);
 
   const fetchFavoriteTextbook: () => Textbook[] | null = useCallback(() => {
     if (textbooks && favorites) {
@@ -54,20 +51,9 @@ export const TextbookPage: React.FC = () => {
   }, [textbooks, favorites]);
 
   useEffect(() => {
-    if (!initialLoadDone) {
-      refetchFavorite();
-      refetchTextbooks();
-      setInitialLoadDone(true);
-    }
     const updated: Textbook[] | null = fetchFavoriteTextbook();
     setTextbooksData(updated ?? []);
-  }, [
-    textbooks,
-    fetchFavoriteTextbook,
-    refetchFavorite,
-    refetchTextbooks,
-    initialLoadDone,
-  ]);
+  }, [textbooks, fetchFavoriteTextbook]);
 
   useEffect(() => {
     if (textbooksData) {
@@ -92,9 +78,7 @@ export const TextbookPage: React.FC = () => {
           {alertText}
         </Alert>
       )}
-      {openModal === ModalEnum.CREATE_PIN && (
-        <CreatePins refetch={refetchPins} />
-      )}
+      {openModal === ModalEnum.CREATE_PIN && <CreatePins />}
       <div className="med-search-container">
         <div className="med-search-page-content">
           <div className="med-search-page-header">

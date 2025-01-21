@@ -15,14 +15,13 @@ import { ModalEnum } from "~/core/enum/modal.enum";
 import { Pin } from "~/model/Pin.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
-import "./PinsCarouselCard.scss";
 import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvider";
 import {
   useAddFavoriteMutation,
-  useGetFavoriteQuery,
   useRemoveFavoriteMutation,
 } from "~/services/api/favorite.service";
 import { useActions } from "~/services/queries";
+import "./PinsCarouselCard.scss";
 
 interface PinsCarouselCardProps {
   pin: Pin;
@@ -38,7 +37,6 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
   const { setModalResource, openSpecificModal } = useModalProvider();
   const [addFavorite] = useAddFavoriteMutation();
   const [removeFavorite] = useRemoveFavoriteMutation();
-  const { refetch: refetchFavorite } = useGetFavoriteQuery(null);
   // used to check if the user has the right to pin a resource
   const { data: actions } = useActions();
   const { idSelectedStructure } = useSelectedStructureProvider();
@@ -94,7 +92,6 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
       }
       notify(t("mediacentre.notification.addFavorite"), "success");
       pin.favorite = true;
-      refetchFavorite();
     } catch (e) {
       console.error(e);
     }
@@ -116,7 +113,6 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
       }
       notify(t("mediacentre.notification.removeFavorite"), "success");
       pin.favorite = false;
-      refetchFavorite();
     } catch (e) {
       console.error(e);
     }

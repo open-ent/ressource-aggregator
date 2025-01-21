@@ -28,7 +28,6 @@ import "../Modal.scss";
 import "./CreateSignet.scss";
 
 interface CreateSignetProps {
-  refetch: () => void;
   disciplines: { id: string; label: string }[];
   levels: { id: string; label: string }[];
   chooseEmptyState: (text: string, image: string) => void;
@@ -36,7 +35,6 @@ interface CreateSignetProps {
 }
 
 export const CreateSignet: React.FC<CreateSignetProps> = ({
-  refetch,
   disciplines,
   levels,
   chooseEmptyState = () => {},
@@ -144,7 +142,6 @@ export const CreateSignet: React.FC<CreateSignetProps> = ({
         return;
       }
       setSelectedTab("mediacentre.signets.mine");
-      refetch();
       chooseEmptyState("mediacentre.empty.state.mine", "empty-state-mine.png");
       setAllResourcesDisplayed(null);
       handleCloseModal();

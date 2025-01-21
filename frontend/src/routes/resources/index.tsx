@@ -8,7 +8,6 @@ import { EmptyState } from "~/components/empty-state/EmptyState";
 import { FilterLayout } from "~/components/filter-layout/FilterLayout";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
 import { MainLayout } from "~/components/main-layout/MainLayout";
-import "~/styles/page/search.scss";
 import { CreatePins } from "~/components/modals/create-pins/CreatePins";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { useExternalResource } from "~/hooks/useExternalResource";
@@ -16,36 +15,27 @@ import { useGlobal } from "~/hooks/useGlobal";
 import { Resource } from "~/model/Resource.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
-import { usePinProvider } from "~/providers/PinProvider";
-import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvider";
+import "~/styles/page/search.scss";
 import { sortByAlphabet } from "~/utils/sortResources.util";
 
 export const ResourcePage: React.FC = () => {
   const { user } = useUser();
   const { t } = useTranslation("mediacentre");
-  const { idSelectedStructure } = useSelectedStructureProvider();
-  const { refetchPins } = usePinProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openModal } = useModalProvider();
 
   const { globals } = useGlobal();
-  const { externalResources, refetchSearch } =
-    useExternalResource(idSelectedStructure);
+  const { externalResources } = useExternalResource();
 
   const [externalResourcesData, setExternalResourcesData] = useState<
     Resource[] | null
   >(null);
-  const [initialLoadDone, setInitialLoadDone] = useState(false);
 
   const [allResourcesDisplayed, setAllResourcesDisplayed] = useState<
     Resource[] | null
   >(null); // all resources after the filters
 
   useEffect(() => {
-    if (!initialLoadDone) {
-      refetchSearch();
-      setInitialLoadDone(true);
-    }
     if (user?.type === "PERSRELELEVE") {
       if (globals) {
         setExternalResourcesData(globals);
@@ -53,7 +43,7 @@ export const ResourcePage: React.FC = () => {
     } else {
       setExternalResourcesData(externalResources);
     }
-  }, [user, externalResources, globals, initialLoadDone, refetchSearch]);
+  }, [user, externalResources, globals]);
 
   useEffect(() => {
     if (externalResourcesData) {
@@ -78,9 +68,7 @@ export const ResourcePage: React.FC = () => {
           {alertText}
         </Alert>
       )}
-      {openModal === ModalEnum.CREATE_PIN && (
-        <CreatePins refetch={refetchPins} />
-      )}
+      {openModal === ModalEnum.CREATE_PIN && <CreatePins />}
       <div className="med-search-container">
         <div className="med-search-page-content">
           <div className="med-search-page-header">

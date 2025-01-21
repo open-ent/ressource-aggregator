@@ -18,11 +18,7 @@ import {
   useUpdateShareResourceMutation,
 } from "~/services/api/signet.service";
 
-interface SignetDeleteProps {
-  refetch: () => void;
-}
-
-export const SignetDelete: React.FC<SignetDeleteProps> = ({ refetch }) => {
+export const SignetDelete: React.FC = () => {
   const { t } = useTranslation("mediacentre");
   const { openModal, closeAllModals } = useModalProvider();
   const { toasterResources, resetResources } = useToasterProvider();
@@ -87,7 +83,6 @@ export const SignetDelete: React.FC<SignetDeleteProps> = ({ refetch }) => {
       if (rejectedResults.length > 0) {
         notify(t("mediacentre.error.delete"), "danger");
       } else {
-        refetch();
         resetResources();
         handleCloseModal();
         notify(

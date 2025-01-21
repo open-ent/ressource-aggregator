@@ -11,12 +11,7 @@ export const useSearch = (query: any) => {
   const { pins } = usePinProvider();
   const [allResources, setAllResources] = useState<Resource[] | null>(null);
   const { favorites } = useFavorite();
-  const {
-    data,
-    error,
-    isLoading,
-    refetch: refetchSearch,
-  } = useSearchQuery({ jsondata: query });
+  const { data, error, isLoading } = useSearchQuery({ jsondata: query });
 
   useEffect(() => {
     if (!isLoading) {
@@ -77,6 +72,5 @@ export const useSearch = (query: any) => {
     allResources,
     error,
     isLoading,
-    refetchSearch,
   };
 };

@@ -14,21 +14,15 @@ import { links } from "~/core/const/links.const";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
-import { usePinProvider } from "~/providers/PinProvider";
 import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvider";
 import { useCreatePinMutation } from "~/services/api/pin.service";
 import "../Modal.scss";
 
-interface CreatePinsProps {
-  refetch: () => void;
-}
-
-export const CreatePins: React.FC<CreatePinsProps> = ({ refetch }) => {
+export const CreatePins: React.FC = () => {
   const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
   const { modalResource, openModal, closeAllModals } = useModalProvider();
   const { setAlertText, setAlertType } = useAlertProvider();
-  const { setIsRefetchPins } = usePinProvider();
   const [createPin] = useCreatePinMutation();
   const [title, setTitle] = useState<string>(modalResource?.title ?? "");
   const [description, setDescription] = useState<string>(
@@ -67,9 +61,7 @@ export const CreatePins: React.FC<CreatePinsProps> = ({ refetch }) => {
         notify(t("mediacentre.error.pin"), "danger");
         return;
       }
-      notify(t("mediacentre.notification.pin.wait"), "success");
-      setIsRefetchPins(true);
-      refetch();
+      notify(t("mediacentre.pin.success"), "success");
       handleCloseModal();
       resetFields();
     } catch (error) {

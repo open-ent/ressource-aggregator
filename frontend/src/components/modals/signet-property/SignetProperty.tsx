@@ -34,13 +34,11 @@ import {
 } from "~/utils/property.utils";
 
 interface SignetPropertyProps {
-  refetch: () => void;
   disciplines: { id: string; label: string }[];
   levels: { id: string; label: string }[];
 }
 
 export const SignetProperty: React.FC<SignetPropertyProps> = ({
-  refetch,
   levels,
   disciplines,
 }) => {
@@ -150,7 +148,6 @@ export const SignetProperty: React.FC<SignetPropertyProps> = ({
         notify(t("mediacentre.error.signet.update"), "danger");
         return;
       }
-      refetch();
       resetResources();
       handleCloseModal();
       resetFields();

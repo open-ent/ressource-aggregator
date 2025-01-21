@@ -30,7 +30,7 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
 }) => {
   const { t } = useTranslation("mediacentre");
   const { resetResources, selectedTab, setSelectedTab } = useToasterProvider();
-  const { mine, shared, published, archived, refetchSignet } = useSignet();
+  const { mine, shared, published, archived } = useSignet();
 
   const selectMine = () => {
     chooseEmptyState("mediacentre.empty.state.mine", "empty-state-mine.png");
@@ -78,7 +78,6 @@ export const AdminSignet: React.FC<AdminSignetProps> = ({
   };
 
   const resetPage = () => {
-    refetchSignet();
     resetResources();
     setAllResourcesDisplayed(null);
   };

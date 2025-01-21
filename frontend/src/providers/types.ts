@@ -1,14 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
 import { AlertTypes } from "@edifice.io/react";
-import {
-  FetchArgs,
-  QueryActionCreatorResult,
-  QueryDefinition,
-  BaseQueryFn,
-  FetchBaseQueryMeta,
-  FetchBaseQueryError,
-} from "@reduxjs/toolkit/query";
 
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { ExternalResource } from "~/model/ExternalResource.model";
@@ -59,23 +51,6 @@ export interface PinProviderProviderProps {
 export type PinProviderContextType = {
   pins: Pin[] | null;
   setPins: Dispatch<SetStateAction<Pin[] | null>>;
-  refetchPins: () => QueryActionCreatorResult<
-    QueryDefinition<
-      string,
-      BaseQueryFn<
-        string | FetchArgs,
-        unknown,
-        FetchBaseQueryError,
-        {},
-        FetchBaseQueryMeta
-      >,
-      never,
-      any,
-      "api"
-    >
-  >;
-  isRefetchPins: boolean;
-  setIsRefetchPins: Dispatch<SetStateAction<boolean>>;
 };
 
 export interface SelectedStructureProviderProviderProps {

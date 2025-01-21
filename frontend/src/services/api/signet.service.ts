@@ -4,9 +4,11 @@ export const signetsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getPublishedSignets: builder.query({
       query: () => "signets",
+      providesTags: ["SignetsChanged"],
     }),
     getMySignets: builder.query({
       query: () => "mysignets",
+      providesTags: ["SignetsChanged"],
     }),
     createSignet: builder.mutation({
       query: ({ payload }) => ({
@@ -14,6 +16,7 @@ export const signetsApi = emptySplitApi.injectEndpoints({
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["SignetsChanged"],
     }),
     updateSignet: builder.mutation({
       query: ({ idSignet, payload }) => ({
@@ -21,12 +24,14 @@ export const signetsApi = emptySplitApi.injectEndpoints({
         method: "PUT",
         body: payload,
       }),
+      invalidatesTags: ["SignetsChanged"],
     }),
     deleteSignet: builder.mutation({
       query: ({ idSignet }) => ({
         url: `signets/${idSignet}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["SignetsChanged"],
     }),
     publishSignet: builder.mutation({
       query: ({ idSignet, payload }) => ({
@@ -34,6 +39,7 @@ export const signetsApi = emptySplitApi.injectEndpoints({
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["SignetsChanged"],
     }),
     updateShareResource: builder.mutation({
       query: ({ idSignet, payload }) => ({
@@ -41,15 +47,18 @@ export const signetsApi = emptySplitApi.injectEndpoints({
         method: "PUT",
         body: payload,
       }),
+      invalidatesTags: ["SignetsChanged"],
     }),
     getMyPublishedSignets: builder.query({
       query: () => "signets/public/",
+      providesTags: ["SignetsChanged"],
     }),
     deleteSignetPublic: builder.mutation({
       query: ({ idSignet }) => ({
         url: `signets/public/${idSignet}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["SignetsChanged"],
     }),
   }),
 });

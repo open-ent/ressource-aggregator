@@ -19,11 +19,7 @@ import { useModalProvider } from "~/providers/ModalsProvider";
 import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvider";
 import { useUpdatePinMutation } from "~/services/api/pin.service";
 
-interface EditPinsProps {
-  refetch: () => void;
-}
-
-export const EditPins: React.FC<EditPinsProps> = ({ refetch }) => {
+export const EditPins: React.FC = () => {
   const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
   const { modalResource, openModal, closeAllModals, openSpecificModal } =
@@ -72,7 +68,6 @@ export const EditPins: React.FC<EditPinsProps> = ({ refetch }) => {
         notify(t("mediacentre.error.pin"), "danger");
       }
 
-      refetch();
       handleCloseModal();
       resetFields();
       notify(t("mediacentre.pin.edit.success"), "success");

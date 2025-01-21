@@ -13,15 +13,9 @@ export const useTextbook = (idStructure: string) => {
     data: textbook,
     error,
     isLoading,
-    refetch: refetchTextbooks,
   } = useGetTextbooksQuery(idStructure);
   const [textbooks, setTextbooks] = useState<Textbook[] | null>(null);
   const { favorites } = useFavorite();
-
-  useEffect(() => {
-    refetchTextbooks();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idStructure]);
 
   useEffect(() => {
     let textbookData: Textbook[] = textbook?.data?.textbooks ?? [];
@@ -47,7 +41,6 @@ export const useTextbook = (idStructure: string) => {
   return {
     textbooks,
     setTextbooks,
-    refetchTextbooks,
     error,
     isLoading,
   };

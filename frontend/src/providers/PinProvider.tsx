@@ -1,4 +1,4 @@
-import React, {
+import {
   FC,
   createContext,
   useContext,
@@ -7,9 +7,6 @@ import React, {
   useState,
 } from "react";
 
-import { useTranslation } from "react-i18next";
-
-import { useAlertProvider } from "./AlertProvider";
 import { useSelectedStructureProvider } from "./SelectedStructureProvider";
 import { PinProviderContextType, PinProviderProviderProps } from "./types";
 import { useGetPinsQuery } from "../services/api/pin.service";
@@ -29,20 +26,14 @@ export const usePinProvider = () => {
 
 export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
   const [pins, setPins] = useState<Pin[] | null>(null);
-  const [isRefetchPins, setIsRefetchPins] = useState<boolean>(false);
-  const { notify } = useAlertProvider();
-  const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
   const [favorites, setFavorites] = useState<Favorite[] | null>(null);
 
   const { data: favorite } = useGetFavoriteQuery(null);
 
-  const { currentData: fetchedPins, refetch: refetchPins } = useGetPinsQuery(
-    idSelectedStructure!,
-    {
-      skip: !idSelectedStructure, // Skip the query if idSelectedStructure is null
-    },
-  );
+  const { currentData: fetchedPins } = useGetPinsQuery(idSelectedStructure, {
+    skip: !idSelectedStructure, // Skip the query if idSelectedStructure is null
+  });
 
   useEffect(() => {
     if (favorite) {
@@ -57,17 +48,7 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
   }, [favorite]);
 
   useEffect(() => {
-    if (idSelectedStructure) {
-      refetchPins();
-    }
-  }, [idSelectedStructure]);
-
-  useEffect(() => {
     if (fetchedPins) {
-      if (isRefetchPins) {
-        notify(t("mediacentre.pin.success"), "success");
-        setIsRefetchPins(false);
-      }
       let updatedPins = fetchedPins.map((pin: Pin) => ({
         ...pin,
         is_pinned: true,
@@ -95,11 +76,8 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
     () => ({
       pins,
       setPins,
-      refetchPins,
-      isRefetchPins,
-      setIsRefetchPins,
     }),
-    [pins, refetchPins],
+    [pins],
   );
 
   return (

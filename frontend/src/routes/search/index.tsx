@@ -13,16 +13,14 @@ import { CreatePins } from "~/components/modals/create-pins/CreatePins";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { useResourceListInfo } from "~/hooks/useResourceListInfo";
 import { useSearch } from "~/hooks/useSearch";
-import "~/styles/page/search.scss";
 import { Resource } from "~/model/Resource.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
-import { usePinProvider } from "~/providers/PinProvider";
+import "~/styles/page/search.scss";
 import { sortByAlphabet } from "~/utils/sortResources.util";
 
 export const Search: React.FC = () => {
   const { t } = useTranslation("mediacentre");
-  const { refetchPins } = usePinProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openModal } = useModalProvider();
 
@@ -47,25 +45,18 @@ export const Search: React.FC = () => {
     };
   };
 
-  const { allResources, refetchSearch } = useSearch(
-    createSearchBody(searchQuery),
-  );
+  const { allResources } = useSearch(createSearchBody(searchQuery));
   const [allResourcesDisplayed, setAllResourcesDisplayed] = useState<
     Resource[] | null
   >(null); // all resources after the filters
   const [searchResourcesData, setSearchResourcesData] = useState<
     Resource[] | null
   >(null);
-  const [initialLoadDone, setInitialLoadDone] = useState(false);
 
   const { resourcesMap } = useResourceListInfo(allResources);
 
   useEffect(() => {
     if (!allResources) return;
-    if (!initialLoadDone) {
-      refetchSearch();
-      setInitialLoadDone(true);
-    }
     const sortedSearchResources = [
       ...sortByAlphabet(resourcesMap.textbooks),
       ...sortByAlphabet(resourcesMap.externalResources),
@@ -74,7 +65,7 @@ export const Search: React.FC = () => {
     ];
     setSearchResourcesData(sortedSearchResources);
     setAllResourcesDisplayed(sortedSearchResources);
-  }, [allResources, refetchSearch, initialLoadDone, resourcesMap]);
+  }, [allResources, resourcesMap]);
 
   return (
     <>
@@ -93,9 +84,7 @@ export const Search: React.FC = () => {
           {alertText}
         </Alert>
       )}
-      {openModal === ModalEnum.CREATE_PIN && (
-        <CreatePins refetch={refetchPins} />
-      )}
+      {openModal === ModalEnum.CREATE_PIN && <CreatePins />}
       <div className="med-search-container">
         <div className="med-search-page-content">
           <div className="med-search-page-header">

@@ -23,14 +23,12 @@ import {
 
 export interface ToasterContainerProps {
   selectedTab: string;
-  refetch: () => void;
   disciplines: { id: string; label: string }[];
   levels: { id: string; label: string }[];
 }
 
 export const ToasterContainer: React.FC<ToasterContainerProps> = ({
   selectedTab,
-  refetch,
   disciplines,
   levels,
 }) => {
@@ -144,7 +142,6 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
         },
       );
       await Promise.all(promises);
-      refetch();
       resetResources();
       notify(
         toasterResources.length > 1

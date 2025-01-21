@@ -12,8 +12,6 @@ import { ModalEnum } from "~/core/enum/modal.enum";
 import { useModalProvider } from "~/providers/ModalsProvider";
 
 interface ModalContainerProps {
-  refetchSignet: () => Promise<void>;
-  refetchPins: () => void;
   levels: { id: string; label: string }[];
   disciplines: { id: string; label: string }[];
   chooseEmptyState: (text: string, image: string) => void;
@@ -21,8 +19,6 @@ interface ModalContainerProps {
 }
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
-  refetchSignet,
-  refetchPins = () => {},
   levels,
   disciplines,
   chooseEmptyState = () => {},
@@ -32,35 +28,18 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
   return (
     <div>
       {openModal === ModalEnum.PUBLISH_SIGNET && (
-        <SignetPublish
-          refetch={refetchSignet}
-          levels={levels}
-          disciplines={disciplines}
-        />
+        <SignetPublish levels={levels} disciplines={disciplines} />
       )}
       {openModal === ModalEnum.PROPERTY_SIGNET && (
-        <SignetProperty
-          refetch={refetchSignet}
-          levels={levels}
-          disciplines={disciplines}
-        />
+        <SignetProperty levels={levels} disciplines={disciplines} />
       )}
       {openModal === ModalEnum.ARCHIVE_SIGNET && (
-        <SignetArchive
-          refetch={refetchSignet}
-          levels={levels}
-          disciplines={disciplines}
-        />
+        <SignetArchive levels={levels} disciplines={disciplines} />
       )}
-      {openModal === ModalEnum.DELETE_SIGNET && (
-        <SignetDelete refetch={refetchSignet} />
-      )}
-      {openModal === ModalEnum.CREATE_PIN && (
-        <CreatePins refetch={refetchPins} />
-      )}
+      {openModal === ModalEnum.DELETE_SIGNET && <SignetDelete />}
+      {openModal === ModalEnum.CREATE_PIN && <CreatePins />}
       {openModal === ModalEnum.CREATE_SIGNET && (
         <CreateSignet
-          refetch={refetchSignet}
           levels={levels}
           disciplines={disciplines}
           chooseEmptyState={chooseEmptyState}
@@ -69,7 +48,7 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
       )}
       {openModal === ModalEnum.PROPERTY_VIEW_SIGNET && <SignetPropertyView />}
       {openModal === ModalEnum.DELETE_SIGNET_PUBLISHED && (
-        <SignetDeletePublish refetch={refetchSignet} />
+        <SignetDeletePublish />
       )}
     </div>
   );

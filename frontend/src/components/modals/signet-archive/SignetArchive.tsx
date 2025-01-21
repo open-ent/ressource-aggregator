@@ -17,13 +17,11 @@ import {
 } from "~/utils/property.utils";
 
 interface SignetArchiveProps {
-  refetch: () => void;
   disciplines: { id: string; label: string }[];
   levels: { id: string; label: string }[];
 }
 
 export const SignetArchive: React.FC<SignetArchiveProps> = ({
-  refetch,
   levels,
   disciplines,
 }) => {
@@ -83,7 +81,6 @@ export const SignetArchive: React.FC<SignetArchiveProps> = ({
       if (rejectedResults.length > 0) {
         notify(t("mediacentre.error.archived"), "danger");
       } else {
-        refetch();
         resetResources();
         handleCloseModal();
         notify(

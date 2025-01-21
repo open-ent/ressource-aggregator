@@ -1,9 +1,8 @@
-import { useState, useEffect, useReducer, useCallback } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 
 import { ID } from "@edifice.io/client";
 import { Alert, useUser } from "@edifice.io/react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
 
 import { PinsCarousel } from "../../components/pins-carousel/PinsCarousel";
 import { EmptyState } from "~/components/empty-state/EmptyState";
@@ -43,18 +42,15 @@ export interface AppProps {
 }
 
 export const App = () => {
-  const location = useLocation();
   const { user } = useUser();
   const { idSelectedStructure } = useSelectedStructureProvider();
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
-  const { pins, setPins, refetchPins } = usePinProvider();
-  const { favorites, setFavorites, refetchFavorite } = useFavorite();
+  const { pins, setPins } = usePinProvider();
+  const { favorites, setFavorites } = useFavorite();
   const { homeSignets, setHomeSignets } = useSignet();
-  const { textbooks, setTextbooks, refetchTextbooks } =
-    useTextbook(idSelectedStructure);
-  const { externalResources, setExternalResources, refetchSearch } =
-    useExternalResource(idSelectedStructure);
+  const { textbooks, setTextbooks } = useTextbook(idSelectedStructure);
+  const { externalResources, setExternalResources } = useExternalResource();
   const { globals } = useGlobal();
   const [pinsEmpty, setPinsEmpty] = useState<boolean>(true);
   const [externalResourcesData, setExternalResourcesData] = useState<
@@ -138,19 +134,8 @@ export const App = () => {
 
   const handleAddFavorite = (resource: any) => {
     setFavorites((prevFavorites: Favorite[]) => [...prevFavorites, resource]);
-    refetchAll();
     resource.favorite = true;
   };
-
-  const refetchAll = () => {
-    refetchFavorite();
-    refetchTextbooks();
-    refetchSearch();
-  };
-
-  useEffect(() => {
-    refetchFavorite();
-  }, [location, refetchFavorite]);
 
   const handleRemoveFavorite = (id: string | number) => {
     setFavorites((prevFavorites: Favorite[] | null) => {
@@ -160,7 +145,6 @@ export const App = () => {
       return prevFavorites.filter((fav) => fav.id != id);
     });
     updateFavoriteStatus(id, false);
-    refetchAll();
   };
 
   const updateFavoriteStatus = (id: string | number, isFavorite: boolean) => {
@@ -283,13 +267,9 @@ export const App = () => {
           {alertText}
         </Alert>
       )}
-      {openModal === ModalEnum.CREATE_PIN && (
-        <CreatePins refetch={refetchPins} />
-      )}
-      {openModal === ModalEnum.EDIT_PIN && <EditPins refetch={refetchPins} />}
-      {openModal === ModalEnum.CONFIRM_DELETE_PIN && (
-        <ConfirmDelete refetch={refetchPins} />
-      )}
+      {openModal === ModalEnum.CREATE_PIN && <CreatePins />}
+      {openModal === ModalEnum.EDIT_PIN && <EditPins />}
+      {openModal === ModalEnum.CONFIRM_DELETE_PIN && <ConfirmDelete />}
       <div className="med-container">
         <div id="pinId">{!pinsEmpty && <PinsCarousel />}</div>
         <div id="favoriteId">
@@ -308,9 +288,9 @@ export const App = () => {
           {resourcesList().length === 0 ? (
             <EmptyState title={t("mediacentre.ressources.empty")} />
           ) : (
-            resourcesList().map((resource, index) => (
+            resourcesList().map((resource) => (
               <HomeList
-                key={Date.now() + index}
+                key={resource.type}
                 resources={resource.resource}
                 type={resource.type}
                 handleAddFavorite={handleAddFavorite}

@@ -6,6 +6,7 @@ export const searchApi = emptySplitApi.injectEndpoints({
       query: ({ jsondata }) => ({
         url: `search?jsondata=${encodeURI(JSON.stringify(jsondata))}`,
       }),
+      providesTags: ["FavoritesChanged"],
     }),
   }),
 });

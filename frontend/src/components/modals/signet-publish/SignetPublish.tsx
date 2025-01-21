@@ -17,13 +17,11 @@ import {
 } from "~/utils/property.utils";
 
 interface SignetPublishProps {
-  refetch: () => void;
   disciplines: { id: string; label: string }[];
   levels: { id: string; label: string }[];
 }
 
 export const SignetPublish: React.FC<SignetPublishProps> = ({
-  refetch,
   disciplines,
   levels,
 }) => {
@@ -70,7 +68,6 @@ export const SignetPublish: React.FC<SignetPublishProps> = ({
         notify(t("mediacentre.error.publish"), "danger");
         return;
       }
-      await refetch();
       resetResources();
       handleCloseModal();
       notify(t("mediacentre.signet.publish.success"), "success");

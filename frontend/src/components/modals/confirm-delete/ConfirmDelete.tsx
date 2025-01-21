@@ -11,11 +11,7 @@ import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvi
 import { useDeletePinMutation } from "~/services/api/pin.service";
 import "../Modal.scss";
 
-interface ConfirmDeleteProps {
-  refetch: () => void;
-}
-
-export const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ refetch }) => {
+export const ConfirmDelete: React.FC = () => {
   const { t } = useTranslation("mediacentre");
   const { idSelectedStructure } = useSelectedStructureProvider();
   const { modalResource, openModal, closeAllModals } = useModalProvider();
@@ -43,7 +39,6 @@ export const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ refetch }) => {
         notify(t("mediacentre.error.pin"), "danger");
       }
 
-      refetch();
       handleCloseModal();
       notify(t("mediacentre.pin.delete.success"), "success");
     } catch (e) {

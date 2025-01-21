@@ -4,6 +4,7 @@ export const signetsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getLevels: builder.query({
       query: () => "levels",
+      providesTags: ["PinsChanged"],
     }),
   }),
 });

@@ -6,6 +6,7 @@ export const textbooksApi = emptySplitApi.injectEndpoints({
       query: (idStructure) => ({
         url: `textbooks/refresh?structureIds=${idStructure}`,
       }),
+      providesTags: ["FavoritesChanged"],
     }),
   }),
 });

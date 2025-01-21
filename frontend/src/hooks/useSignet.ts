@@ -22,18 +22,15 @@ import {
 export const useSignet = () => {
   const { user } = useUser();
   const { pins } = usePinProvider();
-  const { data: publicSignets, refetch: refetchPublicSignet } =
-    useGetPublishedSignetsQuery(null);
-  const { data: mySignets, refetch: refetchMySignet } =
-    useGetMySignetsQuery(null);
-  const { data: myPublishedSignetsData, refetch: refetchMyPublishedSignet } =
-    useGetMyPublishedSignetsQuery(null);
+  const { data: publicSignets } = useGetPublishedSignetsQuery(null);
+  const { data: mySignets } = useGetMySignetsQuery(null);
+  const { data: myPublishedSignetsData } = useGetMyPublishedSignetsQuery(null);
   const [homeSignets, setHomeSignets] = useState<Signet[] | null>(null);
   const [allSignets, setAllSignets] = useState<Signet[] | null>(null);
   const [myPublishedSignets, setMyPublishedSignets] = useState<Signet[] | null>(
     null,
   );
-  const { favorites, refetchFavorite } = useFavorite();
+  const { favorites } = useFavorite();
 
   const getHomeSignets = useCallback(() => {
     if (!allSignets) {
@@ -182,13 +179,6 @@ export const useSignet = () => {
     return updatedPublicSignetsData;
   }, [publicSignets, favorites, pins]);
 
-  const refetchSignet = async () => {
-    await refetchFavorite();
-    await refetchMySignet();
-    await refetchPublicSignet();
-    await refetchMyPublishedSignet();
-  };
-
   useEffect(() => {
     if (favorites && pins) {
       const signetsData = getHomeSignets();
@@ -240,7 +230,6 @@ export const useSignet = () => {
     homeSignets,
     setHomeSignets,
     getHomeSignets,
-    refetchSignet,
     allSignets,
     setAllSignets,
     mine,
