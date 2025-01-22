@@ -31,9 +31,7 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
 
   const { data: favorite } = useGetFavoriteQuery(null);
 
-  const { currentData: fetchedPins } = useGetPinsQuery(idSelectedStructure, {
-    skip: !idSelectedStructure, // Skip the query if idSelectedStructure is null
-  });
+  const { currentData: fetchedPins } = useGetPinsQuery(idSelectedStructure);
 
   useEffect(() => {
     if (favorite) {
