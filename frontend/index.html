@@ -1,33 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Médiacentre</title>
     <link rel="icon" id="favicon" href="" />
-    <link rel="stylesheet" href="/assets/themes/edifice-bootstrap/index.css" />
     <script>
-      wsPort = "{{wsPort}}";
-			mode = "{{mode}}";
-			sources = [
-				{{#sources}}
-					"{{.}}",
-				{{/sources}}
-			];
-			mediacentreUpdateFrequency = {{mediacentreUpdateFrequency}};
-      highlightsPins = {{highlightsPins}};
-      window.config = {
-        wsPort: "{{wsPort}}",
-        mode: "{{mode}}",
-        sources: [
-          {{#sources}}
-            "{{.}}",
-          {{/sources}}
-        ],
-        mediacentreUpdateFrequency: {{mediacentreUpdateFrequency}},
-        highlightsPins: {{highlightsPins}}
-      };
-  </script>
+         wsPort = "{{wsPort}}";
+      mode = "{{mode}}";
+      sources = [
+      	{{#sources}}
+      		"{{.}}",
+      	{{/sources}}
+      ];
+      mediacentreUpdateFrequency = {{mediacentreUpdateFrequency}};
+         highlightsPins = {{highlightsPins}};
+         window.config = {
+           wsPort: "{{wsPort}}",
+           mode: "{{mode}}",
+           sources: [
+             {{#sources}}
+               "{{.}}",
+             {{/sources}}
+           ],
+           mediacentreUpdateFrequency: {{mediacentreUpdateFrequency}},
+           highlightsPins: {{highlightsPins}}
+         };
+    </script>
   </head>
   <body>
     <div id="root"></div>

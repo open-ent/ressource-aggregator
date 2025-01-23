@@ -1,9 +1,9 @@
 /// <reference types="vitest" />
 
-import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
+import { resolve } from "path";
+import { defineConfig, loadEnv } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import path from "path";
 
 // https://vitejs.dev/config/
 export default ({ mode }: { mode: string }) => {
@@ -54,7 +54,6 @@ export default ({ mode }: { mode: string }) => {
   const build = {
     assetsDir: "public",
     rollupOptions: {
-      external: ["edifice-ts-client"],
       output: {
         manualChunks: {
           react: [
@@ -65,9 +64,6 @@ export default ({ mode }: { mode: string }) => {
             "react-hook-form",
             "react-hot-toast",
           ],
-        },
-        paths: {
-          "edifice-ts-client": "/assets/js/edifice-ts-client/index.js",
         },
       },
     },
@@ -82,12 +78,20 @@ export default ({ mode }: { mode: string }) => {
     headers,
     open: true,
     strictPort: true,
+    fs: {
+      allow: ["../../"],
+    },
   };
 
   const test = {
     globals: true,
     environment: "happy-dom",
     setupFiles: "./src/tests/setup.ts",
+    server: {
+      deps: {
+        inline: ["@edifice.io/react"],
+      },
+    },
   };
 
   return defineConfig({
@@ -98,9 +102,13 @@ export default ({ mode }: { mode: string }) => {
     test,
     resolve: {
       alias: {
-        "@cgi-learning-hub": path.resolve(
+        "@cgi-learning-hub": resolve(
           __dirname,
           "node_modules/@cgi-learning-hub",
+        ),
+        "@images": resolve(
+          __dirname,
+          "node_modules/@edifice.io/bootstrap/dist/images",
         ),
       },
     },

@@ -1,6 +1,5 @@
 import React from "react";
 
-import "~/i18n";
 import { EdificeClientProvider, EdificeThemeProvider } from "@edifice.io/react";
 import {
   QueryCache,
@@ -11,7 +10,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
+import "~/i18n";
 
+import "@edifice.io/bootstrap/dist/index.css";
 import { AlertProvider } from "./providers/AlertProvider";
 import { ModalProvider } from "./providers/ModalsProvider";
 import { PinProvider } from "./providers/PinProvider";

@@ -8,7 +8,7 @@ cd backend
 rm -rf ./.gradle
 rm -rf ./build
 rm -rf ./gradle
-rm -rf ./src/main/resources/public
+find ./src/main/resources/public/ -maxdepth 1 -type f -exec rm -f {} +
 rm -rf ./src/main/resources/view
 echo 'Repo clean for build !'
 cd ..
