@@ -113,7 +113,14 @@ public class FavoriteHelper {
     public Future<JsonArray> favoritesExists(JsonArray favorites, UserInfos user, List<Source> sources) {
         Promise<JsonArray> promise = Promise.promise();
         JsonArray data = new JsonArray();
-        JsonArray searchSources = new JsonArray().add(SourceConstant.MOODLE).add(SourceConstant.GAR);
+        JsonArray searchSources = new JsonArray(new JsonArray().add(SourceConstant.MOODLE).add(SourceConstant.GAR).stream()
+        .map(String.class::cast)
+        .filter(expectedSource -> sources.stream()
+            .map(source -> source.getClass().getName())
+            .collect(Collectors.toList())
+            .contains(expectedSource)
+        )
+        .collect(Collectors.toList()));
         JsonObject searchQuery = new JsonObject().put(Field.QUERY, ".*");
         textbookService.get(user.getUserId())
                 .recover(error -> {
