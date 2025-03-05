@@ -38,6 +38,7 @@ public class Mediacentre extends BaseServer {
 
     public static String DIRECTORY_BUS_ADDRESS = "directory";
 
+    public static String MEDIACENTRE_VIEW = "fr.openent.mediacentre.controller.MediacentreController|view";
     public static String MEDIACENTRE_CREATE = "fr.openent.mediacentre.source.Signet|create";
     public static String MEDIACENTRE_DELETE = "fr.openent.mediacentre.source.Signet|delete";
     public static String MEDIACENTRE_UPDATE = "fr.openent.mediacentre.source.Signet|update";

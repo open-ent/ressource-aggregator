@@ -6,6 +6,8 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.util.List;
+
 public interface TextBookService {
 
     /**
@@ -16,18 +18,12 @@ public interface TextBookService {
     Future<JsonArray> get(String userId);
 
     /**
-     * Get all users who have a textbook
+     * Get all users ids who have a textbook or an external resource
      *
-     * @param textbookId  textbook id
+     * @param resource Textbook or External resource
      */
-    Future<JsonArray> getUsersHaveTextbook(String textbookId);
+    Future<List<String>> getUsersIdsFromMongoResource(JsonObject resource);
 
-    /**
-     * Get all users who have a external resources
-     *
-     * @param externalResourceId  external resource id
-     */
-    Future<JsonArray> getUsersHaveExternalResource(String externalResourceId);
     /**
      * Insert multiple textbooks. Used by textbooks initialization
      *

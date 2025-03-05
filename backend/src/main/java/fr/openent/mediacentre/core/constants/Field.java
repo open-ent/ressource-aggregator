@@ -15,11 +15,13 @@ public class Field {
     public static final String UNIVERSALIS_ARK = "ark:/34885/wr0000001";
 
     // Other fields
+    public static final String ALL_USERS_IDS_WITH_MEDIACENTRE_ACCESS = "allUsersIdsWithMediacentreAccess";
     public static final String URL = "url";
     public static final String MEDIACENTREUPDATEFREQUENCY = "mediacentreUpdateFrequency";
     public static final String _ID = "_id";
     public static final String ID = "id";
     public static final String ID_RESSOURCE = "idRessource";
+    public static final String ISPARENT = "isParent";
     public static final String NOM_RESSOURCE = "nomRessource";
     public static final String URL_VIGNETTE = "urlVignette";
     public static final String URL_ACCES_RESSOURCE = "urlAccesRessource";
@@ -28,6 +30,7 @@ public class Field {
     public static final String USERID = "userId";
     public static final String GROUP_ID = "group_id";
     public static final String GROUPID = "groupId";
+    public static final String GROUPS_AND_USERS_IDS = "groupsAndUsersIds";
     public static final String SOURCE = "source";
     public static final String SOURCES = "sources";
     public static final String MODULE = "module";
@@ -118,5 +121,6 @@ public class Field {
     public static final String STRUCTURE_ID = "structureId";
     public static final String IS_TARGET_STRUCTURE = "isTargetStructure";
     public static final String STRUCTURE = "structure";
+    public static final String WORKFLOW_ACTION_NAME = "workflowActionName";
 }
 
