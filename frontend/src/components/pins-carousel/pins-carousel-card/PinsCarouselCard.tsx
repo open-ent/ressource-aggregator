@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { isActionAvailable } from "@edifice.io/client";
 import { Card, Tooltip } from "@edifice.io/react";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
+import InsertLinkRoundedIcon from "@mui/icons-material/InsertLinkRounded";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -118,6 +119,20 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
     }
   };
 
+  const handleDuplicate = async () => {
+    if (!pin?.action?.url) return;
+
+    const response = await fetch(pin.action.url, { method: "POST" });
+
+    if (!response?.ok) {
+      return notify(t(pin.action.message.error), "danger");
+    }
+
+    notify(t(pin.action.message.success), "success");
+  };
+
+  const isMoodle = () => pin.source === "fr.openent.mediacentre.source.Moodle";
+
   return (
     <Card isClickable={false} isSelectable={false} className="med-pin-card">
       <a
@@ -167,8 +182,25 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
               <PushPinIcon className="med-pin" onClick={() => edit()} />
             </Tooltip>
           )}
-          <Tooltip message={t("mediacentre.card.copy")} placement="top">
-            <ContentCopyIcon className="med-link" onClick={() => copy()} />
+          <Tooltip
+            message={
+              isMoodle()
+                ? t("mediacentre.card.duplication")
+                : t("mediacentre.card.copy")
+            }
+            placement="top"
+          >
+            {isMoodle() ? (
+              <ContentCopyRoundedIcon
+                className="med-link"
+                onClick={handleDuplicate}
+              />
+            ) : (
+              <InsertLinkRoundedIcon
+                className="med-link"
+                onClick={() => copy()}
+              />
+            )}
           </Tooltip>
           {pin.favorite ? (
             <Tooltip message={t("mediacentre.card.unfavorite")} placement="top">

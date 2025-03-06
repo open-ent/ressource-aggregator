@@ -1,10 +1,11 @@
-import "./SearchCard.scss";
 import React, { useEffect, useState } from "react";
+import "./SearchCard.scss";
 
 import { isActionAvailable } from "@edifice.io/client";
 import { Card, Tooltip } from "@edifice.io/react";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import InsertLinkRoundedIcon from "@mui/icons-material/InsertLinkRounded";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import PinIcon from "@mui/icons-material/PushPin";
@@ -15,10 +16,6 @@ import anime from "animejs";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { SearchCardDescription } from "./search-card-description/SearchCardDescription";
-import { SearchCardDetails } from "./search-card-details/SearchCardDetails";
-import { SearchCardSubtitle } from "./search-card-subtitle/SearchCardSubtitle";
-import { SearchCardType } from "./search-card-type/SearchCardType";
 import { GLOBAL, SIGNET } from "~/core/const/sources.const";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { SearchCardTypeEnum } from "~/core/enum/search-card-type.enum";
@@ -32,6 +29,10 @@ import {
   useRemoveFavoriteMutation,
 } from "~/services/api/favorite.service";
 import { useActions } from "~/services/queries";
+import { SearchCardDescription } from "./search-card-description/SearchCardDescription";
+import { SearchCardDetails } from "./search-card-details/SearchCardDetails";
+import { SearchCardSubtitle } from "./search-card-subtitle/SearchCardSubtitle";
+import { SearchCardType } from "./search-card-type/SearchCardType";
 
 interface SearchResourceProps {
   publishedIsChecked?: boolean;
@@ -95,6 +96,18 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
     } else {
       console.error("Clipboard not available");
     }
+  };
+
+  const handleDuplicate = async () => {
+    if (!searchResource?.action?.url) return;
+
+    const response = await fetch(searchResource.action.url, { method: "POST" });
+
+    if (!response?.ok) {
+      return notify(t(searchResource.action.message.error), "danger");
+    }
+
+    notify(t(searchResource.action.message.success), "success");
   };
 
   const fav = async () => {
@@ -203,6 +216,9 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
     }
   }, [link]);
 
+  const isMoodle = () =>
+    searchResource.source === "fr.openent.mediacentre.source.Moodle";
+
   return (
     <Card
       isSelectable={
@@ -277,8 +293,25 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
                     <UnPinIcon className="med-pin" onClick={() => pin()} />
                   </Tooltip>
                 ))}
-              <Tooltip message={t("mediacentre.card.copy")} placement="top">
-                <ContentCopyIcon className="med-link" onClick={() => copy()} />
+              <Tooltip
+                message={
+                  isMoodle()
+                    ? t("mediacentre.card.duplication")
+                    : t("mediacentre.card.copy")
+                }
+                placement="top"
+              >
+                {isMoodle() ? (
+                  <ContentCopyRoundedIcon
+                    className="med-link"
+                    onClick={handleDuplicate}
+                  />
+                ) : (
+                  <InsertLinkRoundedIcon
+                    className="med-link"
+                    onClick={() => copy()}
+                  />
+                )}
               </Tooltip>
               {searchResource.favorite ? (
                 <Tooltip

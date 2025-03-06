@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-import "./Resource.scss";
 import { isActionAvailable } from "@edifice.io/client";
-import { AlertTypes, Card } from "@edifice.io/react";
-import { Tooltip } from "@edifice.io/react";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { AlertTypes, Card, Tooltip } from "@edifice.io/react";
+import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
+import InsertLinkRoundedIcon from "@mui/icons-material/InsertLinkRounded";
 import PinIcon from "@mui/icons-material/PushPin";
 import UnPinIcon from "@mui/icons-material/PushPinOutlined";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useTranslation } from "react-i18next";
+import "./Resource.scss";
 
-import { ResourceTitle } from "./resource-title/ResourceTitle";
 import { CardTypeEnum } from "~/core/enum/card-type.enum.ts";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { ExternalResource } from "~/model/ExternalResource.model";
@@ -28,6 +27,7 @@ import {
   useRemoveFavoriteMutation,
 } from "~/services/api/favorite.service";
 import { useActions } from "~/services/queries";
+import { ResourceTitle } from "./resource-title/ResourceTitle";
 
 interface ResourceProps {
   resource:
@@ -89,6 +89,18 @@ export const Resource: React.FC<ResourceProps> = ({
       console.error("Clipboard not available");
     }
     notify(t("mediacentre.notification.copy"), "success");
+  };
+
+  const handleDuplicate = async () => {
+    if (!resource?.action?.url) return;
+
+    const response = await fetch(resource.action.url, { method: "POST" });
+
+    if (!response?.ok) {
+      return notify(t(resource.action.message.error), "danger");
+    }
+
+    notify(t(resource.action.message.success), "success");
   };
 
   const fav = async () => {
@@ -160,6 +172,9 @@ export const Resource: React.FC<ResourceProps> = ({
 
   const isBookMark = () => type === CardTypeEnum.book_mark;
   const isFavorite = () => type === CardTypeEnum.favorites;
+
+  const isMoodle = () =>
+    resource.source === "fr.openent.mediacentre.source.Moodle";
 
   return (
     <Card
@@ -245,8 +260,25 @@ export const Resource: React.FC<ResourceProps> = ({
                 <UnPinIcon className="med-pin" onClick={() => pin()} />
               </Tooltip>
             ))}
-          <Tooltip message={t("mediacentre.card.copy")} placement="top">
-            <ContentCopyIcon className="med-link" onClick={() => copy()} />
+          <Tooltip
+            message={
+              isMoodle()
+                ? t("mediacentre.card.duplication")
+                : t("mediacentre.card.copy")
+            }
+            placement="top"
+          >
+            {isMoodle() ? (
+              <ContentCopyRoundedIcon
+                className="med-link"
+                onClick={handleDuplicate}
+              />
+            ) : (
+              <InsertLinkRoundedIcon
+                className="med-link"
+                onClick={() => copy()}
+              />
+            )}
           </Tooltip>
           {favorite ? (
             <Tooltip message={t("mediacentre.card.unfavorite")} placement="top">
