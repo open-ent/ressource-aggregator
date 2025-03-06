@@ -2,9 +2,9 @@ package fr.openent.mediacentre.service.impl;
 
 import fr.openent.mediacentre.core.constants.Field;
 import fr.openent.mediacentre.service.NotifyService;
+import fr.wseduc.webutils.I18n;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonArray;
-import org.entcore.common.http.request.JsonHttpServerRequest;
 import org.entcore.common.notification.TimelineHelper;
 
 import io.vertx.core.eventbus.EventBus;
@@ -14,6 +14,7 @@ import io.vertx.core.logging.LoggerFactory;
 import org.entcore.common.user.UserInfos;
 import org.entcore.common.user.UserUtils;
 
+import static fr.wseduc.webutils.http.Renders.getHost;
 import static fr.wseduc.webutils.http.Renders.unauthorized;
 
 public class DefaultNotifyService implements NotifyService {
@@ -47,11 +48,21 @@ public class DefaultNotifyService implements NotifyService {
     private void notifyNewResourceMain(HttpServerRequest request, JsonArray users, UserInfos user) {
         String resourceUri = "/mediacentre";
 
+        JsonObject pushNotif = new JsonObject()
+            .put(Field.TITLE, "push.notif.mediacentre.title")
+            .put(Field.BODY, I18n.getInstance()
+                .translate(
+                    "push.notif.mediacentre.newResource",
+                    getHost(request),
+                    I18n.acceptLanguage(request),
+                    user.getUsername()
+                ));
+
         JsonObject params = new JsonObject()
-                .put(Field.PARAM_URI, "/userbook/annuaire#" + user.getUserId())
-                .put(Field.USERNAME, user.getUsername())
-                .put(Field.PARAM_PUSH_NOTIF, new JsonObject().put(Field.TITLE, "push.notif.mediacentre.title").put(Field.BODY, "push.notif.mediacentre.newResource"))
-                .put(Field.PARAM_RESOURCE_URI, resourceUri);
+            .put(Field.PARAM_URI, "/userbook/annuaire#" + user.getUserId())
+            .put(Field.USERNAME, user.getUsername())
+            .put(Field.PARAM_PUSH_NOTIF, pushNotif)
+            .put(Field.PARAM_RESOURCE_URI, resourceUri);
 
         timelineHelper.notifyTimeline(request, "mediacentre.pinned_resource_notification", user, users.getList(), params);
     }

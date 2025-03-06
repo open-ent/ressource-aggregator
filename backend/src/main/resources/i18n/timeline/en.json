@@ -1,4 +1,6 @@
 {
+  "timeline-apptype-mediacentre" : "Médiacentre",
+  "timeline-notiftype-mediacentre-pinnedresourcenotification" : "Ajout d'une ressource épinglée",
   "mediacentre.pinned_resource_notification": "Ajout d'une ressource épinglée",
 
   "timeline.pinned.body1": "Vous avez une nouvelle ressource épinglée.",
