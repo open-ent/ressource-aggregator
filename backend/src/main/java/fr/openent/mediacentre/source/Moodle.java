@@ -1,5 +1,6 @@
 package fr.openent.mediacentre.source;
 
+import fr.openent.mediacentre.enums.Profile;
 import fr.openent.mediacentre.helper.ElasticSearchHelper;
 import fr.openent.mediacentre.helper.elasticsearch.ElasticSearch;
 import fr.wseduc.webutils.Either;
@@ -40,7 +41,9 @@ public class Moodle implements Source {
 
     @Override
     public void plainTextSearch(String query, UserInfos user, Handler<Either<JsonObject, JsonObject>> handler) {
-        ElasticSearchHelper.plainTextSearch(Moodle.class, query, user.getUserId(), null, false, ElasticSearchHelper.searchHandler(Moodle.class, actionProvider, handler));
+        String userProfile = user.getType();
+        if(userProfile.equals(Profile.PERSONNEL.getName()) || userProfile.equals(Profile.TEACHER.getName()))
+                ElasticSearchHelper.plainTextSearch(Moodle.class, query, user.getUserId(), null, false, ElasticSearchHelper.searchHandler(Moodle.class, actionProvider, handler));
     }
 
     @Override
