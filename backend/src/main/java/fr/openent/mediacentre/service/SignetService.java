@@ -43,9 +43,8 @@ public interface SignetService {
      * Update a specific signet
      * @param signetId signet identifier
      * @param signet JsonObject data
-     * @param handler function handler returning JsonObject data
      */
-    void update(String signetId, JsonObject signet, Handler<Either<String, JsonObject>> handler);
+    Future<JsonObject> update(String signetId, JsonObject signet);
 
     /**
      * Update a specific signet collab

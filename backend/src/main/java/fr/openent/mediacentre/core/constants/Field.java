@@ -91,6 +91,7 @@ public class Field {
     public static final String RESOURCEID = "resourceId";
     public static final String DISCIPLINE_LABEL = "discipline_label";
     public static final String LEVEL_LABEL = "level_label";
+    public static final String LABEL = "label";
     public static final String KEY_WORDS = "key_words";
     public static final String IMAGEURL = "imageurl";
     public static final String OWNER_NAME = "owner_name";

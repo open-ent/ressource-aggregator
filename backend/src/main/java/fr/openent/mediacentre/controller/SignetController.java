@@ -1,6 +1,7 @@
 package fr.openent.mediacentre.controller;
 
 import fr.openent.mediacentre.Mediacentre;
+import fr.openent.mediacentre.core.constants.Field;
 import fr.openent.mediacentre.helper.APIHelper;
 import fr.openent.mediacentre.helper.IModelHelper;
 import fr.openent.mediacentre.helper.SignetHelper;
@@ -151,9 +152,15 @@ public class SignetController extends ControllerHelper {
     @ResourceFilter(ShareAndOwner.class)
     @SecuredAction(value = Mediacentre.MANAGER_RESOURCE_RIGHT, type = ActionType.RESOURCE)
     public void update(HttpServerRequest request) {
-        String signetId = request.getParam("id");
+        String signetId = request.getParam(Field.ID);
         RequestUtils.bodyToJson(request, signet -> {
-            signetService.update(signetId, signet, defaultResponseHandler(request));
+            signetService.update(signetId, signet)
+                .compose(updatedSignet -> favoriteService.update(signetId, signet))
+                .onSuccess(updatedFavorite -> renderJson(request, signet))
+                .onFailure(err -> {
+                    log.error("[Mediacentre@SignetController::update] Failed to update favorite : " + err.getMessage());
+                    badRequest(request);
+                });
         });
     }
 

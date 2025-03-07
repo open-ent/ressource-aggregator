@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static fr.openent.mediacentre.core.constants.Field.*;
+
 public class DefaultSignetService implements SignetService {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultSignetService.class);
@@ -169,11 +171,12 @@ public class DefaultSignetService implements SignetService {
     }
 
     @Override
-    public void update(String signetId, JsonObject signet, Handler<Either<String, JsonObject>> handler) {
+    public Future<JsonObject> update(String signetId, JsonObject signet) {
+        Promise<JsonObject> promise = Promise.promise();
         JsonArray levelArray = new JsonArray();
-        if(signet.containsKey("levels")) {
-            for (int i = 0; i < signet.getJsonArray("levels").size(); i++) {
-                levelArray.add((signet.getJsonArray("levels").getJsonObject(i).getString("label")));
+        if(signet.containsKey(LEVELS)) {
+            for (int i = 0; i < signet.getJsonArray(LEVELS).size(); i++) {
+                levelArray.add((signet.getJsonArray(LEVELS).getJsonObject(i).getString(LABEL)));
             }
         }
         if(levelArray.isEmpty()) {
@@ -181,9 +184,9 @@ public class DefaultSignetService implements SignetService {
         }
 
         JsonArray disciplineArray = new JsonArray();
-        if(signet.containsKey("disciplines")) {
-            for (int i = 0; i < signet.getJsonArray("disciplines").size(); i++) {
-                disciplineArray.add((signet.getJsonArray("disciplines").getJsonObject(i).getString("label")));
+        if(signet.containsKey(DISCIPLINES)) {
+            for (int i = 0; i < signet.getJsonArray(DISCIPLINES).size(); i++) {
+                disciplineArray.add((signet.getJsonArray(DISCIPLINES).getJsonObject(i).getString(LABEL)));
             }
         }
         if(disciplineArray.isEmpty()) {
@@ -191,9 +194,9 @@ public class DefaultSignetService implements SignetService {
         }
 
         JsonArray plainTextArray = new JsonArray();
-        if(signet.containsKey("plain_text")) {
-            for (int i = 0; i < signet.getJsonArray("plain_text").size(); i++) {
-                plainTextArray.add((signet.getJsonArray("plain_text").getJsonObject(i).getString("label")));
+        if(signet.containsKey(PLAIN_TEXT)) {
+            for (int i = 0; i < signet.getJsonArray(PLAIN_TEXT).size(); i++) {
+                plainTextArray.add((signet.getJsonArray(PLAIN_TEXT).getJsonObject(i).getString(LABEL)));
             }
         }
         if(plainTextArray.isEmpty()) {
@@ -219,7 +222,10 @@ public class DefaultSignetService implements SignetService {
                 .addAll(plainTextArray)
                 .add(signetId);
 
-        Sql.getInstance().prepared(query, params, SqlResult.validUniqueResultHandler(handler));
+        String errorMessage = "[Mediacentre@DefaultSignetService::update] Failed to update signet : ";
+        Sql.getInstance().prepared(query, params, SqlResult.validUniqueResultHandler(FutureHelper.handlerJsonObject(promise, errorMessage)));
+
+        return promise.future();
     }
 
     public void updateCollab(String signetId, JsonObject signet, Handler<Either<String, JsonObject>> handler) {

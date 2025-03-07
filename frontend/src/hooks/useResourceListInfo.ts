@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { GAR, MOODLE, SIGNET, GLOBAL } from "~/core/const/sources.const";
+import { GAR, GLOBAL, MOODLE, SIGNET } from "~/core/const/sources.const";
+import { STRING } from "~/core/const/typescript.const";
 import { ExternalResource } from "~/model/ExternalResource.model";
 import { GlobalResource } from "~/model/GlobalResource.model";
 import { Moodle } from "~/model/Moodle.model";
@@ -135,10 +136,13 @@ export const useResourceListInfo = (resources: Resource[] | null) => {
     setResourcesInfosMap({
       // sort disciplines, levels and types by custom string sort
       disciplines: result.disciplines
-        .filter((discipline) => discipline.trim() !== "")
+        .filter(
+          (discipline) =>
+            typeof discipline === STRING && discipline.trim() !== "",
+        )
         .sort(customStringSort),
       levels: result.levels
-        .filter((level) => level.trim() !== "")
+        .filter((level) => typeof level === STRING && level.trim() !== "")
         .sort(customStringSort),
       types: result.types
         .filter((type) => type.trim() !== "")

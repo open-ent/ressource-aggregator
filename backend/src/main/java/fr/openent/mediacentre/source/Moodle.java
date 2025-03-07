@@ -8,12 +8,16 @@ import io.vertx.core.Handler;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import org.entcore.common.user.UserInfos;
 
 import java.util.function.UnaryOperator;
+
+import static fr.openent.mediacentre.core.constants.Field.RESOURCES;
+import static fr.openent.mediacentre.core.constants.Field.SOURCE;
 
 public class Moodle implements Source {
 
@@ -44,6 +48,12 @@ public class Moodle implements Source {
         String userProfile = user.getType();
         if(userProfile.equals(Profile.PERSONNEL.getName()) || userProfile.equals(Profile.TEACHER.getName()))
                 ElasticSearchHelper.plainTextSearch(Moodle.class, query, user.getUserId(), null, false, ElasticSearchHelper.searchHandler(Moodle.class, actionProvider, handler));
+        else {
+            JsonObject response = new JsonObject()
+                    .put(SOURCE, Moodle.class.getName())
+                    .put(RESOURCES, new JsonArray());
+            handler.handle(new Either.Right<>(response));
+        }
     }
 
     @Override

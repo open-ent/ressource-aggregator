@@ -24,7 +24,7 @@ export const signetsApi = emptySplitApi.injectEndpoints({
         method: "PUT",
         body: payload,
       }),
-      invalidatesTags: ["SignetsChanged"],
+      invalidatesTags: ["SignetsChanged", "FavoritesChanged"],
     }),
     deleteSignet: builder.mutation({
       query: ({ idSignet }) => ({

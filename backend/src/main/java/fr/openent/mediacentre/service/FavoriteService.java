@@ -34,6 +34,13 @@ public interface FavoriteService {
     Future<JsonObject> create(JsonObject favorite);
 
     /**
+     * Update favorite
+     * @param favorite  body favorite
+     */
+    Future<JsonObject> update(String id, JsonObject favorite);
+
+
+    /**
      * Get resource with favorite
      * @param source    source parameter
      * @param userId    User identifier
