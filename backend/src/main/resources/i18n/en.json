@@ -293,5 +293,10 @@
   "mediacentre.modal.property.view.any.levels": "Aucun niveau n'a été renseigné.",
   "mediacentre.modal.property.view.any.disciplines": "Aucune discipline n'a été renseignée.",
   "mediacentre.new_pinned_resource_notification": "Ajout d'une ressource épinglée",
-  "mediacentre.notification.pin.wait": "L'épingle est en cours de création..."
+  "mediacentre.notification.pin.wait": "L'épingle est en cours de création...",
+
+  "mediacentre.error.page.oops": "Oups !",
+  "mediacentre.error.page.not.found": "La page n’existe pas.",
+  "mediacentre.error.page.an.error.occurred": "Une erreur est survenue.",
+  "mediacentre.error.page.back.to.home": "Retour à l'accueil"
 }

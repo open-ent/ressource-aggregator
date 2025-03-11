@@ -4,11 +4,9 @@ import { Alert } from "@edifice.io/react";
 import StarIcon from "@mui/icons-material/Star";
 import { useTranslation } from "react-i18next";
 
-import { FilterLayout } from "../../components/filter-layout/FilterLayout";
 import { EmptyState } from "~/components/empty-state/EmptyState";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
 import { MainLayout } from "~/components/main-layout/MainLayout";
-import "~/styles/page/search.scss";
 import { CreatePins } from "~/components/modals/create-pins/CreatePins";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { useFavorite } from "~/hooks/useFavorite";
@@ -16,7 +14,9 @@ import { useResourceListInfo } from "~/hooks/useResourceListInfo";
 import { Resource } from "~/model/Resource.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
+import "~/styles/page/search.scss";
 import { sortByAlphabet } from "~/utils/sortResources.util";
+import { FilterLayout } from "../../components/filter-layout/FilterLayout";
 
 export const FavoritePage: React.FC = () => {
   const { t } = useTranslation("mediacentre");

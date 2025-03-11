@@ -1,14 +1,14 @@
 import { createHashRouter } from "react-router-dom";
 
 import Root from "~/app/root";
-import ErrorPage from "~/components/page-error";
+import { PageError } from "~/components/page-error";
 import "~/styles/page/home.scss";
 
 const routes = [
   {
     path: "/",
     element: <Root />,
-    errorElement: <ErrorPage />,
+    errorElement: <PageError />,
     children: [
       {
         index: true,
@@ -24,7 +24,7 @@ const routes = [
   {
     path: "/search",
     element: <Root />,
-    errorElement: <ErrorPage />,
+    errorElement: <PageError />,
     children: [
       {
         index: true,
@@ -40,7 +40,7 @@ const routes = [
   {
     path: "/favorites",
     element: <Root />,
-    errorElement: <ErrorPage />,
+    errorElement: <PageError />,
     children: [
       {
         index: true,
@@ -56,7 +56,7 @@ const routes = [
   {
     path: "/textbook",
     element: <Root />,
-    errorElement: <ErrorPage />,
+    errorElement: <PageError />,
     children: [
       {
         index: true,
@@ -72,7 +72,7 @@ const routes = [
   {
     path: "/resources",
     element: <Root />,
-    errorElement: <ErrorPage />,
+    errorElement: <PageError />,
     children: [
       {
         index: true,
@@ -88,7 +88,7 @@ const routes = [
   {
     path: "/signets",
     element: <Root />,
-    errorElement: <ErrorPage />,
+    errorElement: <PageError />,
     children: [
       {
         index: true,
@@ -100,6 +100,10 @@ const routes = [
         },
       },
     ],
+  },
+  {
+    path: "*",
+    element: <PageError isNotFoundError />,
   },
 ];
 
