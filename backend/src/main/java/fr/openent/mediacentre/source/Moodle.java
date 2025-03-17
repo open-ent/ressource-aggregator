@@ -45,7 +45,7 @@ public class Moodle implements Source {
 
     @Override
     public void plainTextSearch(String query, UserInfos user, Handler<Either<JsonObject, JsonObject>> handler) {
-        String userProfile = user.getType();
+        String userProfile = user.getType().toUpperCase();
         if(userProfile.equals(Profile.PERSONNEL.getName()) || userProfile.equals(Profile.TEACHER.getName()))
                 ElasticSearchHelper.plainTextSearch(Moodle.class, query, user.getUserId(), null, false, ElasticSearchHelper.searchHandler(Moodle.class, actionProvider, handler));
         else {
