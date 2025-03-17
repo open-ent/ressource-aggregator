@@ -1,12 +1,6 @@
-import { useTheme } from "@cgi-learning-hub/ui";
 import { SVGComponent } from "../types";
 
 export const WarningSVG: SVGComponent = () => {
-  const {
-    palette: {
-      error: { main: mainError },
-    },
-  } = useTheme();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +78,7 @@ export const WarningSVG: SVGComponent = () => {
         fill="#e6e6e6"
       />
       <g>
-        <circle cx="218.47958" cy="311.43145" r="73" fill={mainError} />
+        <circle cx="218.47958" cy="311.43145" r="73" fill="#EB002B" />
         <g>
           <circle cx="218.49274" cy="349.47878" r="6.70264" fill="#fff" />
           <path

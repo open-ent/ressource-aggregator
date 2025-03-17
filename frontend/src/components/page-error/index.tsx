@@ -1,5 +1,5 @@
-import { Box, Button, Stack, Typography } from "@cgi-learning-hub/ui";
-import { Layout } from "@edifice.io/react";
+import { Box, Stack, Typography } from "@cgi-learning-hub/ui";
+import { Button, Layout } from "@edifice.io/react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useRouteError } from "react-router-dom";
@@ -32,7 +32,7 @@ export const PageError: FC<PageErrorProps> = ({ isNotFoundError = false }) => {
         <Box width="25rem">
           <WarningSVG />
         </Box>
-        <Typography variant="body1" color="error" fontSize="2.4rem">
+        <Typography variant="body1" color="#EB002B" fontSize="2.4rem">
           {t("mediacentre.error.page.oops")}
         </Typography>
         <Typography variant="body2" fontSize="1.6rem">
@@ -40,11 +40,7 @@ export const PageError: FC<PageErrorProps> = ({ isNotFoundError = false }) => {
             ? t("mediacentre.error.page.not.found")
             : t("mediacentre.error.page.an.error.occurred")}
         </Typography>
-        <Button
-          variant="contained"
-          sx={{ fontSize: "1.6rem" }}
-          onClick={handleGoToHome}
-        >
+        <Button onClick={handleGoToHome}>
           {t("mediacentre.error.page.back.to.home")}
         </Button>
       </Stack>
