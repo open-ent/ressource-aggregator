@@ -29,6 +29,7 @@
     ],
     "wsPort": 3000,
     "highlightsPins": ${mediacentreHighlightsPins},
+    "textHighlightsPins": ${mediacentreTextHighlightsPins},
     "elasticsearch": true,
     "elasticsearchConfig" : {
         "server-uri": "${elasticServerURI}",

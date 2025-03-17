@@ -46,6 +46,7 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
     idSelectedStructure === pin.structure_owner;
   const { t } = useTranslation("mediacentre");
   const [highlights, setHighlights] = useState<boolean | undefined>(false);
+  const [textHighlight, setTextHighlight] = useState<string>("");
 
   const copy = () => {
     if (navigator?.clipboard) {
@@ -76,6 +77,12 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
   useEffect(() => {
     if (typeof window !== fields.UNDEFINED && window?.config) {
       setHighlights(window?.config?.highlightsPins || false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window?.config) {
+      setTextHighlight(window?.config?.textHighlightsPins ?? "");
     }
   }, []);
 
@@ -170,9 +177,7 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
           {(highlights ?? false) && pin.is_parent && (
             <>
               <AutoAwesomeIcon />
-              <span className="med-text-footer">
-                {t("mediacentre.card.offered.by.the.region")}
-              </span>
+              <span className="med-text-footer">{textHighlight}</span>
             </>
           )}
         </div>

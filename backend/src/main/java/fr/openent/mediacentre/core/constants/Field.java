@@ -117,6 +117,7 @@ public class Field {
     public static final String PARAM_URI = "uri";
     public static final String BODY = "body";
     public static final String HIGHLIGHTSPINS = "highlightsPins";
+    public static final String TEXT_HIGHLIGHTS_PINS = "textHighlightsPins";
     public static final String IS_PARENT = "is_parent";
     public static final String MEMBER_ID = "member_id";
     public static final String STRUCTURE_ID = "structureId";

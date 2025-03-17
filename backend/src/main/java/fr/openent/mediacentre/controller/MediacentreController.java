@@ -66,7 +66,8 @@ public class MediacentreController extends ControllerHelper {
                 .put("mode", config.getString("mode"))
                 .put("sources", sourceList)
                 .put(Field.MEDIACENTREUPDATEFREQUENCY, config.getInteger(Field.MEDIACENTREUPDATEFREQUENCY, 60000))
-                .put(Field.HIGHLIGHTSPINS, config.getBoolean(Field.HIGHLIGHTSPINS, false));
+                .put(Field.HIGHLIGHTSPINS, config.getBoolean(Field.HIGHLIGHTSPINS, false))
+                .put(Field.TEXT_HIGHLIGHTS_PINS, config.getString(TEXT_HIGHLIGHTS_PINS, ""));
         renderView(request, params, "index.html", null);
         eventStore.createAndStoreEvent(MediacentreEvent.ACCESS.name(), request);
     }
