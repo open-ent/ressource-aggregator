@@ -10,11 +10,11 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useTranslation } from "react-i18next";
 
-import { fields } from "~/core/const/fields";
 import { GLOBAL, SIGNET } from "~/core/const/sources.const";
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { Pin } from "~/model/Pin.model";
 import { useAlertProvider } from "~/providers/AlertProvider";
+import { useGlobal } from "~/providers/GlobalProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
 import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvider";
 import {
@@ -35,6 +35,7 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
 }) => {
   const [newLink, setNewLink] = useState<string>("");
   const { notify } = useAlertProvider();
+  const { isPinHightlight, textPinHightlight } = useGlobal();
   const { setModalResource, openSpecificModal } = useModalProvider();
   const [addFavorite] = useAddFavoriteMutation();
   const [removeFavorite] = useRemoveFavoriteMutation();
@@ -45,8 +46,6 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
     isActionAvailable("pins", actions) &&
     idSelectedStructure === pin.structure_owner;
   const { t } = useTranslation("mediacentre");
-  const [highlights, setHighlights] = useState<boolean | undefined>(false);
-  const [textHighlight, setTextHighlight] = useState<string>("");
 
   const copy = () => {
     if (navigator?.clipboard) {
@@ -73,18 +72,6 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
       setNewLink(link);
     }
   }, [link]);
-
-  useEffect(() => {
-    if (typeof window !== fields.UNDEFINED && window?.config) {
-      setHighlights(window?.config?.highlightsPins || false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && window?.config) {
-      setTextHighlight(window?.config?.textHighlightsPins ?? "");
-    }
-  }, []);
 
   const addFavoriteResource = async () => {
     try {
@@ -174,10 +161,10 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
       </a>
       <Card.Footer>
         <div className="med-left-footer">
-          {(highlights ?? false) && pin.is_parent && (
+          {isPinHightlight && !!pin.is_parent && (
             <>
               <AutoAwesomeIcon />
-              <span className="med-text-footer">{textHighlight}</span>
+              <span className="med-text-footer">{textPinHightlight}</span>
             </>
           )}
         </div>
