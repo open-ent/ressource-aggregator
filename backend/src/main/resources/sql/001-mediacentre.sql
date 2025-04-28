@@ -146,4 +146,12 @@ INSERT INTO mediacentre.levels VALUES (11, 'voie BTM');
 INSERT INTO mediacentre.levels VALUES (12, 'voie CAP');
 INSERT INTO mediacentre.levels VALUES (13, 'voie FC');
 INSERT INTO mediacentre.levels VALUES (14, 'voie MC');
-
+INSERT INTO mediacentre.levels VALUES (15, '3EME');
+INSERT INTO mediacentre.levels VALUES (16, '4EME');
+INSERT INTO mediacentre.levels VALUES (17, '5EME');
+INSERT INTO mediacentre.levels VALUES (18, '6EME');
+INSERT INTO mediacentre.levels VALUES (19, 'CM2');
+INSERT INTO mediacentre.levels VALUES (20, 'CM1');
+INSERT INTO mediacentre.levels VALUES (21, 'CE2');
+INSERT INTO mediacentre.levels VALUES (22, 'CE1');
+INSERT INTO mediacentre.levels VALUES (23, 'CP');
