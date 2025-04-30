@@ -18,12 +18,16 @@ import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import org.entcore.common.user.UserInfos;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static fr.wseduc.webutils.Utils.handlerToAsyncHandler;
+import static fr.wseduc.webutils.Utils.isEmpty;
 
 public class GAR implements Source {
     private final FavoriteService favoriteService = new DefaultFavoriteService();
@@ -49,11 +53,12 @@ public class GAR implements Source {
             if (event.failed()) {
                 handler.handle(new Either.Left<>(event.cause().getMessage()));
             }
-            else {                
+            else {
+                final String domain = (String) user.getOtherProperties().get("domain");
                 JsonArray formattedResources = getRessourcesPromise.future().result().stream()
                         .filter(JsonObject.class::isInstance)
                         .map(JsonObject.class::cast)
-                        .map(this::format)
+                        .map(resource -> format(domain, resource))
                         .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
 
                 handler.handle(new Either.Right<>(formattedResources));
@@ -383,6 +388,11 @@ public class GAR implements Source {
 
     @Override
     public JsonObject format(JsonObject resource) {
+        return format("", resource);
+    }
+
+    @Override
+    public JsonObject format(String domain, JsonObject resource) {
         String pattern = queryPattern(config.getJsonArray("textbook_typology", new JsonArray()));
         Pattern regexp = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
 
@@ -394,7 +404,7 @@ public class GAR implements Source {
             .put("disciplines", getNames("domaineEnseignement", resource))
             .put("levels", getNames("niveauEducatif", resource))
             .put("document_types", getNames("typologieDocument", resource))
-            .put("link", resource.getString("urlAccesRessource"))
+            .put("link", proxifyLink(domain, resource.getString("urlAccesRessource"), resource.getJsonObject("typePresentation")))
             .put("source", GAR.class.getName())
             .put("plain_text", createPlainText(resource))
             .put("id", resource.getString("idRessource"))
@@ -412,6 +422,18 @@ public class GAR implements Source {
         return formattedResource;
     }
 
+    private String proxifyLink(String domain, String link, JsonObject typePresentation) {
+        if (typePresentation == null || isEmpty(typePresentation.getString("code"))) {
+            return link;
+        }
+        try {
+            return (domain != null ? domain : "") + Field.RESOURCE_PROXY_PREFIX + URLEncoder.encode(link, StandardCharsets.UTF_8.name()) +
+                    Field.RESOURCE_PROXY_SERVICE + typePresentation.getString("code");
+        } catch (UnsupportedEncodingException e) {
+            log.error("Error when encode link.", e);
+            return link;
+        }
+    }
 
     private String createPlainText(JsonObject resource) {
         StringBuilder plain = new StringBuilder();
@@ -459,6 +481,7 @@ public class GAR implements Source {
     public void initTextBooks(UserInfos user, List<String> idStructures, Handler<Either<String, JsonObject>> handler) {
         List<Future<JsonArray>> futures = new ArrayList<>();
         List<String> structures = idStructures == null || idStructures.isEmpty() ? user.getStructures() : idStructures;
+        final String domain = (String) user.getOtherProperties().get("domain");
         for (String structure : structures) {
             Promise<JsonArray> promise = Promise.promise();
             futures.add(promise.future());
@@ -483,7 +506,7 @@ public class GAR implements Source {
                 JsonObject type = resource.getJsonObject("typePresentation", new JsonObject());
                 if (type.containsKey("code") && regexp.matcher(type.getString("code")).find() && !list.contains(resource.getString("idRessource"))) {
                     list.add(resource.getString("idRessource"));
-                    textBooks.add(format(resource));
+                    textBooks.add(format(domain, resource));
                 }
             }
             handler.handle(new Either.Right<>(new JsonObject().put(Field.TEXTBOOKS, textBooks)));

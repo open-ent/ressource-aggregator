@@ -31,13 +31,14 @@ import java.util.Map;
 import java.util.Optional;
 
 import static fr.openent.mediacentre.core.constants.Field.*;
+import static fr.wseduc.webutils.Utils.isNotEmpty;
 
 public class MediacentreController extends ControllerHelper {
 
     private final List<Source> sources;
     private final JsonObject config;
     private EventStore eventStore;
-    private enum MediacentreEvent { ACCESS }
+    private enum MediacentreEvent { ACCESS, GAR_ACCESS }
     private final TextBookHelper textBookHelper = new TextBookHelper();
 
     public MediacentreController(List<Source> sources, JsonObject config) {
@@ -77,6 +78,7 @@ public class MediacentreController extends ControllerHelper {
     @SecuredAction(value = "", type = ActionType.AUTHENTICATED)
     public void openResource(HttpServerRequest request) {
         String targetUrl = request.getParam(Field.URL);
+        String service = request.getParam("service");
 
         if (targetUrl == null || targetUrl.isEmpty()) {
             log.error("[Mediacentre@openResource] No URL where redirect to.");
@@ -88,6 +90,20 @@ public class MediacentreController extends ControllerHelper {
         URL url;
         try {
             String decodedURL = URLDecoder.decode(targetUrl, StandardCharsets.UTF_8.name());
+
+            // hack for double encoding (+prefix) in mobile app case
+            if (decodedURL.startsWith(Field.RESOURCE_PROXY_PREFIX)) {
+                final String mobileDecodedURL = decodedURL.substring(Field.RESOURCE_PROXY_PREFIX.length());
+                final int serviceParamIdx = mobileDecodedURL.lastIndexOf(Field.RESOURCE_PROXY_SERVICE);
+                if (serviceParamIdx > 0) {
+                    service = mobileDecodedURL.substring(serviceParamIdx + Field.RESOURCE_PROXY_SERVICE.length()).split("&")[0];
+                    decodedURL = mobileDecodedURL.substring(0, serviceParamIdx);
+                } else {
+                    decodedURL = mobileDecodedURL;
+                }
+                decodedURL = URLDecoder.decode(decodedURL, StandardCharsets.UTF_8.name());
+            }
+
             url = new URL(decodedURL);
         }
         catch (UnsupportedEncodingException | MalformedURLException e) {
@@ -112,9 +128,13 @@ public class MediacentreController extends ControllerHelper {
             return;
         }
 
+        if (isNotEmpty(service)) {
+            eventStore.createAndStoreEvent(MediacentreEvent.GAR_ACCESS.name(), request, new JsonObject().put("service", service));
+        }
+
         // Redirect if everything is ok
         request.response().setStatusCode(302);
-        request.response().putHeader("Location", targetUrl);
+        request.response().putHeader("Location", url.toString());
         request.response().putHeader("Access-Control-Allow-Origin", getScheme(request) + "://" + getHost(request));
         request.response().end();
     }

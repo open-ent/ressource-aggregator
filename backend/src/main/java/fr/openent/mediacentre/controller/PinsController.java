@@ -47,7 +47,10 @@ public class PinsController extends ControllerHelper {
     @ResourceFilter(ViewRight.class)
     @SecuredAction(value="", type=ActionType.RESOURCE)
     public void getResources(HttpServerRequest request) {
-        UserUtils.getUserInfos(eb, request, user -> pinsService.list(request.getParam(Field.IDSTRUCTURE))
+        UserUtils.getUserInfos(eb, request, user -> {
+            // set domain in user properties to get it when format GAR response
+            user.getOtherProperties().put("domain", getScheme(request) + "://" + getHost(request));
+            pinsService.list(request.getParam(Field.IDSTRUCTURE))
             .compose(resources -> pinsService.getData(resources, user, sources))
             .compose(resources -> pinsService.getStructureIsParent(resources, user))
             .onSuccess(resources -> renderJson(request, resources))
@@ -56,8 +59,8 @@ public class PinsController extends ControllerHelper {
                         this.getClass().getSimpleName(), error.getMessage());
                 log.error(message);
                 renderError(request);
-            })
-        );
+            });
+        });
     }
 
     @Post("/structures/:idStructure/pins")

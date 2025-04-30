@@ -124,5 +124,7 @@ public class Field {
     public static final String IS_TARGET_STRUCTURE = "isTargetStructure";
     public static final String STRUCTURE = "structure";
     public static final String WORKFLOW_ACTION_NAME = "workflowActionName";
+    public static final String RESOURCE_PROXY_PREFIX = "/mediacentre/resource/open?url=";
+    public static final String RESOURCE_PROXY_SERVICE = "&service=";
 }
 

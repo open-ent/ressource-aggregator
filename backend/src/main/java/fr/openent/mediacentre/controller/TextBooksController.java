@@ -35,6 +35,8 @@ public class TextBooksController extends ControllerHelper {
         final List<String> listIdStructures = listIdStructuresParam != null ? Arrays.asList(listIdStructuresParam.split(",")) : new ArrayList<>();
 
         UserUtils.getUserInfos(eb, request, user -> {
+            // set domain in user properties to get it when format GAR response
+            user.getOtherProperties().put("domain", getScheme(request) + "://" + getHost(request));
             textBookHelper.retrieveTextBooks("get", user, sources, listIdStructures, new APIHelper(request));
         });
     }
@@ -47,6 +49,8 @@ public class TextBooksController extends ControllerHelper {
         final List<String> listIdStructures = listIdStructuresParam != null ? Arrays.asList(listIdStructuresParam.split(",")) : new ArrayList<>();
 
         UserUtils.getUserInfos(eb, request, user -> {
+            // set domain in user properties to get it when format GAR response
+            user.getOtherProperties().put("domain", getScheme(request) + "://" + getHost(request));
             textBookHelper.refreshTextBooks("refresh", sources, user, listIdStructures, new APIHelper(request));
         });
     }

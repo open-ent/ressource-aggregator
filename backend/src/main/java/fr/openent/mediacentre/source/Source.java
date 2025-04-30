@@ -44,13 +44,24 @@ public interface Source {
      */
     void advancedSearch(JsonObject query, UserInfos user, Handler<Either<JsonObject, JsonObject>> handler);
 
-    /**
+     /**
      * Format resource
      *
      * @param resource resource to format
      * @return formatted resource
      */
     JsonObject format(JsonObject resource);
+
+    /**
+     * Format resource
+     *
+     * @param domain url scheme + domain
+     * @param resource resource to format
+     * @return formatted resource
+     */
+    default JsonObject format(String domain, JsonObject resource) {
+        return format(resource);
+    }
 
     /**
      * Amass resources.

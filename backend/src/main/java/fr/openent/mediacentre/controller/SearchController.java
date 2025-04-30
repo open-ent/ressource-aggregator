@@ -69,6 +69,9 @@ public class SearchController extends ControllerHelper {
                 return;
             }
 
+            // set domain in user properties to get it when format GAR response
+            user.getOtherProperties().put("domain", getScheme(request) + "://" + getHost(request));
+
             String state = jsondata.getString(Field.STATE);
             JsonArray expectedSources = new JsonArray(jsondata.getJsonArray(Field.SOURCES, new JsonArray()).toString());
             // filter expectedSources with initialised sources
