@@ -298,5 +298,8 @@
   "mediacentre.error.page.oops": "Oups !",
   "mediacentre.error.page.not.found": "La page n’existe pas.",
   "mediacentre.error.page.an.error.occurred": "Une erreur est survenue.",
-  "mediacentre.error.page.back.to.home": "Retour à l'accueil"
+  "mediacentre.error.page.back.to.home": "Retour à l'accueil",
+
+  "push.notif.mediacentre.title": "Médiacentre",
+  "push.notif.mediacentre.newResource": "Vous avez une nouvelle ressource épinglée."
 }
