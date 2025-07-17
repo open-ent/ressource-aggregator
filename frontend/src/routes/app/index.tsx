@@ -50,7 +50,8 @@ export const App = () => {
   const { favorites, setFavorites } = useFavorite();
   const { homeSignets, setHomeSignets } = useSignet();
   const { textbooks, setTextbooks } = useTextbook(idSelectedStructure);
-  const { externalResources, setExternalResources } = useExternalResource();
+  const { externalResources, setExternalResources } =
+    useExternalResource(idSelectedStructure);
   const { globals } = useGlobal();
   const [pinsEmpty, setPinsEmpty] = useState<boolean>(true);
   const [externalResourcesData, setExternalResourcesData] = useState<

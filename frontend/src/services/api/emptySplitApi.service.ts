@@ -23,6 +23,6 @@ const customBaseQuery: BaseQueryFn<
 
 export const emptySplitApi = createApi({
   baseQuery: customBaseQuery,
-  tagTypes: ["PinsChanged", "FavoritesChanged", "SignetsChanged"],
+  tagTypes: ["PinsChanged", "FavoritesChanged", "SignetsChanged", "Search"],
   endpoints: () => ({}),
 });

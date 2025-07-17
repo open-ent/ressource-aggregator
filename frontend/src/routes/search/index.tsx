@@ -18,6 +18,7 @@ import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
 import "~/styles/page/search.scss";
 import { sortByAlphabet } from "~/utils/sortResources.util";
+import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvider";
 
 export const Search: React.FC = () => {
   const { t } = useTranslation("mediacentre");
@@ -27,6 +28,7 @@ export const Search: React.FC = () => {
   const location = useLocation();
   const searchBody = location.state?.searchBody;
   const [searchParams] = useSearchParams();
+  const { idSelectedStructure } = useSelectedStructureProvider();
   const searchQuery =
     searchParams.get("query") ?? searchBody?.data?.query ?? ".*"; // .* for all resources
 
@@ -45,7 +47,10 @@ export const Search: React.FC = () => {
     };
   };
 
-  const { allResources } = useSearch(createSearchBody(searchQuery));
+  const { allResources } = useSearch(
+    createSearchBody(searchQuery),
+    idSelectedStructure,
+  );
   const [allResourcesDisplayed, setAllResourcesDisplayed] = useState<
     Resource[] | null
   >(null); // all resources after the filters

@@ -17,15 +17,17 @@ import { useAlertProvider } from "~/providers/AlertProvider";
 import { useModalProvider } from "~/providers/ModalsProvider";
 import "~/styles/page/search.scss";
 import { sortByAlphabet } from "~/utils/sortResources.util";
+import { useSelectedStructureProvider } from "~/providers/SelectedStructureProvider";
 
 export const ResourcePage: React.FC = () => {
   const { user } = useUser();
   const { t } = useTranslation("mediacentre");
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openModal } = useModalProvider();
+  const { idSelectedStructure } = useSelectedStructureProvider();
 
   const { globals } = useGlobal();
-  const { externalResources } = useExternalResource();
+  const { externalResources } = useExternalResource(idSelectedStructure);
 
   const [externalResourcesData, setExternalResourcesData] = useState<
     Resource[] | null

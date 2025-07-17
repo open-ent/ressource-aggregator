@@ -7,7 +7,7 @@ import { Resource } from "~/model/Resource.model";
 import { SearchResultCategory } from "~/model/SearchResultCategory";
 import { usePinProvider } from "~/providers/PinProvider";
 
-export const useExternalResource = () => {
+export const useExternalResource = (idSelectedStructure: string) => {
   const { pins } = usePinProvider();
   const query = {
     state: "PLAIN_TEXT",
@@ -18,7 +18,10 @@ export const useExternalResource = () => {
     sources: ["fr.openent.mediacentre.source.GAR"],
   };
 
-  const { data, error, isLoading } = useSearchQuery({ jsondata: query });
+  const { data, error, isLoading } = useSearchQuery({
+    jsondata: query,
+    idStructure: idSelectedStructure,
+  });
 
   const [externalResources, setExternalResources] = useState<
     ExternalResource[] | null
