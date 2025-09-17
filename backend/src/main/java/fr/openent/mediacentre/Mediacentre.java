@@ -5,6 +5,7 @@ import fr.openent.mediacentre.helper.elasticsearch.ElasticSearch;
 import fr.openent.mediacentre.source.Source;
 import fr.openent.mediacentre.tasks.AmassTask;
 import fr.wseduc.cron.CronTrigger;
+import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonArray;
@@ -51,7 +52,11 @@ public class Mediacentre extends BaseServer {
 
     @Override
     public void start(Promise<Void> startPromise) throws Exception {
-        super.start(startPromise);
+        Promise<Void> promise = Promise.promise();
+        super.start(promise);
+        promise.future().compose(init -> initMediacentre()).onComplete(startPromise);
+    }
+    private Future<Void> initMediacentre() {
 
         EventBus eb = getEventBus(vertx);
         wsPort = config.getInteger("wsPort", 3000);
@@ -68,10 +73,14 @@ public class Mediacentre extends BaseServer {
         List<String> sourceNames = new ArrayList<>(configSources.fieldNames());
         for (String sourceName : sourceNames) {
             if (configSources.getBoolean(sourceName)) {
-                Source source = (Source) Class.forName(sourceName).newInstance();
-                source.setEventBus(eb);
-                source.setConfig(config);
-                sources.add(source);
+	            try {
+		            Source source = (Source) Class.forName(sourceName).newInstance();
+                    source.setEventBus(eb);
+                    source.setConfig(config);
+                    sources.add(source);
+	            } catch (Exception e) {
+                    return Future.failedFuture(e);
+                }
             }
         }
         SqlConf signetConf = SqlConfs.createConf(SignetController.class.getName());
@@ -111,11 +120,10 @@ public class Mediacentre extends BaseServer {
             new CronTrigger(vertx, config.getString("amass-cron", "0 1 * * * ? *")).schedule(amassTask);
         } catch (ParseException e) {
             log.fatal("Unable to parse amass cron expression");
-            throw e;
+            return Future.failedFuture(e);
         }
 
-        startPromise.tryComplete();
-        startPromise.tryFail("[Mediacentre@Mediacentre::start] Failed to start module Mediacentre.");
+        return Future.succeededFuture();
     }
 
 }
