@@ -33,7 +33,7 @@
     </repositories>
 
     <properties>
-        <entCoreVersion>6.10-SNAPSHOT</entCoreVersion>
+        <entCoreVersion>6.11-SNAPSHOT</entCoreVersion>
         <vertxCronTimerVersion>3.0-SNAPSHOT</vertxCronTimerVersion>
         <junitVersion>5.1.0</junitVersion>
         <reflectionsVersion>0.10.2</reflectionsVersion>
