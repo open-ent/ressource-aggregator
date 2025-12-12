@@ -29,6 +29,11 @@ case `uname -s` in
     fi
 esac
 
+function init() {
+  me=`id -u`:`id -g`
+  echo "DEFAULT_DOCKER_USER=$me" > .env
+}
+
 # Nettoyage du dossier `backend`
 function clean() {
   echo "Cleaning..."
