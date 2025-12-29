@@ -1,0 +1,44 @@
+{
+  "name": "fr.openent~mediacentre",
+  {% if (inventory_hostname_short is defined and inventory_hostname_short == 'jobs') %}
+    "worker" : true,
+  {% endif %}
+  "config": {
+    "main" : "fr.openent.mediacentre.Mediacentre",
+    "port" : 8122,
+    "app-name" : "Mediacentre",
+    "app-address" : "/mediacentre",
+    "app-icon" : "Mediacentre-large",
+    "host": "https://{{ host }}",
+    "ssl" : true,
+  	"sql" : true,
+  	"db-schema" : "mediacentre",
+    "event-collection": "gar-events",
+    {% if overrideTheme %} "override-theme": {{ override2d }}, {% endif %}
+    "auto-redeploy": false,
+    "userbook-host": "https://{{ host }}",
+    "integration-mode": "{{ integration_mode|default('HTTP') }}",
+    "app-registry.port" : 8012,
+    "sources": {
+      "fr.openent.mediacentre.source.GAR": true,
+      "fr.openent.mediacentre.source.Moodle": {{ mediacentreSourceMoodle | default('false') }},
+	    "fr.openent.mediacentre.source.Signet": true,
+      "fr.openent.mediacentre.source.PMB": false
+    },
+    "textbook_typology": ["MAN"],
+  	"whitelist-sources": {{ mediacentreWhitelist | default('[]') }},
+  	"highlightsPins":  {{ mediacentreHighlightsPins | default('false') }},
+  	"textHighlightsPins": "{{ mediacentreTextHighlightsPins | default('') }}",
+  	{% if mediacentreElasticServerURIs is defined and mediacentreESIndex is defined %}
+      "elasticsearch": true,
+      "elasticsearchConfig" : {
+        "server-uris": {{ mediacentreElasticServerURIs }},
+        "index": "{{ mediacentreESIndex }}",
+  		  "elasticsearch-ssl": {{ mediacentreESSsl  | default('false') }},
+  		  "username": "{{ mediacentreESUsername  | default('') }}",
+  		  "password": "{{ mediacentreESPassword  | default('') }}"
+      },
+    {% endif %}
+    "wsPort": 6503
+  }
+}
