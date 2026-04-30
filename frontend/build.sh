@@ -78,44 +78,44 @@ init () {
   if [ "$NO_DOCKER" = "true" ] ; then
     pnpm install
   else
-    docker-compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm install"
+    docker compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm install"
   fi
 
 }
 
 installDeps() {
-  docker-compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm install"
+  docker compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm install"
 }
 
 runTest() {
-  docker-compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm test"
+  docker compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm test"
 }
 
 runDev() {
-  docker-compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm run dev"
+  docker compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm run dev"
 }
 
 prettierDocker() {
-  docker-compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm run format:write"
+  docker compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm run format:write"
 }
 
 lintFixDocker() {
-  docker-compose run --rm node sh -c "pnpm run fix"
+  docker compose run --rm node sh -c "pnpm run fix"
 }
 
 checkQualityCode() {
-  docker-compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm run format:check && pnpm run lint"
+  docker compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm run format:check && pnpm run lint"
 }
 
 runLocal() {
-  docker-compose run --rm -u "$USER_UID:$GROUP_GID" node pnpm dev
+  docker compose run --rm -u "$USER_UID:$GROUP_GID" node pnpm dev
 }
 
 build () {
   if [ "$NO_DOCKER" = "true" ] ; then
     pnpm run build
   else
-    docker-compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm build"
+    docker compose run --rm -u "$USER_UID:$GROUP_GID" node sh -c "pnpm build"
   fi
   status=$?
   if [ $status != 0 ];

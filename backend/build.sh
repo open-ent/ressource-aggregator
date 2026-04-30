@@ -62,7 +62,7 @@ test() {
 
 
 publish() {
-    version=`docker-compose run --rm maven mvn $MVN_OPTS help:evaluate -Dexpression=project.version -q -DforceStdout`
+    version=`docker compose run --rm maven mvn $MVN_OPTS help:evaluate -Dexpression=project.version -q -DforceStdout`
     level=`echo $version | cut -d'-' -f3`
     case "$level" in
         *SNAPSHOT)

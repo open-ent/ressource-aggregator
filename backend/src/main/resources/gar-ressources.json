@@ -1,0 +1,191 @@
+[
+  {
+    "idRessource": "ark:/34885/wr0000001",
+    "nomRessource": "Universalis Education",
+    "nomEditeur": "ENCYCLOPAEDIA UNIVERSALIS FRANCE",
+    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/137.png",
+    "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F34885%2Fwr0000001",
+    "typePresentation": {
+      "code": "DIC",
+      "nom": "ressources de référence, dictionnaires et encyclopédies"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      { "nom": "lycée général et technologique" },
+      { "nom": "1re générale" },
+      { "nom": "terminale générale" }
+    ],
+    "typologieDocument": [
+      { "nom": "chronologie" },
+      { "nom": "atlas" },
+      { "nom": "biographie" }
+    ],
+    "typePedagogique": [
+      { "nom": "animation" },
+      { "nom": "matériel de référence" }
+    ],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/51645/WooflashGAR",
+    "nomRessource": "Wooflash",
+    "nomEditeur": "WOOCLAP SA",
+    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/14600.png",
+    "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F51645%2FWooflashGAR",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entraînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      { "nom": "accompagnement de l'élève (discipline)" }
+    ],
+    "niveauEducatif": [
+      { "nom": "6e" },
+      { "nom": "2de générale et technologique" },
+      { "nom": "3e" }
+    ],
+    "typologieDocument": [
+      { "nom": "collection de documents" }
+    ],
+    "typePedagogique": [
+      { "nom": "autoévaluation" },
+      { "nom": "exercice" }
+    ],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/19153/Cafeyn",
+    "nomRessource": "Cafeyn",
+    "nomEditeur": "Réseau Canopé",
+    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/20411.png",
+    "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F19153%2FCafeyn",
+    "typePresentation": {
+      "code": "DOC",
+      "nom": "ressources documentaires et de presse"
+    },
+    "domaineEnseignement": [
+      { "nom": "Domaines d'enseignement de la voie générale et technologique" }
+    ],
+    "niveauEducatif": [
+      { "nom": "6e" },
+      { "nom": "2de générale et technologique" },
+      { "nom": "terminale professionnelle" }
+    ],
+    "typologieDocument": [
+      { "nom": "web média" },
+      { "nom": "base de données" }
+    ],
+    "typePedagogique": [
+      { "nom": "ressource documentaire et de presse" }
+    ],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/CI3977251568689",
+    "nomRessource": "Courrier international",
+    "nomEditeur": "COURRIER INTERNATIONAL",
+    "urlVignette": "https://vignette.gar.education.fr//kiosque-edu-com/gar/6665.png",
+    "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F12313%2FCI3977251568689",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [
+      { "nom": "géographie" },
+      { "nom": "histoire" },
+      { "nom": "sciences économiques et sociales" }
+    ],
+    "niveauEducatif": [
+      { "nom": "lycée général et technologique" }
+    ],
+    "typologieDocument": [
+      { "nom": "livre numérique" }
+    ],
+    "typePedagogique": [
+      { "nom": "manuel d'enseignement" }
+    ],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/LM2438948708166",
+    "nomRessource": "Le Monde pour tous les élèves",
+    "nomEditeur": "LE MONDE",
+    "urlVignette": "https://vignette.gar.education.fr//kiosque-edu-com/gar/9976.png",
+    "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F12313%2FLM2438948708166",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [
+      { "nom": "histoire-géographie, géopolitique et sciences politiques" }
+    ],
+    "niveauEducatif": [
+      { "nom": "lycée professionnel" },
+      { "nom": "lycée général et technologique" },
+      { "nom": "collège" }
+    ],
+    "typologieDocument": [
+      { "nom": "livre numérique" }
+    ],
+    "typePedagogique": [
+      { "nom": "manuel d'enseignement" }
+    ],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/79004/3dvg3080695",
+    "nomRessource": "Édugéo - Offre Éduthèque de l'IGN",
+    "nomEditeur": "Institut national de l'information géographique et forestière (IGN)",
+    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/mere/12079.png",
+    "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F79004%2F3dvg3080695",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      { "nom": "CM2" },
+      { "nom": "6e" },
+      { "nom": "collège" }
+    ],
+    "typologieDocument": [
+      { "nom": "carte" },
+      { "nom": "atlas" },
+      { "nom": "application" }
+    ],
+    "typePedagogique": [
+      { "nom": "matériel de référence" },
+      { "nom": "activité pédagogique" }
+    ],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/19153/sdcf9pk5f",
+    "nomRessource": "e-sidoc : le portail documentaire du CDI",
+    "nomEditeur": "Réseau Canopé",
+    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/14575.png",
+    "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F19153%2Fsdcf9pk5f",
+    "typePresentation": {
+      "code": "DOC",
+      "nom": "ressources documentaires et de presse"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      { "nom": "6e" },
+      { "nom": "4e" },
+      { "nom": "lycée général et technologique" }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [
+      { "nom": "cyberquête" }
+    ],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  }
+]

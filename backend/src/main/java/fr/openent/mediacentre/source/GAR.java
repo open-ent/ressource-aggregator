@@ -18,6 +18,7 @@ import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import org.entcore.common.user.UserInfos;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -76,7 +77,7 @@ public class GAR implements Source {
      * @param structureId User structure identifier
      * @param handler     Function handler returning data
      */
-    private void getResources(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
+/*    private void getResources(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
         if(WorkflowActionUtils.hasRight(user, WorkflowActions.GAR_RIGHT.toString())) {
             JsonObject action = new JsonObject()
                     .put("action", "getResources")
@@ -96,6 +97,35 @@ public class GAR implements Source {
             }));
         } else {
             handler.handle(new Either.Right<>(new JsonArray()));
+        }
+    }*/
+
+    private void getResources(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
+        try {
+            // Récupération du fichier depuis le dossier resources
+            InputStream is = getClass().getClassLoader().getResourceAsStream("gar-ressources.json");
+
+            if (is == null) {
+                // Tentative alternative pour certains contextes de compilation
+                is = Thread.currentThread().getContextClassLoader().getResourceAsStream("gar-ressources.json");
+            }
+
+            if (is != null) {
+                // Lecture du flux d'entrée en String
+                java.util.Scanner s = new java.util.Scanner(is, "UTF-8").useDelimiter("\\A");
+                String result = s.hasNext() ? s.next() : "";
+                is.close();
+
+                // Conversion en JsonArray et retour via le handler
+                JsonArray allResources = new JsonArray(result);
+                handler.handle(new Either.Right(allResources));
+            } else {
+                // Fichier non trouvé
+                handler.handle(new Either.Left("gar.mock.file.not.found"));
+            }
+        } catch (Exception e) {
+            // Erreur de lecture ou de parsing JSON
+            handler.handle(new Either.Left("gar.mock.read.error"));
         }
     }
 
