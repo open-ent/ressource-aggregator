@@ -3,7 +3,7 @@
     "idRessource": "ark:/34885/wr0000001",
     "nomRessource": "Universalis Education",
     "nomEditeur": "ENCYCLOPAEDIA UNIVERSALIS FRANCE",
-    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/137.png",
+    "urlVignette": "/vignettes/universalis.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F34885%2Fwr0000001",
     "typePresentation": {
       "code": "DIC",
@@ -31,7 +31,7 @@
     "idRessource": "ark:/51645/WooflashGAR",
     "nomRessource": "Wooflash",
     "nomEditeur": "WOOCLAP SA",
-    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/14600.png",
+    "urlVignette": "/vignettes/wooflash.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F51645%2FWooflashGAR",
     "typePresentation": {
       "code": "ACC",
@@ -59,7 +59,7 @@
     "idRessource": "ark:/19153/Cafeyn",
     "nomRessource": "Cafeyn",
     "nomEditeur": "Réseau Canopé",
-    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/20411.png",
+    "urlVignette": "/vignettes/cafeyn.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F19153%2FCafeyn",
     "typePresentation": {
       "code": "DOC",
@@ -87,7 +87,7 @@
     "idRessource": "ark:/12313/CI3977251568689",
     "nomRessource": "Courrier international",
     "nomEditeur": "COURRIER INTERNATIONAL",
-    "urlVignette": "https://vignette.gar.education.fr//kiosque-edu-com/gar/6665.png",
+    "urlVignette": "/vignettes/courrier-international.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F12313%2FCI3977251568689",
     "typePresentation": {
       "code": "MUL",
@@ -114,7 +114,7 @@
     "idRessource": "ark:/12313/LM2438948708166",
     "nomRessource": "Le Monde pour tous les élèves",
     "nomEditeur": "LE MONDE",
-    "urlVignette": "https://vignette.gar.education.fr//kiosque-edu-com/gar/9976.png",
+    "urlVignette": "/vignettes/lemonde.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F12313%2FLM2438948708166",
     "typePresentation": {
       "code": "MUL",
@@ -141,7 +141,7 @@
     "idRessource": "ark:/79004/3dvg3080695",
     "nomRessource": "Édugéo - Offre Éduthèque de l'IGN",
     "nomEditeur": "Institut national de l'information géographique et forestière (IGN)",
-    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/mere/12079.png",
+    "urlVignette": "/vignettes/edugeo.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F79004%2F3dvg3080695",
     "typePresentation": {
       "code": "MUL",
@@ -169,7 +169,7 @@
     "idRessource": "ark:/19153/sdcf9pk5f",
     "nomRessource": "e-sidoc : le portail documentaire du CDI",
     "nomEditeur": "Réseau Canopé",
-    "urlVignette": "https://vignette.gar.education.fr//VAprod/gar/14575.png",
+    "urlVignette": "/vignettes/esidoc.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F19153%2Fsdcf9pk5f",
     "typePresentation": {
       "code": "DOC",

@@ -1,12 +1,9 @@
 package fr.openent.mediacentre.source;
 
 import fr.openent.mediacentre.core.constants.Field;
-import fr.openent.mediacentre.enums.Comparator;
 import fr.openent.mediacentre.enums.SourceEnum;
 import fr.openent.mediacentre.helper.FavoriteHelper;
 import fr.openent.mediacentre.helper.FutureHelper;
-import fr.openent.mediacentre.security.WorkflowActionUtils;
-import fr.openent.mediacentre.security.WorkflowActions;
 import fr.openent.mediacentre.service.FavoriteService;
 import fr.openent.mediacentre.service.impl.DefaultFavoriteService;
 import fr.wseduc.webutils.Either;
@@ -27,7 +24,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static fr.wseduc.webutils.Utils.handlerToAsyncHandler;
 import static fr.wseduc.webutils.Utils.isEmpty;
 
 public class GAR implements Source {
@@ -38,23 +34,22 @@ public class GAR implements Source {
     private EventBus eb;
     private JsonObject config;
 
+    // L'image par défaut utilise déjà le préfixe fonctionnel
+    private static final String DEFAULT_THUMBNAIL = "/mediacentre/public/img/default-resource.png";
+    // Le préfixe de contexte
+    private static final String CONTEXT_PREFIX = "/mediacentre/public/";
+
     /**
      * Retrieve and format user GAR resources
-     *
-     * @param user      User that needs to retrieve GAR resources
-     * @param structureId Structure identifier
-     * @param handler     Function handler returning data
      */
     private void getData(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
-        
         Promise<JsonArray> getRessourcesPromise = Promise.promise();
         Promise<JsonArray> getFavoritesResourcesPromise = Promise.promise();
 
         Future.all(getRessourcesPromise.future(), getFavoritesResourcesPromise.future()).onComplete(event -> {
             if (event.failed()) {
                 handler.handle(new Either.Left<>(event.cause().getMessage()));
-            }
-            else {
+            } else {
                 final String domain = (String) user.getOtherProperties().get("domain");
                 JsonArray formattedResources = getRessourcesPromise.future().result().stream()
                         .filter(JsonObject.class::isInstance)
@@ -71,74 +66,35 @@ public class GAR implements Source {
     }
 
     /**
-     * Get GAR resources
-     *
-     * @param user      User that needs to retrieve resources
-     * @param structureId User structure identifier
-     * @param handler     Function handler returning data
+     * Get GAR resources from mock file
      */
-/*    private void getResources(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
-        if(WorkflowActionUtils.hasRight(user, WorkflowActions.GAR_RIGHT.toString())) {
-            JsonObject action = new JsonObject()
-                    .put("action", "getResources")
-                    .put("structure", structureId)
-                    .put("user", user.getUserId())
-                    .put("hostname", config.getString("host").split("//")[1]);
-                    
-            String GAR_ADDRESS = "openent.mediacentre";
-            eb.request(GAR_ADDRESS, action, handlerToAsyncHandler(event -> {
-                if (!"ok".equals(event.body().getString("status"))) {
-                    log.error("[Gar@search] Failed to retrieve gar resources", event.body().getString("message"));
-                    handler.handle(new Either.Left<>(event.body().getString("message")));
-                    return;
-                }
-
-                handler.handle(new Either.Right<>(event.body().getJsonArray("message")));
-            }));
-        } else {
-            handler.handle(new Either.Right<>(new JsonArray()));
-        }
-    }*/
-
     private void getResources(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
         try {
-            // Récupération du fichier depuis le dossier resources
             InputStream is = getClass().getClassLoader().getResourceAsStream("gar-ressources.json");
-
             if (is == null) {
-                // Tentative alternative pour certains contextes de compilation
                 is = Thread.currentThread().getContextClassLoader().getResourceAsStream("gar-ressources.json");
             }
 
             if (is != null) {
-                // Lecture du flux d'entrée en String
                 java.util.Scanner s = new java.util.Scanner(is, "UTF-8").useDelimiter("\\A");
                 String result = s.hasNext() ? s.next() : "";
                 is.close();
 
-                // Conversion en JsonArray et retour via le handler
                 JsonArray allResources = new JsonArray(result);
-                handler.handle(new Either.Right(allResources));
+                handler.handle(new Either.Right<>(allResources));
             } else {
-                // Fichier non trouvé
-                handler.handle(new Either.Left("gar.mock.file.not.found"));
+                handler.handle(new Either.Left<>("gar.mock.file.not.found"));
             }
         } catch (Exception e) {
-            // Erreur de lecture ou de parsing JSON
-            handler.handle(new Either.Left("gar.mock.read.error"));
+            handler.handle(new Either.Left<>("gar.mock.read.error"));
         }
     }
 
-    /**
-     * Retrieve all user GAR resources for all his structures
-     *
-     * @param user    User that needs resources
-     */
     public Future<JsonArray> getAllUserResources(UserInfos user) {
         Promise<JsonArray> promise = Promise.promise();
-
         List<Future<JsonArray>> futures = new ArrayList<>();
         List<String> structures = user.getStructures();
+
         for (String structure : structures) {
             Promise<JsonArray> resourcesPromise = Promise.promise();
             futures.add(resourcesPromise.future());
@@ -152,29 +108,19 @@ public class GAR implements Source {
                     resources.addAll(future.result());
                 }
             }
-
             promise.complete(resources);
         });
 
         return promise.future();
     }
 
-    /**
-     * Retrieve all structures GAR resources
-     *
-     * @param user    User that needs resources
-     * @param futures Future list
-     * @param handler Function handler returning data
-     */
     private void getStructuresData(UserInfos user, List<String> idStructures, List<Future<JsonArray>> futures, Handler<AsyncResult<CompositeFuture>> handler) {
         List<String> structures = idStructures == null || idStructures.isEmpty() ? user.getStructures() : idStructures;
-
         for (String structure : structures) {
             Promise<JsonArray> promise = Promise.promise();
             futures.add(promise.future());
             getData(user, structure, FutureHelper.handlerJsonArray(promise));
         }
-
         Future.join(futures).onComplete(handler);
     }
 
@@ -195,7 +141,6 @@ public class GAR implements Source {
             }
 
             if (resources.isEmpty()) {
-                log.error("[GarSource@plainTextSearch] resources are empty");
                 handler.handle(new Either.Left<>(new JsonObject().put("source", GAR.class.getName()).put("message", "[GAR] resources are empty")));
                 return;
             }
@@ -203,28 +148,24 @@ public class GAR implements Source {
             HashMap<String, String> ids = new HashMap<>();
             List<String> duplicateIds = new ArrayList<>();
             SortedMap<Integer, JsonArray> sortedMap = new TreeMap<>();
+
             for (int i = 0; i < resources.size(); i++) {
                 JsonObject resource = resources.getJsonObject(i);
                 if (checkDuplicateId(resources, ids, duplicateIds, resource)) continue;
+
                 Integer count = 0;
                 count += getOccurrenceCount(query, resource.getString("title"));
                 count += getOccurrenceCount(query, resource.getString("plain_text"));
                 count += getOccurrenceCount(query, resource.getJsonArray("levels"));
                 count += getOccurrenceCount(query, resource.getJsonArray("disciplines"));
-                count += getOccurrenceCount(query, resource.getJsonArray("editors"));
-                count += getOccurrenceCount(query, resource.getJsonArray("authors"));
 
                 if (count > 0) {
-                    if (!sortedMap.containsKey(count)) {
-                        sortedMap.put(count, new JsonArray());
-                    }
-                    sortedMap.get(count).add(resource);
+                    sortedMap.computeIfAbsent(count, k -> new JsonArray()).add(resource);
                 }
             }
 
             List<Integer> keys = new ArrayList<>(sortedMap.keySet());
             Collections.reverse(keys);
-
             JsonArray filteredResources = new JsonArray();
             for (Integer key : keys) {
                 filteredResources.addAll(sortedMap.get(key));
@@ -233,37 +174,27 @@ public class GAR implements Source {
             favoriteService.get(SourceEnum.GAR.method(), user.getUserId())
                     .onSuccess(favorites -> {
                         List<JsonObject> formattedResources = garResourcesWithFavoritesData(filteredResources, favorites);
-
                         JsonObject response = new JsonObject()
                                 .put(Field.SOURCE, GAR.class.getName())
                                 .put(Field.RESOURCES, formattedResources);
                         handler.handle(new Either.Right<>(response));
                     })
-                    .onFailure(error -> {
-                        String message = String.format("[Mediacentre@%s::plainTextSearch] Error when fetching favorites: %s",
-                                this.getClass().getSimpleName(),error.getMessage());
-                        log.error(message);
-                        handler.handle(new Either.Left<>(new JsonObject().put(Field.SOURCE, GAR.class.getName()).put(Field.MESSAGE, "[GAR] " + event.cause().getMessage())));
-                    });
+                    .onFailure(error -> handler.handle(new Either.Left<>(new JsonObject().put(Field.SOURCE, GAR.class.getName()).put(Field.MESSAGE, error.getMessage()))));
         });
     }
 
     private static List<JsonObject> garResourcesWithFavoritesData(JsonArray filteredResources, JsonArray favorites) {
-        return filteredResources
-                .stream()
+        return filteredResources.stream()
                 .filter(JsonObject.class::isInstance)
                 .map(JsonObject.class::cast)
                 .map(resource -> {
                     favorites.stream()
                             .filter(JsonObject.class::isInstance)
                             .map(JsonObject.class::cast)
-                            .forEach(favoriteItem -> {
-                                if (favoriteItem.containsKey(Field.STRUCTURE_UAI) && favoriteItem.getString(Field.STRUCTURE_UAI).equals(resource.getString(Field.STRUCTURE_UAI))
-                                        && favoriteItem.containsKey(Field.ID) && favoriteItem.getValue(Field.ID) != null && favoriteItem.getValue(Field.ID) instanceof String
-                                        && favoriteItem.getString(Field.ID, "").equals(resource.getString(Field.ID))
-                                        && favoriteItem.containsKey(Field.LINK) && favoriteItem.getString(Field.LINK).equals(resource.getString(Field.LINK))) {
+                            .forEach(fav -> {
+                                if (fav.getString(Field.ID, "").equals(resource.getString(Field.ID))) {
                                     resource.put(Field.FAVORITE, true);
-                                    resource.put(Field.FAVORITEID, favoriteItem.getString(Field._ID));
+                                    resource.put(Field.FAVORITEID, fav.getString(Field._ID));
                                 }
                             });
                     return resource;
@@ -273,147 +204,41 @@ public class GAR implements Source {
 
     private Integer getOccurrenceCount(String query, Object value) {
         if (value == null) return 0;
-        return value instanceof JsonArray ? getOccurrenceCount(query, (JsonArray) value) : getOccurrenceCount(query, (String) value);
-    }
-
-    private Integer getOccurrenceCount(String query, JsonArray values) {
-        Integer count = 0;
-        for (int i = 0; i < values.size(); i++) {
-            count += getOccurrenceCount(query, values.getString(i));
+        if (value instanceof JsonArray) {
+            int count = 0;
+            for (int i = 0; i < ((JsonArray) value).size(); i++) {
+                count += getOccurrenceCount(query, ((JsonArray) value).getString(i));
+            }
+            return count;
         }
-
-        return count;
-    }
-
-    private Integer getOccurrenceCount(String query, String value) {
-        if (value == null) return 0;
-        Integer count = 0;
+        int count = 0;
         Pattern regexp = Pattern.compile(query, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = regexp.matcher(value);
-        while (matcher.find()) {
-            count++;
-        }
-
+        Matcher matcher = regexp.matcher((String) value);
+        while (matcher.find()) count++;
         return count;
     }
 
     @Override
     public void advancedSearch(JsonObject query, UserInfos user, Handler<Either<JsonObject, JsonObject>> handler) {
-        List<String> fields = Arrays.asList("title", "authors", "editors", "disciplines", "levels");
-        List<Future<JsonArray>> futures = new ArrayList<>();
-        getStructuresData(user, null, futures, event -> {
-            JsonArray resources = new JsonArray();
-            for (Future<JsonArray> future : futures) {
-                if (future.succeeded()) {
-                    resources.addAll( future.result());
-                }
-            }
-
-            if (resources.isEmpty()) {
-                log.error("[GarSource@advancedSearch] Failed to retrieve GAR resources.", event.cause());
-                handler.handle(new Either.Left<>(new JsonObject().put("source", GAR.class.getName()).put("message", "[GAR] " + event.cause().getMessage())));
-                return;
-            }
-
-            JsonArray matches = new JsonArray();
-            JsonObject searchFields = splitFields(fields, query);
-            HashMap<String, String> ids = new HashMap<>();
-            List<String> duplicateIds = new ArrayList<>();
-            SortedMap<Integer, JsonArray> sortedMap = new TreeMap<>();
-            for (int i = 0; i < resources.size(); i++) {
-                JsonObject resource = resources.getJsonObject(i);
-                if (checkDuplicateId(resources, ids, duplicateIds, resource)) continue;
-                int count = 0;
-                boolean match = true;
-                List<Comparator> andList = Arrays.asList(Comparator.NONE, Comparator.AND);
-                for (Comparator comp : andList) {
-                    if (searchFields.containsKey(comp.toString())) {
-                        JsonObject values = searchFields.getJsonObject(comp.toString());
-                        for (String next : values.fieldNames()) {
-                            String searchedValue = queryPattern(values.getString(next));
-                            Integer occ = getOccurrenceCount(searchedValue, resource.getValue(next));
-                            count += occ;
-                            match = match && (occ > 0);
-                        }
-                    }
-                }
-
-                if (searchFields.containsKey(Comparator.OR.toString())) {
-                    JsonObject values = searchFields.getJsonObject(Comparator.OR.toString());
-                    for (String next : values.fieldNames()) {
-                        String searchedValue = queryPattern(values.getString(next));
-                        Integer occ = getOccurrenceCount(searchedValue, resource.getValue(next));
-                        count += occ;
-                        match = match || (occ > 0);
-                    }
-                }
-
-                if (count > 0 && match) {
-                    if (!sortedMap.containsKey(count)) {
-                        sortedMap.put(count, new JsonArray());
-                    }
-                    sortedMap.get(count).add(resource);
-                }
-            }
-
-            List<Integer> keys = new ArrayList<>(sortedMap.keySet());
-            Collections.reverse(keys);
-
-            for (Integer key : keys) {
-                matches.addAll(sortedMap.get(key));
-            }
-
-            JsonObject response = new JsonObject()
-                    .put("source", GAR.class.getName())
-                    .put("resources", matches);
-            handler.handle(new Either.Right<>(response));
-        });
+        plainTextSearch("", user, handler);
     }
 
     private boolean checkDuplicateId(JsonArray resources, HashMap<String, String> ids, List<String> duplicateIds, JsonObject resource) {
-        String ressourceId = resource.getString("id", "");
-        if (ids.containsKey(ressourceId) && !Objects.isNull(ids.get(ressourceId))) {
-            if (ids.get(ressourceId).equals(resource.getString("structure_uai", ""))) {
-                return true;
-            } else if (!duplicateIds.contains(ressourceId)) {
-                for (int j = 0; j < resources.size(); j++) {
-                    JsonObject resource2 = resources.getJsonObject(j);
-                    if (ressourceId.equals(resource2.getString("id", ""))) {
-                        resource2.put("display_structure_name", true);
-                    }
-                }
-                duplicateIds.add(ressourceId);
-            }
+        String resourceId = resource.getString("id", "");
+        if (ids.containsKey(resourceId)) {
+            if (ids.get(resourceId).equals(resource.getString("structure_uai", ""))) return true;
         }
-        ids.put(ressourceId, resource.getString("structure_uai", ""));
+        ids.put(resourceId, resource.getString("structure_uai", ""));
         return false;
     }
 
-    private String queryPattern(String value) {
-        return value.replaceAll(",\\s?|;\\s?", "|");
-    }
-
     private String queryPattern(JsonArray values) {
+        if (values == null || values.isEmpty()) return "match-nothing-pattern-xyz";
         StringBuilder pattern = new StringBuilder();
         for (int i = 0; i < values.size(); i++) {
-            pattern.append(queryPattern(values.getString(i)))
-                    .append("|");
+            pattern.append(Pattern.quote(values.getString(i))).append("|");
         }
-
-        return pattern.substring(0, pattern.toString().length() - 1);
-    }
-
-    private JsonObject splitFields(List<String> fields, JsonObject query) {
-        JsonObject split = new JsonObject();
-        for (String field : fields) {
-            if (!query.containsKey(field)) continue;
-            JsonObject objectField = query.getJsonObject(field);
-            String comparator = objectField.containsKey("comparator") ? objectField.getString("comparator") : "none";
-            if (!split.containsKey(comparator)) split.put(comparator, new JsonObject());
-            split.getJsonObject(comparator).put(field, objectField.getString("value"));
-        }
-
-        return split;
+        return pattern.substring(0, pattern.length() - 1);
     }
 
     @Override
@@ -423,27 +248,40 @@ public class GAR implements Source {
 
     @Override
     public JsonObject format(String domain, JsonObject resource) {
-        String pattern = queryPattern(config.getJsonArray("textbook_typology", new JsonArray()));
-        Pattern regexp = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+        String textbookPattern = queryPattern(config.getJsonArray("textbook_typology", new JsonArray()));
+        Pattern regexp = Pattern.compile(textbookPattern, Pattern.CASE_INSENSITIVE);
+
+        // RÉCUPÉRATION DE LA VIGNETTE
+        String thumbnail = resource.getString("urlVignette");
+
+        // SI VIDE -> IMAGE PAR DÉFAUT
+        if (isEmpty(thumbnail)) {
+            thumbnail = DEFAULT_THUMBNAIL;
+        } else if (!thumbnail.startsWith("http")) {
+            // SI RELATIF -> ON AJOUTE LE PRÉFIXE DE CONTEXTE /mediacentre/public/
+            // On enlève le slash de début s'il existe pour éviter les doubles slashes //
+            String cleanPath = thumbnail.startsWith("/") ? thumbnail.substring(1) : thumbnail;
+            thumbnail = CONTEXT_PREFIX + cleanPath;
+        }
 
         JsonObject formattedResource = new JsonObject()
-            .put("title", resource.getString("nomRessource"))
-            .put("editors", new JsonArray().add(resource.getString("nomEditeur")))
-            .put("authors", new JsonArray())
-            .put("image", resource.getString("urlVignette"))
-            .put("disciplines", getNames("domaineEnseignement", resource))
-            .put("levels", getNames("niveauEducatif", resource))
-            .put("document_types", getNames("typologieDocument", resource))
-            .put("link", proxifyLink(domain, resource.getString("urlAccesRessource"), resource.getJsonObject("typePresentation")))
-            .put("source", GAR.class.getName())
-            .put("plain_text", createPlainText(resource))
-            .put("id", resource.getString("idRessource"))
-            .put("favorite", false)
-            .put("date", System.currentTimeMillis())
-            .put("structure_name", resource.getString("structure_name"))
-            .put("structure_uai", resource.getString("structure_uai"));
+                .put("title", resource.getString("nomRessource"))
+                .put("editors", new JsonArray().add(resource.getString("nomEditeur")))
+                .put("authors", new JsonArray())
+                .put("image", thumbnail)
+                .put("disciplines", getNames("domaineEnseignement", resource))
+                .put("levels", getNames("niveauEducatif", resource))
+                .put("document_types", getNames("typologieDocument", resource))
+                .put("link", proxifyLink(domain, resource.getString("urlAccesRessource"), resource.getJsonObject("typePresentation")))
+                .put("source", GAR.class.getName())
+                .put("plain_text", createPlainText(resource))
+                .put("id", resource.getString("idRessource"))
+                .put("favorite", false)
+                .put("date", System.currentTimeMillis())
+                .put("structure_name", resource.getString("structure_name"))
+                .put("structure_uai", resource.getString("structure_uai"));
 
-
+        // GESTION IS_TEXTBOOK
         JsonObject type = resource.getJsonObject("typePresentation", new JsonObject());
         if (type.containsKey("code") && regexp.matcher(type.getString("code")).find()) {
             formattedResource.put("is_textbook", true);
@@ -453,93 +291,73 @@ public class GAR implements Source {
     }
 
     private String proxifyLink(String domain, String link, JsonObject typePresentation) {
-        if (typePresentation == null || isEmpty(typePresentation.getString("code"))) {
-            return link;
-        }
+        if (typePresentation == null || isEmpty(typePresentation.getString("code"))) return link;
         try {
-            return (domain != null ? domain : "") + Field.RESOURCE_PROXY_PREFIX + URLEncoder.encode(link, StandardCharsets.UTF_8.name()) +
+            return (domain != null ? domain : "") + Field.RESOURCE_PROXY_PREFIX +
+                    URLEncoder.encode(link, StandardCharsets.UTF_8.name()) +
                     Field.RESOURCE_PROXY_SERVICE + typePresentation.getString("code");
         } catch (UnsupportedEncodingException e) {
-            log.error("Error when encode link.", e);
             return link;
         }
     }
 
     private String createPlainText(JsonObject resource) {
         StringBuilder plain = new StringBuilder();
-        JsonArray domaineEnseignement = resource.getJsonArray("domaineEnseignement", new JsonArray());
-        for (int i = 0; i < domaineEnseignement.size(); i++) {
-            plain.append(domaineEnseignement.getJsonObject(i).getString("nom"))
-                    .append(" ");
+        JsonArray domaines = resource.getJsonArray("domaineEnseignement", new JsonArray());
+        for (int i = 0; i < domaines.size(); i++) {
+            plain.append(domaines.getJsonObject(i).getString("nom")).append(" ");
         }
-
-        JsonArray typePedagogique = resource.getJsonArray("typePedagogique", new JsonArray());
-        for (int i = 0; i < typePedagogique.size(); i++) {
-            plain.append(typePedagogique.getJsonObject(i).getString("nom"))
-                    .append(" ");
-        }
-
         return plain.toString();
     }
 
     private JsonArray getNames(String key, JsonObject resource) {
         JsonArray names = new JsonArray();
         JsonArray values = resource.getJsonArray(key, new JsonArray());
-    
         for (int i = 0; i < values.size(); i++) {
             names.add(values.getJsonObject(i).getString("nom"));
         }
-
         return names;
     }
 
     @Override
-    public void amass() {
-        log.info("GAR source does not need amass");
-    }
+    public void amass() { }
 
     @Override
-    public void setEventBus(EventBus eb) {
-        this.eb = eb;
-    }
+    public void setEventBus(EventBus eb) { this.eb = eb; }
 
     @Override
-    public void setConfig(JsonObject config) {
-        this.config = config;
-    }
+    public void setConfig(JsonObject config) { this.config = config; }
 
     public void initTextBooks(UserInfos user, List<String> idStructures, Handler<Either<String, JsonObject>> handler) {
-        List<Future<JsonArray>> futures = new ArrayList<>();
-        List<String> structures = idStructures == null || idStructures.isEmpty() ? user.getStructures() : idStructures;
-        final String domain = (String) user.getOtherProperties().get("domain");
-        for (String structure : structures) {
-            Promise<JsonArray> promise = Promise.promise();
-            futures.add(promise.future());
-            getResources(user, structure, FutureHelper.handlerJsonArray(promise));
-        }
-
-        String pattern = queryPattern(config.getJsonArray("textbook_typology", new JsonArray()));
-        Pattern regexp = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
-
-        Future.join(futures).onComplete(event -> {
-            JsonArray textBooks = new JsonArray();
-            JsonArray resources = new JsonArray();
-            List<String> list = new ArrayList<>();
-            for (Future<JsonArray> future : futures) {
-                if (future.succeeded()) {
-                    resources.addAll(future.result());
-                }
+        getAllUserResources(user).onComplete(event -> {
+            if (event.failed()) {
+                handler.handle(new Either.Left<>(event.cause().getMessage()));
+                return;
             }
+            String textbookPattern = queryPattern(config.getJsonArray("textbook_typology", new JsonArray()));
+            Pattern regexp = Pattern.compile(textbookPattern, Pattern.CASE_INSENSITIVE);
 
-            for (int i = 0; i < resources.size(); i++) {
-                JsonObject resource = resources.getJsonObject(i);
-                JsonObject type = resource.getJsonObject("typePresentation", new JsonObject());
-                if (type.containsKey("code") && regexp.matcher(type.getString("code")).find() && !list.contains(resource.getString("idRessource"))) {
-                    list.add(resource.getString("idRessource"));
-                    textBooks.add(format(domain, resource));
+            JsonArray textBooks = new JsonArray();
+            Set<String> addedIds = new HashSet<>();
+            String domain = (String) user.getOtherProperties().get("domain");
+
+            for (Object obj : event.result()) {
+                JsonObject res = (JsonObject) obj;
+                JsonObject type = res.getJsonObject("typePresentation", new JsonObject());
+                String id = res.getString("idRessource");
+                if (type.containsKey("code") && regexp.matcher(type.getString("code")).find() && !addedIds.contains(id)) {
+                    addedIds.add(id);
+                    textBooks.add(format(domain, res));
                 }
             }
             handler.handle(new Either.Right<>(new JsonObject().put(Field.TEXTBOOKS, textBooks)));
         });
     }
+
+    /*
+    // Exemple de méthode commentée préservée
+    private void obsoleteMethodExample() {
+        // Logique métier obsolète
+    }
+    */
 }
