@@ -51,6 +51,32 @@ public class MediacentreController extends ControllerHelper {
     public void init(Vertx vertx, JsonObject config, RouteMatcher rm, Map<String, fr.wseduc.webutils.security.SecuredAction> securedActions) {
         super.init(vertx, config, rm, securedActions);
         eventStore = EventStoreFactory.getFactory().getEventStore(Mediacentre.class.getSimpleName());
+        // --- AJOUT DE LA ROUTE POUR LES VIGNETTES ---
+        rm.get("/vignettes/:name", request -> {
+            String imageName = request.getParam("name");
+
+            // Tentative de lecture du fichier dans src/main/resources/vignettes/
+            vertx.fileSystem().readFile("vignettes/" + imageName, res -> {
+                if (res.succeeded()) {
+                    // Détection simplifiée du type MIME
+                    String contentType = "image/png";
+                    if (imageName.toLowerCase().endsWith(".jpg") || imageName.toLowerCase().endsWith(".jpeg")) {
+                        contentType = "image/jpeg";
+                    } else if (imageName.toLowerCase().endsWith(".svg")) {
+                        contentType = "image/svg+xml";
+                    }
+
+                    request.response()
+                            .putHeader("Content-Type", contentType)
+                            .putHeader("Cache-Control", "public, max-age=86400") // Cache 24h
+                            .end(res.result());
+                } else {
+                    log.warn("[MediacentreController] Vignette non trouvée : " + imageName);
+                    request.response().setStatusCode(404).end();
+                }
+            });
+        });
+        // --- FIN DE L'AJOUT ---
     }
 
     @Get("")
