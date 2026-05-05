@@ -1,5 +1,2734 @@
 [
   {
+    "idRessource": "ark:/32835/AdaptivLangue",
+    "description": "L'application Adaptiv’Langue est un compagnon numérique des lycéen.ne.s pour la maîtrise intuitive de la langue française. A partir des connaissances intuitives de l'élève, la progression se focalise sur la maîtrise des cas simples de la langue courante pour ensuite ouvrir sur des cas plus complexes. Adaptiv'Langue propose un parcours personnalisé à chaque élève, en puisant dans une banque de plus de 2400 exercices autocorrectifs, dédiés à la maîtrise des fondamentaux de 5 domaines de l'étude de la langue (syntaxe, orthographe, lexique, verbe, cohérence du texte). Des tableaux de bord qui renvoient aux enseignants des informations permettant de suivre l'ensemble de la classe, des groupes d'élèves à besoins similaires et de chaque élève individuellement.",
+    "nomRessource": "Adaptiv'Langue",
+    "nomEditeur": "EvidenceB",
+    "urlVignette": "https://vignette.gar.education.fr/OAI_GarNinja_prod/gar/14454.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "FRANC"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "1re professionnelle"
+      },
+      {
+        "nom": "CAP - 1re année"
+      },
+      {
+        "nom": "CAP - 2e année"
+      },
+      {
+        "nom": "2de professionnelle"
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "BP - 1re année"
+      },
+      {
+        "nom": "BP - 2e année"
+      },
+      {
+        "nom": "BMA - 1re année"
+      },
+      {
+        "nom": "BMA - 2e année"
+      },
+      {
+        "nom": "terminale professionnelle"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/32835/AdaptivLangue_plus",
+    "description": "L'application Adaptiv’Langue Plus est un compagnon numérique des lycéen.ne.s pour la maîtrise intuitive de la langue française. A partir des connaissances intuitives de l'élève, la progression reprend les fondamentaux et l'amène vers la maîtrise de cas plus complexes, dans la perspective de l'analyse approfondie des textes au lycée. Adaptiv'Langue Plus propose un parcours personnalisé à chaque élève, en puisant dans une banque de plus de 3500 exercices autocorrectifs, dédiés à la maîtrise des fondamentaux de 5 domaines de l'étude de la langue (syntaxe, orthographe, lexique, verbe, logique). Des tableaux de bord qui renvoient aux enseignants des informations permettant de suivre les progrès de l'ensemble de la classe, des groupes d'élèves à besoins similaires et de chaque élève individuellement.",
+    "nomRessource": "Adaptiv'Langue Plus",
+    "nomEditeur": "EvidenceB",
+    "urlVignette": "https://vignette.gar.education.fr/OAI_GarNinja_prod/gar/14455.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "FRANC"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782017158394",
+    "description": "Une nouvelle génération de manuel numérique !  Deux modes d&#39 affichage : en doubles-pages ou en granulesModifiableTéléchargeablePartage et vidéoprojectionAccessible via l&#39 ENT  Police DYSUn manuel numérique régulièrement actualisé !  Avec de nombreuses ressources :  Des séquences actualisées avec de nouveaux documents au fil de l&#39 année  Des audios  De très nombreuses vidéos ",
+    "nomRessource": "Anglais Monde Contemporain 1re/Tle Spécialité LLCE - Manuel numérique élève - Ed. 2021",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/12594.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "langues, littératures et cultures étrangères - anglais (enseignement de spécialité)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782017158400",
+    "description": "Une nouvelle génération de manuel numérique !Deux modes d&#39 affichage : en doubles-pagesou en granulesModifiableTéléchargeablePartage et vidéopojectionAccessible via l&#39 ENT  Police DYSUn manuel numérique régulièrement actualiséAvec de nombreuses ressources :  des séquences actualisées avec de nouveaux documents au fil de l&#39 année !  des audios  de très nombreuses vidéos ",
+    "nomRessource": "Anglais Monde Contemporain 1re/Tle Spécialité LLCE - Manuel numérique enseignant - Ed. 2021",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/12595.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "langues, littératures et cultures étrangères - anglais (enseignement de spécialité)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782218998317",
+    "description": "Le site de soutien scolaire pour réviser toute l’année et réussir ses examens de la 3e à la terminale grâce à des contenus rédigés par des professeurs agrégés et conformes aux programmes officiels de l’éducation nationale.Classes couvertes au lycée :• Seconde• Première et terminale générale• Premières et terminales technologiques• Seconde, première et terminale ProLes ressources en lignePlus de 13 000 contenus organisés par classe, par matière et par chapitre, accessibles via un moteur de recherche et comprenant :• 1 500 sujets d’annales corrigés conformes aux nouveaux programmes• 4 000 fiches de révision• 7 000 quiz interactifs• 350 cours audio et vidéoAinsi que des conseils de méthode dans toutes les matières des examens.Nos choix pédagogiquesApporter aux élèves des ressources et des méthodes leur permettant un travail personnel en autonomie ou encadré, grâce à des contenus variés, adaptés à leurs besoins et à leurs habitudes de travail.",
+    "nomRessource": "Annabac.com",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/462.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782016291665",
+    "description": "Une Banque de ressources actualisée 1re/Tle pour une plus grande liberté pédagogique !Tous les documents du manuel organisés en base de données.Des séquences actualisées avec des documents supplémentaires au fil de l&#39 année.",
+    "nomRessource": "Banque de ressources Tutto Bene! Première/Terminale - Ed. 2020",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/10363.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/21889/n13_9782047389515",
+    "description": "Le manuel numérique SVT 1re propose l'intégralité du manuel papier à consulter sur ordinateur ou tablette mais également les ressources suivantes : Animations eduMedia et de Philippe CosentinoModélisation dynamiques de molécules en 3DPanoramas microscopiques de lames mincesSchémas-bilans animésCours en podcastVidéosLe manuel existe également au format granulaire Pealrtrees .",
+    "nomRessource": "Baude - Jusserand SVT 1re 2019 élève",
+    "nomEditeur": "BORDAS",
+    "urlVignette": "https://vignette.gar.education.fr/sejer-fr/gar/9423.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "sciences de la vie et de la Terre (enseignement de spécialité)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "Niveau éducatif détaillé (2015-)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/21889/n13_9782047388303",
+    "description": "Le manuel numérique SVT 1re propose l'intégralité du manuel papier à consulter sur ordinateur ou tablette mais également les ressources suivantes :  Le livre du professeur Animations eduMedia et de Philippe Cosentino Modélisation dynamiques de molécules en 3D Panoramas microscopiques de lames minces Schémas-bilans animés Cours en podcast Vidéos .",
+    "nomRessource": "Baude - Jusserand SVT 1re 2019 enseignant adoptant papier",
+    "nomEditeur": "BORDAS",
+    "urlVignette": "https://vignette.gar.education.fr/sejer-fr/gar/9522.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "sciences de la vie et de la Terre (enseignement de spécialité)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "Niveau éducatif détaillé (2015-)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/21889/n13_9782047390702",
+    "description": "Près de 130 ressources disponibles dans le manuel numérique de Tle:le livre du professeur intégral des animations eduMedia et de Philippe Cosentino des modélisations dynamiques de molécules en 3D des panoramas microscopiques de lames minces des schémas-bilans animés des cours en podcast (DYS)..",
+    "nomRessource": "Baude/Jusserand SVT Tle 2020 Manuel num. enseignant adoptant papier via CNS",
+    "nomEditeur": "BORDAS",
+    "urlVignette": "https://vignette.gar.education.fr/sejer-fr/gar/11591.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "sciences de la vie et de la Terre (enseignement de spécialité)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "Niveau éducatif détaillé (2015-)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/21889/n13_9782047390641",
+    "description": "Près de 130 ressources disponibles dans le manuel numérique de Tle:des animations eduMedia et de Philippe Cosentinodes modélisations dynamiques de molécules en 3Ddes panoramas microscopiques de lames mincesdes schémas-bilans animésdes cours en podcast (DYS)Le manuel existe également dans une version compatible avec le format granulaire de la plateforme Pearltrees Education..",
+    "nomRessource": "Baude/Jusserand SVT Tle 2020 Manuel numérique élève Licence 100% numérique",
+    "nomEditeur": "BORDAS",
+    "urlVignette": "https://vignette.gar.education.fr/sejer-fr/gar/11677.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "sciences de la vie et de la Terre (enseignement de spécialité)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "Niveau éducatif détaillé (2015-)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/51644/MVDEDU-FLEX",
+    "description": "Bibliothèque FLEX Manuels & ressources Permet un accès à toutes les ressources de l'utilisateur.",
+    "nomRessource": "Bibliothèque FLEX - Manuels et ressources numériques (mère de famille)",
+    "nomEditeur": "EDULIB",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/mere/11416.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "cycle 2 (2016)"
+      },
+      {
+        "nom": "cycle 1 (2016)"
+      },
+      {
+        "nom": "voie BP"
+      },
+      {
+        "nom": "voie BEP"
+      },
+      {
+        "nom": "terminale technologique"
+      },
+      {
+        "nom": "terminale TMD"
+      },
+      {
+        "nom": "voie générale et technologique"
+      },
+      {
+        "nom": "diplôme de comptabilité et gestion"
+      },
+      {
+        "nom": "LICENC"
+      },
+      {
+        "nom": "voie professionnelle"
+      },
+      {
+        "nom": "CPGE - 1re année"
+      },
+      {
+        "nom": "voie CPGE"
+      },
+      {
+        "nom": "1CAP2  "
+      },
+      {
+        "nom": "cycle 3 (2016)"
+      },
+      {
+        "nom": "2CAP2  "
+      },
+      {
+        "nom": "cycle 4 (2016)"
+      },
+      {
+        "nom": "1BTS2 "
+      },
+      {
+        "nom": "voie CAP"
+      },
+      {
+        "nom": "2BTS2 "
+      },
+      {
+        "nom": "section DUT"
+      },
+      {
+        "nom": "CPGE - 2e année"
+      },
+      {
+        "nom": "DUT - 1re année"
+      },
+      {
+        "nom": "voie générale"
+      },
+      {
+        "nom": "section BTS"
+      },
+      {
+        "nom": "TSTD2A13403 "
+      },
+      {
+        "nom": "lycée professionnel"
+      },
+      {
+        "nom": "T-ST2S33104 "
+      },
+      {
+        "nom": "terminale STL"
+      },
+      {
+        "nom": "terminale techno hôtellerie"
+      },
+      {
+        "nom": "terminale STI2D"
+      },
+      {
+        "nom": "terminale générale"
+      },
+      {
+        "nom": "TLEPRO "
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "CM2"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "1-ST2S33104 "
+      },
+      {
+        "nom": "CE2"
+      },
+      {
+        "nom": "1-HOT 33401 "
+      },
+      {
+        "nom": "CM1"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "BAC PRO (Baccalauréat professionnel)"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "1re générale"
+      },
+      {
+        "nom": "1re technologique"
+      },
+      {
+        "nom": "1re TMD"
+      },
+      {
+        "nom": "voie technologique"
+      },
+      {
+        "nom": "DUT - 2e année"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "terminale STMG"
+      },
+      {
+        "nom": "1STD2A13403"
+      },
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "grande section"
+      },
+      {
+        "nom": "1re pro domaine de la production"
+      },
+      {
+        "nom": "1re pro domaine des services"
+      },
+      {
+        "nom": "1re STHR"
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "terminale STHR"
+      },
+      {
+        "nom": "1re STL"
+      },
+      {
+        "nom": "CE1"
+      },
+      {
+        "nom": "STMG31016 "
+      },
+      {
+        "nom": "1BP2  "
+      },
+      {
+        "nom": "1re STI2D"
+      },
+      {
+        "nom": "CP"
+      },
+      {
+        "nom": "2BP2  "
+      },
+      {
+        "nom": "section d'enseignement général et professionnel adapté"
+      },
+      {
+        "nom": "BTS (Brevet de technicien supérieur)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/40015/library_lib-manuels",
+    "description": "Bibliothèque des manuels Lib MANUELS Permet un accès hors ligne à la totalité des manuels de l'utilisateur",
+    "nomRessource": "Bibliothèque manuels numérique Lib Manuels (mère de famille)",
+    "nomEditeur": "EDULIB",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/mere/8680.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "cycle 2 (2016)"
+      },
+      {
+        "nom": "cycle 1 (2016)"
+      },
+      {
+        "nom": "voie BP"
+      },
+      {
+        "nom": "voie BEP"
+      },
+      {
+        "nom": "terminale technologique"
+      },
+      {
+        "nom": "terminale TMD"
+      },
+      {
+        "nom": "voie générale et technologique"
+      },
+      {
+        "nom": "diplôme de comptabilité et gestion"
+      },
+      {
+        "nom": "LICENC"
+      },
+      {
+        "nom": "voie professionnelle"
+      },
+      {
+        "nom": "CPGE - 1re année"
+      },
+      {
+        "nom": "voie CPGE"
+      },
+      {
+        "nom": "1CAP2  "
+      },
+      {
+        "nom": "cycle 3 (2016)"
+      },
+      {
+        "nom": "2CAP2  "
+      },
+      {
+        "nom": "cycle 4 (2016)"
+      },
+      {
+        "nom": "1BTS2 "
+      },
+      {
+        "nom": "voie CAP"
+      },
+      {
+        "nom": "2BTS2 "
+      },
+      {
+        "nom": "section DUT"
+      },
+      {
+        "nom": "CPGE - 2e année"
+      },
+      {
+        "nom": "DUT - 1re année"
+      },
+      {
+        "nom": "voie générale"
+      },
+      {
+        "nom": "section BTS"
+      },
+      {
+        "nom": "TSTD2A13403 "
+      },
+      {
+        "nom": "lycée professionnel"
+      },
+      {
+        "nom": "T-ST2S33104 "
+      },
+      {
+        "nom": "terminale STL"
+      },
+      {
+        "nom": "terminale techno hôtellerie"
+      },
+      {
+        "nom": "terminale STI2D"
+      },
+      {
+        "nom": "terminale générale"
+      },
+      {
+        "nom": "TLEPRO "
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "CM2"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "1-ST2S33104 "
+      },
+      {
+        "nom": "CE2"
+      },
+      {
+        "nom": "1-HOT 33401 "
+      },
+      {
+        "nom": "CM1"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "BAC PRO (Baccalauréat professionnel)"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "1re générale"
+      },
+      {
+        "nom": "1re technologique"
+      },
+      {
+        "nom": "1re TMD"
+      },
+      {
+        "nom": "voie technologique"
+      },
+      {
+        "nom": "DUT - 2e année"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "terminale STMG"
+      },
+      {
+        "nom": "1STD2A13403"
+      },
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "grande section"
+      },
+      {
+        "nom": "1re pro domaine de la production"
+      },
+      {
+        "nom": "1re pro domaine des services"
+      },
+      {
+        "nom": "1re STHR"
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "terminale STHR"
+      },
+      {
+        "nom": "1re STL"
+      },
+      {
+        "nom": "CE1"
+      },
+      {
+        "nom": "STMG31016 "
+      },
+      {
+        "nom": "1BP2  "
+      },
+      {
+        "nom": "1re STI2D"
+      },
+      {
+        "nom": "CP"
+      },
+      {
+        "nom": "2BP2  "
+      },
+      {
+        "nom": "section d'enseignement général et professionnel adapté"
+      },
+      {
+        "nom": "BTS (Brevet de technicien supérieur)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/FO9782216155408",
+    "description": "Ce manuel numérique est GRATUIT pour les enseignants qui équipent leur classe du  manuel élève papier ou numérique.Cliquer sur le bouton « Accéder à l’offre » ci-dessus.  Avec ce manuel numérique pour l’enseignant, retrouvez tout le contenu de la version papier intégrée dans une application interactive qui permet l’animation de la vidéo-projection, la personnalisation de contenus et facilite l’apprentissage des élèves.  L’enseignant peut  :  exploiter des enrichissements:Ressources vidéo  Quizz d&#39 autoévaluation à  chaque fin de chapitre  animer sa classe différemment  :vidéo-projection du manuelaffichage des documents en plein écran  personnaliser son manuel  :ajout d’annotations grâce à la trousse graphiqueajout de pièces jointes  : liens internet, pages de cours, notes audio ou écrites, …  créer son cours en y intégrant des éléments du manuel   et des documents personnels  Partager un document à ses élèves, leur assigner un travail et suivre leur progression   Compatible ENTDisponible en ligne ou sans connexionIntègre la fonction 1-clic  Une richesse pédagogique pour animer ses cours et stimuler l’apprentissage des élèves.Pour un usage classe 100% numérique ou en complément du papier",
+    "nomRessource": "BLOC 4 - Manager l'équipe commerciale - BTS 1&2 MCO - Éd 2019 - Manuel numérique enseignant",
+    "nomEditeur": "FOUCHER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/8906.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/FO9782216155422",
+    "description": "Ce manuel numérique est GRATUIT pour les enseignants qui équipent leur classe du  manuel élève papier ou numérique.Cliquer sur le bouton « Accéder à l’offre » ci-dessus.  Avec ce manuel numérique pour l’enseignant, retrouvez tout le contenu de la version papier intégrée dans une application interactive qui permet l’animation de la vidéo-projection, la personnalisation de contenus et facilite l’apprentissage des élèves.  L’enseignant peut  :  exploiter les nombreux enrichissements des ressources vidéo  des Quiz d&#39 autoévaluation à chaque fin de chapitre  animer sa classe différemment  :vidéo-projection du manuelaffichage des documents en plein écran  personnaliser son manuel  :ajout d’annotations grâce à la trousse graphiqueajout de pièces jointes  : liens internet, pages de cours, notes audio ou écrites, …  créer son cours en y intégrant des éléments du manuel   et des documents personnels  Partager un document à ses élèves, leur assigner un travail et suivre leur progression   Compatible ENTDisponible en ligne ou sans connexionIntègre la fonction 1-clic  Une richesse pédagogique pour animer ses cours et stimuler l’apprentissage des élèves.Pour un usage classe 100% numérique ou en complément du papier.",
+    "nomRessource": "BLOC2 Animer dynamiser l'offre commerciale BTS 1&2 MCO Éd 2019 - Manuel numérique enseignant",
+    "nomEditeur": "FOUCHER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/8908.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/19153/Cafeyn",
+    "description": "Grâce à Cafeyn, bénéficiez d'un accès sans limite à de la presse numérique abordant des sujets tels que l'actualité, les sciences et technologies, la culture et les loisirs, …. Où que vous soyez et à tout moment, Cafeyn offre la possibilité de consulter la version numérique d'un article ou d'un numéro de magazine. De plus, les archives des différents magazines sont accessibles pour réaliser des recherches documentaires et des exposés.",
+    "nomRessource": "Cafeyn",
+    "nomEditeur": "Réseau Canopé",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/20411.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "DOC",
+      "nom": "ressources documentaires et de presse"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "3PPRO "
+      },
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "TLEPRO "
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782017220718",
+    "description": "La version digitale  du carnet est enrichie de contenus interactifs.  Plus de 150 ressources numériques  accessibles en un clic depuis le manuel numérique :+ de 60  tutos vidéo  pour un accompagnement pas à pas de l’élève +  de 60 exercices interactifs supplémentaires  pour travailler les automatismes et les capacités   Des corrigés types et des synthèses de cours en PDF Quelles sont les principales fonctionnalités du manuel numérique ?Navigation simplePersonnalisation du manuelAffichage simultané de plusieurs documentsPartage de documents entre professeurs et élèvesUtilisation possible hors connexionAccès multisupport : PC, Mac, smartphones, tablettesEt en plus pour l’enseignant :Outils de vidéoprojectionAffichage des corrigésSuivi des réponses des élèvesCréation de groupes de niveauExport sur clé USB",
+    "nomRessource": "Cahier de Maths 1re séries technologiques enseignement com - manuel numérique enseignant - Éd. 2023",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/16218.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782017220732",
+    "description": "La version digitale  du carnet est enrichie de contenus interactifs.  Plus de 150 ressources numériques  accessibles en un clic depuis le manuel numérique :48 tutos vidéo  pour un accompagnement pas à pas de l’élève 80 exercices interactifs supplémentaires  pour travailler les automatismes et les capacités   Des corrigés types et des synthèses de cours en PDF Quelles sont les principales fonctionnalités du manuel numérique ?Navigation simplePersonnalisation du manuelAffichage simultané de plusieurs documentsPartage de documents entre professeurs et élèvesUtilisation possible hors connexionAccès multisupport : PC, Mac,smartphones, tablettesEt en plus pour l’enseignant :Outils de vidéoprojectionAffichage des corrigésSuivi des réponses des élèvesCréation de groupes de niveauExport sur clé USB",
+    "nomRessource": "Cahier de Maths Term séries technologiques enseignement com - manuel numérique enseignant - Éd. 2023",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/16220.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/42700/Y2FudG9vLXNjcmliZQ",
+    "description": "Logiciel complet et accessible permettant de : - prendre des notes en classe - préparer et réaliser tous les exercices, du primaire au lycée - de préparer, réaliser et corriger des évaluations - de noter les devoirs à faire - de créer son emploi du temps",
+    "nomRessource": "Cantoo Scribe",
+    "nomEditeur": "Cantoo",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/18148.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "PRO",
+      "nom": "ressources de production pédagogique"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "APLUA"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "3PPRO "
+      },
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "CM2"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "1CAP2  "
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "2CAP2  "
+      },
+      {
+        "nom": "CE2"
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "CM1"
+      },
+      {
+        "nom": "CE1"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "1BP2  "
+      },
+      {
+        "nom": "CP"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "2BP2  "
+      },
+      {
+        "nom": "1BMA2 "
+      },
+      {
+        "nom": "2BMA2 "
+      },
+      {
+        "nom": "TLEPRO "
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/35570/chateau-de-versailles",
+    "description": "\"Retrouvez l'ensemble des ressources proposées par le Château de Versailles. Préparer une visite, découvrir les collections, réviser son bac, écouter un podcast, jouer en famille ou en classes, les possibilités sont riches et variées !",
+    "nomRessource": "Château de Versailles",
+    "nomEditeur": "Etablissement public du château, du musée et du domaine national de Versailles",
+    "urlVignette": "https://vignette.gar.education.fr/OAI_GarNinja_prod/gar/18390.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "3PPRO "
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "CM2"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "CE2"
+      },
+      {
+        "nom": "CM1"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "1CAP2  "
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "2CAP2  "
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "moyenne section"
+      },
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "grande section"
+      },
+      {
+        "nom": "TPS  "
+      },
+      {
+        "nom": "petite section"
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "CE1"
+      },
+      {
+        "nom": "1BP2  "
+      },
+      {
+        "nom": "CP"
+      },
+      {
+        "nom": "2BP2  "
+      },
+      {
+        "nom": "1BMA2 "
+      },
+      {
+        "nom": "2BMA2 "
+      },
+      {
+        "nom": "TLEPRO "
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/57117/4f4852369852",
+    "description": "Découvrir le numérique et apprendre la programmation en s'amusant, c'est possible avec Citizen Code!",
+    "nomRessource": "Citizen Code",
+    "nomEditeur": "Tralalere",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/18973.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "3PPRO "
+      },
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "CM2"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "CE2"
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "CM1"
+      },
+      {
+        "nom": "CE1"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "TLEPRO "
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/86527/531235422018286754745172216519497898693",
+    "description": "",
+    "nomRessource": "Communs numériques Tactileo",
+    "nomEditeur": "Maskott SAS",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/19732.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "collège professionnel"
+      },
+      {
+        "nom": "collège"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/CI3977251568689",
+    "description": "Chaque semaine depuis plus de 30 ans, Courrier international, grâce à ses 70 journalistes à Paris et ses correspondants à travers le monde, épluche pour vous plus de 1 500 journaux, magazines et sites de la presse internationale. De ce précieux travail ressort une sélection des meilleurs articles qui seront traduits en français, afin de vous donner les analyses les plus complètes et les plus pertinentes des événements internationaux : politiques, économiques, sociaux mais aussi l’actualité scientifique, environnementale et sociétale…..Courrier international s’intéresse aussi à la France et aux français, mais tels qu’on les voit d’ailleurs.Courrier international c’est aussi un site Internet avec l’hebdo en PDF chaque semaine de nombreuses newsletters thématiques dont La Lettre de l'Educ qui reprend les sujets des programmes de 1ères et terminales traités dans l'hebdomadaire et le site. Vous bénéficiez en plus de nombreux enrichissements : une carte interactive pour vos recherches, des vidéos, des dessins, des reportages, des unes commentées, des interviews, des revues de presse et Réveil Courrier pour avoir chaque matin un aperçu de toutes les infos necessaires pour démarrer la journée bien informée … et toutes nos archives depuis 1995.",
+    "nomRessource": "Courrier international",
+    "nomEditeur": "COURRIER INTERNATIONAL",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/6665.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "SES"
+      },
+      {
+        "nom": "HISTO"
+      },
+      {
+        "nom": "HGGSP"
+      },
+      {
+        "nom": "langues, littératures et cultures étrangères - anglais (enseignement de spécialité)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782017191070",
+    "description": "Idéal pour la vidéoprojection en classe !Avec de nombreuses ressources :Des diaporamas d&#39 activités mentales rapidesDes vidéos sur les automatismesDes versions interactives des QCMDes fichiers logicielsAvec toutes les fonctionnalités d&#39 Éducadhoc :VidéoprojectionOutils d&#39 annotationPartage de ressources et suivi des élèvesNouveautés 2023 :Création de séquences et d&#39 exercices interactifsMode diaporama",
+    "nomRessource": "Déclic - Maths Enseignement scientifique 1re - Manuel numérique élève - Ed. 2023",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/16260.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782017191087",
+    "description": "Idéal pour la vidéoprojection en classe !Avec de nombreuses ressources :Des diaporamas d&#39 activités mentales rapidesDes vidéos sur les automatismesDes versions interactives des QCMDes fichiers logicielsAvec toutes les fonctionnalités d&#39 Éducadhoc :VidéoprojectionOutils d&#39 annotation, personnalisation du manuel  Partage de ressources et suivi des élèvesNouveautés 2023 :Création de séquences et d&#39 exercices interactifsMode diaporama",
+    "nomRessource": "Déclic - Maths Enseignement scientifique 1re - Manuel numérique enseignant - Ed. 2023",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/16261.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/19153/sdcf9pk5f",
+    "description": "Portail d’information et de recherche documentaire à destination des élèves et des professeurs. Il permet de trouver les documents empruntables au CDI et des documents numériques utiles pour les travaux d'élèves. Il propose l'actualité du CDI, des sélections de documents (nouveautés, coups de coeur, sélections thématiques). L'espace personnalisé permet de retrouver ses prêts en cours, ses réservations et également ses avis de lecture. Il peut proposer un accès à des ressources numériques (presse en ligne, dictionnaires...).",
+    "nomRessource": "e-sidoc : le portail documentaire du CDI",
+    "nomEditeur": "Réseau Canopé",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/14575.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "DOC",
+      "nom": "ressources documentaires et de presse"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "3PPRO "
+      },
+      {
+        "nom": "voie BP"
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "4e professionnelle"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "voie BEP"
+      },
+      {
+        "nom": "voie BMA"
+      },
+      {
+        "nom": "terminale technologique"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "voie BT"
+      },
+      {
+        "nom": "BTM - 2e année"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "CPGE - 1re année"
+      },
+      {
+        "nom": "voie CPGE"
+      },
+      {
+        "nom": "voie FC"
+      },
+      {
+        "nom": "1CAP2  "
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "2CAP2  "
+      },
+      {
+        "nom": "1BTS2 "
+      },
+      {
+        "nom": "voie BTM"
+      },
+      {
+        "nom": "2BTS2 "
+      },
+      {
+        "nom": "1re générale"
+      },
+      {
+        "nom": "voie CAP"
+      },
+      {
+        "nom": "section DUT"
+      },
+      {
+        "nom": "CPGE - 2e année"
+      },
+      {
+        "nom": "TBT "
+      },
+      {
+        "nom": "voie MC"
+      },
+      {
+        "nom": "DUT - 1re année"
+      },
+      {
+        "nom": "1BT "
+      },
+      {
+        "nom": "section BTS"
+      },
+      {
+        "nom": "1re technologique"
+      },
+      {
+        "nom": "DUT - 2e année"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "lycée professionnel"
+      },
+      {
+        "nom": "terminale pro domaine de la production"
+      },
+      {
+        "nom": "formation professionnelle"
+      },
+      {
+        "nom": "formation des personnels de l'éducation nationale"
+      },
+      {
+        "nom": "formation professionnelle continue des adultes"
+      },
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "1re pro domaine de la production"
+      },
+      {
+        "nom": "1re pro domaine des services"
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "FC post niveau IV"
+      },
+      {
+        "nom": "terminale générale"
+      },
+      {
+        "nom": "BTM - 1re année"
+      },
+      {
+        "nom": "FC post niveau V"
+      },
+      {
+        "nom": "1BP2  "
+      },
+      {
+        "nom": "2BP2  "
+      },
+      {
+        "nom": "1BMA2 "
+      },
+      {
+        "nom": "2BMA2 "
+      },
+      {
+        "nom": "TLEPRO "
+      },
+      {
+        "nom": "terminale pro domaine des services"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/20863/002/000",
+    "description": "Educ'ARTE propose plus de 3000 vidéos issues du meilleur d'ARTE, couvrant toutes les matières et disponibles en français, allemand, anglais, espagnol et italien, ainsi que des outils innovants pour personnaliser les vidéos.",
+    "nomRessource": "Educ'ARTE",
+    "nomEditeur": "ARTE France Développement",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/8602.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "DOC",
+      "nom": "ressources documentaires et de presse"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "SVT"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "école maternelle"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/MERE_Educadhoc_GAR",
+    "description": "Mère de famille relative aux ressources utilisant l'application Educadhoc pour les manuels numériques et les parcours interactifs. Affectation établissement a réaliser pour la mère de famille afin que les utilisateurs disposent dans Educadhoc de la bilbiothèque et des fonctionnalités associées pour l'espace BUREAU. Les éditeurs concernés par cette mère de famille sont : Hachette éducationHatierDidierFoucherEdition Maison des languesBertrand LacosteLe GénieFontainePicardDocéo éditionDunod  ",
+    "nomRessource": "Educadhoc_GAR (mère de famille)",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/mere/6394.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/79004/3dvg3080695",
+    "description": "Le service en ligne Édugéo est destiné à apporter aux enseignants et à leurs élèves des donnéees géographiques sur la France métropolitaine, les départements et les régions d'outre-mer. Il fournit aussi des outils de cartographies en ligne. Le service se compose de cette ressource (Edugéo Support), et de deux ressources associées: Edugeo-Cartographie et Edugeo-Minetest. La ressource Edugéo Support intervient comme une ressource mère de famille, les deux ressources Edugéo-Cartographie et Edugeo-Minetest sont membres de la famille. Les utilisateurs ne verront que Edugéo Support dans leur médiacentre.",
+    "nomRessource": "Édugéo - Offre Éduthèque de l'IGN (mère de famille)",
+    "nomEditeur": "Institut national de l'information géographique et forestière (IGN)",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/mere/12079.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "CM2"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "TLEPRO "
+      },
+      {
+        "nom": "cycle 3 (2016)"
+      },
+      {
+        "nom": "cycle 4 (2016)"
+      },
+      {
+        "nom": "lycée professionnel"
+      },
+      {
+        "nom": "enseignement supérieur en lycée"
+      },
+      {
+        "nom": "collège"
+      },
+      {
+        "nom": "collège professionnel"
+      },
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "adaptation scolaire et scolarisation des élèves handicapés"
+      },
+      {
+        "nom": "voies générale, technologique, professionnelle"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "école élémentaire"
+      },
+      {
+        "nom": "école maternelle"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/79004/1mnt1547832",
+    "description": "Le service en ligne Minetest à la carte (membre de la famille Edugéo) est destiné à apporter aux enseignants et à leurs élèves des cartes sous format Minetest basées sur les données géographiques de l'IGN sur la France métropolitaine et les départements et régions d'outre-mer, ainsi que des outils pédagogiques (de simulation de risques naturels par exemple). La ressource Minetest intervient comme une ressource enfant de la famille Édugéo (Edugéo Support étant la mère de famille). De ce fait les utilisateurs ne verront pas cette notice dans leur médiacenter, ils ne verront que la notice mère Edugéo Support.",
+    "nomRessource": "Édugéo - Offre Éduthèque de l'IGN (Minetest)",
+    "nomEditeur": "Institut national de l'information géographique et forestière (IGN)",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/12081.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "CM2"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "CM1"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "TLEPRO "
+      },
+      {
+        "nom": "cycle 3 (2016)"
+      },
+      {
+        "nom": "cycle 4 (2016)"
+      },
+      {
+        "nom": "lycée professionnel"
+      },
+      {
+        "nom": "enseignement supérieur en lycée"
+      },
+      {
+        "nom": "collège"
+      },
+      {
+        "nom": "collège professionnel"
+      },
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "adaptation scolaire et scolarisation des élèves handicapés"
+      },
+      {
+        "nom": "voies générale, technologique, professionnelle"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "école élémentaire"
+      },
+      {
+        "nom": "école maternelle"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/79004/3dvg3080697",
+    "description": "Le service en ligne Édugéo cartographie est destiné à apporter aux enseignants et à leurs élèves des donnéees géographiques sur la France métropolitaine, les départements et les régions d'outre-mer. Il fournit des outils en ligne pour créer des cartes légendés, des cartes statistiques et des cartes narratives. La ressource Édugéo cartographie intervient comme une ressource enfant de la famille Édugéo (Edugéo Support étant la mère de famille). De ce fait les utilisateurs ne verront pas cette notice dans leur médiacenter, ils ne verront que la notice mère Edugéo Support.",
+    "nomRessource": "Édugéo - Offre Éduthèque de l'IGN (outils cartographiques)",
+    "nomEditeur": "Institut national de l'information géographique et forestière (IGN)",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/12080.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "1ERPRO "
+      },
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "CM2"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "2NDPRO "
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "TLEPRO "
+      },
+      {
+        "nom": "cycle 3 (2016)"
+      },
+      {
+        "nom": "cycle 4 (2016)"
+      },
+      {
+        "nom": "lycée professionnel"
+      },
+      {
+        "nom": "enseignement supérieur en lycée"
+      },
+      {
+        "nom": "collège"
+      },
+      {
+        "nom": "collège professionnel"
+      },
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "adaptation scolaire et scolarisation des élèves handicapés"
+      },
+      {
+        "nom": "voies générale, technologique, professionnelle"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "école élémentaire"
+      },
+      {
+        "nom": "école maternelle"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/40015/5cb49d1a07571619c4c4fba6",
+    "description": "En 2023, votre manuel est enrichi :Pour toutes les notions du programme d'étude de la langue, + de 100 nouveaux exercices interactifsPour chaque objet d'étude du programme de littérature, un parcours interactif pour accompagner la lecture d'une oeuvre (Genially) : Bel-Ami, Le Misanthrope, Le Dernier Jour d'un condamné, L'EtrangerUn fil d'actualité accessible depuis le manuel pour suivre les actualités culturelles du Français au LycéeEt toujours, un manuel alliant richesse littéraire et artistique, et des outils pratiques et méthodiquesDes oeuvres intégrales (théâtre, roman) et des parcours (poésie, littérature d'idées) des groupements de textes et des pistes de lectures cursivesDe nombreux repères pour les élèves : fiches d'Histoire littéraire et artistique, frises chronologiques, repères sur les genres, contextualisation des séquences...Des ressources variées pour les prolongements littéraires et artistiques : lectures d'images, dossiers thématiques, études de mise en scène, podcasts d'histoire littéraire...Un entraînement complet et efficace pour maîtriser l'étude de la langue et les outils d'analyse : leçons synthétiques et exercices progressifsDe la méthode pour préparer le nouveau BAC : fiches pratiques et visuelles, exemples rédigés et commentés, exercicesUn manuel numérique avec tout le contenu de la version papier intégré dans une application interactive qui propose des fonctionnalités spécifiques pour les DYS ( police, jeu sur les interlignages, textes lus..).L'élève accède à de nombreuses ressources numériques et activités complémentaires :24 podcasts d'histoire littéraire et artistiquedes études d'oeuvres d'artdes vidéos : captations, entretiens exclusifs avec des metteur et metteuse en scènedes textes lus par leur auteur ou par des comédien ou comédiennedes textes complémentaires (parcours de lecture, textes échos)Pour l'enseignant : 1 licence enseignant LIB offerte pour 20 licences élève LIB achetée►2023 : Offre spéciale Pack Manuel + Cahier Empreintes Littéraires",
+    "nomRessource": "Empreintes littéraires Français 2de (Ed. num. 2023) - LIB manuel numérique PREMIUM actualisé élève - Lib Manuels",
+    "nomEditeur": "Magnard",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/9915.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "FRANC"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "voie générale et technologique"
+      },
+      {
+        "nom": "2GT"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/40015/5cb49dff451c951ef2b17636",
+    "description": "En 2023, votre manuel est enrichi :Pour toutes les notions du programme d'étude de la langue, + de 100 nouveaux exercices interactifsPour chaque objet d'étude du programme de littérature, un parcours interactif pour accompagner la lecture d'une oeuvre (Genially) : Bel-Ami, Le Misanthrope, Le Dernier Jour d'un condamné, L'EtrangerUn fil d'actualité accessible depuis le manuel pour suivre les actualités culturelles du Français au LycéeEt toujours, un manuel alliant richesse littéraire et artistique, et des outils pratiques et méthodiquesDes oeuvres intégrales (théâtre, roman) et des parcours (poésie, littérature d'idées) des groupements de textes et des pistes de lectures cursivesDe nombreux repères pour les élèves : fiches d'Histoire littéraire et artistique, frises chronologiques, repères sur les genres, contextualisation des séquences...Des ressources variées pour les prolongements littéraires et artistiques : lectures d'images, dossiers thématiques, études de mise en scène, podcasts d'histoire littéraire...Un entraînement complet et efficace pour maîtriser l'étude de la langue et les outils d'analyse : leçons synthétiques et exercices progressifsDe la méthode pour préparer le nouveau BAC : fiches pratiques et visuelles, exemples rédigés et commentés, exercicesSur ce manuel numérique enseignant :Toutes les ressources du manuel numérique élève :24 podcasts d'histoire littéraire et artistique des études d'oeuvres d'artdes vidéos : captations, entretiens exclusifs avec des metteur et metteuse en scènedes textes lus par leur auteur ou par des comédien ou comédiennedes textes complémentaires (parcours de lecture, textes échos)un accès direct au livre du professeurdes fonctionnalités spécifiques pour les DYS ( police, jeu sur les interlignages, textes lus..).Pour l'enseignant : 1 licence enseignant LIB pour 20 licences élève LIB achetées►2023 : Offre spéciale Pack Manuel + Cahier Empreintes Littéraires",
+    "nomRessource": "Empreintes littéraires Français 2de (Ed. num. 2023) - LIB manuel numérique PREMIUM actualisé enseignant - Lib Manuels",
+    "nomEditeur": "Magnard",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/9718.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "FRANC"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "voie générale et technologique"
+      },
+      {
+        "nom": "2GT"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782401059061",
+    "description": "Avec ce manuel numérique pour l’élève, retrouvez tout le contenu de la version papier intégrée dans une application interactive qui permet la personnalisation de contenus et facilite l’apprentissage des élèves.  L’élève y trouve  :  - de nombreux enrichissements  :QCM interactifsRessources vidéos :pour retenir l’essentiel grâce au schéma bilan animépour acquérir les méthodes (corrigé des exercices méthodes animé)pour aller plus loin  Mémocartes imprimables et interactives pour développer la mémorisation activeSimulateurs  - une offre de fonctionnalités pratiques et faciles à utiliser :navigation  rapide  : sommaire interactif, recherche par mot clé, mise en favoriajout d’annotations dans le manuel grâce à la trousse  : crayon, surligneur, flèche, …création de notes orales ou écrites  une vraie solution au poids du cartable permettant une utilisation nomade, en classe ou à la maison.  Configurations requises  : https://educadhoc.fr/distribution/Compatible ENTDisponible en ligne ou sans connexionIntègre la fonction 1-clic  Pour un usage classe 100% numérique ou en complément du papier",
+    "nomRessource": "Enseignement scientifique 1re - éd. 2019 - Manuel numérique PREMIUM élève",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/9064.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "G-SCI"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782401059054",
+    "description": "Ce manuel numérique est GRATUIT pour les enseignants qui équipent leur classe du manuel élève papier ou numérique.Cliquer sur le bouton « Accéder à l’offre » ci-dessus.  Avec ce manuel numérique pour l’enseignant, retrouvez tout le contenu de la version papier intégrée dans une application interactive qui permet l’animation de la vidéo-projection, la personnalisation de contenus et facilite l’apprentissage des élèves.  L’enseignant peut  :  exploiter les nombreux enrichissements QCM interactifsRessources vidéos :pour retenir l’essentiel grâce au schéma bilan animépour acquérir les méthodes (corrigé des exercices méthodes animé)pour aller plus loin  Mémocartes imprimables et interactives pour développer la mémorisation activeSimulateurs  animer sa classe différemment  :vidéo-projection du manuelaffichage des documents en plein écran  personnaliser son manuel  :ajout d’annotations grâce à la trousse graphiqueajout de pièces jointes  : liens internet, pages de cours, notes audio ou écrites, …  créer son cours en y intégrant des éléments du manuel   et des documents personnels  Partager un document à ses élèves, leur assigner un travail et suivre leur progression   Compatible ENTDisponible en ligne ou sans connexionIntègre la fonction 1-clic  Une richesse pédagogique pour animer ses cours et stimuler l’apprentissage des élèves.Pour un usage classe 100% numérique ou en complément du papier.",
+    "nomRessource": "Enseignement scientifique 1re - éd.2019 - Manuel numérique PREMIUM enseignant",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/9063.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "G-SCI"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782401073418",
+    "description": "Fonctionnalités de ce manuel numérique PREMIUM NOUVELLE GENERATION modifiable pour une pédagogie sur-mesure au choix de l'enseignant lisibilité optimisée à l'écran, même sur smartphone ! un mode DYS pour un affichage des textes adapté aux élèves à besoins spécifiques et toujours les fonctionnalités du manuel numérique PREMIUM Accès au manuel avec ou sans connexion Téléchargement sur ordinateur, tablette, smartphone ou clé USB Tous les enrichissements numériques en 1 clic Interaction de l'enseignant avec les élèves Compatible ENT",
+    "nomRessource": "Enseignement scientifique Tle, éd. 2020. Manuel numérique PREMIUM élève",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/10850.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "G-SCI"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782401073401",
+    "description": "Fonctionnalités de ce manuel numérique PREMIUM NOUVELLE GENERATION modifiable pour une pédagogie sur-mesure au choix de l'enseignant lisibilité optimisée à l'écran, même sur smartphone ! un mode DYS pour un affichage des textes adapté aux élèves à besoins spécifiques et toujours les fonctionnalités du manuel numérique PREMIUM Accès au manuel avec ou sans connexion Téléchargement sur ordinateur, tablette, smartphone ou clé USB Tous les enrichissements numériques en 1 clic Interaction de l'enseignant avec les élèves Compatible ENT",
+    "nomRessource": "Enseignement scientifique Tle, éd. 2020. Manuel numérique PREMIUM enseignant",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/10849.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "G-SCI"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/27019/fk34t2y7l2",
+    "description": "Accompagnement pédagogique en ligne",
+    "nomRessource": "Enseigno 2",
+    "nomEditeur": "Educlever",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/12170.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "LV"
+      },
+      {
+        "nom": "HIGEO"
+      },
+      {
+        "nom": "FRANC"
+      },
+      {
+        "nom": "MATHS"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "6e"
+      },
+      {
+        "nom": "cycle 3 (2016)"
+      },
+      {
+        "nom": "CM2"
+      },
+      {
+        "nom": "CM1"
+      },
+      {
+        "nom": "2GT"
+      },
+      {
+        "nom": "CE2"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "3e"
+      },
+      {
+        "nom": "5e"
+      },
+      {
+        "nom": "4e"
+      },
+      {
+        "nom": "1re générale et technologique"
+      },
+      {
+        "nom": "CE1"
+      },
+      {
+        "nom": "CP"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/20863/004/000",
+    "description": "ERSILIA est une plateforme collaborative en ligne pour comprendre le monde contemporain par l'image. Les contenus éditorialisés sont liés à des thématiques : Image et territoire, Image et corps, Image et mémoire... Ils s'articulent autour d'œuvres emblématiques dont les enjeux politiques, sociaux, historiques et artistiques sont révélés par des clés d'analyse. Celles-ci donnent accès à des textes inédits, des jeux créatifs pour exercer son regard, des créations de jeunes, et de nombreux liens renvoient à des sites de référence. Chaque utilisateur est invité à concevoir son propre parcours et à le partager à l'ensemble de son réseau sur ERSILIA.",
+    "nomRessource": "ERSILIA",
+    "nomEditeur": "ERSILIA",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/16027.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MUL",
+      "nom": "ressources d'enseignement multimédias"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "ESOCA"
+      },
+      {
+        "nom": "ARTS"
+      },
+      {
+        "nom": "APLUA"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "collège"
+      },
+      {
+        "nom": "voies générale, technologique, professionnelle"
+      },
+      {
+        "nom": "lycée professionnel"
+      },
+      {
+        "nom": "collège professionnel"
+      },
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/40015/5ea1d81d955ec452cf3691d3",
+    "description": "Un fort ancrage culturel avec des documents authentiques en tout genre pour varier les plaisirs.18 unités de tailles variables, pour s'adapter au calendrier de Terminale et vous offrir un large choix de thèmesUne liberté pédagogique optimale grâce à une structure claire et modulableUn questionnement différencié dans chaque unitéUn fort ancrage culturel avec plus de 400 documents authentiques : 64 vidéos, 40 audios, 198 images, 101 textes Un travail linguistique diversifié et conséquent : exercices interactifs de langue dans chaque unité, précis grammatical, exercices en fin de manuel...Une préparation aux épreuves du Bac : 33 pages \"De camino al examen\" et 6 fiches de méthodologie+ 3 courts-métrages pour un travail libre autour de plusieurs axes Avec le manuel numérique élève :L'intégralité de la version papier en version numériqueAccès direct à des ressources et activités complémentaires :Des audios et des vidéosLe lexique sonoriséDes exercices interactifsLes \"desafío quiz\" ► Pour l'enseignant : 1 licence enseignant LIB offerte pour 20 licences élève LIB achetées",
+    "nomRessource": "Espagnol Otros Mundos ¡A descubrir! Tle (2020) - LIB manuel numérique élève - Lib Manuels",
+    "nomEditeur": "Magnard",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/12007.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "terminale STL"
+      },
+      {
+        "nom": "terminale techno hôtellerie"
+      },
+      {
+        "nom": "terminale technologique"
+      },
+      {
+        "nom": "voie technologique"
+      },
+      {
+        "nom": "terminale STHR"
+      },
+      {
+        "nom": "terminale STI2D"
+      },
+      {
+        "nom": "terminale TMD"
+      },
+      {
+        "nom": "terminale générale"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "TSTD2A13403 "
+      },
+      {
+        "nom": "voie générale et technologique"
+      },
+      {
+        "nom": "T-ST2S33104 "
+      },
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "voie générale"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "terminale STMG"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/40015/5ea1d7ac955ec43350369307",
+    "description": "Un fort ancrage culturel avec des documents authentiques en tout genre pour varier les plaisirs.18 unités de tailles variables, pour s'adapter au calendrier de Terminale et vous offrir un large choix de thèmesUne liberté pédagogique optimale grâce à une structure claire et modulableUn questionnement différencié dans chaque unitéUn fort ancrage culturel avec plus de 400 documents authentiques : 64 vidéos, 40 audios, 198 images, 101 textes Un travail linguistique diversifié et conséquent : exercices interactifs de langue dans chaque unité, précis grammatical, exercices en fin de manuel...Une préparation aux épreuves du Bac : 33 pages \"De camino al examen\" et 6 fiches de méthodologie+ 3 courts-métrages pour un travail libre autour de plusieurs axes Dans ce manuel numérique enseignant :Toutes les ressources du manuel numérique élève :Des audios et des vidéosLe lexique sonoriséDes exercices interactifsLes \"desafío quiz\"Le livre du professeur à télécharger directement dans le manuel ► Pour l'enseignant : 1 licence enseignant LIB offerte pour 20 licences élève LIB achetées",
+    "nomRessource": "Espagnol Otros Mundos ¡A descubrir! Tle (2020) - LIB manuel numérique enseignant - Lib Manuels",
+    "nomEditeur": "Magnard",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/12006.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "terminale STL"
+      },
+      {
+        "nom": "terminale techno hôtellerie"
+      },
+      {
+        "nom": "terminale technologique"
+      },
+      {
+        "nom": "voie technologique"
+      },
+      {
+        "nom": "terminale STHR"
+      },
+      {
+        "nom": "terminale STI2D"
+      },
+      {
+        "nom": "terminale TMD"
+      },
+      {
+        "nom": "terminale générale"
+      },
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "TSTD2A13403 "
+      },
+      {
+        "nom": "voie générale et technologique"
+      },
+      {
+        "nom": "T-ST2S33104 "
+      },
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "voie générale"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "terminale STMG"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/21889/n13_9782091316383",
+    "description": ".",
+    "nomRessource": "Esplorazione 1re / Terminale - Licence élève adoptant numérique",
+    "nomEditeur": "NATHAN",
+    "urlVignette": "https://vignette.gar.education.fr/sejer-fr/gar/11745.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "ITALIEN"
+      },
+      {
+        "nom": "LV"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "Niveau éducatif détaillé (2015-)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/21889/n13_9782091316444",
+    "description": ".",
+    "nomRessource": "Esplorazione 1re / Terminale - Licence enseignantCNS",
+    "nomEditeur": "NATHAN",
+    "urlVignette": "https://vignette.gar.education.fr/sejer-fr/gar/11764.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "ITALIEN"
+      },
+      {
+        "nom": "LV"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "Niveau éducatif détaillé (2015-)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/ML9782356858887",
+    "description": "Nos manuels numériques sont sur Éducadhoc, la plateforme éducative qui rassemble plus de 3 millions d'élèves et de professeur(e)s en France : Naviguer intuitivement dans votre manuel grâce à des outils dédiés (flèches, sommaires, carrousels, recherche par mots-clés, etc.) Préparer vos cours facilement et personnaliser votre manuel (favoris, captures, création de séquences pédagogiques, ajouts de notes et de lien, importation et exportation de documents, etc.)Animer vos cours (vidéoprojection, pistes audio, vidéo, etc.)Partager des documents et ressources avec vos élèves (suivi de travail, envoi des synthèses de cours, assignation des devoirs, etc.)",
+    "nomRessource": "Fantastisch! Lycée 2de Programme 2025 - Licence numérique élève",
+    "nomEditeur": "EDITIONS MAISON DES LANGUES",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/21029.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/ML9782356858894",
+    "description": "Nos manuels numériques sont sur Éducadhoc, la plateforme éducative qui rassemble plus de 3 millions d'élèves et de professeur(e)s en France : Naviguer intuitivement dans votre manuel grâce à des outils dédiés (flèches, sommaires, carrousels, recherche par mots-clés, etc.) Préparer vos cours facilement et personnaliser votre manuel (favoris, captures, création de séquences pédagogiques, ajouts de notes et de lien, importation et exportation de documents, etc.)Animer vos cours (vidéoprojection, pistes audio, vidéo, etc.)Partager des documents et ressources avec vos élèves (suivi de travail, envoi des synthèses de cours, assignation des devoirs, etc.)",
+    "nomRessource": "Fantastisch! Lycée 2de Programme 2025 - Licence numérique professeur",
+    "nomEditeur": "EDITIONS MAISON DES LANGUES",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/21030.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/20863/003/000",
+    "description": "Fovéa propose des vidéos et des exercices interactifs sur différentes thématiques en lien : l’ouverture sur le monde (religions, modes de vie et de culture, immigration), histoire, économie, développement durable. Les vidéos et les exercices sont accessibles pour les enfants porteurs de handicap.",
+    "nomRessource": "Fovéa",
+    "nomEditeur": "ARTE France",
+    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/9615.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "DIC",
+      "nom": "ressources de référence, dictionnaires et encyclopédies"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "éducation aux médias et à l'information (discipline)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "collège"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/40015/60898d1a1beb140062a2725e",
+    "description": "Nouveaux contenus en 2025 :6 sujets de Bac pour entraîner et évaluer vos élèves6 vidéos en partenariat avec La Boîte à Bac Un fil d’actualité accessible depuis le manuelEt toujours, un manuel clé en main pour une mise en oeuvre pragmatique du programmeUn cours structuré pour une lecture en autonomiePlus de 700 documents variés pour vos élèves : grandes infographies, équilibre entre documents inédits et incontournablesDes vidéos de Thibaut Sardier (agrégé de géographie, journaliste, youtubeur) pour décrypter les thèmes Une préparation aux épreuves du Bac : des sujets guidés et blancs pour la dissertation et l'analyse de documentsUne préparation au Grand Oral et aux études supérieures : méthodes spécifiques pour gagner en autonomie, \"Boîtes à culture\" pour enrichir sa culture générale, exercices, tutoriels vidéos...",
+    "nomRessource": "HGGSP Tle (Ed. num. 2025) - LIB Banque de ressources enseignant - Lib Manuels",
+    "nomEditeur": "Magnard",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/13623.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      },
+      {
+        "nom": "HIGEO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "voie générale"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "terminale générale"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/40015/5ea1d00a955ec433373692f8",
+    "description": "Nouveaux contenus en 2025 :6 sujets de Bac pour entraîner et évaluer vos élèves6 vidéos en partenariat avec La Boîte à Bac Un fil d’actualité accessible depuis le manuelEt toujours, un manuel clé en main pour une mise en oeuvre pragmatique du programmeUn cours structuré pour une lecture en autonomiePlus de 700 documents variés pour vos élèves : grandes infographies, équilibre entre documents inédits et incontournablesDes vidéos de Thibaut Sardier (agrégé de géographie, journaliste, youtubeur) pour décrypter les thèmes Une préparation aux épreuves du Bac : des sujets guidés et blancs pour la dissertation et l'analyse de documentsUne préparation au Grand Oral et aux études supérieures : méthodes spécifiques pour gagner en autonomie, \"Boîtes à culture\" pour enrichir sa culture générale, exercices, tutoriels vidéos... Ce manuel numérique PREMIUM, livré avec une banque de ressources, permet à l'enseignant d'assembler librement tous les documents et ressources du manuel.En complément de toutes les ressources du manuel numérique (vidéos, podcasts, cartes interactives,..), le livre du professeur accessible en un clic.► Pour l'enseignant : 1 licence enseignant LIB + banque de ressources offerte pour 20 licences élève LIB achetées",
+    "nomRessource": "HGGSP Tle (Ed. num. 2025) - LIB manuel numérique PREMIUM actualisé + banque de ressources enseignant - Lib Manuels",
+    "nomEditeur": "Magnard",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/12000.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      },
+      {
+        "nom": "HIGEO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "voie générale"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "terminale générale"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/40015/5ea1d0a9955ec454ea369171",
+    "description": "Nouveaux contenus en 2025 :6 sujets de Bac pour entraîner et évaluer vos élèves6 vidéos en partenariat avec La Boîte à Bac Un fil d’actualité accessible depuis le manuelEt toujours, un manuel clé en main pour une mise en oeuvre pragmatique du programmeUn cours structuré pour une lecture en autonomiePlus de 700 documents variés pour vos élèves : grandes infographies, équilibre entre documents inédits et incontournablesDes vidéos de Thibaut Sardier (agrégé de géographie, journaliste, youtubeur) pour décrypter les thèmes Une préparation aux épreuves du Bac : des sujets guidés et blancs pour la dissertation et l'analyse de documentsUne préparation au Grand Oral et aux études supérieures : méthodes spécifiques pour gagner en autonomie, \"Boîtes à culture\" pour enrichir sa culture générale, exercices, tutoriels vidéos... Un manuel numérique avec tout le contenu de la version papier intégré dans une application interactive qui permet l'affichage vue page/vue web, propose des fonctionnalités spécifiques pour les DYS ( police, textes lus..) et des zones de saisie dans les activités. L'élève accède à de nombreuses ressources numériques et activités complémentaires : des vidéos de Thibaut Sardier pour décrypter les thèmes d’entrées de chapitresdes podcastsdes cartes interactivestous les cours en podcastdes tutoriels vidéos pour préparer le grand Oral► Pour l'enseignant : 1 licence enseignant LIB + banque de ressources offerte pour 20 licences élève LIB achetées",
+    "nomRessource": "HGGSP Tle (Ed. num. 2025) - LIB manuel numérique PREMIUM actualisé élève - Lib Manuels",
+    "nomEditeur": "Magnard",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/12001.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      },
+      {
+        "nom": "HIGEO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "terminale générale et technologique"
+      },
+      {
+        "nom": "voie générale"
+      },
+      {
+        "nom": "cycle terminal"
+      },
+      {
+        "nom": "terminale générale"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782401097452",
+    "description": "Ce manuel numérique élève contient de NOMBREUX ENRICHISSEMENTS  FONCTIONNALITES :lecture du manuel au choix  : en double page ou par bloc ressourceaccès aux enrichissements numériques en 1 cliclisibilité optimisée à l’écran, même sur smartphone  !zoom sur les textes et documentsmode DYS pour un affichage des textes adapté aux élèves à besoins spécifiquesenvoi d’un devoir ou d’un document à l’enseignantimpression des pages du manueltéléchargement sur ordinateur, tablette, smartphone ou clé USBaccès avec ou sans connexioncompatibilité ENT   Pour les enseignants qui équipent leur classe de ce manuel numérique élève, le manuel numérique enseignant est GRATUIT  Merci de consulter les configurations minimales requises pour l&#39 utilisation du manuel numérique : https://www.educadhoc.fr/distribution",
+    "nomRessource": "Histoire Géographie 2de - Éd. 2023 - Manuel numérique élève",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/16287.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782401097445",
+    "description": "Ce manuel numérique enseignant contient de NOMBREUX ENRICHISSEMENTS  :tous les enrichissements de la version élève+ les ressources réservées à l’enseignant  FONCTIONNALITES :affichage optimisé pour la vidéoprojectionlecture du manuel au choix  : en double page ou par bloc ressourcecontenu modifiable pour une pédagogie sur-mesure au choix de l’enseignantlisibilité optimisée à l’écran, même sur smartphone  !mode DYS pour un affichage des textes adapté aux élèves à besoins spécifiquesaccès aux enrichissements numériques en 1 clicassignation d’un devoir ou d’un document à la classe entière, à un groupe d&#39 élèves ou à un élève en particulierimpression des pages du manueltéléchargement sur ordinateur, tablette, smartphone ou clé USBaccès avec ou sans connexioncompatibilité ENT   Ce manuel numérique enseignant est GRATUIT pour les enseignants qui équipent leur classe du manuel élève papier ou numérique  Merci de consulter les configurations minimales requises pour l&#39 utilisation du manuel numérique : https://www.educadhoc.fr/distribution",
+    "nomRessource": "Histoire Géographie 2de - Éd. 2023 - Manuel numérique enseignant",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/16286.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782016279403",
+    "description": "Découvrez le manuel numérique nouvelle génération !-Que trouverez-vous dans votre manuel numérique ?L’intégralité du contenu du manuel papier.Des liens vers des vidéosDes cartes et des frises interactivesDes fonds de cartes et de frisesQuelles sont les fonctionnalités ?VidéoprojectionTéléchargeableGranulaireRessources complémentaires  Affichage du contenu adapté  pour les élèves dyslexiques  Exportable sur clé USBCompatible GAR et ENTAccessible en ligne et hors ligne sur PC, Mac et tablette ",
+    "nomRessource": "Histoire Géographie EMC Terminale séries technologiques - Manuel numérique élève - Éd. 2020",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/10279.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782016279410",
+    "description": "Découvrez le manuel numérique nouvelle génération !Que trouverez-vous dans votre manuel numérique ?L’intégralité du contenu du manuel papier.Des liens vers des vidéosDes cartes et des frises interactivesDes fonds de cartes et de frisesQuelles sont les fonctionnalités ?VidéoprojectionTéléchargeableQuestionnement modifiable par l&#39 enseignantGranulaireRessources complémentaires  Affichage du contenu adapté  pour les élèves yslexiques  Exportable sur clé USBCompatible GAR et ENTAccessible en ligne et hors ligne sur PC, Mac et tablette   ",
+    "nomRessource": "Histoire Géographie EMC Terminale séries technologiques - Manuel numérique enseignant - Éd. 2020",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/10280.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/58826/BLNEDU-9791035815769",
+    "description": "Le manuel numérique HGGSP Tle - Édition 2026 propose des documents actualisés à partir des dernières données disponibles. Il donne également accès à des dossiers d'actualité en lien avec le programme et en prise avec l'actualité, envoyés au retour des vacances scolaires de la Toussaint, de Noël et d'Hiver.Ce manuel est parfaitement adapté au nouvel enseignement d'HGGSP, avec une structure et des exemples suivant fidèlement le nouveau programme pour en faciliter la mise en œuvre.Ce manuel combine acquisition de nouveaux savoirs (via la mobilisation des compétences par le travail sur documents) et activités développant autonomie, réflexion (recherche, esprit critique, argumentation via le débat). Et une démultiplication des formes de travail (oral, écrit, individuel, groupe) via les ateliers.Structure d’un thème : - La page d’ouverture de thème permet d’entrer dans le thème avec une belle iconographie.- Une double page \"Première approche\" présente une grande carte et les premières notions pour entrer dans le thème.- Les 3 double-pages \"Les clés du thème\" sont une introduction documentaire aux notions du thème.- La page \"Le point sur\" permet une première synthèse des notions du thème des exercices auto correctifs et disponibles en version interactive permettent de vérifier ses premières acquisitions.Chaque Axe commence par la confrontation de deux photos.Il traite les jalons du programme sous forme de dossiers documentaires.Une double page \"Focus\" complète les jalons quand cela est nécessaire.La double page \"Fabrique de l’image\" donne une réflexion sur la portée politique des images.L’objet conclusif commence par une double page avec une carte et des documents pour donner le contexte.Il traite les jalons du programme sous forme de dossiers documentaires.Une double page \"Focus\" complète les jalons quand cela est nécessaire.Chaque axe et objet conclusif se termine par 3 double pages :- des ateliers permettant un travail sous des formes très variées - un bilan écrit et schématisé faisant la synthèse de ce qui a été vu - une préparation au bac.Ressources complémentaires du manuel :des fichiers audiodes cartes interactives, exercices interactifs, schémas bilan interactifsdes vidéosdes sites internetle guide pédagogique complet (sur le manuel numérique enseignant) ► Pour l'enseignant : 1 licence enseignant offerte pour 30 licences élèves achetées",
+    "nomRessource": "Histoire Géographie Géopolitique Sciences politiques 1re spécialité (ed.num 2026) - Manuel numérique max Premium (Ed. num 2026) - Licence actualisée élève - Manuel max",
+    "nomEditeur": "Belin Education",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/11205.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      },
+      {
+        "nom": "HIGEO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "1re générale"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/58826/BLNEDU-9791035815981",
+    "description": "Le manuel numérique HGGSP Tle - Édition 2026 propose des documents actualisés à partir des dernières données disponibles. Il donne également accès à des dossiers d'actualité en lien avec le programme et en prise avec l'actualité, envoyés au retour des vacances scolaires de la Toussaint, de Noël et d'Hiver.Ce manuel est parfaitement adapté au nouvel enseignement d'HGGSP, avec une structure et des exemples suivant fidèlement le nouveau programme pour en faciliter la mise en œuvre.Ce manuel combine acquisition de nouveaux savoirs (via la mobilisation des compétences par le travail sur documents) et activités développant autonomie, réflexion (recherche, esprit critique, argumentation via le débat). Et une démultiplication des formes de travail (oral, écrit, individuel, groupe) via les ateliers.Structure d’un thème : - La page d’ouverture de thème permet d’entrer dans le thème avec une belle iconographie.- Une double page \"Première approche\" présente une grande carte et les premières notions pour entrer dans le thème.- Les 3 double-pages \"Les clés du thème\" sont une introduction documentaire aux notions du thème.- La page \"Le point sur\" permet une première synthèse des notions du thème des exercices auto correctifs et disponibles en version interactive permettent de vérifier ses premières acquisitions.Chaque Axe commence par la confrontation de deux photos.Il traite les jalons du programme sous forme de dossiers documentaires.Une double page \"Focus\" complète les jalons quand cela est nécessaire.La double page \"Fabrique de l’image\" donne une réflexion sur la portée politique des images.L’objet conclusif commence par une double page avec une carte et des documents pour donner le contexte.Il traite les jalons du programme sous forme de dossiers documentaires.Une double page \"Focus\" complète les jalons quand cela est nécessaire.Chaque axe et objet conclusif se termine par 3 double pages :- des ateliers permettant un travail sous des formes très variées - un bilan écrit et schématisé faisant la synthèse de ce qui a été vu - une préparation au bac.Ressources complémentaires du manuel :des fichiers audiodes cartes interactives, exercices interactifs, schémas bilan interactifsdes vidéosdes sites internetle guide pédagogique complet (sur le manuel numérique enseignant) ► Pour l'enseignant : 1 licence enseignant offerte pour 30 licences élèves achetées",
+    "nomRessource": "Histoire Géographie Géopolitique Sciences politiques 1re spécialité (ed.num 2026) - Manuel numérique max Premium (Ed. num 2026) - Licence actualisée enseignant - Manuel max",
+    "nomEditeur": "Belin Education",
+    "urlVignette": "https://vignette.gar.education.fr/GAREDULIBPROD/gar/11206.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      },
+      {
+        "nom": "HIGEO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "1re générale"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782401073463",
+    "description": "Fonctionnalités de ce manuel numérique PREMIUM NOUVELLE GENERATION modifiable pour une pédagogie sur-mesure au choix de l'enseignant lisibilité optimisée à l'écran, même sur smartphone ! un mode DYS pour un affichage des textes adapté aux élèves à besoins spécifiques et toujours les fonctionnalités du manuel numérique PREMIUM Accès au manuel avec ou sans connexion Téléchargement sur ordinateur, tablette, smartphone ou clé USB Tous les enrichissements numériques en 1 clic Interaction de l'enseignant avec les élèves Compatible ENT",
+    "nomRessource": "Histoire Tle, éd. 2020. Manuel numérique PREMIUM enseignant",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/10855.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/21889/n13_9782095056841",
+    "description": "Cette compilation contient le manuel d'Histoire Cote 1re (édition 2019) et le manuel de Géographie Janin 1re (édition 2025).> La version numérique du manuel papier + des ressources multimédias accessibles directement pour réviser, s’entraîner, aller plus loin• vidéos• cours en version audio• exercices interactifs autocorrectifs• frises, croquis de paysages, cartes et schémas interactifs• textes en police adaptée pour les élèves dyslexiques...> Des outils faciles à utiliser (notes orales et écrites, zoom, surligneur…) pour s’approprier le manuel et personnaliser ses révisions> Consultable partout et à tout moment, le manuel numérique élève est multisupport (ordinateurs, tablettes et smartphones) > Pour un usage individuel à la maison et/ou en classe (domicile et établissement)Une licence annuelle par enfant ouvre 7 accès : - 1 accès en ligne illimité pendant toute la durée de la licence- 3 téléchargements sur ordinateurs (PC ou Mac)- 3 téléchargements sur tablettes ou smartphones (iOS, Android ou Windows)> L'appli gratuite Biblio Manuels permet de regrouper tous les manuels numériques élèves achetés dans une seule bibliothèque.Pour + d'infos et pour télécharger l'appli, consultez le site manuelnumerique.com .",
+    "nomRessource": "Histoire-Géographie 1re Cote/Janin (2025) - Licence élève",
+    "nomEditeur": "NATHAN",
+    "urlVignette": "https://vignette.gar.education.fr/sejer-fr/gar/21669.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "histoire et géographie (enseignement commun)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "Niveau éducatif détaillé (2015-)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/21889/n13_9782095056988",
+    "description": "Cette compilation contient le manuel d'Histoire Cote 1re (édition 2019) et le manuel de Géographie Janin 1re (édition 2025).> La version numérique du manuel + de nombreuses ressources numériques accessibles directement pour faire la classe et préparer ses cours :• vidéos• cours en version audio• exercices interactifs autocorrectifs• frises, croquis de paysages, cartes et schémas interactifs• textes en police adaptée pour les élèves dyslexiques...> Des outils faciles à utiliser (notes orales et écrites, zoom, surligneur…) pour s’approprier le manuel et personnaliser ses révisions> Consultable partout et à tout moment, le manuel numérique élève est multisupport (ordinateurs, tablettes et smartphones) > L'appli gratuite Biblio Manuels permet de regrouper tous les manuels numériques élèves achetés dans une seule bibliothèque.Pour + d'infos et pour télécharger l'appli, consultez le site manuelnumerique.com .",
+    "nomRessource": "Histoire-Géographie 1re Cote/Janin (2025) - Licence enseignant",
+    "nomEditeur": "NATHAN",
+    "urlVignette": "https://vignette.gar.education.fr/sejer-fr/gar/21732.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entrąînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "histoire et géographie (enseignement commun)"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      },
+      {
+        "nom": "Niveau éducatif détaillé (2015-)"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782401073333",
+    "description": "Une version tout-en-un Histoire et Géographie au format réduit qui traite l&#39 intégralité du programme.Un manuel de Tle avec :une richesse documentairedes parcours pédagogiques différenciésune préparation au Bac efficace et un entraînement à toutes les épreuves.",
+    "nomRessource": "Histoire-Géographie Tle - Éd. 2025 actualisée - Manuel numérique élève",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/10842.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HA9782401073326",
+    "description": "Une version tout-en-un Histoire et Géographie au format réduit qui traite l&#39 intégralité du programme.Un manuel de Tle avec :une richesse documentairedes parcours pédagogiques différenciésune préparation au Bac efficace et un entraînement à toutes les épreuves.",
+    "nomRessource": "Histoire-Géographie Tle - Éd. 2025 actualisée - Manuel numérique enseignant",
+    "nomEditeur": "HATIER",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/10841.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "HISTO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/HE9782017256656",
+    "description": "La version digitale du Tome unique Histoire Géographie EMC 1re séries technologiques est enrichie de contenus interactifs.+ de 100 ressources numériques  accessibles en un clic depuis le manuel numérique :+ de 47 cartes mentales, cartes et frises interactives  pour entraîner les élèves et les  préparer au contrôle continu.+ de 100 liens vers des vidéos et des sites web  pour aller plus loin.7 fonds de cartes et de frises à compléter  pour entraîner les élèves et les  préparer au contrôle continu.8 quiz Kyushi à vidéoprojeter en classe  pour travailler la mémorisation et réactiver les acquis.Quelles sont les principales fonctionnalités du manuel numérique ?Pour l’enseignant :Vidéoprojection en classeEchanges professeurs-élèvesPersonnalisation du manuelPour l’élèveAccès smartphonePour tousNavigation simpleUtilisation possible hors connexionTéléchargement clé USBAccès multisupport : PC, Mac, smartphones, tablettesL’Académie Educadhoc, votre nouvel espace de formation.Retrouvez sur éducadhoc.fr, des formations éclair en 2mn chrono et des webinaires pour aller plus loin dans votre utilisation. ",
+    "nomRessource": "Histoire-Géographie-EMC 1re sér. technologiques (manuel) - Licence numérique enseignant - Éd. 2025",
+    "nomEditeur": "HACHETTE EDUCATION",
+    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/20867.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      {
+        "nom": "EMC"
+      },
+      {
+        "nom": "HISTO"
+      }
+    ],
+    "niveauEducatif": [
+      {
+        "nom": "lycée général et technologique"
+      }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
     "idRessource": "ark:/34885/wr0000001",
     "nomRessource": "Universalis Education",
     "nomEditeur": "ENCYCLOPAEDIA UNIVERSALIS FRANCE",
@@ -187,5 +2916,54 @@
     ],
     "structure_uai": "0010962L",
     "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "http://n2t.net/ark:/99999/r20xxxxxxx",
+    "idType": "ARK",
+    "nomRessource": "Arts Plastiques",
+    "idEditeur": "378901946_0000000000000000",
+    "nomEditeur": "C'est à voir",
+    "urlVignette": "https://www.editions-retz.com/sites/default/files/styles/desktop_ouvrage_complet/public/visuels/9782725632667.jpg?itok=loTYdKPQ",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "typePedagogique": [
+      { "nom": "activité pédagogique" },
+      { "nom": "matériel de référence" }
+    ],
+    "typologieDocument": [
+      { "nom": "livre numérique" }
+    ],
+    "niveauEducatif": [],
+    "domaineEnseignement": [
+      { "nom": "français (cycle 3)" }
+    ],
+    "urlAccesRessource": "https://sp-auth.validation.test-gar.education.fr/domaineGar?idENT=RU5UVEVTVDE=&idEtab=MDY1MDQ5OVAtRVQ2&idSrc=aHR0cDovL24ydC5uZXQvYXJrOi85OTk5OS9yMjB4eHh4eHh4eA=="
+  },
+  {
+    "idRessource": "http://n2t.net/ark:/99999/r14xxxxxxx",
+    "idType": "ARK",
+    "nomRessource": "Educ'ARTE",
+    "idEditeur": "378901946_0000000000000000",
+    "nomEditeur": "Microméga - Hatier",
+    "urlVignette": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ZWfoIaCHxy3nyTNNSbVtO5lhb8M7ji9BOlJdMfLTtQ&s",
+    "typePresentation": {
+      "code": "OTHER",
+      "nom": "manuels numériques"
+    },
+    "typePedagogique": [
+      { "nom": "simulation" }
+    ],
+    "typologieDocument": [
+      { "nom": "banque de vidéos" }
+    ],
+    "niveauEducatif": [
+      { "nom": "5e" }
+    ],
+    "domaineEnseignement": [
+      { "nom": "Physique Chimie" }
+    ],
+    "urlAccesRessource": "https://sp-auth.validation.test-gar.education.fr/domaineGar?idENT=RU5UVEVTVDE=&idEtab=MDY1MDQ5OVAtRVQ2&idSrc=aHR0cDovL24ydC5uZXQvYXJrOi85OTk5OS9yMTR4eHh4eHh4eA=="
   }
 ]
