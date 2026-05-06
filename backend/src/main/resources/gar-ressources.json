@@ -801,58 +801,6 @@
     "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
   },
   {
-    "idRessource": "ark:/19153/Cafeyn",
-    "description": "Grâce à Cafeyn, bénéficiez d'un accès sans limite à de la presse numérique abordant des sujets tels que l'actualité, les sciences et technologies, la culture et les loisirs, …. Où que vous soyez et à tout moment, Cafeyn offre la possibilité de consulter la version numérique d'un article ou d'un numéro de magazine. De plus, les archives des différents magazines sont accessibles pour réaliser des recherches documentaires et des exposés.",
-    "nomRessource": "Cafeyn",
-    "nomEditeur": "Réseau Canopé",
-    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/20411.png",
-    "urlAccesRessource": "",
-    "typePresentation": {
-      "code": "DOC",
-      "nom": "ressources documentaires et de presse"
-    },
-    "domaineEnseignement": [],
-    "niveauEducatif": [
-      {
-        "nom": "3PPRO "
-      },
-      {
-        "nom": "1ERPRO "
-      },
-      {
-        "nom": "6e"
-      },
-      {
-        "nom": "2GT"
-      },
-      {
-        "nom": "2NDPRO "
-      },
-      {
-        "nom": "1re générale et technologique"
-      },
-      {
-        "nom": "terminale générale et technologique"
-      },
-      {
-        "nom": "3e"
-      },
-      {
-        "nom": "5e"
-      },
-      {
-        "nom": "4e"
-      },
-      {
-        "nom": "TLEPRO "
-      }
-    ],
-    "typologieDocument": [],
-    "typePedagogique": [],
-    "structure_uai": "0010962L",
-    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
-  },
-  {
     "idRessource": "ark:/12313/HE9782017220718",
     "description": "La version digitale  du carnet est enrichie de contenus interactifs.  Plus de 150 ressources numériques  accessibles en un clic depuis le manuel numérique :+ de 60  tutos vidéo  pour un accompagnement pas à pas de l’élève +  de 60 exercices interactifs supplémentaires  pour travailler les automatismes et les capacités   Des corrigés types et des synthèses de cours en PDF Quelles sont les principales fonctionnalités du manuel numérique ?Navigation simplePersonnalisation du manuelAffichage simultané de plusieurs documentsPartage de documents entre professeurs et élèvesUtilisation possible hors connexionAccès multisupport : PC, Mac, smartphones, tablettesEt en plus pour l’enseignant :Outils de vidéoprojectionAffichage des corrigésSuivi des réponses des élèvesCréation de groupes de niveauExport sur clé USB",
     "nomRessource": "Cahier de Maths 1re séries technologiques enseignement com - manuel numérique enseignant - Éd. 2023",
@@ -1172,41 +1120,6 @@
     "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
   },
   {
-    "idRessource": "ark:/12313/CI3977251568689",
-    "description": "Chaque semaine depuis plus de 30 ans, Courrier international, grâce à ses 70 journalistes à Paris et ses correspondants à travers le monde, épluche pour vous plus de 1 500 journaux, magazines et sites de la presse internationale. De ce précieux travail ressort une sélection des meilleurs articles qui seront traduits en français, afin de vous donner les analyses les plus complètes et les plus pertinentes des événements internationaux : politiques, économiques, sociaux mais aussi l’actualité scientifique, environnementale et sociétale…..Courrier international s’intéresse aussi à la France et aux français, mais tels qu’on les voit d’ailleurs.Courrier international c’est aussi un site Internet avec l’hebdo en PDF chaque semaine de nombreuses newsletters thématiques dont La Lettre de l'Educ qui reprend les sujets des programmes de 1ères et terminales traités dans l'hebdomadaire et le site. Vous bénéficiez en plus de nombreux enrichissements : une carte interactive pour vos recherches, des vidéos, des dessins, des reportages, des unes commentées, des interviews, des revues de presse et Réveil Courrier pour avoir chaque matin un aperçu de toutes les infos necessaires pour démarrer la journée bien informée … et toutes nos archives depuis 1995.",
-    "nomRessource": "Courrier international",
-    "nomEditeur": "COURRIER INTERNATIONAL",
-    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/6665.png",
-    "urlAccesRessource": "",
-    "typePresentation": {
-      "code": "MUL",
-      "nom": "ressources d'enseignement multimédias"
-    },
-    "domaineEnseignement": [
-      {
-        "nom": "SES"
-      },
-      {
-        "nom": "HISTO"
-      },
-      {
-        "nom": "HGGSP"
-      },
-      {
-        "nom": "langues, littératures et cultures étrangères - anglais (enseignement de spécialité)"
-      }
-    ],
-    "niveauEducatif": [
-      {
-        "nom": "lycée général et technologique"
-      }
-    ],
-    "typologieDocument": [],
-    "typePedagogique": [],
-    "structure_uai": "0010962L",
-    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
-  },
-  {
     "idRessource": "ark:/12313/HE9782017191070",
     "description": "Idéal pour la vidéoprojection en classe !Avec de nombreuses ressources :Des diaporamas d&#39 activités mentales rapidesDes vidéos sur les automatismesDes versions interactives des QCMDes fichiers logicielsAvec toutes les fonctionnalités d&#39 Éducadhoc :VidéoprojectionOutils d&#39 annotationPartage de ressources et suivi des élèvesNouveautés 2023 :Création de séquences et d&#39 exercices interactifsMode diaporama",
     "nomRessource": "Déclic - Maths Enseignement scientifique 1re - Manuel numérique élève - Ed. 2023",
@@ -1243,187 +1156,6 @@
     "niveauEducatif": [
       {
         "nom": "lycée général et technologique"
-      }
-    ],
-    "typologieDocument": [],
-    "typePedagogique": [],
-    "structure_uai": "0010962L",
-    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
-  },
-  {
-    "idRessource": "ark:/19153/sdcf9pk5f",
-    "description": "Portail d’information et de recherche documentaire à destination des élèves et des professeurs. Il permet de trouver les documents empruntables au CDI et des documents numériques utiles pour les travaux d'élèves. Il propose l'actualité du CDI, des sélections de documents (nouveautés, coups de coeur, sélections thématiques). L'espace personnalisé permet de retrouver ses prêts en cours, ses réservations et également ses avis de lecture. Il peut proposer un accès à des ressources numériques (presse en ligne, dictionnaires...).",
-    "nomRessource": "e-sidoc : le portail documentaire du CDI",
-    "nomEditeur": "Réseau Canopé",
-    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/14575.png",
-    "urlAccesRessource": "",
-    "typePresentation": {
-      "code": "DOC",
-      "nom": "ressources documentaires et de presse"
-    },
-    "domaineEnseignement": [],
-    "niveauEducatif": [
-      {
-        "nom": "3PPRO "
-      },
-      {
-        "nom": "voie BP"
-      },
-      {
-        "nom": "6e"
-      },
-      {
-        "nom": "4e professionnelle"
-      },
-      {
-        "nom": "2GT"
-      },
-      {
-        "nom": "voie BEP"
-      },
-      {
-        "nom": "voie BMA"
-      },
-      {
-        "nom": "terminale technologique"
-      },
-      {
-        "nom": "3e"
-      },
-      {
-        "nom": "voie BT"
-      },
-      {
-        "nom": "BTM - 2e année"
-      },
-      {
-        "nom": "5e"
-      },
-      {
-        "nom": "4e"
-      },
-      {
-        "nom": "lycée général et technologique"
-      },
-      {
-        "nom": "CPGE - 1re année"
-      },
-      {
-        "nom": "voie CPGE"
-      },
-      {
-        "nom": "voie FC"
-      },
-      {
-        "nom": "1CAP2  "
-      },
-      {
-        "nom": "2NDPRO "
-      },
-      {
-        "nom": "2CAP2  "
-      },
-      {
-        "nom": "1BTS2 "
-      },
-      {
-        "nom": "voie BTM"
-      },
-      {
-        "nom": "2BTS2 "
-      },
-      {
-        "nom": "1re générale"
-      },
-      {
-        "nom": "voie CAP"
-      },
-      {
-        "nom": "section DUT"
-      },
-      {
-        "nom": "CPGE - 2e année"
-      },
-      {
-        "nom": "TBT "
-      },
-      {
-        "nom": "voie MC"
-      },
-      {
-        "nom": "DUT - 1re année"
-      },
-      {
-        "nom": "1BT "
-      },
-      {
-        "nom": "section BTS"
-      },
-      {
-        "nom": "1re technologique"
-      },
-      {
-        "nom": "DUT - 2e année"
-      },
-      {
-        "nom": "terminale générale et technologique"
-      },
-      {
-        "nom": "lycée professionnel"
-      },
-      {
-        "nom": "terminale pro domaine de la production"
-      },
-      {
-        "nom": "formation professionnelle"
-      },
-      {
-        "nom": "formation des personnels de l'éducation nationale"
-      },
-      {
-        "nom": "formation professionnelle continue des adultes"
-      },
-      {
-        "nom": "1ERPRO "
-      },
-      {
-        "nom": "1re pro domaine de la production"
-      },
-      {
-        "nom": "1re pro domaine des services"
-      },
-      {
-        "nom": "1re générale et technologique"
-      },
-      {
-        "nom": "FC post niveau IV"
-      },
-      {
-        "nom": "terminale générale"
-      },
-      {
-        "nom": "BTM - 1re année"
-      },
-      {
-        "nom": "FC post niveau V"
-      },
-      {
-        "nom": "1BP2  "
-      },
-      {
-        "nom": "2BP2  "
-      },
-      {
-        "nom": "1BMA2 "
-      },
-      {
-        "nom": "2BMA2 "
-      },
-      {
-        "nom": "TLEPRO "
-      },
-      {
-        "nom": "terminale pro domaine des services"
       }
     ],
     "typologieDocument": [],
@@ -1470,94 +1202,6 @@
     },
     "domaineEnseignement": [],
     "niveauEducatif": [],
-    "typologieDocument": [],
-    "typePedagogique": [],
-    "structure_uai": "0010962L",
-    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
-  },
-  {
-    "idRessource": "ark:/79004/3dvg3080695",
-    "description": "Le service en ligne Édugéo est destiné à apporter aux enseignants et à leurs élèves des donnéees géographiques sur la France métropolitaine, les départements et les régions d'outre-mer. Il fournit aussi des outils de cartographies en ligne. Le service se compose de cette ressource (Edugéo Support), et de deux ressources associées: Edugeo-Cartographie et Edugeo-Minetest. La ressource Edugéo Support intervient comme une ressource mère de famille, les deux ressources Edugéo-Cartographie et Edugeo-Minetest sont membres de la famille. Les utilisateurs ne verront que Edugéo Support dans leur médiacentre.",
-    "nomRessource": "Édugéo - Offre Éduthèque de l'IGN (mère de famille)",
-    "nomEditeur": "Institut national de l'information géographique et forestière (IGN)",
-    "urlVignette": "https://vignette.gar.education.fr/VAprod/gar/mere/12079.png",
-    "urlAccesRessource": "",
-    "typePresentation": {
-      "code": "MUL",
-      "nom": "ressources d'enseignement multimédias"
-    },
-    "domaineEnseignement": [],
-    "niveauEducatif": [
-      {
-        "nom": "1ERPRO "
-      },
-      {
-        "nom": "6e"
-      },
-      {
-        "nom": "CM2"
-      },
-      {
-        "nom": "2GT"
-      },
-      {
-        "nom": "2NDPRO "
-      },
-      {
-        "nom": "1re générale et technologique"
-      },
-      {
-        "nom": "terminale générale et technologique"
-      },
-      {
-        "nom": "3e"
-      },
-      {
-        "nom": "5e"
-      },
-      {
-        "nom": "4e"
-      },
-      {
-        "nom": "TLEPRO "
-      },
-      {
-        "nom": "cycle 3 (2016)"
-      },
-      {
-        "nom": "cycle 4 (2016)"
-      },
-      {
-        "nom": "lycée professionnel"
-      },
-      {
-        "nom": "enseignement supérieur en lycée"
-      },
-      {
-        "nom": "collège"
-      },
-      {
-        "nom": "collège professionnel"
-      },
-      {
-        "nom": "lycée général et technologique"
-      },
-      {
-        "nom": "adaptation scolaire et scolarisation des élèves handicapés"
-      },
-      {
-        "nom": "voies générale, technologique, professionnelle"
-      },
-      {
-        "nom": "cycle terminal"
-      },
-      {
-        "nom": "école élémentaire"
-      },
-      {
-        "nom": "école maternelle"
-      }
-    ],
     "typologieDocument": [],
     "typePedagogique": [],
     "structure_uai": "0010962L",
@@ -2815,6 +2459,7 @@
   {
     "idRessource": "ark:/12313/CI3977251568689",
     "nomRessource": "Courrier international",
+    "description": "Chaque semaine depuis plus de 30 ans, Courrier international, grâce à ses 70 journalistes à Paris et ses correspondants à travers le monde, épluche pour vous plus de 1 500 journaux, magazines et sites de la presse internationale. De ce précieux travail ressort une sélection des meilleurs articles qui seront traduits en français, afin de vous donner les analyses les plus complètes et les plus pertinentes des événements internationaux : politiques, économiques, sociaux mais aussi l’actualité scientifique, environnementale et sociétale…..Courrier international s’intéresse aussi à la France et aux français, mais tels qu’on les voit d’ailleurs.Courrier international c’est aussi un site Internet avec l’hebdo en PDF chaque semaine de nombreuses newsletters thématiques dont La Lettre de l'Educ qui reprend les sujets des programmes de 1ères et terminales traités dans l'hebdomadaire et le site. Vous bénéficiez en plus de nombreux enrichissements : une carte interactive pour vos recherches, des vidéos, des dessins, des reportages, des unes commentées, des interviews, des revues de presse et Réveil Courrier pour avoir chaque matin un aperçu de toutes les infos necessaires pour démarrer la journée bien informée … et toutes nos archives depuis 1995.",
     "nomEditeur": "COURRIER INTERNATIONAL",
     "urlVignette": "/vignettes/courrier-international.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F12313%2FCI3977251568689",
@@ -2869,6 +2514,7 @@
   {
     "idRessource": "ark:/79004/3dvg3080695",
     "nomRessource": "Édugéo - Offre Éduthèque de l'IGN",
+    "description": "Le service en ligne Édugéo est destiné à apporter aux enseignants et à leurs élèves des donnéees géographiques sur la France métropolitaine, les départements et les régions d'outre-mer. Il fournit aussi des outils de cartographies en ligne. Le service se compose de cette ressource (Edugéo Support), et de deux ressources associées: Edugeo-Cartographie et Edugeo-Minetest. La ressource Edugéo Support intervient comme une ressource mère de famille, les deux ressources Edugéo-Cartographie et Edugeo-Minetest sont membres de la famille. Les utilisateurs ne verront que Edugéo Support dans leur médiacentre.",
     "nomEditeur": "Institut national de l'information géographique et forestière (IGN)",
     "urlVignette": "/vignettes/edugeo.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F79004%2F3dvg3080695",
@@ -2897,6 +2543,7 @@
   {
     "idRessource": "ark:/19153/sdcf9pk5f",
     "nomRessource": "e-sidoc : le portail documentaire du CDI",
+    "description": "Portail d’information et de recherche documentaire à destination des élèves et des professeurs. Il permet de trouver les documents empruntables au CDI et des documents numériques utiles pour les travaux d'élèves. Il propose l'actualité du CDI, des sélections de documents (nouveautés, coups de coeur, sélections thématiques). L'espace personnalisé permet de retrouver ses prêts en cours, ses réservations et également ses avis de lecture. Il peut proposer un accès à des ressources numériques (presse en ligne, dictionnaires...).",
     "nomEditeur": "Réseau Canopé",
     "urlVignette": "/vignettes/esidoc.png",
     "urlAccesRessource": "https://idp-auth.gar.education.fr/domaineGar?idENT=VTA=&idEtab=MDAxMDk2Mkw=&idRessource=ark%3A%2F19153%2Fsdcf9pk5f",
@@ -2923,7 +2570,7 @@
     "nomRessource": "Arts Plastiques",
     "idEditeur": "378901946_0000000000000000",
     "nomEditeur": "C'est à voir",
-    "urlVignette": "https://www.editions-retz.com/sites/default/files/styles/desktop_ouvrage_complet/public/visuels/9782725632667.jpg?itok=loTYdKPQ",
+    "urlVignette": "http://www.editions-retz.com/sites/default/files/styles/desktop_ouvrage_complet/public/visuels/9782725632667.jpg?itok=loTYdKPQ",
     "typePresentation": {
       "code": "MAN",
       "nom": "manuels numériques"
@@ -2940,30 +2587,5 @@
       { "nom": "français (cycle 3)" }
     ],
     "urlAccesRessource": "https://sp-auth.validation.test-gar.education.fr/domaineGar?idENT=RU5UVEVTVDE=&idEtab=MDY1MDQ5OVAtRVQ2&idSrc=aHR0cDovL24ydC5uZXQvYXJrOi85OTk5OS9yMjB4eHh4eHh4eA=="
-  },
-  {
-    "idRessource": "http://n2t.net/ark:/99999/r14xxxxxxx",
-    "idType": "ARK",
-    "nomRessource": "Educ'ARTE",
-    "idEditeur": "378901946_0000000000000000",
-    "nomEditeur": "Microméga - Hatier",
-    "urlVignette": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ZWfoIaCHxy3nyTNNSbVtO5lhb8M7ji9BOlJdMfLTtQ&s",
-    "typePresentation": {
-      "code": "OTHER",
-      "nom": "manuels numériques"
-    },
-    "typePedagogique": [
-      { "nom": "simulation" }
-    ],
-    "typologieDocument": [
-      { "nom": "banque de vidéos" }
-    ],
-    "niveauEducatif": [
-      { "nom": "5e" }
-    ],
-    "domaineEnseignement": [
-      { "nom": "Physique Chimie" }
-    ],
-    "urlAccesRessource": "https://sp-auth.validation.test-gar.education.fr/domaineGar?idENT=RU5UVEVTVDE=&idEtab=MDY1MDQ5OVAtRVQ2&idSrc=aHR0cDovL24ydC5uZXQvYXJrOi85OTk5OS9yMTR4eHh4eHh4eA=="
   }
 ]
