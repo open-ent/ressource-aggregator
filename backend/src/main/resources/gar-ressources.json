@@ -1190,24 +1190,6 @@
     "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
   },
   {
-    "idRessource": "ark:/12313/MERE_Educadhoc_GAR",
-    "description": "Mère de famille relative aux ressources utilisant l'application Educadhoc pour les manuels numériques et les parcours interactifs. Affectation établissement a réaliser pour la mère de famille afin que les utilisateurs disposent dans Educadhoc de la bilbiothèque et des fonctionnalités associées pour l'espace BUREAU. Les éditeurs concernés par cette mère de famille sont : Hachette éducationHatierDidierFoucherEdition Maison des languesBertrand LacosteLe GénieFontainePicardDocéo éditionDunod  ",
-    "nomRessource": "Educadhoc_GAR (mère de famille)",
-    "nomEditeur": "HACHETTE EDUCATION",
-    "urlVignette": "https://vignette.gar.education.fr/kiosque-edu-com/gar/mere/6394.png",
-    "urlAccesRessource": "",
-    "typePresentation": {
-      "code": "MAN",
-      "nom": "manuels numériques"
-    },
-    "domaineEnseignement": [],
-    "niveauEducatif": [],
-    "typologieDocument": [],
-    "typePedagogique": [],
-    "structure_uai": "0010962L",
-    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
-  },
-  {
     "idRessource": "ark:/79004/1mnt1547832",
     "description": "Le service en ligne Minetest à la carte (membre de la famille Edugéo) est destiné à apporter aux enseignants et à leurs élèves des cartes sous format Minetest basées sur les données géographiques de l'IGN sur la France métropolitaine et les départements et régions d'outre-mer, ainsi que des outils pédagogiques (de simulation de risques naturels par exemple). La ressource Minetest intervient comme une ressource enfant de la famille Édugéo (Edugéo Support étant la mère de famille). De ce fait les utilisateurs ne verront pas cette notice dans leur médiacenter, ils ne verront que la notice mère Edugéo Support.",
     "nomRessource": "Édugéo - Offre Éduthèque de l'IGN (Minetest)",
@@ -2563,29 +2545,5 @@
     ],
     "structure_uai": "0010962L",
     "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
-  },
-  {
-    "idRessource": "http://n2t.net/ark:/99999/r20xxxxxxx",
-    "idType": "ARK",
-    "nomRessource": "Arts Plastiques",
-    "idEditeur": "378901946_0000000000000000",
-    "nomEditeur": "C'est à voir",
-    "urlVignette": "http://www.editions-retz.com/sites/default/files/styles/desktop_ouvrage_complet/public/visuels/9782725632667.jpg?itok=loTYdKPQ",
-    "typePresentation": {
-      "code": "MAN",
-      "nom": "manuels numériques"
-    },
-    "typePedagogique": [
-      { "nom": "activité pédagogique" },
-      { "nom": "matériel de référence" }
-    ],
-    "typologieDocument": [
-      { "nom": "livre numérique" }
-    ],
-    "niveauEducatif": [],
-    "domaineEnseignement": [
-      { "nom": "français (cycle 3)" }
-    ],
-    "urlAccesRessource": "https://sp-auth.validation.test-gar.education.fr/domaineGar?idENT=RU5UVEVTVDE=&idEtab=MDY1MDQ5OVAtRVQ2&idSrc=aHR0cDovL24ydC5uZXQvYXJrOi85OTk5OS9yMjB4eHh4eHh4eA=="
   }
 ]
