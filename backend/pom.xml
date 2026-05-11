@@ -15,7 +15,6 @@
         <developerConnection>scm:git:https://github.com/OPEN-ENT-NG/ressource-aggregator.git</developerConnection>
         <url>https://github.com/OPEN-ENT-NG/ressource-aggregator</url>
     </scm>
-
     <repositories>
         <repository>
             <id>ode</id>
@@ -31,7 +30,6 @@
             <url>https://oss.sonatype.org/content/repositories/iovertx-3720/</url>
         </repository>
     </repositories>
-
     <properties>
         <entCoreVersion>6.14.9</entCoreVersion>
         <vertxCronTimerVersion>3.0.0</vertxCronTimerVersion>
