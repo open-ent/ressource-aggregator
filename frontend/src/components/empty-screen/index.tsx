@@ -2,7 +2,7 @@ import {
   useEdificeClient,
   useEdificeTheme,
   EmptyScreen,
-} from "@edifice.io/react";
+} from "@open-ent/react";
 import { useTranslation } from "react-i18next";
 
 export default function EmptyScreenApp(): JSX.Element {

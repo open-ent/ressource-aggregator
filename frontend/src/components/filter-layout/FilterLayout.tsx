@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Checkbox } from "@edifice.io/react";
+import { Checkbox } from "@open-ent/react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 

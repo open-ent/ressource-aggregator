@@ -1,4 +1,4 @@
-import { useUser } from "@edifice.io/react";
+import { useUser } from "@open-ent/react";
 
 import { rights } from "~/config";
 import { AppProps } from "~/routes/app";

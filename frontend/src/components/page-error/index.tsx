@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@cgi-learning-hub/ui";
-import { Button, Layout } from "@edifice.io/react";
+import { Button, Layout } from "@open-ent/react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useRouteError } from "react-router-dom";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { odeServices } from "@edifice.io/client";
+import { odeServices } from "@open-ent/client";
 
 // TODO : use new hook usePreference
 /**

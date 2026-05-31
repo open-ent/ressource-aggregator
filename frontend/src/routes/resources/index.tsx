@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Alert, useUser } from "@edifice.io/react";
+import { Alert, useUser } from "@open-ent/react";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import { useTranslation } from "react-i18next";
 

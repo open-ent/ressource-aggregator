@@ -4,7 +4,7 @@ import {
   useEdificeClient,
   ShareModal,
   EdificeClientProvider,
-} from "@edifice.io/react";
+} from "@open-ent/react";
 
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { useModalProvider } from "~/providers/ModalsProvider";

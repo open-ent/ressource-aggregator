@@ -1,6 +1,6 @@
 import React from "react";
 
-import { EdificeClientProvider, EdificeThemeProvider } from "@edifice.io/react";
+import { EdificeClientProvider, EdificeThemeProvider } from "@open-ent/react";
 import {
   QueryCache,
   QueryClient,
@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import "~/i18n";
 
-import "@edifice.io/bootstrap/dist/index.css";
+import "@open-ent/bootstrap/dist/index.css";
 import { AlertProvider } from "./providers/AlertProvider";
 import { GlobalProvider } from "./providers/GlobalProvider";
 import { ModalProvider } from "./providers/ModalsProvider";

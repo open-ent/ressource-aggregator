@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { IAction } from "@edifice.io/client";
+import { IAction } from "@open-ent/client";
 
 import { sessionHasWorkflowRights } from "../api";
 import { workflows } from "~/config";

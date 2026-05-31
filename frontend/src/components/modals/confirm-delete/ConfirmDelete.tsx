@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AlertTypes, Button, Modal } from "@edifice.io/react";
+import { AlertTypes, Button, Modal } from "@open-ent/react";
 import { useTranslation } from "react-i18next";
 
 import { ModalEnum } from "~/core/enum/modal.enum";

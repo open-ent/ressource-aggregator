@@ -1,4 +1,4 @@
-import { RightRole } from "@edifice.io/client";
+import { RightRole } from "@open-ent/client";
 import { create } from "zustand";
 
 type UserRights = Record<RightRole, boolean>;

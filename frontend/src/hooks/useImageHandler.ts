@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { odeServices } from "@edifice.io/client";
+import { odeServices } from "@open-ent/client";
 
 export default function useImageHandler(initialCover: string | Blob | File) {
   const [cover, setCover] = useState<string | Blob | File>(initialCover);
