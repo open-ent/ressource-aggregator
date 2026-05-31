@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import { Alert } from "@edifice.io/react";
+import { Alert } from "@open-ent/react";
 import SchoolIcon from "@mui/icons-material/School";
 import { useTranslation } from "react-i18next";
 

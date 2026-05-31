@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-import { useUser } from "@edifice.io/react";
+import { useUser } from "@open-ent/react";
 
 import {
   SelectedStructureProviderContextType,

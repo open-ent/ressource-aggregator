@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { isActionAvailable } from "@edifice.io/client";
-import { AlertTypes, Card, Tooltip } from "@edifice.io/react";
+import { isActionAvailable } from "@open-ent/client";
+import { AlertTypes, Card, Tooltip } from "@open-ent/react";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import InsertLinkRoundedIcon from "@mui/icons-material/InsertLinkRounded";
 import PinIcon from "@mui/icons-material/PushPin";

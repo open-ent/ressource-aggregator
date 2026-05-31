@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Checkbox, Grid, Modal } from "@edifice.io/react";
+import { Checkbox, Grid, Modal } from "@open-ent/react";
 import { Chip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 

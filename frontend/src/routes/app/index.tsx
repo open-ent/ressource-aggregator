@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 
-import { ID } from "@edifice.io/client";
-import { Alert, useUser } from "@edifice.io/react";
+import { ID } from "@open-ent/client";
+import { Alert, useUser } from "@open-ent/react";
 import { useTranslation } from "react-i18next";
 
 import { PinsCarousel } from "../../components/pins-carousel/PinsCarousel";

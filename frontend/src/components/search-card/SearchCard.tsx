@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./SearchCard.scss";
 
-import { isActionAvailable } from "@edifice.io/client";
-import { Card, Tooltip } from "@edifice.io/react";
+import { isActionAvailable } from "@open-ent/client";
+import { Card, Tooltip } from "@open-ent/react";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import InsertLinkRoundedIcon from "@mui/icons-material/InsertLinkRounded";

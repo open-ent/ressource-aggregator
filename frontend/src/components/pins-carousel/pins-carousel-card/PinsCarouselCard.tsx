@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { isActionAvailable } from "@edifice.io/client";
-import { Card, Tooltip } from "@edifice.io/react";
+import { isActionAvailable } from "@open-ent/client";
+import { Card, Tooltip } from "@open-ent/react";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import InsertLinkRoundedIcon from "@mui/icons-material/InsertLinkRounded";

@@ -89,7 +89,7 @@ export default ({ mode }: { mode: string }) => {
     setupFiles: "./src/tests/setup.ts",
     server: {
       deps: {
-        inline: ["@edifice.io/react"],
+        inline: ["@open-ent/react"],
       },
     },
   };
@@ -108,9 +108,19 @@ export default ({ mode }: { mode: string }) => {
         ),
         "@images": resolve(
           __dirname,
-          "node_modules/@edifice.io/bootstrap/dist/images",
+          "node_modules/@open-ent/bootstrap/dist/images",
         ),
       },
+      dedupe: [
+        "react",
+        "react-dom",
+        "@tanstack/react-query",
+        "react-i18next",
+        "i18next",
+        "@open-ent/client",
+        "@open-ent/react",
+        "@open-ent/bootstrap",
+      ],
     },
   });
 };

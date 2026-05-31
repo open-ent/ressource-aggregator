@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { useUser } from "@edifice.io/react";
+import { useUser } from "@open-ent/react";
 
 import { Signet } from "./../model/Signet.model";
 import {

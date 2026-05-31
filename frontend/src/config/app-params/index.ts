@@ -5,7 +5,7 @@ import {
   type IFilter,
   type IOrder,
   type ResourceType,
-} from "@edifice.io/client";
+} from "@open-ent/client";
 
 const rootElement = document.querySelector<HTMLElement>("[data-ode-app]");
 let _appParams: AppParams;

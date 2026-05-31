@@ -1,4 +1,4 @@
-import { odeServices } from "@edifice.io/client";
+import { odeServices } from "@open-ent/client";
 import { useDispatch } from "react-redux";
 import { searchApi } from "~/services/api/search.service";
 

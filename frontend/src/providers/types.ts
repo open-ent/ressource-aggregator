@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
-import { AlertTypes } from "@edifice.io/react";
+import { AlertTypes } from "@open-ent/react";
 
 import { ModalEnum } from "~/core/enum/modal.enum";
 import { ExternalResource } from "~/model/ExternalResource.model";

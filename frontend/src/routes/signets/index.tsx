@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { isActionAvailable } from "@edifice.io/client";
-import { Alert, Button } from "@edifice.io/react";
+import { isActionAvailable } from "@open-ent/client";
+import { Alert, Button } from "@open-ent/react";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useTranslation } from "react-i18next";
 

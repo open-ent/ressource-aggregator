@@ -1,4 +1,4 @@
-import { LoadingScreen } from "@edifice.io/react";
+import { LoadingScreen } from "@open-ent/react";
 import { useTranslation } from "react-i18next";
 
 import { ListCard } from "../list-card/ListCard";

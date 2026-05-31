@@ -1,6 +1,6 @@
 import React from "react";
 
-import { LoadingScreen } from "@edifice.io/react";
+import { LoadingScreen } from "@open-ent/react";
 import FlagIcon from "@mui/icons-material/Flag";
 import ArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";

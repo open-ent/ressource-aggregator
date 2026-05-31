@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { LoadingScreen } from "@edifice.io/react";
+import { LoadingScreen } from "@open-ent/react";
 import { useNavigate } from "react-router-dom";
 
 import { ListCard } from "../list-card/ListCard";
