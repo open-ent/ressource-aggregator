@@ -114,3 +114,5 @@ edifice
 .env
 target
 dependency-reduced-pom.xml
+# build artifact
+*.tsbuildinfo
