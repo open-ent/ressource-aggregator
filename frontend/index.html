@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Médiacentre</title>
     <link rel="icon" id="favicon" href="" />
+    <style>
+      /* Retouches layout thème 1d. */
+      @media (min-width: 768px) {
+        /* Menu compte : en thème 1d le header collapse -> on ré-ancre le menu en
+           haut-droite du viewport (sinon mal positionné). */
+        #dropdown-navbar.dropdown-menu {
+          position: fixed !important;
+          top: 64px !important;
+          right: 12px !important;
+          left: auto !important;
+          transform: none !important;
+        }
+        /* Le <main class="container-fluid"> qui enveloppe le contenu était plafonné à
+           1352px et collé à gauche -> on lui rend sa pleine largeur. */
+        main.container-fluid,
+        .container-fluid {
+          max-width: none !important;
+        }
+        /* Puis on plafonne et on centre le contenu (marges égales gauche/droite). */
+        .med-container,
+        .med-search-container,
+        .med-signets-container {
+          width: auto !important;
+          max-width: 1675px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+      }
+    </style>
     <script>
          wsPort = "{{wsPort}}";
       mode = "{{mode}}";

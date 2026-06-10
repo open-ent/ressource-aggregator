@@ -59,7 +59,9 @@
 
 @for $i from 1 through 8 {
   .grid-#{$i} {
-    --edifice-columns: #{$i};
+    // Le bootstrap @open-ent lit --openent-columns (défaut 12) ; --edifice-columns
+    // était ignoré -> grille à 12 colonnes -> cards écrasées en barres fines.
+    --openent-columns: #{$i};
     width: 100%;
     gap: 10px;
     @media (min-width: 1600px) {
