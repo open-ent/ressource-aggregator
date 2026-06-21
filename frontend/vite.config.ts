@@ -53,21 +53,17 @@ export default ({ mode }: { mode: string }) => {
 
   const build = {
     assetsDir: "public",
+    chunkSizeWarningLimit: 5000,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
     rollupOptions: {
+      // Bundle en un seul chunk (cf. mindmap) : évite le RollupError
+      // "createSvgIcon is not exported by @mui/material/SvgIcon" provoqué par
+      // la résolution des ré-exports MUI à travers les frontières de chunks
+      // (déclenché par le pré-bundle @cgi-learning-hub/ui).
       output: {
-        manualChunks: {
-          react: [
-            "react",
-            "react-router-dom",
-            "react-dom",
-            "react-error-boundary",
-            "react-hook-form",
-            "react-hot-toast",
-          ],
-        },
+        inlineDynamicImports: true,
       },
     },
   };
