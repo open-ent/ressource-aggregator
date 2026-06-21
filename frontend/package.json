@@ -45,9 +45,9 @@
     ]
   },
   "dependencies": {
-    "@cgi-learning-hub/icons": "develop",
-    "@cgi-learning-hub/theme": "develop",
-    "@cgi-learning-hub/ui": "develop",
+    "@cgi-learning-hub/icons": "1.13.0",
+    "@cgi-learning-hub/theme": "1.13.0",
+    "@cgi-learning-hub/ui": "1.13.0",
     "@open-ent/react": "^2.5.22",
     "@open-ent/bootstrap": "^2.5.22",
     "@open-ent/client": "^2.5.22",
