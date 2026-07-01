@@ -31,7 +31,11 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
 
   const { data: favorite } = useGetFavoriteQuery(null);
 
-  const { currentData: fetchedPins } = useGetPinsQuery(idSelectedStructure);
+  // On ne lance la requête que lorsque la structure est résolue : sinon
+  // idSelectedStructure est vide et l'URL devient `/structures//pins` (double slash) -> 404.
+  const { currentData: fetchedPins } = useGetPinsQuery(idSelectedStructure, {
+    skip: !idSelectedStructure,
+  });
 
   useEffect(() => {
     if (favorite) {

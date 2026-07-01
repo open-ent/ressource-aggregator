@@ -334,9 +334,19 @@ public class ElasticSearchHelper {
 
     public static Handler<AsyncResult<JsonArray>> searchHandler(Class<?> source, Function<JsonObject, JsonObject> actionProvider, Handler<Either<JsonObject, JsonObject>> handler) {
         return ar -> {
-            if (ar.failed())
-                handler.handle(new Either.Left<>(new JsonObject().put("source", source.getName()).put("error", "[" + source.getName() + "] " + ar.cause().getMessage())));
-            else {
+            if (ar.failed()) {
+                // Un index inexistant (ES/OpenSearch répond 404 « Not Found ») signifie
+                // simplement qu'aucune ressource n'a encore été indexée pour cette source
+                // (ex. aucun signet créé) : on renvoie une liste vide plutôt qu'une erreur,
+                // sinon /mediacentre/signets renvoie 500 au lieu de [].
+                if (ar.cause() != null && "Not Found".equalsIgnoreCase(ar.cause().getMessage())) {
+                    handler.handle(new Either.Right<>(new JsonObject()
+                            .put("source", source.getName())
+                            .put("resources", new JsonArray())));
+                } else {
+                    handler.handle(new Either.Left<>(new JsonObject().put("source", source.getName()).put("error", "[" + source.getName() + "] " + ar.cause().getMessage())));
+                }
+            } else {
                 List<JsonObject> resources = ((List<JsonObject>) ar.result().getList());
                 if (Objects.nonNull(actionProvider)) {
                     resources = resources
