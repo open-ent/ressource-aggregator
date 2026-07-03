@@ -1,12 +1,7 @@
 name: dev-check-repository
 
-on:
-  push:
-    branches: [main, master, develop]
-    tags: ['*']
-  pull_request:
-    branches: [main, master, develop]
-  workflow_dispatch:
+# [push] sur TOUTES les branches (les branches de travail sont `<v>-patched-dev`, pas main/develop).
+on: [push]
 
 permissions:
   contents: write
