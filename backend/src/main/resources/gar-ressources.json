@@ -2545,5 +2545,28 @@
     ],
     "structure_uai": "0010962L",
     "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
+  },
+  {
+    "idRessource": "ark:/12313/LLS9791040003861",
+    "nomRessource": "Cyrano de Bergerac - Edmond Rostand - Manuel numérique élève - Collection Les Classiques - Ed. 2023",
+    "description": "Cyrano de Bergerac d'Edmond Rostand, texte intégral et dossier pédagogique. Version numérique augmentée, ouvrage collaboratif de la collection Les Classiques.",
+    "nomEditeur": "lelivrescolaire.fr",
+    "urlVignette": "img/gar-cyrano-de-bergerac.png",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuels numériques"
+    },
+    "domaineEnseignement": [
+      { "nom": "français" }
+    ],
+    "niveauEducatif": [
+      { "nom": "4e" },
+      { "nom": "collège" }
+    ],
+    "typologieDocument": [],
+    "typePedagogique": [],
+    "structure_uai": "0010962L",
+    "structure_name": "LPO LYC METIER-BROCELIANDE-GUER"
   }
 ]
