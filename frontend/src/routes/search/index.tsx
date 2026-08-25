@@ -43,6 +43,7 @@ export const Search: React.FC = () => {
         "fr.openent.mediacentre.source.GAR",
         "fr.openent.mediacentre.source.Moodle",
         "fr.openent.mediacentre.source.Signet",
+        "fr.openent.mediacentre.source.PMB",
       ],
     };
   };
@@ -67,6 +68,7 @@ export const Search: React.FC = () => {
       ...sortByAlphabet(resourcesMap.externalResources),
       ...sortByAlphabet(resourcesMap.signets),
       ...sortByAlphabet(resourcesMap.moodle),
+      ...sortByAlphabet(resourcesMap.pmb),
     ];
     setSearchResourcesData(sortedSearchResources);
     setAllResourcesDisplayed(sortedSearchResources);

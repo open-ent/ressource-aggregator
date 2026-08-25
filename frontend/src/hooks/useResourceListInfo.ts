@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { GAR, GLOBAL, MOODLE, SIGNET } from "~/core/const/sources.const";
+import { GAR, GLOBAL, MOODLE, PMB, SIGNET } from "~/core/const/sources.const";
 import { STRING } from "~/core/const/typescript.const";
 import { ExternalResource } from "~/model/ExternalResource.model";
 import { GlobalResource } from "~/model/GlobalResource.model";
@@ -17,6 +17,7 @@ const ResourcesMapInitialStates: ResourcesMap = {
   moodle: [],
   signets: [],
   global: [],
+  pmb: [],
 };
 const ResourceInfosMapInitialStates: ResourceInfosMap = {
   disciplines: [],
@@ -42,6 +43,7 @@ const isExternalResource = (resource: Resource) =>
 const isMoodle = (resource: Resource) => resource.source === MOODLE;
 const isSignet = (resource: Resource) => resource.source === SIGNET;
 const isGlobalResource = (resource: Resource) => resource.source === GLOBAL;
+const isPmb = (resource: Resource) => resource.source === PMB;
 
 // this kook get all information about a list of resources and it's used in the FilterLayout component
 export const useResourceListInfo = (resources: Resource[] | null) => {
@@ -84,6 +86,11 @@ export const useResourceListInfo = (resources: Resource[] | null) => {
           acc.global = [...acc.global, resource];
         }
 
+        // Case PMB
+        if (isPmb(resource)) {
+          acc.pmb = [...acc.pmb, resource];
+        }
+
         acc.disciplines =
           resource?.disciplines?.reduce(
             (accumulatedDisciplines, discipline) => {
@@ -114,6 +121,7 @@ export const useResourceListInfo = (resources: Resource[] | null) => {
         moodle: [] as Resource[],
         signets: [] as Resource[],
         global: [] as Resource[],
+        pmb: [] as Resource[],
         disciplines: [] as string[],
         levels: [] as string[],
         types: [] as string[],
@@ -132,6 +140,7 @@ export const useResourceListInfo = (resources: Resource[] | null) => {
       moodle: result.moodle as Moodle[],
       signets: result.signets as Signet[],
       global: result.global as GlobalResource[],
+      pmb: result.pmb as Resource[],
     });
     setResourcesInfosMap({
       // sort disciplines, levels and types by custom string sort
