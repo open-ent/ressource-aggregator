@@ -22,7 +22,17 @@ public class PMB implements Source {
 
     @Override
     public void plainTextSearch(String query, UserInfos user, Handler<Either<JsonObject, JsonObject>> handler) {
-        ElasticSearchHelper.plainTextSearch(PMB.class, query, user.getUserId(), user.getStructures(), false, ElasticSearchHelper.searchHandler(PMB.class, null, handler));
+        plainTextSearch(query, user, null, handler);
+    }
+
+    @Override
+    public void plainTextSearch(String query, UserInfos user, List<String> idStructures, Handler<Either<JsonObject, JsonObject>> handler) {
+        // Respecter la structure sélectionnée dans le sélecteur d'établissement (idStructures),
+        // pas seulement les structures propres du compte connecté — sinon un compte multi-
+        // établissement (ou vue "en tant que") ne trouve jamais les ressources PMB de la
+        // structure affichée. Même repli que GAR (getStructuresData).
+        List<String> structures = (idStructures == null || idStructures.isEmpty()) ? user.getStructures() : idStructures;
+        ElasticSearchHelper.plainTextSearch(PMB.class, query, user.getUserId(), structures, false, ElasticSearchHelper.searchHandler(PMB.class, null, handler));
     }
 
     @Override

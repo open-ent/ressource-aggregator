@@ -1,8 +1,6 @@
 package fr.openent.mediacentre.source;
 
 import fr.openent.mediacentre.core.constants.Field;
-import fr.openent.mediacentre.enums.SourceEnum;
-import fr.openent.mediacentre.helper.FavoriteHelper;
 import fr.openent.mediacentre.helper.FutureHelper;
 import fr.openent.mediacentre.service.FavoriteService;
 import fr.openent.mediacentre.service.impl.DefaultFavoriteService;
@@ -20,7 +18,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -28,7 +25,6 @@ import static fr.wseduc.webutils.Utils.isEmpty;
 
 public class GAR implements Source {
     private final FavoriteService favoriteService = new DefaultFavoriteService();
-    private final FavoriteHelper favoriteHelper = new FavoriteHelper();
 
     private final Logger log = LoggerFactory.getLogger(GAR.class);
     private EventBus eb;
@@ -131,105 +127,15 @@ public class GAR implements Source {
 
     @Override
     public void plainTextSearch(String query, UserInfos user, List<String> idStructures, Handler<Either<JsonObject, JsonObject>> handler) {
-        List<Future<JsonArray>> futures = new ArrayList<>();
-        getStructuresData(user, idStructures, futures, event -> {
-            JsonArray resources = new JsonArray();
-            for (Future<JsonArray> future : futures) {
-                if (future.succeeded()) {
-                    resources.addAll(future.result());
-                }
-            }
-
-            if (resources.isEmpty()) {
-                handler.handle(new Either.Left<>(new JsonObject().put("source", GAR.class.getName()).put("message", "[GAR] resources are empty")));
-                return;
-            }
-
-            HashMap<String, String> ids = new HashMap<>();
-            List<String> duplicateIds = new ArrayList<>();
-            SortedMap<Integer, JsonArray> sortedMap = new TreeMap<>();
-
-            for (int i = 0; i < resources.size(); i++) {
-                JsonObject resource = resources.getJsonObject(i);
-                if (checkDuplicateId(resources, ids, duplicateIds, resource)) continue;
-
-                Integer count = 0;
-                count += getOccurrenceCount(query, resource.getString("title"));
-                count += getOccurrenceCount(query, resource.getString("plain_text"));
-                count += getOccurrenceCount(query, resource.getJsonArray("levels"));
-                count += getOccurrenceCount(query, resource.getJsonArray("disciplines"));
-
-                if (count > 0) {
-                    sortedMap.computeIfAbsent(count, k -> new JsonArray()).add(resource);
-                }
-            }
-
-            List<Integer> keys = new ArrayList<>(sortedMap.keySet());
-            Collections.reverse(keys);
-            JsonArray filteredResources = new JsonArray();
-            for (Integer key : keys) {
-                filteredResources.addAll(sortedMap.get(key));
-            }
-
-            favoriteService.get(SourceEnum.GAR.method(), user.getUserId())
-                    .onSuccess(favorites -> {
-                        List<JsonObject> formattedResources = garResourcesWithFavoritesData(filteredResources, favorites);
-                        JsonObject response = new JsonObject()
-                                .put(Field.SOURCE, GAR.class.getName())
-                                .put(Field.RESOURCES, formattedResources);
-                        handler.handle(new Either.Right<>(response));
-                    })
-                    .onFailure(error -> handler.handle(new Either.Left<>(new JsonObject().put(Field.SOURCE, GAR.class.getName()).put(Field.MESSAGE, error.getMessage()))));
-        });
-    }
-
-    private static List<JsonObject> garResourcesWithFavoritesData(JsonArray filteredResources, JsonArray favorites) {
-        return filteredResources.stream()
-                .filter(JsonObject.class::isInstance)
-                .map(JsonObject.class::cast)
-                .map(resource -> {
-                    favorites.stream()
-                            .filter(JsonObject.class::isInstance)
-                            .map(JsonObject.class::cast)
-                            .forEach(fav -> {
-                                if (fav.getString(Field.ID, "").equals(resource.getString(Field.ID))) {
-                                    resource.put(Field.FAVORITE, true);
-                                    resource.put(Field.FAVORITEID, fav.getString(Field._ID));
-                                }
-                            });
-                    return resource;
-                })
-                .collect(Collectors.toList());
-    }
-
-    private Integer getOccurrenceCount(String query, Object value) {
-        if (value == null) return 0;
-        if (value instanceof JsonArray) {
-            int count = 0;
-            for (int i = 0; i < ((JsonArray) value).size(); i++) {
-                count += getOccurrenceCount(query, ((JsonArray) value).getString(i));
-            }
-            return count;
-        }
-        int count = 0;
-        Pattern regexp = Pattern.compile(query, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = regexp.matcher((String) value);
-        while (matcher.find()) count++;
-        return count;
+        // GAR n'expose que des manuels numériques (onglet Manuels, cf. initTextBooks) : il ne doit
+        // jamais apparaître dans la recherche générale "Ressources" (avant le bouchon JSON, l'appel
+        // réel à l'API GAR n'était d'ailleurs jamais invoqué depuis ce chemin de recherche générale).
+        handler.handle(new Either.Left<>(new JsonObject().put("source", GAR.class.getName()).put("message", "[GAR] not a resources search source")));
     }
 
     @Override
     public void advancedSearch(JsonObject query, UserInfos user, Handler<Either<JsonObject, JsonObject>> handler) {
         plainTextSearch("", user, handler);
-    }
-
-    private boolean checkDuplicateId(JsonArray resources, HashMap<String, String> ids, List<String> duplicateIds, JsonObject resource) {
-        String resourceId = resource.getString("id", "");
-        if (ids.containsKey(resourceId)) {
-            if (ids.get(resourceId).equals(resource.getString("structure_uai", ""))) return true;
-        }
-        ids.put(resourceId, resource.getString("structure_uai", ""));
-        return false;
     }
 
     private String queryPattern(JsonArray values) {
