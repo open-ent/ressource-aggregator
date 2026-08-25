@@ -4,7 +4,6 @@ import fr.openent.mediacentre.controller.*;
 import fr.openent.mediacentre.helper.elasticsearch.ElasticSearch;
 import fr.openent.mediacentre.source.Source;
 import fr.openent.mediacentre.tasks.AmassTask;
-import fr.wseduc.cron.CronTrigger;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
@@ -117,13 +116,29 @@ public class Mediacentre extends BaseServer {
 
         try {
             AmassTask amassTask = new AmassTask(sources);
-            new CronTrigger(vertx, config.getString("amass-cron", "0 1 * * * ? *")).schedule(amassTask);
+            String amassCronExpr = config.getString("amass-cron", "0 1 * * * ? *");
+            // fr.wseduc.cron.CronTrigger (lib externe fr.wseduc:vertx-cron-timer) ne déclenchait
+            // jamais son timer malgré un délai calculé correct (vérifié par diagnostic) — un
+            // vertx.setTimer brut, lui, fonctionne. On planifie donc nous-mêmes, récursivement,
+            // avec la même horloge Quartz mais sans passer par cette lib suspecte.
+            org.quartz.CronExpression amassExpr = new org.quartz.CronExpression(amassCronExpr);
+            scheduleAmass(amassExpr, amassTask);
+            log.info(String.format("[Mediacentre] amass cron scheduled: %s (sources=%d)", amassCronExpr, sources.size()));
         } catch (ParseException e) {
             log.fatal("Unable to parse amass cron expression");
             return Future.failedFuture(e);
         }
 
         return Future.succeededFuture();
+    }
+
+    private void scheduleAmass(org.quartz.CronExpression expression, AmassTask amassTask) {
+        java.util.Date now = new java.util.Date();
+        long delay = expression.getNextValidTimeAfter(now).getTime() - now.getTime();
+        vertx.setTimer(delay, timerId -> {
+            amassTask.handle(timerId);
+            scheduleAmass(expression, amassTask);
+        });
     }
 
 }
