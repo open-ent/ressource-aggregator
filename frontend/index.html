@@ -26,14 +26,17 @@
         .container-fluid {
           max-width: none !important;
         }
-        /* Puis on plafonne et on centre le contenu (marges égales gauche/droite). */
+        /* Puis on plafonne et on centre le contenu (marges égales gauche/droite),
+           SANS jamais recouvrir la sidebar fixe à icônes (75px) : elle est en
+           position:fixed donc hors du flux, "margin: auto" seul l'ignorait et le
+           contenu venait se plaquer sous elle (texte tronqué à gauche). */
         .med-container,
         .med-search-container,
         .med-signets-container {
           width: auto !important;
           max-width: 1675px !important;
-          margin-left: auto !important;
-          margin-right: auto !important;
+          margin-left: calc(75px + max(0px, (100% - 1675px) / 2)) !important;
+          margin-right: max(0px, calc((100% - 1675px) / 2)) !important;
         }
       }
     </style>
