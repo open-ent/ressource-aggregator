@@ -171,7 +171,7 @@ public class DefaultPinsService implements PinsService {
     public Future<JsonArray> getData(List<PinResource> resources, UserInfos user, List<Source> sources) {
         Promise<JsonArray> promise = Promise.promise();
         JsonArray data = new JsonArray();
-        JsonArray searchSources = new JsonArray(new JsonArray().add(SourceConstant.MOODLE).add(SourceConstant.GAR).stream()
+        JsonArray searchSources = new JsonArray(new JsonArray().add(SourceConstant.MOODLE).add(SourceConstant.GAR).add(SourceConstant.PMB).stream()
         .map(String.class::cast)
         .filter(expectedSource -> sources.stream()
             .map(source -> source.getClass().getName())
@@ -243,6 +243,7 @@ public class DefaultPinsService implements PinsService {
                 List<String> allUsersIdsWithMediacentreAccess = composeInfos.getJsonArray(Field.ALL_USERS_IDS_WITH_MEDIACENTRE_ACCESS).getList();
                 switch (resource.getString(Field.SOURCE)) {
                     case SourceConstant.MOODLE:
+                    case SourceConstant.PMB:
                         return Future.succeededFuture(allUsersIdsWithMediacentreAccess);
                     case SourceConstant.GAR:
                         return textbookService.getUsersIdsFromMongoResource(resource);
