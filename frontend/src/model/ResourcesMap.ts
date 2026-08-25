@@ -1,6 +1,7 @@
 import { ExternalResource } from "./ExternalResource.model";
 import { GlobalResource } from "./GlobalResource.model";
 import { Moodle } from "./Moodle.model";
+import { Resource } from "./Resource.model";
 import { Signet } from "./Signet.model";
 import { Textbook } from "./Textbook.model";
 export interface ResourcesMap {
@@ -9,4 +10,5 @@ export interface ResourcesMap {
   moodle: Moodle[];
   signets: Signet[];
   global: GlobalResource[];
+  pmb: Resource[];
 }

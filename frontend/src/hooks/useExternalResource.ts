@@ -15,7 +15,10 @@ export const useExternalResource = (idSelectedStructure: string) => {
       query: ".*",
     },
     event: "search",
-    sources: ["fr.openent.mediacentre.source.GAR"],
+    sources: [
+      "fr.openent.mediacentre.source.GAR",
+      "fr.openent.mediacentre.source.PMB",
+    ],
   };
 
   const { data, error, isLoading } = useSearchQuery({
@@ -33,7 +36,11 @@ export const useExternalResource = (idSelectedStructure: string) => {
       const garResult = searchResult?.find(
         (result) => result?.data?.source == "fr.openent.mediacentre.source.GAR",
       );
+      const pmbResult = searchResult?.find(
+        (result) => result?.data?.source == "fr.openent.mediacentre.source.PMB",
+      );
       const garResources: Resource[] = garResult?.data?.resources ?? [];
+      const pmbResources: Resource[] = pmbResult?.data?.resources ?? [];
       let externalResourcesData = garResources.filter(
         (resource) => !resource?.is_textbook ?? true,
       ) as ExternalResource[];
@@ -49,7 +56,20 @@ export const useExternalResource = (idSelectedStructure: string) => {
           }),
         );
       }
-      setExternalResources(externalResourcesData);
+      let pmbResourcesData = pmbResources as ExternalResource[];
+      if (pins) {
+        pmbResourcesData = pmbResourcesData.map(
+          (pmbResource: ExternalResource) => ({
+            ...pmbResource,
+            is_pinned: pins.some(
+              (pin: Pin) =>
+                pin?.id == pmbResource?.id &&
+                pin.source === "fr.openent.mediacentre.source.PMB",
+            ),
+          }),
+        );
+      }
+      setExternalResources([...externalResourcesData, ...pmbResourcesData]);
     }
   }, [data, pins]);
 

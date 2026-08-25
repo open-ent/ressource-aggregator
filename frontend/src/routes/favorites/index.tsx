@@ -41,6 +41,7 @@ export const FavoritePage: React.FC = () => {
       ...sortByAlphabet(resourcesMap.signets),
       ...sortByAlphabet(resourcesMap.moodle),
       ...sortByAlphabet(resourcesMap.global),
+      ...sortByAlphabet(resourcesMap.pmb),
     ];
     setFavoriteResourcesData(sortedFavoriteResources);
     setAllResourcesDisplayed(sortedFavoriteResources);

@@ -31,9 +31,13 @@ export const useSearch = (query: any, idSelectedStructure: string) => {
       const gar = searchResult?.find(
         (result) => result?.data?.source == "fr.openent.mediacentre.source.GAR",
       );
+      const pmb = searchResult?.find(
+        (result) => result?.data?.source == "fr.openent.mediacentre.source.PMB",
+      );
       let signetResources = signets?.data?.resources || [];
       let moodleResources = moodle?.data?.resources || [];
       let garResources = gar?.data?.resources || [];
+      let pmbResources = pmb?.data?.resources || [];
 
       // map with pins
       if (pins) {
@@ -61,12 +65,21 @@ export const useSearch = (query: any, idSelectedStructure: string) => {
               pin.source === "fr.openent.mediacentre.source.GAR",
           ),
         }));
+        pmbResources = pmbResources.map((pmbResource: Resource) => ({
+          ...pmbResource,
+          is_pinned: pins.some(
+            (pin: Pin) =>
+              pin?.id == pmbResource?.id &&
+              pin.source === "fr.openent.mediacentre.source.PMB",
+          ),
+        }));
       }
 
       setAllResources([
         ...garResources,
         ...signetResources,
         ...moodleResources,
+        ...pmbResources,
       ]);
     }
   }, [data, isLoading, favorites, pins]);

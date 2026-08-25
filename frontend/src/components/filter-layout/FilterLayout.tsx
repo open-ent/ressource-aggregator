@@ -67,6 +67,7 @@ export const FilterLayout: React.FC<FilterLayoutProps> = ({
     SIGNETS: t("mediacentre.sidebar.signets"),
     MOODLES: t("mediacentre.search.card.moodle"),
     GLOBAL_RESOURCES: t("mediacentre.resource.globalResources"),
+    PMB: t("mediacentre.sidebar.pmb"),
   };
 
   const THEMES = {
@@ -103,6 +104,9 @@ export const FilterLayout: React.FC<FilterLayoutProps> = ({
     if (resourcesMap.global.length) {
       sourcesTemp = [...sourcesTemp, SOURCES.GLOBAL_RESOURCES];
     }
+    if (resourcesMap.pmb.length) {
+      sourcesTemp = [...sourcesTemp, SOURCES.PMB];
+    }
     setSources(sourcesTemp);
     // reset selected checkboxes when we change the resources
     setSelectedCheckboxes({
@@ -125,6 +129,7 @@ export const FilterLayout: React.FC<FilterLayoutProps> = ({
         moodle: [],
         signets: (myPublishedSignetsResult?.signets as Signet[]) ?? [],
         global: [],
+        pmb: [],
       };
       const filteredResources = filterByAllDropdowns(
         myPublishedSignetsResourceMap,
