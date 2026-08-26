@@ -11,19 +11,28 @@
     <style>
       /* Retouches layout thème 1d. */
       @media (min-width: 768px) {
-        /* Menu compte : en thème 1d le header collapse -> on ré-ancre le menu en
-           haut-droite du viewport (sinon mal positionné). */
+        /* Menu compte (communauté / moteur de recherche / mon compte) : le thème
+           natif prévoit déjà une rangée inline desktop pour ce menu, via une règle
+           réservée à [data-product=neo] (@open-ent/bootstrap) :
+             [data-product=neo] .header .navbar .dropdown-menu {
+               position: static !important; display: flex; background: transparent;
+               flex-direction: row; padding: 0; border-radius: 0; border: 0; box-shadow: none;
+             }
+           En thème 1d cette règle ne s'applique jamais -> le menu reste un dropdown
+           replié en position:absolute (caché), d'où l'ancien correctif en position:fixed
+           qui le replaçait n'importe où au lieu de l'intégrer dans le header. On reproduit
+           ici la VRAIE règle neo, sans dépendre de data-product. */
         #dropdown-navbar.dropdown-menu {
-          position: fixed !important;
-          top: 64px !important;
-          right: 12px !important;
-          left: auto !important;
-          transform: none !important;
+          position: static !important;
+          display: flex !important;
+          background: transparent !important;
+          flex-direction: row !important;
+          padding: 0 !important;
+          border-radius: 0 !important;
+          border: 0 !important;
+          box-shadow: none !important;
         }
-        /* Les icônes (communauté / moteur de recherche / mon compte) de ce même menu
-           n'ont de taille dédiée que pour [data-product=neo] (@open-ent/bootstrap) ;
-           en thème 1d elles retombent sur une taille par défaut minuscule. On réapplique
-           ici les mêmes tailles que la règle neo, sans dépendre de data-product. */
+        /* Même raison : tailles d'icônes réservées à [data-product=neo], reproduites ici. */
         #dropdown-navbar.dropdown-menu .icon {
           width: 1.6rem !important;
           height: 1.6rem !important;
