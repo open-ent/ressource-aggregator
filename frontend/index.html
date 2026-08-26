@@ -20,6 +20,18 @@
           left: auto !important;
           transform: none !important;
         }
+        /* Les icônes (communauté / moteur de recherche / mon compte) de ce même menu
+           n'ont de taille dédiée que pour [data-product=neo] (@open-ent/bootstrap) ;
+           en thème 1d elles retombent sur une taille par défaut minuscule. On réapplique
+           ici les mêmes tailles que la règle neo, sans dépendre de data-product. */
+        #dropdown-navbar.dropdown-menu .icon {
+          width: 1.6rem !important;
+          height: 1.6rem !important;
+        }
+        #dropdown-navbar.dropdown-menu .nav-link > svg {
+          width: 3.2rem !important;
+          height: 3.2rem !important;
+        }
         /* Le <main class="container-fluid"> qui enveloppe le contenu était plafonné à
            1352px et collé à gauche -> on lui rend sa pleine largeur. */
         main.container-fluid,
