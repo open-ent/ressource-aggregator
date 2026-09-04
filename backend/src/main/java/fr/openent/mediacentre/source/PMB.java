@@ -51,6 +51,12 @@ public class PMB implements Source {
                 .put("levels", new JsonArray())
                 .put("document_types", resource.getJsonArray("document_types"))
                 .put("link", resource.getString("link"))
+                // Réservation d'un exemplaire dans l'OPAC de l'établissement, construite par le
+                // connecteur PMB (BibliographicRecord.generateReservationLink). PMB détient
+                // l'état des exemplaires, des prêts et de la file d'attente : la notice indexée
+                // ne porte que le point d'entrée, jamais une disponibilité — qui serait périmée
+                // dès le moissonnage suivant.
+                .put("reservation_link", resource.getString("reservation_link", ""))
                 .put("source", PMB.class.getName())
                 .put("id", resource.getString("id"))
                 .put("date", System.currentTimeMillis())
