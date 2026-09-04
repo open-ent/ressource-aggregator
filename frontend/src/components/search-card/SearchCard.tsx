@@ -6,6 +6,7 @@ import { Card, Tooltip } from "@open-ent/react";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import InsertLinkRoundedIcon from "@mui/icons-material/InsertLinkRounded";
+import LibraryAddCheckOutlinedIcon from "@mui/icons-material/LibraryAddCheckOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import PinIcon from "@mui/icons-material/PushPin";
@@ -221,6 +222,20 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
   const isMoodle = () =>
     searchResource.source === "fr.openent.mediacentre.source.Moodle";
 
+  /**
+   * Réservation d'un exemplaire au CDI. Le lien est construit par le connecteur PMB vers
+   * l'OPAC de l'établissement (`do_resa.php?lvl=resa`), qui détient seul l'état des
+   * exemplaires : c'est PMB qui accepte ou refuse, avec son propre message, et non l'ENT qui
+   * devinerait sur une notice moissonnée la nuit précédente.
+   *
+   * Testé sur la présence du champ, pas sur la source : les notices indexées avant l'ajout de
+   * la réservation n'en portent pas, et referaient surface avec un bouton mort.
+   */
+  const reservationLink = searchResource.reservation_link;
+  const reserve = () => {
+    if (reservationLink) window.open(reservationLink, "_blank", "noopener");
+  };
+
   return (
     <Card
       isSelectable={
@@ -295,6 +310,17 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
                     <UnPinIcon className="med-pin" onClick={() => pin()} />
                   </Tooltip>
                 ))}
+              {reservationLink && (
+                <Tooltip
+                  message={t("mediacentre.card.reserve")}
+                  placement="top"
+                >
+                  <LibraryAddCheckOutlinedIcon
+                    className="med-reserve"
+                    onClick={() => reserve()}
+                  />
+                </Tooltip>
+              )}
               <Tooltip
                 message={
                   isMoodle()

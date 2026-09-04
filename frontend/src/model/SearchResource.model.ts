@@ -12,6 +12,12 @@ export interface SearchResource {
   levels?: string[];
   link?: string;
   url?: string;
+  /**
+   * Réservation d'un exemplaire dans l'OPAC de l'établissement. Propre aux notices PMB, et
+   * absent des notices moissonnées avant l'ajout de la réservation : toujours tester sa
+   * présence plutôt que la source.
+   */
+  reservation_link?: string;
   plain_text?: string[];
   source?: string;
   title?: string;

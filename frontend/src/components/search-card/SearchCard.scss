@@ -126,6 +126,12 @@
             color: $med-red;
           }
 
+          // Réservation d'un exemplaire au CDI (notices PMB uniquement).
+          .med-reserve {
+            cursor: pointer;
+            color: $med-light-blue;
+          }
+
           .med-star {
             color: $med-orange;
             height: 25px;
