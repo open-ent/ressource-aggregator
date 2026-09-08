@@ -65,10 +65,18 @@ public class GAR implements Source {
      * Get GAR resources from mock file
      */
     private void getResources(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
+        // Bouchon GAR : pas de vrai flux par UAI (la vraie différenciation par établissement ne
+        // sera testable qu'en prod contre le GAR réel). Pour rendre le sélecteur multi-établissement
+        // démontrable dès maintenant, on sert un second catalogue, plus restreint, en alternance par
+        // structureId (hash pair/impair) : PUREMENT illustratif pour la démo, ne reflète aucune vraie
+        // différence de catalogue GAR par établissement.
+        String fileName = (structureId != null && (structureId.hashCode() & 1) != 0)
+                ? "gar-ressources-structure2.json"
+                : "gar-ressources.json";
         try {
-            InputStream is = getClass().getClassLoader().getResourceAsStream("gar-ressources.json");
+            InputStream is = getClass().getClassLoader().getResourceAsStream(fileName);
             if (is == null) {
-                is = Thread.currentThread().getContextClassLoader().getResourceAsStream("gar-ressources.json");
+                is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             }
 
             if (is != null) {
@@ -76,8 +84,7 @@ public class GAR implements Source {
                 String result = s.hasNext() ? s.next() : "";
                 is.close();
 
-                JsonArray allResources = new JsonArray(result);
-                handler.handle(new Either.Right<>(allResources));
+                handler.handle(new Either.Right<>(new JsonArray(result)));
             } else {
                 handler.handle(new Either.Left<>("gar.mock.file.not.found"));
             }
@@ -87,9 +94,21 @@ public class GAR implements Source {
     }
 
     public Future<JsonArray> getAllUserResources(UserInfos user) {
+        return getAllUserResources(user, null);
+    }
+
+    /**
+     * Comme getAllUserResources(user), mais restreint aux établissements de idStructures quand
+     * cette liste est fournie et non vide (sinon replie sur tous les établissements de l'utilisateur).
+     * Ajouté pour que le sélecteur d'établissement du frontend (multi-établissements) filtre
+     * réellement les ressources — initTextBooks() acceptait déjà idStructures en paramètre mais
+     * ne l'utilisait jamais, fusionnant systématiquement tous les établissements.
+     */
+    public Future<JsonArray> getAllUserResources(UserInfos user, List<String> idStructures) {
         Promise<JsonArray> promise = Promise.promise();
         List<Future<JsonArray>> futures = new ArrayList<>();
-        List<String> structures = user.getStructures();
+        List<String> structures = (idStructures == null || idStructures.isEmpty())
+                ? user.getStructures() : idStructures;
 
         for (String structure : structures) {
             Promise<JsonArray> resourcesPromise = Promise.promise();
@@ -235,7 +254,7 @@ public class GAR implements Source {
     public void setConfig(JsonObject config) { this.config = config; }
 
     public void initTextBooks(UserInfos user, List<String> idStructures, Handler<Either<String, JsonObject>> handler) {
-        getAllUserResources(user).onComplete(event -> {
+        getAllUserResources(user, idStructures).onComplete(event -> {
             if (event.failed()) {
                 handler.handle(new Either.Left<>(event.cause().getMessage()));
                 return;
