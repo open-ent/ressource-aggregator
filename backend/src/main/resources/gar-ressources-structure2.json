@@ -1,0 +1,56 @@
+[
+  {
+    "idRessource": "ark:/32835/DemoStructure2-Manuel1",
+    "description": "Manuel numérique de démonstration, jeu de données du second établissement (bouchon).",
+    "nomRessource": "Manuel Histoire-Géographie 6e",
+    "nomEditeur": "EditeurDemo",
+    "urlVignette": "",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuel numérique"
+    },
+    "domaineEnseignement": [
+      { "nom": "HIST-GEO" }
+    ],
+    "niveauEducatif": [
+      { "nom": "6e" }
+    ]
+  },
+  {
+    "idRessource": "ark:/32835/DemoStructure2-Manuel2",
+    "description": "Manuel numérique de démonstration, jeu de données du second établissement (bouchon).",
+    "nomRessource": "Manuel Mathématiques 5e",
+    "nomEditeur": "EditeurDemo",
+    "urlVignette": "",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "MAN",
+      "nom": "manuel numérique"
+    },
+    "domaineEnseignement": [
+      { "nom": "MATH" }
+    ],
+    "niveauEducatif": [
+      { "nom": "5e" }
+    ]
+  },
+  {
+    "idRessource": "ark:/32835/DemoStructure2-Ressource3",
+    "description": "Ressource de démonstration, jeu de données du second établissement (bouchon).",
+    "nomRessource": "Exerciseur Sciences 4e",
+    "nomEditeur": "EditeurDemo",
+    "urlVignette": "",
+    "urlAccesRessource": "",
+    "typePresentation": {
+      "code": "ACC",
+      "nom": "ressources d'entraînement et d'accompagnement scolaire"
+    },
+    "domaineEnseignement": [
+      { "nom": "SCIENCES" }
+    ],
+    "niveauEducatif": [
+      { "nom": "4e" }
+    ]
+  }
+]
