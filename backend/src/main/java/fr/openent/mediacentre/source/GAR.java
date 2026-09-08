@@ -2,6 +2,8 @@ package fr.openent.mediacentre.source;
 
 import fr.openent.mediacentre.core.constants.Field;
 import fr.openent.mediacentre.helper.FutureHelper;
+import fr.openent.mediacentre.security.WorkflowActionUtils;
+import fr.openent.mediacentre.security.WorkflowActions;
 import fr.openent.mediacentre.service.FavoriteService;
 import fr.openent.mediacentre.service.impl.DefaultFavoriteService;
 import fr.wseduc.webutils.Either;
@@ -21,6 +23,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static fr.wseduc.webutils.Utils.handlerToAsyncHandler;
 import static fr.wseduc.webutils.Utils.isEmpty;
 
 public class GAR implements Source {
@@ -62,14 +65,56 @@ public class GAR implements Source {
     }
 
     /**
-     * Get GAR resources from mock file
+     * Get GAR resources : bouchon local (config "gar-mock": true, ex. environnement sans
+     * gar-connector déployé) ou vrai flux via le bus d'événements vers gar-connector
+     * ("gar-mock": false ou absent — comportement historique restauré, cf. commit 7fefa6a
+     * "fix: mock ressources GAR" qui l'avait temporairement remplacé).
      */
     private void getResources(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
-        // Bouchon GAR : pas de vrai flux par UAI (la vraie différenciation par établissement ne
-        // sera testable qu'en prod contre le GAR réel). Pour rendre le sélecteur multi-établissement
-        // démontrable dès maintenant, on sert un second catalogue, plus restreint, en alternance par
-        // structureId (hash pair/impair) : PUREMENT illustratif pour la démo, ne reflète aucune vraie
-        // différence de catalogue GAR par établissement.
+        if (config != null && config.getBoolean("gar-mock", false)) {
+            getMockResources(structureId, handler);
+        } else {
+            getRealResources(user, structureId, handler);
+        }
+    }
+
+    /**
+     * Vrai flux GAR : délègue à gar-connector via le bus d'événements (adresse historique
+     * "openent.mediacentre", cf. fr.openent.gar.Gar.GAR_ADDRESS et
+     * GarController#case "getResources" côté connecteur). Nécessite gar-connector déployé et
+     * le droit WorkflowActions.GAR_RIGHT sur l'utilisateur — sinon liste vide (comportement
+     * d'origine, pas une erreur).
+     */
+    private void getRealResources(UserInfos user, String structureId, Handler<Either<String, JsonArray>> handler) {
+        if (WorkflowActionUtils.hasRight(user, WorkflowActions.GAR_RIGHT.toString())) {
+            JsonObject action = new JsonObject()
+                    .put("action", "getResources")
+                    .put("structure", structureId)
+                    .put("user", user.getUserId())
+                    .put("hostname", config.getString("host").split("//")[1]);
+
+            String GAR_ADDRESS = "openent.mediacentre";
+            eb.request(GAR_ADDRESS, action, handlerToAsyncHandler(event -> {
+                if (!"ok".equals(event.body().getString("status"))) {
+                    log.error("[Gar@search] Failed to retrieve gar resources", event.body().getString("message"));
+                    handler.handle(new Either.Left<>(event.body().getString("message")));
+                    return;
+                }
+                handler.handle(new Either.Right<>(event.body().getJsonArray("message")));
+            }));
+        } else {
+            handler.handle(new Either.Right<>(new JsonArray()));
+        }
+    }
+
+    /**
+     * Bouchon GAR : pas de vrai flux par UAI (la vraie différenciation par établissement ne
+     * sera testable qu'en prod contre le GAR réel). Pour rendre le sélecteur multi-établissement
+     * démontrable en local sans gar-connector, on sert un second catalogue, plus restreint, en
+     * alternance par structureId (hash pair/impair) : PUREMENT illustratif pour la démo, ne
+     * reflète aucune vraie différence de catalogue GAR par établissement.
+     */
+    private void getMockResources(String structureId, Handler<Either<String, JsonArray>> handler) {
         String fileName = (structureId != null && (structureId.hashCode() & 1) != 0)
                 ? "gar-ressources-structure2.json"
                 : "gar-ressources.json";
