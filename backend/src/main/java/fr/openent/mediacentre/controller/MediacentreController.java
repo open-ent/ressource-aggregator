@@ -9,6 +9,7 @@ import fr.openent.mediacentre.source.GAR;
 import fr.openent.mediacentre.source.Source;
 import fr.wseduc.rs.ApiDoc;
 import fr.wseduc.rs.Get;
+import fr.wseduc.rs.Post;
 import fr.wseduc.security.ActionType;
 import fr.wseduc.security.SecuredAction;
 import io.vertx.core.Vertx;
@@ -211,6 +212,27 @@ public class MediacentreController extends ControllerHelper {
         }
 
         renderJson(request, safeConfig);
+    }
+
+    @Post("/gar/reindex")
+    @ApiDoc("Force le réindexage GAR (mock ou réel selon gar-mock), sans attendre le cron amass-cron. " +
+            "Utile après une bascule mock <-> réel : le reset intégré à amass() évite tout mélange.")
+    @SecuredAction(value = "", type = ActionType.RESOURCE)
+    @ResourceFilter(SuperAdminFilter.class)
+    public void reindexGar(final HttpServerRequest request) {
+        GAR garSource = this.sources.stream()
+                .filter(GAR.class::isInstance)
+                .map(GAR.class::cast)
+                .findFirst()
+                .orElse(null);
+
+        if (garSource == null) {
+            renderJson(request, new JsonObject().put("status", "ko").put("message", "GAR source not configured"), 404);
+            return;
+        }
+
+        garSource.amass();
+        renderJson(request, new JsonObject().put("status", "ok"));
     }
 
     @SecuredAction(value = Mediacentre.VIEW_RESOURCE_RIGHT, type = ActionType.RESOURCE)
