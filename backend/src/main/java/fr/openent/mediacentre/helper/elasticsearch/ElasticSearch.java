@@ -284,7 +284,10 @@ public class ElasticSearch {
 							if (event.statusCode() == 200) {
 								event.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(new JsonObject(respBody))));
 							} else {
-								handler.handle(new DefaultAsyncResult<>(new ElasticSearchException(event.statusMessage())));
+								// Même correctif que postInternal : garder le corps de la réponse ES,
+								// pas seulement le statusMessage générique.
+								event.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(
+										new ElasticSearchException(event.statusMessage() + " : " + respBody.toString()))));
 							}
 							esc.checkSuccess();
 						})

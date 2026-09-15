@@ -136,7 +136,7 @@ public class GAR implements Source {
                 handler.handle(new Either.Left<>("gar.mock.file.not.found"));
             }
         } catch (Exception e) {
-            handler.handle(new Either.Left<>("gar.mock.read.error"));
+            handler.handle(new Either.Left<>("gar.mock.read.error: " + e.getClass().getSimpleName() + ": " + e.getMessage()));
         }
     }
 

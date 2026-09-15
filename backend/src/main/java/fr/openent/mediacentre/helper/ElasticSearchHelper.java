@@ -339,7 +339,11 @@ public class ElasticSearchHelper {
                 // simplement qu'aucune ressource n'a encore été indexée pour cette source
                 // (ex. aucun signet créé) : on renvoie une liste vide plutôt qu'une erreur,
                 // sinon /mediacentre/signets renvoie 500 au lieu de [].
-                if (ar.cause() != null && "Not Found".equalsIgnoreCase(ar.cause().getMessage())) {
+                // Le message porte désormais aussi le corps de la réponse ES ("Not Found : {...}")
+                // depuis que postInternal ne le tronque plus au statusMessage seul — startsWith au
+                // lieu d'une égalité stricte pour continuer à détecter ce cas.
+                if (ar.cause() != null && ar.cause().getMessage() != null
+                        && ar.cause().getMessage().toLowerCase().startsWith("not found")) {
                     handler.handle(new Either.Right<>(new JsonObject()
                             .put("source", source.getName())
                             .put("resources", new JsonArray())));
