@@ -109,15 +109,14 @@ public class GAR implements Source {
 
     /**
      * Bouchon GAR : pas de vrai flux par UAI (la vraie différenciation par établissement ne
-     * sera testable qu'en prod contre le GAR réel). Pour rendre le sélecteur multi-établissement
-     * démontrable en local sans gar-connector, on sert un second catalogue, plus restreint, en
-     * alternance par structureId (hash pair/impair) : PUREMENT illustratif pour la démo, ne
-     * reflète aucune vraie différence de catalogue GAR par établissement.
+     * sera testable qu'en prod contre le GAR réel). L'alternance précédente entre deux fichiers
+     * selon la parité du hash de structureId servait un catalogue restreint (3 ressources,
+     * aucun manuel réaliste) à toute structure de hash impair — purement accidentel, sans lien
+     * avec l'établissement réel. On sert désormais systématiquement le catalogue complet
+     * (63 ressources, 37 manuels).
      */
     private void getMockResources(String structureId, Handler<Either<String, JsonArray>> handler) {
-        String fileName = (structureId != null && (structureId.hashCode() & 1) != 0)
-                ? "gar-ressources-structure2.json"
-                : "gar-ressources.json";
+        String fileName = "gar-ressources.json";
         try {
             InputStream is = getClass().getClassLoader().getResourceAsStream(fileName);
             if (is == null) {
