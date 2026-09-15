@@ -19,15 +19,21 @@
 
 package fr.openent.mediacentre.helper.elasticsearch;
 
+import io.vertx.core.Future;
 import io.vertx.core.http.HttpClientRequest;
 import io.vertx.core.json.JsonObject;
 
 public class BulkRequest {
 
-	private final HttpClientRequest request;
+	private final Future<HttpClientRequest> requestFuture;
 
-	BulkRequest(HttpClientRequest request) {
-		this.request = request;
+	// La connexion HTTP (esc.client.request(...)) est asynchrone : au moment où bulk() retourne,
+	// elle n'est jamais encore établie. Porter le Future (plutôt qu'un .result() bloquant appelé
+	// trop tôt, toujours null) permet à index()/end() d'empiler leurs écritures via onSuccess —
+	// exécutées dans l'ordre d'appel dès que la connexion aboutit, sans rien changer côté
+	// appelant (PMB, GAR).
+	BulkRequest(Future<HttpClientRequest> requestFuture) {
+		this.requestFuture = requestFuture;
 	}
 
 	public void index(JsonObject element, JsonObject metadata) {
@@ -39,12 +45,13 @@ public class BulkRequest {
 				metadata.put("_id", id);
 			}
 		}
-		request.write(new JsonObject().put("index", metadata)
-				.encode() + "\n" + element.encode() + "\n");
+		String line = new JsonObject().put("index", metadata)
+				.encode() + "\n" + element.encode() + "\n";
+		requestFuture.onSuccess(request -> request.write(line));
 	}
 
 	public void end() {
-		request.end();
+		requestFuture.onSuccess(HttpClientRequest::end);
 	}
 
 }
