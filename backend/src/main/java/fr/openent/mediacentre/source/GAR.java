@@ -190,10 +190,36 @@ public class GAR implements Source {
 
     @Override
     public void plainTextSearch(String query, UserInfos user, List<String> idStructures, Handler<Either<JsonObject, JsonObject>> handler) {
-        // GAR n'expose que des manuels numériques (onglet Manuels, cf. initTextBooks) : il ne doit
-        // jamais apparaître dans la recherche générale "Ressources" (avant le bouchon JSON, l'appel
-        // réel à l'API GAR n'était d'ailleurs jamais invoqué depuis ce chemin de recherche générale).
-        handler.handle(new Either.Left<>(new JsonObject().put("source", GAR.class.getName()).put("message", "[GAR] not a resources search source")));
+        // GAR n'expose que des manuels numériques via l'API réelle (onglet Manuels, cf.
+        // initTextBooks) : pas de recherche par mot-clé côté vrai GAR, donc on décline en dehors
+        // du mode mock (comportement inchangé — l'appel réel à l'API GAR n'a jamais existé sur ce
+        // chemin). En mode mock (gar-mock=true, démo/dev sans gar-connector), on filtre le
+        // catalogue local par mot-clé pour que le picker "Ressources" (recherche générale, utilisé
+        // notamment par le cahier de textes) retourne des résultats exploitables.
+        if (config == null || !config.getBoolean("gar-mock", false)) {
+            handler.handle(new Either.Left<>(new JsonObject().put("source", GAR.class.getName()).put("message", "[GAR] not a resources search source")));
+            return;
+        }
+        getMockResources(null, event -> {
+            if (event.isLeft()) {
+                handler.handle(new Either.Left<>(new JsonObject().put("source", GAR.class.getName()).put("message", event.left().getValue())));
+                return;
+            }
+            String domain = (String) user.getOtherProperties().get("domain");
+            String lowerQuery = query == null ? "" : query.toLowerCase();
+            JsonArray matches = new JsonArray();
+            for (Object obj : event.right().getValue()) {
+                JsonObject res = (JsonObject) obj;
+                String title = res.getString("nomRessource", "");
+                String description = res.getString("description", "");
+                if (lowerQuery.isEmpty()
+                        || title.toLowerCase().contains(lowerQuery)
+                        || description.toLowerCase().contains(lowerQuery)) {
+                    matches.add(format(domain, res));
+                }
+            }
+            handler.handle(new Either.Right<>(new JsonObject().put("source", GAR.class.getName()).put("resources", matches)));
+        });
     }
 
     @Override
