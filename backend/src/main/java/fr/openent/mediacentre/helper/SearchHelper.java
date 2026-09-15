@@ -54,7 +54,7 @@ public class SearchHelper extends ControllerHelper {
     ) {
         Handler<Either<JsonObject, JsonObject>> handler = event -> {
             if (event.isLeft()) {
-                log.error("[SearchController@search] Failed to retrieve source resources.", event.left().getValue());
+                log.error("[SearchController@search] Failed to retrieve source resources :" + event.left().getValue());
                 answer.storeMultiple(new JsonObject().put("error", event.left().getValue()).put("status", "ko"),
                         expectedSources.size());
             } else {
