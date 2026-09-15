@@ -133,7 +133,7 @@ public class ElasticSearchHelper {
         JsonArray must = new JsonArray();
         if(myPublishedSignets) {
             JsonObject term = new JsonObject()
-                    .put("authors", userId);
+                    .put("authors.keyword", userId);  // même piège : term exact sur un champ text -> .keyword
             must.add(new JsonObject().put("term", term));
         }
         must.add(sourceFilter(source));
@@ -170,7 +170,7 @@ public class ElasticSearchHelper {
 
     public static void deletePublicSignets(String signetId, Handler<AsyncResult<JsonArray>> handler) {
         JsonObject term = new JsonObject()
-                .put("id", signetId);
+                .put("id.keyword", signetId);  // même piège : term exact sur un champ text -> .keyword
         JsonObject query = new JsonObject().put("term", term);
         JsonObject object = new JsonObject().put("query", query);
 
@@ -198,7 +198,7 @@ public class ElasticSearchHelper {
         JsonArray must = new JsonArray();
         must.add(sourceFilter(Signet.class));
         JsonObject term = new JsonObject()
-                .put("authors", userId);
+                .put("authors.keyword", userId);  // même piège : term exact sur un champ text -> .keyword
         must.add(new JsonObject().put("term", term));
         JsonObject bool = new JsonObject()
                 .put("must", must);
@@ -266,8 +266,13 @@ public class ElasticSearchHelper {
     }
 
     private static JsonObject sourceFilter(Class<?> source) {
+        // "source" est mappé en text (analysé) : une requête "term" (correspondance exacte, sans
+        // analyse) sur la chaîne complète "fr.openent.mediacentre.source.GAR" ne matche jamais
+        // aucun terme indexé (celui-ci est tokenisé en fr/openent/mediacentre/source/gar par
+        // l'analyseur standard) — 0 résultat systématique, quelle que soit la source. Cibler le
+        // sous-champ .keyword (non analysé, toujours présent par défaut sur un champ text).
         JsonObject term = new JsonObject()
-                .put("source", source.getName());
+                .put("source.keyword", source.getName());
 
         return new JsonObject()
                 .put("term", term);
@@ -326,8 +331,10 @@ public class ElasticSearchHelper {
     }
 
     private static JsonObject structureFilter(List<String> structures) {
+        // Même piège que sourceFilter() : "structure" est mappé en text, "terms" (correspondance
+        // exacte multi-valeurs) doit cibler le sous-champ .keyword.
         JsonObject terms = new JsonObject()
-                .put("structure", new JsonArray(structures));
+                .put("structure.keyword", new JsonArray(structures));
 
         return new JsonObject().put("terms", terms);
     }
