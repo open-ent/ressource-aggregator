@@ -1,7 +1,10 @@
 package fr.openent.mediacentre.source;
 
 import fr.openent.mediacentre.core.constants.Field;
+import fr.openent.mediacentre.helper.ElasticSearchHelper;
 import fr.openent.mediacentre.helper.FutureHelper;
+import fr.openent.mediacentre.helper.elasticsearch.BulkRequest;
+import fr.openent.mediacentre.helper.elasticsearch.ElasticSearch;
 import fr.openent.mediacentre.security.WorkflowActionUtils;
 import fr.openent.mediacentre.security.WorkflowActions;
 import fr.openent.mediacentre.service.FavoriteService;
@@ -190,36 +193,15 @@ public class GAR implements Source {
 
     @Override
     public void plainTextSearch(String query, UserInfos user, List<String> idStructures, Handler<Either<JsonObject, JsonObject>> handler) {
-        // GAR n'expose que des manuels numériques via l'API réelle (onglet Manuels, cf.
-        // initTextBooks) : pas de recherche par mot-clé côté vrai GAR, donc on décline en dehors
-        // du mode mock (comportement inchangé — l'appel réel à l'API GAR n'a jamais existé sur ce
-        // chemin). En mode mock (gar-mock=true, démo/dev sans gar-connector), on filtre le
-        // catalogue local par mot-clé pour que le picker "Ressources" (recherche générale, utilisé
-        // notamment par le cahier de textes) retourne des résultats exploitables.
-        if (config == null || !config.getBoolean("gar-mock", false)) {
-            handler.handle(new Either.Left<>(new JsonObject().put("source", GAR.class.getName()).put("message", "[GAR] not a resources search source")));
-            return;
-        }
-        getMockResources(null, event -> {
-            if (event.isLeft()) {
-                handler.handle(new Either.Left<>(new JsonObject().put("source", GAR.class.getName()).put("message", event.left().getValue())));
-                return;
-            }
-            String domain = (String) user.getOtherProperties().get("domain");
-            String lowerQuery = query == null ? "" : query.toLowerCase();
-            JsonArray matches = new JsonArray();
-            for (Object obj : event.right().getValue()) {
-                JsonObject res = (JsonObject) obj;
-                String title = res.getString("nomRessource", "");
-                String description = res.getString("description", "");
-                if (lowerQuery.isEmpty()
-                        || title.toLowerCase().contains(lowerQuery)
-                        || description.toLowerCase().contains(lowerQuery)) {
-                    matches.add(format(domain, res));
-                }
-            }
-            handler.handle(new Either.Right<>(new JsonObject().put("source", GAR.class.getName()).put("resources", matches)));
-        });
+        // GAR est désormais indexé comme les autres sources (PMB/Signet/Moodle), que le module
+        // soit en mode mock ou réel — cf. amass(), qui alimente l'index et le remet à zéro à
+        // chaque exécution (donc aussi à chaque bascule mock <-> réel, sans mélange des deux jeux
+        // de données). Pas de filtre par structure ici : le catalogue mock n'est rattaché à
+        // aucun UAI réel, et amass() ne peut pas encore alimenter l'index en mode réel (cf.
+        // amass(), le connecteur GAR n'a pas de contrat de moissonnage en masse) — filtrer par
+        // structure viderait alors systématiquement les résultats.
+        ElasticSearchHelper.plainTextSearch(GAR.class, query, user.getUserId(), null, false,
+                ElasticSearchHelper.searchHandler(GAR.class, null, handler));
     }
 
     @Override
@@ -315,7 +297,54 @@ public class GAR implements Source {
     }
 
     @Override
-    public void amass() { }
+    public void amass() {
+        // Reset systématique avant réindexation : les documents GAR indexés dépendent du mode
+        // courant (mock ou réel). Sans ce reset, basculer gar-mock laisserait les documents de
+        // l'ancien mode mélangés à ceux du nouveau au prochain amass (cron horaire, cf.
+        // Mediacentre#amass-cron) — ou à un déclenchement manuel via POST /mediacentre/gar/reindex.
+        JsonObject deleteQuery = new JsonObject().put("query", new JsonObject()
+                .put("term", new JsonObject().put("source", GAR.class.getName())));
+        ElasticSearch.getInstance().delete(deleteQuery, deleteResult -> {
+            if (deleteResult.failed()) {
+                log.error("[GAR@amass] Failed to reset previous index: " + deleteResult.cause().getMessage());
+            }
+            if (config != null && config.getBoolean("gar-mock", false)) {
+                amassMock();
+            }
+            // Réel (gar-mock=false) : rien à indexer ici. Le connecteur gar-connector n'expose
+            // qu'un accès par utilisateur/structure (action "getResources"), pas de contrat de
+            // moissonnage en masse comme PMB ("amass"/"records") — à construire côté connecteur
+            // avant de pouvoir alimenter l'index en mode réel.
+        });
+    }
+
+    private void amassMock() {
+        getMockResources(null, event -> {
+            if (event.isLeft()) {
+                log.error("[GAR@amass] Failed to load mock catalog: " + event.left().getValue());
+                return;
+            }
+            JsonArray resources = event.right().getValue();
+            if (resources.isEmpty()) {
+                return;
+            }
+            BulkRequest bulkRequest = ElasticSearch.getInstance().bulk(RESOURCE_TYPE_NAME, ar -> {
+                if (ar.failed()) {
+                    log.error("[GAR@amass] Failed to index mock catalog: " + ar.cause().getMessage());
+                    return;
+                }
+                log.info(String.format("[GAR@amass] %d mock resources indexed", resources.size()));
+            });
+            for (Object obj : resources) {
+                JsonObject resource = (JsonObject) obj;
+                JsonObject document = format("", resource);
+                JsonObject metadata = new JsonObject()
+                        .put("_id", String.format("%s$%s", GAR.class.getName(), resource.getString("idRessource")));
+                bulkRequest.index(document, metadata);
+            }
+            bulkRequest.end();
+        });
+    }
 
     @Override
     public void setEventBus(EventBus eb) { this.eb = eb; }
