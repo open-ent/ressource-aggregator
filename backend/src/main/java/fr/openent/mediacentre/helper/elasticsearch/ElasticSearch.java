@@ -236,7 +236,11 @@ public class ElasticSearch {
 					if (response.statusCode() == expectedStatus) {
 						response.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(new JsonObject(respBody))));
 					} else {
-						handler.handle(new DefaultAsyncResult<>(new ElasticSearchException(response.statusMessage())));
+						// Le statusMessage seul ("Bad Request"…) ne dit jamais QUEL champ/mapping pose
+						// problème : lire le corps de la réponse (le vrai détail ES, ex.
+						// mapper_parsing_exception) plutôt que de le perdre silencieusement.
+						response.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(
+								new ElasticSearchException(response.statusMessage() + " : " + respBody.toString()))));
 					}
 					esc.checkSuccess();
 				})
@@ -276,7 +280,10 @@ public class ElasticSearch {
 							if (event.statusCode() == 200) {
 								event.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(new JsonObject(respBody))));
 							} else {
-								handler.handle(new DefaultAsyncResult<>(new ElasticSearchException(event.statusMessage())));
+								// Même correctif que postInternal : garder le corps de la réponse ES,
+								// pas seulement le statusMessage générique.
+								event.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(
+										new ElasticSearchException(event.statusMessage() + " : " + respBody.toString()))));
 							}
 							esc.checkSuccess();
 						})
