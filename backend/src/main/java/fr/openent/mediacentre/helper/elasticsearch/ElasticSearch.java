@@ -274,23 +274,31 @@ public class ElasticSearch {
 			requestOptions.putHeader("Authorization", "Basic " + Base64.getEncoder().encodeToString(credentials.getBytes()));
 		}
 
+		// request.send() (sans argument) termine la requête immédiatement, corps vide — à
+		// l'opposé de ce qu'il faut ici : BulkRequest.index() doit pouvoir écrire (write) au fil
+		// de l'eau, puis end() ferme le flux quand tous les documents sont empilés. On enregistre
+		// donc le futur handler de réponse (request.response()) avant tout write/end, comme
+		// l'exige l'API chunked de Vert.x, plutôt que d'appeler send().
 		final Future<HttpClientRequest> reqFuture = esc.client.request(requestOptions)
-				.onSuccess(request -> request.setChunked(true).send()
-						.onSuccess(event -> {
-							if (event.statusCode() == 200) {
-								event.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(new JsonObject(respBody))));
-							} else {
-								// Même correctif que postInternal : garder le corps de la réponse ES,
-								// pas seulement le statusMessage générique.
-								event.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(
-										new ElasticSearchException(event.statusMessage() + " : " + respBody.toString()))));
-							}
-							esc.checkSuccess();
-						})
-						.onFailure(e -> checkDisableClientAfterError(esc, e)))
+				.onSuccess(request -> {
+					request.setChunked(true);
+					request.response()
+							.onSuccess(response -> {
+								if (response.statusCode() == 200) {
+									response.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(new JsonObject(respBody))));
+								} else {
+									// Même correctif que postInternal : garder le corps de la réponse ES,
+									// pas seulement le statusMessage générique.
+									response.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(
+											new ElasticSearchException(response.statusMessage() + " : " + respBody.toString()))));
+								}
+								esc.checkSuccess();
+							})
+							.onFailure(e -> checkDisableClientAfterError(esc, e));
+				})
 				.onFailure(e -> checkDisableClientAfterError(esc, e));
 
-		return new BulkRequest(reqFuture.result());
+		return new BulkRequest(reqFuture);
 	}
 
 	/**
