@@ -29,9 +29,15 @@
             <id>ossvrtx</id>
             <url>https://oss.sonatype.org/content/repositories/iovertx-3720/</url>
         </repository>
+      <repository>
+        <id>pt-releases</id>
+        <name>rct-nexus maven-releases (entcore-libs patchées)</name>
+        <url>https://rct-nexus.tech.fr/repository/maven-releases/</url>
+      </repository>
     </repositories>
     <properties>
-        <entCoreVersion>6.14.9-patched</entCoreVersion>
+        <entCoreVersion>6.16.14-patched</entCoreVersion>
+        <entCoreLibsVersion>6.16.7-patched</entCoreLibsVersion>
         <vertxCronTimerVersion>3.0.0</vertxCronTimerVersion>
         <junitVersion>5.1.0</junitVersion>
         <reflectionsVersion>0.10.2</reflectionsVersion>
@@ -48,7 +54,7 @@
         <dependency>
             <groupId>org.entcore</groupId>
             <artifactId>common</artifactId>
-            <version>${entCoreVersion}</version>
+            <version>${entCoreLibsVersion}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
