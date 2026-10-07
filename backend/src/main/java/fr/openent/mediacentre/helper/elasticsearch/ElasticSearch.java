@@ -241,8 +241,8 @@ public class ElasticSearch {
 					if (response.statusCode() == expectedStatus) {
 						response.bodyHandler(respBody -> handler.handle(new DefaultAsyncResult<>(new JsonObject(respBody))));
 					} else {
-						request.bodyHandler(respBody -> {
-							String message = "status=" + request.statusCode() + " " + request.statusMessage() + " body=" + respBody.toString();
+						response.bodyHandler(respBody -> {
+							String message = "status=" + response.statusCode() + " " + response.statusMessage() + " body=" + respBody.toString();
 							log.error("[Mediacentre@ElasticSearch::postInternal] Unexpected response for " + path + " : " + message);
 							handler.handle(new DefaultAsyncResult<>(new ElasticSearchException(message)));
 						});
