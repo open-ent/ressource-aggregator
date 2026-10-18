@@ -1,3 +1,4 @@
+import { useUser } from "@open-ent/react";
 import { useEffect, useState } from "react";
 
 import { useFavorite } from "./useFavorite";
@@ -9,12 +10,17 @@ import { usePinProvider } from "~/providers/PinProvider";
 
 export const useTextbook = (idStructure: string) => {
   const { pins } = usePinProvider();
+  // On attend la structure de l'usager (sinon la requête partait avec `structureIds=` vide).
+  const { user } = useUser();
+  const skip = !idStructure && (user?.structures?.length ?? 0) > 0;
   const {
     data: textbook,
     error,
-    isLoading,
+    isLoading: isQueryLoading,
+    isUninitialized,
     refetch,
-  } = useGetTextbooksQuery(idStructure);
+  } = useGetTextbooksQuery(idStructure, { skip });
+  const isLoading = isQueryLoading || isUninitialized;
   const [textbooks, setTextbooks] = useState<Textbook[] | null>(null);
   const { favorites } = useFavorite();
 

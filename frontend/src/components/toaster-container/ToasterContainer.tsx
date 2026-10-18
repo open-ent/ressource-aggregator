@@ -289,6 +289,7 @@ export const ToasterContainer: React.FC<ToasterContainerProps> = ({
             {isManager() &&
               sharedArray.map((item) => (
                 <Button
+                  key={item.label}
                   type="button"
                   color="primary"
                   variant="filled"

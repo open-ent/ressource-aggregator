@@ -1,3 +1,4 @@
+import { useUser } from "@open-ent/react";
 import { useEffect, useState } from "react";
 
 import { useSearchQuery } from "../services/api/search.service";
@@ -21,10 +22,20 @@ export const useExternalResource = (idSelectedStructure: string) => {
     ],
   };
 
-  const { data, error, isLoading } = useSearchQuery({
-    jsondata: query,
-    idStructure: idSelectedStructure,
-  });
+  // On attend la structure de l'usager (sinon la requête partait avec `structureIds=` vide) ; sans
+  // aucune structure, on interroge quand même.
+  const { user } = useUser();
+  const skip = !idSelectedStructure && (user?.structures?.length ?? 0) > 0;
+  const {
+    data,
+    error,
+    isLoading: isQueryLoading,
+    isUninitialized,
+  } = useSearchQuery(
+    { jsondata: query, idStructure: idSelectedStructure },
+    { skip },
+  );
+  const isLoading = isQueryLoading || isUninitialized;
 
   const [externalResources, setExternalResources] = useState<
     ExternalResource[] | null

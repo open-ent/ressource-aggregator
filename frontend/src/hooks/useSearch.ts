@@ -1,3 +1,4 @@
+import { useUser } from "@open-ent/react";
 import { useEffect, useState } from "react";
 
 import { useFavorite } from "./useFavorite";
@@ -11,10 +12,22 @@ export const useSearch = (query: any, idSelectedStructure: string) => {
   const { pins } = usePinProvider();
   const [allResources, setAllResources] = useState<Resource[] | null>(null);
   const { favorites } = useFavorite();
-  const { data, error, isLoading, refetch } = useSearchQuery({
-    jsondata: query,
-    idStructure: idSelectedStructure,
-  });
+  // Sans structure résolue, la requête partait avec `structureIds=` vide : on attend la structure.
+  // On attend la structure de l'usager (sinon la requête partait avec `structureIds=` vide) ; sans
+  // aucune structure, on interroge quand même.
+  const { user } = useUser();
+  const skip = !idSelectedStructure && (user?.structures?.length ?? 0) > 0;
+  const {
+    data,
+    error,
+    isLoading: isQueryLoading,
+    isUninitialized,
+    refetch,
+  } = useSearchQuery(
+    { jsondata: query, idStructure: idSelectedStructure },
+    { skip },
+  );
+  const isLoading = isQueryLoading || isUninitialized;
 
   useEffect(() => {
     if (!isLoading) {
