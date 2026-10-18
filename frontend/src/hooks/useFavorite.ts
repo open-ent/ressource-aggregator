@@ -7,7 +7,7 @@ import { usePinProvider } from "~/providers/PinProvider";
 
 export const useFavorite = () => {
   const { pins } = usePinProvider();
-  const { data: favorite, error, isLoading } = useGetFavoriteQuery(null);
+  const { data: favorite, error, isLoading, refetch } = useGetFavoriteQuery(null);
   const [favorites, setFavorites] = useState<Favorite[] | null>(null);
 
   useEffect(() => {
@@ -31,5 +31,5 @@ export const useFavorite = () => {
     }
   }, [favorite, pins]);
 
-  return { favorites, setFavorites, error, isLoading };
+  return { favorites, setFavorites, error, isLoading, refetch };
 };

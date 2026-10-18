@@ -4,6 +4,7 @@ import { Alert } from "@open-ent/react";
 import SchoolIcon from "@mui/icons-material/School";
 import { useTranslation } from "react-i18next";
 
+import { QueryStatus } from "~/components/query-status/QueryStatus";
 import { EmptyState } from "~/components/empty-state/EmptyState";
 import { FilterLayout } from "~/components/filter-layout/FilterLayout";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
@@ -27,7 +28,7 @@ export const TextbookPage: React.FC = () => {
   const { openModal } = useModalProvider();
   const { idSelectedStructure } = useSelectedStructureProvider();
 
-  const { textbooks } = useTextbook(idSelectedStructure);
+  const { textbooks, ...status } = useTextbook(idSelectedStructure);
   const [textbooksData, setTextbooksData] = useState<Resource[] | null>(null);
   const { favorites } = useFavorite();
   const [allResourcesDisplayed, setAllResourcesDisplayed] = useState<
@@ -89,7 +90,8 @@ export const TextbookPage: React.FC = () => {
               </h1>
             </div>
           </div>
-          <div className="med-search-page-content-body">
+          <QueryStatus isLoading={status.isLoading} isError={!!status.error} onRetry={status.refetch} />
+          <div className={`med-search-page-content-body${status.isLoading || status.error ? " d-none" : ""}`}>
             {textbooksData && !textbooksData.length ? (
               <EmptyState
                 image="empty-state-textbooks.png"

@@ -8,6 +8,8 @@ import PinIcon from "@mui/icons-material/PushPin";
 import UnPinIcon from "@mui/icons-material/PushPinOutlined";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { duplicateResource } from "~/utils/duplicateResource";
+import { assertMutationOk } from "~/utils/assertMutationOk";
 import { useTranslation } from "react-i18next";
 import "./Resource.scss";
 
@@ -94,9 +96,9 @@ export const Resource: React.FC<ResourceProps> = ({
   const handleDuplicate = async () => {
     if (!resource?.action?.url) return;
 
-    const response = await fetch(resource.action.url, { method: "POST" });
+    const ok = await duplicateResource(resource.action.url);
 
-    if (!response?.ok) {
+    if (!ok) {
       return notify(t(resource.action.message.error), "danger");
     }
 
@@ -114,14 +116,15 @@ export const Resource: React.FC<ResourceProps> = ({
           ...resource,
           id: newId,
         };
-        await addFavorite({ id: newId, resource: newResource });
+        assertMutationOk(await addFavorite({ id: newId, resource: newResource }));
       } else {
-        await addFavorite({ id: resource._id, resource });
+        assertMutationOk(await addFavorite({ id: resource._id, resource }));
       }
       notify(t("mediacentre.notification.addFavorite"), "success");
       handleAddFavorite(resource);
     } catch (e) {
       console.error(e);
+      notify(t("mediacentre.error.favorite.retrieval"), "danger");
     }
   };
 
@@ -134,20 +137,21 @@ export const Resource: React.FC<ResourceProps> = ({
         const newId = resource.id
           ? parseInt(resource.id.toString())
           : resource.id;
-        await removeFavorite({
+        assertMutationOk(await removeFavorite({
           id: newId,
           source: resource?.source,
-        });
+        }));
       } else {
-        await removeFavorite({
+        assertMutationOk(await removeFavorite({
           id: resource.favoriteId ?? resource._id,
           source: resource?.source,
-        });
+        }));
       }
       notify(t("mediacentre.notification.removeFavorite"), "success");
       handleRemoveFavorite(id);
     } catch (e) {
       console.error(e);
+      notify(t("mediacentre.error.favorite.retrieval"), "danger");
     }
   };
 
@@ -195,7 +199,7 @@ export const Resource: React.FC<ResourceProps> = ({
           {image ? (
             <img
               src={image}
-              alt="Resource"
+              alt=""
               className="med-resource-image"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
@@ -206,7 +210,7 @@ export const Resource: React.FC<ResourceProps> = ({
           ) : (
             <img
               src="/mediacentre/public/img/no-image-resource.png"
-              alt="Resource"
+              alt=""
               className="med-resource-image"
             />
           )}
@@ -224,7 +228,7 @@ export const Resource: React.FC<ResourceProps> = ({
             <div className="med-footer-text">
               <img
                 src="/mediacentre/public/img/no-avatar.svg"
-                alt="Resource"
+                alt=""
                 className="med-resource-footer-image"
               />
               <span className="med-footer-text-text">
@@ -235,7 +239,7 @@ export const Resource: React.FC<ResourceProps> = ({
             <div className="med-footer-text">
               <img
                 src={footerImage}
-                alt="Resource"
+                alt=""
                 className="med-resource-footer-image"
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;

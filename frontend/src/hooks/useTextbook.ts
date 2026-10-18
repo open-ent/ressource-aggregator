@@ -13,6 +13,7 @@ export const useTextbook = (idStructure: string) => {
     data: textbook,
     error,
     isLoading,
+    refetch,
   } = useGetTextbooksQuery(idStructure);
   const [textbooks, setTextbooks] = useState<Textbook[] | null>(null);
   const { favorites } = useFavorite();
@@ -43,5 +44,6 @@ export const useTextbook = (idStructure: string) => {
     setTextbooks,
     error,
     isLoading,
+    refetch,
   };
 };

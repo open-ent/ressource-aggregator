@@ -14,6 +14,8 @@ import UnPinIcon from "@mui/icons-material/PushPinOutlined";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import anime from "animejs";
+import { duplicateResource } from "~/utils/duplicateResource";
+import { assertMutationOk } from "~/utils/assertMutationOk";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
@@ -104,9 +106,9 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
   const handleDuplicate = async () => {
     if (!searchResource?.action?.url) return;
 
-    const response = await fetch(searchResource.action.url, { method: "POST" });
+    const ok = await duplicateResource(searchResource.action.url);
 
-    if (!response?.ok) {
+    if (!ok) {
       return notify(t(searchResource.action.message.error), "danger");
     }
 
@@ -123,24 +125,25 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
           ...searchResource,
           id: newId,
         };
-        await addFavorite({
+        assertMutationOk(await addFavorite({
           id: newId,
           resource: newSearchResource,
-        });
+        }));
       } else {
         const newSearchResource = {
           ...searchResource,
           _id: undefined,
         };
-        await addFavorite({
+        assertMutationOk(await addFavorite({
           id: searchResource._id,
           resource: newSearchResource,
-        });
+        }));
       }
       notify(t("mediacentre.notification.addFavorite"), "success");
       searchResource.favorite = true;
     } catch (e) {
       console.error(e);
+      notify(t("mediacentre.error.favorite.retrieval"), "danger");
     }
   };
 
@@ -153,21 +156,22 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
         const newId = searchResource.id
           ? parseInt(searchResource.id.toString())
           : searchResource.id;
-        await removeFavorite({
+        assertMutationOk(await removeFavorite({
           id: newId,
           source: searchResource?.source,
-        });
+        }));
       } else {
-        await removeFavorite({
+        assertMutationOk(await removeFavorite({
           id: searchResource.favoriteId ?? searchResource._id,
           source: searchResource?.source,
-        });
+        }));
       }
       notify(t("mediacentre.notification.removeFavorite"), "success");
       searchResource.favorite = false;
       setIsRemoveResource(true);
     } catch (e) {
       console.error(e);
+      notify(t("mediacentre.error.favorite.retrieval"), "danger");
     }
   };
 
@@ -258,7 +262,7 @@ export const SearchCard: React.FC<SearchResourceProps> = ({
             {searchResource.image && (
               <img
                 src={searchResource.image}
-                alt="Resource"
+                alt=""
                 className="med-search-resource-image"
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;

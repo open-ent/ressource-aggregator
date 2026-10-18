@@ -10,7 +10,7 @@ import { usePinProvider } from "~/providers/PinProvider";
 
 export const useGlobal = () => {
   const { pins } = usePinProvider();
-  const { data: global, error, isLoading } = useGetGlobalQuery(null);
+  const { data: global, error, isLoading, refetch } = useGetGlobalQuery(null);
   const [globals, setGlobals] = useState<GlobalResource[] | null>(null);
   const { favorites } = useFavorite();
 
@@ -39,5 +39,5 @@ export const useGlobal = () => {
     setGlobals(globalData);
   }, [global, favorites, pins]);
 
-  return { globals, setGlobals, error, isLoading };
+  return { globals, setGlobals, error, isLoading, refetch };
 };

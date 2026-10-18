@@ -303,5 +303,8 @@
   "mediacentre.error.page.back.to.home": "Retour à l'accueil",
 
   "push.notif.mediacentre.title": "Médiacentre",
-  "push.notif.mediacentre.newResource": "Vous avez une nouvelle ressource épinglée."
+  "push.notif.mediacentre.newResource": "Vous avez une nouvelle ressource épinglée.",
+  "mediacentre.loading": "Chargement…",
+  "mediacentre.error.load": "Impossible de charger les ressources pour le moment.",
+  "mediacentre.error.retry": "Réessayer"
 }

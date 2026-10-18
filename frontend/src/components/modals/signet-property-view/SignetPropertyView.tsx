@@ -61,7 +61,7 @@ export const SignetPropertyView: React.FC<SignetPropertyViewProps> = () => {
           >
             <img
               src={modalResource?.image}
-              alt="Resource"
+              alt=""
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
                 currentTarget.src =

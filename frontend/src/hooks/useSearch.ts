@@ -11,7 +11,7 @@ export const useSearch = (query: any, idSelectedStructure: string) => {
   const { pins } = usePinProvider();
   const [allResources, setAllResources] = useState<Resource[] | null>(null);
   const { favorites } = useFavorite();
-  const { data, error, isLoading } = useSearchQuery({
+  const { data, error, isLoading, refetch } = useSearchQuery({
     jsondata: query,
     idStructure: idSelectedStructure,
   });
@@ -88,5 +88,6 @@ export const useSearch = (query: any, idSelectedStructure: string) => {
     allResources,
     error,
     isLoading,
+    refetch,
   };
 };

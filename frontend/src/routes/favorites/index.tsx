@@ -4,6 +4,7 @@ import { Alert } from "@open-ent/react";
 import StarIcon from "@mui/icons-material/Star";
 import { useTranslation } from "react-i18next";
 
+import { QueryStatus } from "~/components/query-status/QueryStatus";
 import { EmptyState } from "~/components/empty-state/EmptyState";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
 import { MainLayout } from "~/components/main-layout/MainLayout";
@@ -23,7 +24,7 @@ export const FavoritePage: React.FC = () => {
   const { alertType, alertText, setAlertText } = useAlertProvider();
   const { openModal } = useModalProvider();
 
-  const { favorites } = useFavorite();
+  const { favorites, ...status } = useFavorite();
   const [allResourcesDisplayed, setAllResourcesDisplayed] = useState<
     Resource[] | null
   >(null); // all resources after the filters
@@ -75,7 +76,8 @@ export const FavoritePage: React.FC = () => {
               </h1>
             </div>
           </div>
-          <div className="med-search-page-content-body">
+          <QueryStatus isLoading={status.isLoading} isError={!!status.error} onRetry={status.refetch} />
+          <div className={`med-search-page-content-body${status.isLoading || status.error ? " d-none" : ""}`}>
             {favoriteResourcesData && !favoriteResourcesData.length ? (
               <EmptyState
                 image="empty-state-favorites.png"

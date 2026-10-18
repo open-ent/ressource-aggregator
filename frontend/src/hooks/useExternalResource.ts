@@ -70,8 +70,11 @@ export const useExternalResource = (idSelectedStructure: string) => {
         );
       }
       setExternalResources([...externalResourcesData, ...pmbResourcesData]);
+    } else if (error) {
+      // Recherche en échec : liste vide plutôt qu'un chargement sans fin (l'échec est signalé par la page Ressources).
+      setExternalResources([]);
     }
-  }, [data, pins]);
+  }, [data, error, pins]);
 
   return {
     externalResources,

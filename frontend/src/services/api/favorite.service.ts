@@ -1,3 +1,4 @@
+import { addFavoriteUrl, removeFavoriteUrl } from "../../utils/queryString";
 import { emptySplitApi } from "./emptySplitApi.service";
 
 export const favoriteApi = emptySplitApi.injectEndpoints({
@@ -5,6 +6,7 @@ export const favoriteApi = emptySplitApi.injectEndpoints({
     getFavorite: builder.query({
       query: () => "favorites",
       providesTags: ["FavoritesChanged"],
+      extraOptions: { surfaceErrors: true },
     }),
     addFavorite: builder.mutation({
       query: ({
@@ -14,7 +16,7 @@ export const favoriteApi = emptySplitApi.injectEndpoints({
         id: string | number | undefined;
         resource: any;
       }) => ({
-        url: `favorites?id=${id}`,
+        url: addFavoriteUrl(id),
         method: "POST",
         body: { ...resource },
       }),
@@ -28,7 +30,7 @@ export const favoriteApi = emptySplitApi.injectEndpoints({
         id: string | number | undefined;
         source: string | undefined;
       }) => ({
-        url: `favorites?id=${id}&source=${source}`,
+        url: removeFavoriteUrl(id, source),
         method: "DELETE",
       }),
       invalidatesTags: ["FavoritesChanged", "PinsChanged"],

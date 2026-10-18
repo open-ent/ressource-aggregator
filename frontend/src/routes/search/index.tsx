@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 import { FilterLayout } from "../../components/filter-layout/FilterLayout";
+import { QueryStatus } from "~/components/query-status/QueryStatus";
 import { EmptyState } from "~/components/empty-state/EmptyState";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
 import { MainLayout } from "~/components/main-layout/MainLayout";
@@ -48,7 +49,7 @@ export const Search: React.FC = () => {
     };
   };
 
-  const { allResources } = useSearch(
+  const { allResources, ...status } = useSearch(
     createSearchBody(searchQuery),
     idSelectedStructure,
   );
@@ -103,7 +104,8 @@ export const Search: React.FC = () => {
               </h1>
             </div>
           </div>
-          <div className="med-search-page-content-body">
+          <QueryStatus isLoading={status.isLoading} isError={!!status.error} onRetry={status.refetch} />
+          <div className={`med-search-page-content-body${status.isLoading || status.error ? " d-none" : ""}`}>
             {searchResourcesData && !searchResourcesData.length ? (
               <EmptyState
                 image="empty-state-search.png"

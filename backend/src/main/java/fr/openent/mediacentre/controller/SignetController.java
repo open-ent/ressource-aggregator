@@ -122,7 +122,9 @@ public class SignetController extends ControllerHelper {
                     if(event.isRight()) {
                         renderJson(request, event.right().getValue());;
                     } else {
-                        log.error("Public signet not found");
+                        log.error("[Mediacentre@SignetController::getPublic] Failed to get published signets : " + event.left().getValue());
+                        // Sans réponse, la requête restait pendante : la page des signets chargeait sans fin.
+                        renderError(request);
                     }
                 });
         });
@@ -293,7 +295,8 @@ public class SignetController extends ControllerHelper {
                 if(event.isRight()) {
                     renderJson(request, event.right().getValue());;
                 } else {
-                    log.error("Searching public signet not found");
+                    log.error("[Mediacentre@SignetController::searchPublic] Failed to search published signets : " + event.left().getValue());
+                    renderError(request);
                 }
             });
         });

@@ -8,6 +8,8 @@ import InsertLinkRoundedIcon from "@mui/icons-material/InsertLinkRounded";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { duplicateResource } from "~/utils/duplicateResource";
+import { assertMutationOk } from "~/utils/assertMutationOk";
 import { useTranslation } from "react-i18next";
 
 import { GLOBAL, SIGNET } from "~/core/const/sources.const";
@@ -81,14 +83,15 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
           ...pin,
           id: newId,
         };
-        await addFavorite({ id: newId, resource: newResource });
+        assertMutationOk(await addFavorite({ id: newId, resource: newResource }));
       } else {
-        await addFavorite({ id: pin._id, resource: pin });
+        assertMutationOk(await addFavorite({ id: pin._id, resource: pin }));
       }
       notify(t("mediacentre.notification.addFavorite"), "success");
       pin.favorite = true;
     } catch (e) {
       console.error(e);
+      notify(t("mediacentre.error.favorite.retrieval"), "danger");
     }
   };
 
@@ -96,29 +99,30 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
     try {
       if (pin.source === SIGNET || pin.source === GLOBAL) {
         const newId = pin.id ? parseInt(pin.id.toString()) : pin.id;
-        await removeFavorite({
+        assertMutationOk(await removeFavorite({
           id: newId,
           source: pin?.source,
-        });
+        }));
       } else {
-        await removeFavorite({
+        assertMutationOk(await removeFavorite({
           id: pin.favoriteId ?? pin._id,
           source: pin?.source,
-        });
+        }));
       }
       notify(t("mediacentre.notification.removeFavorite"), "success");
       pin.favorite = false;
     } catch (e) {
       console.error(e);
+      notify(t("mediacentre.error.favorite.retrieval"), "danger");
     }
   };
 
   const handleDuplicate = async () => {
     if (!pin?.action?.url) return;
 
-    const response = await fetch(pin.action.url, { method: "POST" });
+    const ok = await duplicateResource(pin.action.url);
 
-    if (!response?.ok) {
+    if (!ok) {
       return notify(t(pin.action.message.error), "danger");
     }
 
@@ -152,7 +156,7 @@ export const PinsCarouselCard: React.FC<PinsCarouselCardProps> = ({
             ) : (
               <img
                 src="/mediacentre/public/img/no-image-resource.png"
-                alt="Resource"
+                alt=""
                 className="med-pin-image"
               />
             )}

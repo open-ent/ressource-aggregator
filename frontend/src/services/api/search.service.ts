@@ -1,14 +1,14 @@
+import { searchUrl } from "../../utils/queryString";
 import { emptySplitApi } from "./emptySplitApi.service";
 
 export const searchApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     search: builder.query({
       query: ({ jsondata, idStructure }) => ({
-        url: `search?structureIds=${idStructure}&jsondata=${encodeURI(
-          JSON.stringify(jsondata),
-        )}`,
+        url: searchUrl(idStructure, jsondata),
       }),
       providesTags: ["FavoritesChanged", "Search"],
+      extraOptions: { surfaceErrors: true },
     }),
   }),
 });

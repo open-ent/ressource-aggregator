@@ -5,6 +5,7 @@ export const globalApi = emptySplitApi.injectEndpoints({
     getGlobal: builder.query({
       query: () => "global/resources",
       providesTags: ["FavoritesChanged"],
+      extraOptions: { surfaceErrors: true },
     }),
   }),
 });

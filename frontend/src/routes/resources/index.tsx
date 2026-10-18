@@ -4,6 +4,7 @@ import { Alert, useUser } from "@open-ent/react";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import { useTranslation } from "react-i18next";
 
+import { QueryStatus } from "~/components/query-status/QueryStatus";
 import { EmptyState } from "~/components/empty-state/EmptyState";
 import { FilterLayout } from "~/components/filter-layout/FilterLayout";
 import { InfiniteScrollList } from "~/components/infinite-scroll-list/InfiniteScrollList";
@@ -26,7 +27,7 @@ export const ResourcePage: React.FC = () => {
   const { openModal } = useModalProvider();
   const { idSelectedStructure } = useSelectedStructureProvider();
 
-  const { globals } = useGlobal();
+  const { globals, ...status } = useGlobal();
   const { externalResources } = useExternalResource(idSelectedStructure);
 
   const [externalResourcesData, setExternalResourcesData] = useState<
@@ -81,7 +82,8 @@ export const ResourcePage: React.FC = () => {
               </h1>
             </div>
           </div>
-          <div className="med-search-page-content-body">
+          <QueryStatus isLoading={status.isLoading} isError={!!status.error} onRetry={status.refetch} />
+          <div className={`med-search-page-content-body${status.isLoading || status.error ? " d-none" : ""}`}>
             {externalResourcesData && !externalResourcesData.length ? (
               <EmptyState
                 image="empty-state.png"

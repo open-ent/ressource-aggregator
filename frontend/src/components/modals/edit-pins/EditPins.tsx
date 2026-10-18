@@ -97,7 +97,7 @@ export const EditPins: React.FC = () => {
           <div className="med-modal-image">
             <img
               src={modalResource?.image}
-              alt="Resource"
+              alt=""
               className="med-image"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
