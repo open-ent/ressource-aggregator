@@ -41,6 +41,25 @@
           width: 3.2rem !important;
           height: 3.2rem !important;
         }
+        /* Icônes du menu compte en blanc sur la barre et libellés masqués (règles neo `.icon` / `.nav-text`
+           elles aussi réservées à [data-product=neo]) : sans elles les icônes sortaient en gris sur le vert
+           du bandeau (illisibles) avec leur libellé affiché sous chaque icône. */
+        #dropdown-navbar.dropdown-menu .nav-link,
+        #dropdown-navbar.dropdown-menu .dropdown-item,
+        #dropdown-navbar.dropdown-menu .icon {
+          color: #fff !important;
+        }
+        #dropdown-navbar.dropdown-menu .nav-text {
+          position: absolute !important;
+          width: 1px !important;
+          height: 1px !important;
+          margin: -1px !important;
+          padding: 0 !important;
+          overflow: hidden !important;
+          clip: rect(0, 0, 0, 0) !important;
+          white-space: nowrap !important;
+          border: 0 !important;
+        }
         /* Le <main class="container-fluid"> qui enveloppe le contenu était plafonné à
            1352px et collé à gauche -> on lui rend sa pleine largeur. */
         main.container-fluid,
