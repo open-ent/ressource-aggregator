@@ -5,6 +5,8 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import HomeIcon from "@mui/icons-material/Home";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import SchoolIcon from "@mui/icons-material/School";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { useUser } from "@open-ent/react";
 import StarIcon from "@mui/icons-material/Star";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -24,6 +26,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const location = useLocation();
   const { t } = useTranslation("mediacentre");
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const { user } = useUser();
+  // Administration du médiacentre : réservée au super-administrateur.
+  const isSuperAdmin = !!(user?.functions as Record<string, unknown> | undefined)?.SUPER_ADMIN;
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -77,6 +82,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
           name={`${t("mediacentre.sidebar.signets")}`}
           selected={location.pathname === "/signets"}
         />
+        {isSuperAdmin && (
+          <SidebarIcon
+            action={() => navigate("/admin")}
+            icon={<SettingsIcon />}
+            name={`${t("mediacentre.sidebar.admin")}`}
+            selected={location.pathname === "/admin"}
+          />
+        )}
       </div>
     </div>
   );

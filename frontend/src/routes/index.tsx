@@ -102,6 +102,22 @@ const routes = [
     ],
   },
   {
+    path: "/admin",
+    element: <Root />,
+    errorElement: <PageError />,
+    children: [
+      {
+        index: true,
+        async lazy() {
+          const { AdminPage } = await import("./admin");
+          return {
+            Component: AdminPage,
+          };
+        },
+      },
+    ],
+  },
+  {
     path: "*",
     element: <PageError isNotFoundError />,
   },

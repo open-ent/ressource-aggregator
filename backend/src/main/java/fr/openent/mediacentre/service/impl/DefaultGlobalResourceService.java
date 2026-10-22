@@ -92,6 +92,22 @@ public class DefaultGlobalResourceService extends MongoDbCrudService implements 
     }
 
     @Override
+    public Future<List<GlobalResource>> listAll() {
+        Promise<List<GlobalResource>> promise = Promise.promise();
+
+        mongo.find(collection, new JsonObject(), MongoDbResult.validResultsHandler(result -> {
+            if (result.isLeft()) {
+                log.error("[Mediacentre@GlobalResourceServiceMongoImpl::listAll] Can't find global resources: ", result.left().getValue());
+                promise.fail(result.left().getValue());
+                return;
+            }
+            promise.complete(IModelHelper.toList(result.right().getValue(), GlobalResource.class));
+        }));
+
+        return promise.future();
+    }
+
+    @Override
     public Future<JsonObject> deleteGlobalChannel(String idChannel) {
         Promise<JsonObject> promise = Promise.promise();
         mongo.delete(collection, new JsonObject().put(Field._ID, idChannel), MongoDbResult.validResultHandler(FutureHelper.handlerJsonObject(promise)));

@@ -26,6 +26,13 @@ public interface GlobalResourceService {
     public Future<List<GlobalResource>> list(Profile profile);
 
     /**
+     * Toutes les ressources globales, tous profils confondus (administration).
+     *
+     * @return Future de toutes les ressources globales
+     */
+    public Future<List<GlobalResource>> listAll();
+
+    /**
      * delete a global ressource
      * @param idChannel   global ressource id
      */

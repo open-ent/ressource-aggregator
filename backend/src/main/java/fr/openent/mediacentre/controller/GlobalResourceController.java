@@ -8,6 +8,7 @@ import fr.openent.mediacentre.security.ViewRight;
 import fr.openent.mediacentre.service.GlobalResourceService;
 import fr.openent.mediacentre.service.impl.DefaultGlobalResourceService;
 import fr.wseduc.rs.Delete;
+import fr.wseduc.rs.ApiDoc;
 import fr.wseduc.rs.Get;
 import fr.wseduc.rs.Post;
 import fr.wseduc.rs.Put;
@@ -52,6 +53,21 @@ public class GlobalResourceController extends ControllerHelper {
             })
             .onFailure(error -> {
                 String message = String.format("[GlobalResourceController@%s::getResources] Failed to get resources : %s",
+                        this.getClass().getSimpleName(), error.getMessage());
+                log.error(message);
+                renderError(request);
+            });
+    }
+
+    @Get("/global/resources/all")
+    @ApiDoc("Liste toutes les ressources globales, tous profils confondus (administration)")
+    @ResourceFilter(SuperAdminFilter.class)
+    @SecuredAction(value = "", type = ActionType.RESOURCE)
+    public void getAllResources(HttpServerRequest request) {
+        globalResourceService.listAll()
+            .onSuccess(resources -> renderJson(request, IModelHelper.toJsonArray(resources)))
+            .onFailure(error -> {
+                String message = String.format("[GlobalResourceController@%s::getAllResources] Failed to get resources : %s",
                         this.getClass().getSimpleName(), error.getMessage());
                 log.error(message);
                 renderError(request);
