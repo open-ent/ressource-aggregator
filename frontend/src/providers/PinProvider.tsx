@@ -7,6 +7,8 @@ import {
   useState,
 } from "react";
 
+import { useUser } from "@open-ent/react";
+
 import { useSelectedStructureProvider } from "./SelectedStructureProvider";
 import { PinProviderContextType, PinProviderProviderProps } from "./types";
 import { useGetPinsQuery } from "../services/api/pin.service";
@@ -30,12 +32,19 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
   const [favorites, setFavorites] = useState<Favorite[] | null>(null);
 
   const { data: favorite } = useGetFavoriteQuery(null);
+  const { user } = useUser();
 
   // On ne lance la requête que lorsque la structure est résolue : sinon
   // idSelectedStructure est vide et l'URL devient `/structures//pins` (double slash) -> 404.
   const { currentData: fetchedPins } = useGetPinsQuery(idSelectedStructure, {
     skip: !idSelectedStructure,
   });
+
+  // Un usager sans établissement (super-administrateur) n'a pas d'épingles à charger : sans cette liste vide, les
+  // signets de l'accueil (qui attendent les épingles) restaient en chargement indéfiniment.
+  useEffect(() => {
+    if (user && (user.structures?.length ?? 0) === 0) setPins((current) => current ?? []);
+  }, [user]);
 
   useEffect(() => {
     if (favorite) {
