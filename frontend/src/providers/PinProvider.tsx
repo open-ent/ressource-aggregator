@@ -31,7 +31,7 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
   const { idSelectedStructure } = useSelectedStructureProvider();
   const [favorites, setFavorites] = useState<Favorite[] | null>(null);
 
-  const { data: favorite } = useGetFavoriteQuery(null);
+  const { data: favorite, error: favoriteError } = useGetFavoriteQuery(null);
   const { user } = useUser();
 
   // On ne lance la requête que lorsque la structure est résolue : sinon
@@ -55,8 +55,10 @@ export const PinProvider: FC<PinProviderProviderProps> = ({ children }) => {
         favorite: true,
       }));
       setFavorites(favoriteData);
+    } else if (favoriteError) {
+      setFavorites([]);
     }
-  }, [favorite]);
+  }, [favorite, favoriteError]);
 
   useEffect(() => {
     if (fetchedPins) {

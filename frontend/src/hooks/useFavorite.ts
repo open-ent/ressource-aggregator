@@ -28,8 +28,12 @@ export const useFavorite = () => {
         }));
       }
       setFavorites(favoriteData);
+    } else if (error) {
+      // Lecture refusée ou en échec (usager sans droit sur le médiacentre) : liste vide plutôt qu'un chargement sans fin,
+      // que les signets, les épingles et les ressources globales attendent aussi.
+      setFavorites([]);
     }
-  }, [favorite, pins]);
+  }, [favorite, error, pins]);
 
   return { favorites, setFavorites, error, isLoading, refetch };
 };
