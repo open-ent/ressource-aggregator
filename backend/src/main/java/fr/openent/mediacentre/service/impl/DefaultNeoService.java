@@ -14,7 +14,7 @@ public class DefaultNeoService implements NeoService {
     public void getIdsFromBookMarks(final JsonArray bookmarksIds, Handler<Either<String, JsonArray>> handler) {
         JsonObject params = new JsonObject().put("bookmarksIds", bookmarksIds);
 
-        String queryNeo4j = "WITH {bookmarksIds} AS shareBookmarkIds " +
+        String queryNeo4j = "WITH $bookmarksIds AS shareBookmarkIds " +
                 "UNWIND shareBookmarkIds AS shareBookmarkId " +
                 "MATCH (u:User)-[:HAS_SB]->(sb:ShareBookmark) " +
                 "UNWIND TAIL(sb[shareBookmarkId]) as vid MATCH (v:Visible {id : vid}) " +
@@ -28,7 +28,7 @@ public class DefaultNeoService implements NeoService {
     public void getUsersInfosFromIds(JsonArray groupIds, Handler<Either<String, JsonArray>> handler) {
         JsonObject params = new JsonObject()
                 .put("groupIds", groupIds);
-        String queryGroupsNeo4j = "MATCH(g:Group)-[:IN]-(ug:User) WHERE g.id IN {groupIds} WITH g, " +
+        String queryGroupsNeo4j = "MATCH(g:Group)-[:IN]-(ug:User) WHERE g.id IN $groupIds WITH g, " +
                 "collect({id: ug.id, username: ug.displayName}) AS users return users ";
         Neo4j.getInstance().execute(queryGroupsNeo4j, params, Neo4jResult.validResultHandler(handler));
     }

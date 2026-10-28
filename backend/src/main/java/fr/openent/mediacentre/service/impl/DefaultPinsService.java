@@ -369,7 +369,7 @@ public class DefaultPinsService implements PinsService {
         String query = "MATCH (s:Structure) " +
         "OPTIONAL MATCH (s)-[r:HAS_ATTACHMENT]->(ps:Structure) " +
         "WITH s " +
-        "WHERE ps IS NULL AND s.id = {structureId} " +
+        "WHERE ps IS NULL AND s.id = $structureId " +
         "RETURN COUNT(s) > 0 AS isTargetStructure";
         JsonObject params = new JsonObject().put(Field.STRUCTURE_ID, structureId);
         neo.execute(query, params, Neo4jResult.validUniqueResultHandler(event -> {
@@ -386,8 +386,8 @@ public class DefaultPinsService implements PinsService {
     private Future<List<String>> getAllUsersIdsInStructureWithMediacentreAccess(String structure) {
         Promise<List<String>> promise = Promise.promise();
         String query =
-            "MATCH (u:User)-[:IN]->(g:Group)-[:DEPENDS]->(:Structure {id: {structure}}), " +
-            "(g)-[:AUTHORIZED]->(:Role)-[:AUTHORIZE]->(:WorkflowAction {name: {workflowActionName}}) " +
+            "MATCH (u:User)-[:IN]->(g:Group)-[:DEPENDS]->(:Structure {id: $structure}), " +
+            "(g)-[:AUTHORIZED]->(:Role)-[:AUTHORIZE]->(:WorkflowAction {name: $workflowActionName}) " +
             "RETURN DISTINCT u.id AS userId";
 
         JsonObject params = new JsonObject()
@@ -463,8 +463,8 @@ public class DefaultPinsService implements PinsService {
     // get all users ids from list of groups and users ids
     private Future<List<String>> getUsersIdsFromGroupsAndUsersIds(List<String> groupsAndUsersIds) {
         Promise<List<String>> promise = Promise.promise();
-        String query = "MATCH (u:User) WHERE u.id IN {groupsAndUsersIds} "+
-                "OPTIONAL MATCH (u)-[:IN]->(g:Group) WHERE g.id IN {groupsAndUsersIds} "+
+        String query = "MATCH (u:User) WHERE u.id IN $groupsAndUsersIds "+
+                "OPTIONAL MATCH (u)-[:IN]->(g:Group) WHERE g.id IN $groupsAndUsersIds "+
                 "RETURN DISTINCT u.id AS userId";
 
         JsonObject params = new JsonObject().put(Field.GROUPS_AND_USERS_IDS, new JsonArray(groupsAndUsersIds));
